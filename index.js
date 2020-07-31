@@ -292,7 +292,7 @@ bot.on('message', async message=>{
   break;
 
   case 'tip':
-      if(!message.args[1] === 'life'){
+      if(!message.args[1]){
         message.channel.send('So you want life tips HUH i\'ve got a very good one here', tips)
       }
   break;
