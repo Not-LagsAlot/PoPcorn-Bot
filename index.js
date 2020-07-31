@@ -12,6 +12,8 @@ var invite = 'To invite the bot go to: https://PoPcornbot.wordpress.com/ and cli
 var prefix = 'The prefix is `.` and cannot be changed';
 var commandsss = 'To get a list of commands simply type .commands';
 var question = 'If your question is not answered please create a support ticket';
+var changes = 'Added 2 new commands, Fixed the play command issue';
+var tips = "Always brush your teeth"
 
 
 
@@ -32,26 +34,7 @@ bot.on('ready',() =>{
 bot.on('message', async message=>{ 
     let args = message.content.substring(PREFIX.length).split(" ");
 
-    const { badwords } = require("./swear.json")
-if(!message.member.hasPermission("ADMINISTRATOR")) {
-
-
-
-  let confirm = false;
    
-    var i;
-    for(i = 0;i < badwords.length; i++) {
-      
-      if(message.content.toLowerCase().includes(badwords[i].toLowerCase()))
-        confirm = true;
-      
-    }
-    if(confirm) {
-      message.delete()
-      return message.reply('Don\'t swear here')
-    }    
-   
-}
     switch(args[0]){
 
 
@@ -82,7 +65,7 @@ if(!message.member.hasPermission("ADMINISTRATOR")) {
 
         const commands = new Discord.MessageEmbed()
         .setTitle('These are the commands')
-        .setFooter('.Warn, .website, .info, .advice, .say, .spank, .slap, hi, .punch, .dropkickanime, .play, .premium, .User, .serverinfo, .rate(Requires a number under 10)')
+        .setFooter('.Warn, .website, .info, .advice, .say, .spank, .slap, hi, .punch, .dropkickanime, .play, .premium, .User, .serverinfo, .rate(Requires a number under 10), .destroy')
   
         
           message.channel.send(commands)
@@ -138,6 +121,7 @@ if(!message.member.hasPermission("ADMINISTRATOR")) {
                 message.channel.send('You require the `Manage Messages` permission to execute this command')
               }
               else{
+                message.delete();
                 message.channel.bulkDelete(args[1]);
               }
               break;
@@ -149,7 +133,7 @@ if(!message.member.hasPermission("ADMINISTRATOR")) {
                     message.channel.send('You require the `Manage Messages` permission to execute this command')
                   }
                   else{
-                    message.channel.send(args[1]);
+                    message.channel.send(args.slice(1).join(" "));
                   }
                   break;
 
@@ -225,7 +209,6 @@ if(!message.member.hasPermission("ADMINISTRATOR")) {
         console.log(error)
       })
       dispatcher.setVolumeLogarithmic(5 / 5)
-
       break;
 
 
@@ -301,7 +284,47 @@ if(!message.member.hasPermission("ADMINISTRATOR")) {
     case 'lagsalot':
 
       const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'LagsAlot');
-	message.react(emoji);
+  message.react(emoji);
+
+
+   case 'creeper':
+    message.channel.send('Sorry this command IS ONLY FOR PREMIUM USERS!')
+  break;
+
+  case 'tip':
+      if(!message.args[1] === 'life'){
+        message.channel.send('So you want life tips HUH i\'ve got a very good one here', tips)
+      }
+  break;
+
+
+  case 'new':
+   const changed = new Discord.MessageEmbed()
+  .setTitle('Whats New!')
+  .addField('Current Version', version)
+  .addField('Changes To The Bot', changes)
+  .setTimestamp(Date.now())
+  .setColor(0xec1581)
+       message.channel.send(changed);
+  break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
