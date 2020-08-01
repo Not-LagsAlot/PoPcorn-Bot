@@ -8,7 +8,8 @@ require("moment-duration-format");
 var command = '.commands';
 const PREFIX = '.';
 var changes = 'Added 2 new commands, Fixed the play command issue';
-var AI = 'AI currently in work';
+const alexa = require('alexa-bot-api');
+var chatbot = new alexa("aw2plm")
 
 
 
@@ -27,6 +28,14 @@ bot.on('ready',() =>{
 
 bot.on('message', async message=>{ 
     let args = message.content.substring(PREFIX.length).split(" ");
+
+
+     
+    if(!message.channel.id === '739037008168484885'){
+      if(message.author.bot) return;
+      let content = message.content;
+      chatbot.getReply(content).then(r => message.channel.send(r))
+    }
 
    
     switch(args[0]){
@@ -271,10 +280,7 @@ bot.on('message', async message=>{
 
 
 
-    case 'A.I':
-      message.channel.send('Command still under work, NOT AVAILABLE FOR PUBLIC')
-    break;
-
+     
 
 
     case 'lagsalot':
