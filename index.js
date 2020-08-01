@@ -7,14 +7,8 @@ const moment = require("moment");
 require("moment-duration-format");
 var command = '.commands';
 const PREFIX = '.';
-const { ErelaClient } = require("erela.js");
-var invite = 'To invite the bot go to: https://PoPcornbot.wordpress.com/ and click on the bot oath option';
-var prefix = 'The prefix is `.` and cannot be changed';
-var commandsss = 'To get a list of commands simply type .commands';
-var question = 'If your question is not answered please create a support ticket';
 var changes = 'Added 2 new commands, Fixed the play command issue';
-var tips = "Always brush your teeth"
-
+var AI = 'AI currently in work';
 
 
 
@@ -133,12 +127,14 @@ bot.on('message', async message=>{
                     message.channel.send('You require the `Manage Messages` permission to execute this command')
                   }
                   else{
+
+                    message.delete();
                     message.channel.send(args.slice(1).join(" "));
                   }
                   break;
 
             case 'spank':
-                if(!args) return message.channel.reply('state user')
+                if(!args) return message.content.reply('state user')
                 message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956')
                 break;
             
@@ -146,7 +142,7 @@ bot.on('message', async message=>{
              
 
             case 'slap':
-                if(!args[1])    return message.channel.reply('User specification is required')
+                if(!args[1])    return message.content.reply('User specification is required')
                   message.channel.send('Slapped specified user https://tenor.com/view/vanderpump-rules-pump-rules-slap-gif-4474446')
             break;
 
@@ -308,6 +304,16 @@ bot.on('message', async message=>{
        message.channel.send(changed);
   break;
 
+
+
+
+
+
+
+  case 'mute':
+    if(!message.member.hasPermission('BAN_MEMBERS')){
+      message.channel.send('You require `BAN_MEMBERS` permission ||B R U H||')
+    }
 
 
 
