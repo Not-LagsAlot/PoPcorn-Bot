@@ -310,14 +310,14 @@ bot.on('message', async message=>{
 
   case 'poll':
 
+  const poll = new Discord.MessageEmbed()
+  .setColor(0xFFC300)
+  .setTitle(args.slice(1).join(" "))
+  .setTimestamp(Date.now())
+  .setDescription(message.author.username)
+ message.channel.send(poll);
 
-    message.delete();
-    message.channel.send(args.slice(1).join(" "));
-    const prick = message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsup');
-                  message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsdown');
-  message.react(prick);
-
-
+            
 
 
 
