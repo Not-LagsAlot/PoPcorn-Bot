@@ -314,7 +314,7 @@ bot.on('message', async message=>{
   .setColor(0xFFC300)
   .setTitle(args.slice(1).join(" "))
   .setTimestamp(Date.now())
-  .setDescription(message.author.username)
+  .setDescription('poll started by', message.author.username)
  message.channel.send(poll);
 
             
