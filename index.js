@@ -315,7 +315,10 @@ bot.on('message', async message=>{
   .setTitle(args.slice(1).join(" "))
   .setTimestamp(Date.now())
   .setDescription('poll started by', message.author.username)
- message.channel.send(poll);
+ message.channel.send(poll)
+ Discord.MessageReaction.react(":thumbsup:")
+ Discord.MessageReaction.react(":thumbsdown:")
+break;
 
             
 
