@@ -1,13 +1,13 @@
 
 const Discord = require("discord.js");
 const bot = new Discord.Client();
-var version = 'v0.1';
+var version = 'v0.2';
 const ytdl = require('ytdl-core')
 const moment = require("moment");
 require("moment-duration-format");
 var command = '.commands';
 const PREFIX = '.';
-var changes = 'Added 2 new commands, Fixed the play command issue';
+var changes = 'Added 1 new command, Fixed bugs and crashes';
 var AI = 'AI currently in work';
 
 
