@@ -26,7 +26,7 @@ bot.on('ready',() =>{
 
 
 bot.on('message', async message=>{ 
-    let args = message.content.slice(PREFIX.length).split(" ");
+    let args = message.content.slice(PREFIX.length).split(' ');
 
    
     switch(args[0]){
