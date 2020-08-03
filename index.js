@@ -318,6 +318,7 @@ bot.on('message', async message => {
         .setTimestamp(Date.now())
         .setDescription('Type .poll (your message goes here) to start a new poll')
 
+
       if (!args[1]) {
         message.channel.send(poll)
         break;
@@ -325,13 +326,11 @@ bot.on('message', async message => {
 
       let msgArgs = args.slice(1).join(" ")
 
-      message.channel.send("**" + msgArgs + "**").then(messageReaction => {
-
+      const poll0 = new Discord.MessageEmbed()
+      .setColor(0xFFC300)
+      .setTitle("**" + msgArgs + "**").then(messageReaction => {
         messageReaction.react("👍");
-        messageReaction.react("👎");
-
-        message.delete().catch(console.error)
-      })
+        messageReaction.react("👎")})
       break;
 
 
