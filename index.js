@@ -313,9 +313,9 @@ bot.on('message', async message=>{
 
     message.delete();
     message.channel.send(args.slice(1).join(" "));
-    const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsup');
+    const prick = message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsup');
                   message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsdown');
-  message.react(emoji);
+  message.react(prick);
 
 
 
