@@ -326,11 +326,10 @@ bot.on('message', async message => {
 
       let msgArgs = args.slice(1).join(" ")
 
-      const poll0 = new Discord.MessageEmbed()
-      .setColor(0xFFC300)
-      .setTitle("**" + msgArgs + "**").then(messageReaction => {
+      message.channel.send("**" + msgArgs + "**").then(messageReaction => {
         messageReaction.react("👍");
-        messageReaction.react("👎")})
+        messageReaction.react("👎");
+      })
       break;
 
 
