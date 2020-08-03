@@ -209,14 +209,7 @@ bot.on('message', async message => {
 
 
 
-      case 'dc':
-        if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
-          message.channel.send('**❌ You require `Manage Channels` permission to run this command')
-        }else{
-          voiceChannel.leave()
-          message.channel.send('Succesfully Disconnected')
-        }
-      break;
+   
 
 
 
