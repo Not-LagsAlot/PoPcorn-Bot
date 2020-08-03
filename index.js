@@ -317,7 +317,8 @@ bot.on('message', async message=>{
   .setDescription('poll started by', message.author.username)
  message.channel.send(poll)
 
- const idk = message.guild.emojis.cache.find(emoji => emoji.name === ':thumbsup:', message.guild.emojis.cache.find(emoji => emoji.name === ':thumbdown:')
+ const idk = message.guild.emojis.cache.find(emoji => emoji.name === ':thumbsup:', message.guild.emojis.cache.find(emoji => emoji.name === ':thumbdown:'));
+ message.channel.react(idk)
 break;
 
             
