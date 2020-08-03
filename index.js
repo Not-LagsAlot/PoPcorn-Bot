@@ -308,6 +308,20 @@ bot.on('message', async message=>{
 
 
 
+  case 'poll':
+
+
+    message.delete();
+    message.channel.send(args.slice(1).join(" "));
+    const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsup');
+  message.react(emoji)
+  const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'thumbsdown');
+  message.react(emoji);
+
+
+
+
+
 
 
   case 'mute':
