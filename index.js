@@ -39,8 +39,9 @@ bot.on('message', async message => {
 
 
     case 'ping':
-      await message.channel.send('Pinging...')
-      message.edit(`Pong\nAPI Latency ${Math.round(bot.ws.ping)}`)
+      message.channel.send(`Pong\nAPI Latency ${Math.round(bot.ws.ping)}`)
+
+    break;
 
     
 
