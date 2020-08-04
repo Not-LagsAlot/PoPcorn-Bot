@@ -39,7 +39,7 @@ bot.on('message', async message => {
 
 
     case 'ping':
-      message.channel.send(`Pong + ${Math.round(bot.ws.ping)}`)
+      message.channel.send(`Pong ${Math.round(bot.ws.ping)}ms`)
 
     break;
 
