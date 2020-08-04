@@ -9,39 +9,9 @@ var command = '.commands';
 const PREFIX = '.';
 var changes = 'Added 1 new command, Fixed bugs and crashes';
 var AI = 'AI currently in work';
-var stats = {};
-
-if (message.guild.id in stats === false) {
-  stats[message.guild.id] = {};
-}
 
 
 
-function getRandomInt(min, max) {
-min = Math.ceil(min);
-max = Math.floor(max);
-return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
-
-
-const guildstats = stats[message.guild.id];
-
-if (message.author.id in guildstats === false) {
-guildstats[message.author.id] = {
-  xp: 0,
-  level: 0,
-  last_message: 0
-};
-}
-
-
-const userstats = guildstats[message.author.id];
-userstats.xp += getRandomInt
-
-
-console.log(message.author.username + 'now has' + userstats.xp)
 
 
 
@@ -65,6 +35,12 @@ bot.on('message', async message => {
 
 
   switch (args[0]) {
+
+
+
+    case 'ping':
+      await message.channel.send('Pinging...')
+      message.edit(`Pong\nAPI Latency ${Math.round(client.ws.ping)}`)
 
     
 
@@ -381,6 +357,16 @@ bot.on('message', async message => {
       } else {
 
       }
+
+
+
+
+
+
+
+
+
+      
 
 
 
