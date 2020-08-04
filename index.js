@@ -340,7 +340,7 @@ bot.on('message', async message => {
 
       let msgArgs = args.slice(1).join(" ")
 
-      message.channel.send("**" + msgArgs + "**").then(messageReaction => {
+      message.channel.send("**" , message.author.username , 'asks' + msgArgs + "**").then(messageReaction => {
         messageReaction.react("👍");
         messageReaction.react("👎");
       })
