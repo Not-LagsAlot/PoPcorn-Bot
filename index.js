@@ -39,7 +39,7 @@ bot.on('message', async message => {
 
 
     case 'ping':
-      message.channel.send('Pong' `${Math.round(bot.ws.ping)}` + 'ms')
+      message.channel.send(`Pong ${Math.round(bot.ws.ping)} + ms`)
 
     break;
 
@@ -340,14 +340,10 @@ bot.on('message', async message => {
 
       let msgArgs = args.slice(1).join(" ")
 
-     const pollembed = new Discord.MessageEmbed()
-     .setTitle("**" , msgArgs + "**").then(messageReaction => {
-      messageReaction.react("👍");
-      messageReaction.react("👎");
-    })
-    .setTimestamp(Date.now())
-
-    message.channel.send(pollembed)
+      message.channel.send("**" , msgArgs + "**").then(messageReaction => {
+        messageReaction.react("👍");
+        messageReaction.react("👎");
+      })
       break;
 
 
@@ -357,8 +353,8 @@ bot.on('message', async message => {
 
 
     case 'mute':
-      if (!message.member.hasPermission('BAN_MEMBERS')) {
-        message.channel.send('You require `BAN_MEMBERS` permission ||B R U H||')
+      if (!message.member.hasPermission(['MUTE_MEMBERS'])) {
+        message.channel.send(':x: You don\'t have the required permission to use this command')
       } else {
 
       }
