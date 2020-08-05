@@ -276,6 +276,11 @@ bot.on('message', async message => {
       break;
 
 
+      case 'ai':
+       message.guild.channels.create === '739055164425764965'
+      break;
+
+
 
 
 
