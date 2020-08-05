@@ -19,20 +19,11 @@ var AI = 'AI currently in work';
 bot.on('ready', () => {
   bot.user.setActivity('.help | popcornbot.wordpress.com');
   console.log('This bot is online');
+  
 })
 
 
-if(message.content === 'hi'){
-  message.channel.send(Hi)
-}
 
-if(message.content === 'what do u wanna learn'){
-  message.channel.send('idk ')
-}
-
-if(message.content === 'creeper'){
-  message.channel.send('Aww man')
-}
 
 
 
@@ -43,6 +34,18 @@ if(message.content === 'creeper'){
 
 bot.on('message', async message => {
   let args = message.content.slice(PREFIX.length).split(' ');
+
+  if(message.content === 'hi'){
+    message.channel.send(Hi)
+  }
+  
+  if(message.content === 'what do u wanna learn'){
+    message.channel.send('idk ')
+  }
+  
+  if(message.content === 'creeper'){
+    message.channel.send('Aww man')
+  }
 
   
 
