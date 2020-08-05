@@ -22,6 +22,19 @@ bot.on('ready', () => {
 })
 
 
+if(message.content === 'hi'){
+  message.channel.send(Hi)
+}
+
+if(message.content === 'what do u wanna learn'){
+  message.channel.send('idk ')
+}
+
+if(message.content === 'creeper'){
+  message.channel.send('Aww man')
+}
+
+
 
 
 
