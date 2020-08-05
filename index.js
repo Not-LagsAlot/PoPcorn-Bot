@@ -1,6 +1,7 @@
 
 const Discord = require("discord.js");
 const bot = new Discord.Client();
+const alexabot = require('alexa-bot-api')
 var version = 'v0.2';
 const ytdl = require('ytdl-core')
 const moment = require("moment");
@@ -9,6 +10,7 @@ var command = '.commands';
 const PREFIX = '.';
 var changes = 'Added 1 new command, Fixed bugs and crashes';
 var AI = 'AI currently in work';
+var chatbot = new alexabot("aw2plm")
 
 
 
@@ -32,11 +34,20 @@ bot.on('ready', () => {
 
 
 
+
+
 bot.on('message', async message => {
+
+  if(message.channel.id === '739055164425764965'){
+    if(message.author.bot) return;
+    let content = message.content;
+    chatbot.getReply(content).then(r => message.channel.send(r))
+  }
+  
   let args = message.content.slice(PREFIX.length).split(' ');
 
   if(message.content === 'hi'){
-    message.channel.send(Hi)
+    message.channel.send('Hi')
   }
   
   if(message.content === 'what do u wanna learn'){
@@ -292,9 +303,6 @@ bot.on('message', async message => {
       break;
 
 
-      case 'ai':
-       message.guild.channels.create === '739055164425764965'
-      break;
 
 
 
