@@ -39,7 +39,7 @@ bot.on('message', async message => {
 
 
     case 'ping':
-      message.channel.send('Pong' + `${Math.round(bot.ws.ping)}` + 'ms')
+      message.channel.send('Pong' `${Math.round(bot.ws.ping)}` + 'ms')
 
     break;
 
@@ -340,10 +340,14 @@ bot.on('message', async message => {
 
       let msgArgs = args.slice(1).join(" ")
 
-      message.channel.send("**" , message.author.username , 'asks' + msgArgs + "**").then(messageReaction => {
-        messageReaction.react("👍");
-        messageReaction.react("👎");
-      })
+     const pollembed = new Discord.MessageEmbed()
+     .setTitle("**" , msgArgs + "**").then(messageReaction => {
+      messageReaction.react("👍");
+      messageReaction.react("👎");
+    })
+    .setTimestamp(Date.now())
+
+    message.channel.send(pollembed)
       break;
 
 
