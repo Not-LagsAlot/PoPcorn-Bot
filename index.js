@@ -35,32 +35,7 @@ bot.on('ready', () => {
 bot.on('message', async message => {
 
 
-  function getRandomInt(min, max) {
-    min = Math.ceil(15);
-    max = Math.floor(25);
-    return Math.floor(Math.random() * (25 - 15)) + 15;
-  }
-
-  if(message.guild.id in stats === false){
-
-    stats[message.guild.id] = {};
-  }
-
-  const guildstats = stats[message.guild.id];
-
-  if(message.author.id in guildstats === false){
-    guildstats[message.author.id] = {
-      xp: 0,
-      level: 0,
-      last_message: 0
-    };
-  }
-
-  const userstats = guildstats[message.author.id];
-  userstats.xp += getRandomInt
-
-
-  console.log(message.author.username + 'now has' + userstats.xp);
+  
 
 
 
@@ -420,7 +395,7 @@ bot.on('message', async message => {
       }
 
       if(target.id === message.author.id){
-        return message.channel.send(`**${message.author.username}, you cannot ban yourself!`)
+        return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
       }
 
 
@@ -438,6 +413,12 @@ bot.on('message', async message => {
       message.channel.send(ban)
       target.ban(args[1])
 
+
+
+      case 'kick':
+        if(!message.member.hasPermission(['KICK_MEMBERS'])){
+          message.channel.send(`**${message.author.username}** you require \`kick members\` permission`)
+        }
 
 
 
