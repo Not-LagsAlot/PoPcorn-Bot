@@ -9,6 +9,7 @@ var command = '.commands';
 const PREFIX = '.';
 var changes = 'Added 1 new command, Fixed bugs and crashes';
 var AI = 'AI currently in work';
+var stats = {};
 
 
 
@@ -17,7 +18,7 @@ var AI = 'AI currently in work';
 
 
 bot.on('ready', () => {
-  bot.user.setActivity('.help | popcornbot.wordpress.com');
+  bot.user.setActivity('people type `.help`', {type: 'WATCHING'});
   console.log('This bot is online');
   
 })
@@ -31,8 +32,38 @@ bot.on('ready', () => {
 
 
 
-
 bot.on('message', async message => {
+
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  if(message.guild.id in stats === false){
+
+    stats[message.guild.id] = {};
+  }
+
+  const guildstats = stats[message.guild.id];
+
+  if(message.author.id in guildstats === false){
+    stats[message.author.id] = {
+      xp: 0,
+      level: 0,
+      last_message: 0
+    };
+  }
+
+  const userstats = stats[message.author.id];
+  userstats.xp += getRandomInt
+
+
+  console.log(message.author.username + 'now has' + userstats.xp);
+
+
+
   let args = message.content.slice(PREFIX.length).split(' ');
 
   if(message.content === 'hi'){
