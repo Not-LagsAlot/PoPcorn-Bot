@@ -404,13 +404,39 @@ bot.on('message', async message => {
 
 
 
-    case 'mute':
-      if (!message.member.hasPermission(['MUTE_MEMBERS'])) {
-        message.channel.send(':x: You don\'t have the required permission to use this command')
-      } else {
-
+    case 'ban':
+      if(!message.member.hasPermission(['BAN_MEMBERS'])){
+        message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
       }
 
+      if(!message.guild.me.hasPermission(['BAN_MEMBERS'])){
+        return message.channel.send(`**${message.author.username}, i do not have the permission to ban someone`)
+      }
+
+      const target = message.mentions.members.first();
+
+      if(!target){
+        return message.channel.send(`**${message.author.username}**, you need to menton a user`)
+      }
+
+      if(target.id === message.author.id){
+        return message.channel.send(`**${message.author.username}, you cannot ban yourself!`)
+      }
+
+
+      if(!args[1]){
+        return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
+      }
+
+
+      let ban = new Discord.MessageEmbed()
+      .setTitle("Ban")
+      .setDescription(`Banned ${target} (${target.id})`)
+      .setColor(0x15daea)
+      .setFooter(`Banned by ${message.author.tag}`)
+
+      message.channel.send(ban)
+      target.ban(args[1])
 
 
 
