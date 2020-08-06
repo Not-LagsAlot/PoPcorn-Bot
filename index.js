@@ -38,7 +38,7 @@ bot.on('message', async message => {
   function getRandomInt(min, max) {
     min = Math.ceil(15);
     max = Math.floor(25);
-    return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (25 - 15)) + 15;
   }
 
   if(message.guild.id in stats === false){
