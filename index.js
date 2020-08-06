@@ -409,6 +409,46 @@ bot.on('message', async message => {
       target.ban(args[1])
 
 
+      case 'kick':
+
+        if(!message.member.hasPermission(['KICK_MEMBERS'])){
+          message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
+        }
+  
+        if(!message.guild.me.hasPermission(['KICK_MEMBERS'])){
+          return message.channel.send(`**${message.author.username}, i do not have the permission to kick someone`)
+        }
+  
+        const userg = message.mentions.members.first();
+  
+        if(!userg){
+          return message.channel.send(`**${message.author.username}**, you need to menton a user`)
+        }
+  
+        if(userg.id === message.author.id){
+          return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
+        }
+  
+  
+        if(!args[1]){
+          return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
+        }
+  
+        if(target.id === message.guild.ownerID){
+          return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
+        }
+  
+  
+        let kickedf = new Discord.MessageEmbed()
+        .setTitle("Kick")
+        .setDescription(`kicked ${userg} (${userg.id})`)
+        .setColor(0x15daea)
+        .setFooter(`kicked by ${message.author.tag}`)
+  
+        message.channel.send(kickedf)
+        userg.kick(args[1])
+
+
 
     
 
