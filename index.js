@@ -49,14 +49,14 @@ bot.on('message', async message => {
   const guildstats = stats[message.guild.id];
 
   if(message.author.id in guildstats === false){
-    stats[message.author.id] = {
+    guildstats[message.author.id] = {
       xp: 0,
       level: 0,
       last_message: 0
     };
   }
 
-  const userstats = stats[message.author.id];
+  const userstats = guildstats[message.author.id];
   userstats.xp += getRandomInt
 
 
