@@ -61,18 +61,9 @@ bot.on('message', async message => {
 
 
     case 'ping':
-      message.channel.send(`Pong ${Math.round(bot.ws.ping)} + ms`)
+      message.channel.send(`Pong \`${Math.round(bot.ws.ping)}ms\``)
 
     break;
-
-    
-
-
-
-
-
-
-
 
     case 'welcome':
       message.channel.send('Thank you for inviting me :)')
@@ -403,6 +394,10 @@ bot.on('message', async message => {
         return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
       }
 
+      if(target.id === message.guild.ownerID){
+        return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
+      }
+
 
       let ban = new Discord.MessageEmbed()
       .setTitle("Ban")
@@ -415,11 +410,7 @@ bot.on('message', async message => {
 
 
 
-      case 'kick':
-        if(!message.member.hasPermission(['KICK_MEMBERS'])){
-          message.channel.send(`**${message.author.username}** you require \`kick members\` permission`)
-        }
-
+    
 
 
 
