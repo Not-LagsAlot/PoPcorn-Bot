@@ -1,15 +1,14 @@
 
 const Discord = require("discord.js");
 const bot = new Discord.Client();
-var version = 'v0.2';
+var version = 'v0.3';
 const ytdl = require('ytdl-core')
 const moment = require("moment");
 require("moment-duration-format");
 var command = '.commands';
 const PREFIX = '.';
-var changes = 'Added 1 new command, Fixed bugs and crashes';
+var changes = 'Added 2 new command (ban and kick), Fixed bugs and crashes, removed splay command';
 var AI = 'AI currently in work';
-var stats = {};
 
 
 
@@ -32,26 +31,10 @@ bot.on('ready', () => {
 
 
 
-bot.on('message', async message => {
-
-
-  
-
+bot.on('message',  message => {
 
 
   let args = message.content.slice(PREFIX.length).split(' ');
-
-  if(message.content === 'hi'){
-    message.channel.send('Hi')
-  }
-  
-  if(message.content === 'what do u wanna learn'){
-    message.channel.send('idk ')
-  }
-  
-  if(message.content === 'creeper'){
-    message.channel.send('Aww man')
-  }
 
   
 
@@ -86,7 +69,7 @@ bot.on('message', async message => {
 
       const commands = new Discord.MessageEmbed()
         .setTitle('These are the commands')
-        .setFooter('.Warn, .website, .info, .advice, .say, .spank, .slap, hi, .punch, .dropkickanime, .play, .premium, .User, .serverinfo, .rate(Requires a number under 10), .destroy')
+        .setFooter('.Warn, .website, .info, .advice, .say, .spank, .slap, hi, .punch, .dropkickanime, .play, .premium, .User, .serverinfo, .rate(Requires a number under 10), .ban <user> <reason>, .kick <user> <reason>')
 
 
       message.channel.send(commands)
@@ -200,39 +183,7 @@ bot.on('message', async message => {
 
 
     case 'play':
-      const voiceChannel = message.member.voice.channel
-      const play = new Discord.MessageEmbed()
-        .setTitle('You need to be in a Voice Channel to run this command')
-        .setColor(0xf0ff00)
-
-
-      if (!voiceChannel) return message.channel.send(
-
-        message.channel.send(play)
-
-      );
-      const permissions = voiceChannel.permissionsFor(message.client.user)
-      if (!permissions.has('CONNECT')) return message.channel.send(':no_entry_sign: I dont have the permission `connect` so i can\'t run this command')
-      if (!permissions.has('SPEAK')) return message.channel.send(':no_entry_sign: I don\'t have `Speak` permission')
-
-
-      try {
-        var connection = await voiceChannel.join()
-      } catch (error) {
-        console.log('Erorr connecting: {erorr}')
-        message.channel.send(':x: Erorr while connection to the Voice Channel')
-      }
-
-      const dispatcher = connection.play(ytdl(args[1]))
-        .on('finish', () => {
-          voiceChannel.leave()
-          message.channel.send('I have left the voice channel after playing the music ')
-        })
-        .on('error', error => {
-          console.log(error)
-        })
-      dispatcher.setVolumeLogarithmic(5 / 5)
-      break;
+      message.channel.send('Play command was not working as expected so it has been transfered to a whole new Discord bot that is still under work')
 
 
 
@@ -400,13 +351,14 @@ bot.on('message', async message => {
 
 
       let ban = new Discord.MessageEmbed()
-      .setTitle("Ban")
-      .setDescription(`Banned ${target} (${target.id})`)
-      .setColor(0x15daea)
+      .setTitle(`successfully Banned ${target}`)
+      .setColor(0x3BF04B)
       .setFooter(`Banned by ${message.author.tag}`)
 
       message.channel.send(ban)
       target.ban(args[1])
+
+      break;
 
 
       case 'kick':
@@ -431,17 +383,17 @@ bot.on('message', async message => {
   
   
         if(!args[1]){
-          return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
+          return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
         }
   
         if(target.id === message.guild.ownerID){
-          return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
+          return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
         }
   
   
         let kickedf = new Discord.MessageEmbed()
-        .setTitle("Kick")
-        .setDescription(`kicked ${userg} (${userg.id})`)
+        .setTitle(`successfully kicked ${userg}`)
+        .setDescription()
         .setColor(0x15daea)
         .setFooter(`kicked by ${message.author.tag}`)
   
