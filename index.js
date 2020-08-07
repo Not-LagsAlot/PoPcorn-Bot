@@ -17,7 +17,7 @@ var AI = 'AI currently in work';
 
 
 bot.on('ready', () => {
-  bot.user.setActivity('people type `.help`', {type: 'WATCHING'});
+  bot.user.setActivity('people type .help', {type: 'WATCHING'});
   console.log('This bot is online');
   
 })
@@ -34,7 +34,7 @@ bot.on('ready', () => {
 bot.on('message',  message => {
 
 
-  let args = message.content.slice(PREFIX.length).split(' ');
+  let args = message.content.slice(PREFIX.length).split(" ");
 
   
 
@@ -240,9 +240,7 @@ bot.on('message',  message => {
       break;
 
 
-      case 'ai':
-       message.guild.channels.create === '739055164425764965'
-      break;
+     
 
 
 
