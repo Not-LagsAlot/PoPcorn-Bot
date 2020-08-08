@@ -258,7 +258,7 @@ userg.kick(args[1]);
   if (!args[0]) { 
 		return message.channel.send(`Please Give Me Text!`) 
        } else {
-        const embed = new MessageEmbed()
+        const embed = new Discord.MessageEmbed()
           .setColor(`${EmbedColor}`)
           .setDescription(args.join(' ').split('').reverse().join(''))
 		  message.channel.send(embed)};
