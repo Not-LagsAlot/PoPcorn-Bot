@@ -8,7 +8,7 @@ const prefix = '.';
 var changes = 'Added 2 new command (ban and kick), Fixed bugs and crashes, removed splay command';
 
 
-var command = '.commands';
+var commands = '.commands';
 
 var version = 'v0.3';
 
@@ -19,7 +19,7 @@ var version = 'v0.3';
 
 
 client.once('ready', () => {
-  bot.user.setActivity('people type .help', { type: 'WATCHING' });
+  client.user.setActivity('people type .help', { type: 'WATCHING' });
   console.log('This bot is online');
 
 });
@@ -47,13 +47,13 @@ client.on('message', message => {
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('Please select this option to get the list of commands', command)
+      .addField('Please select this option to get the list of commands', commands)
 
     message.channel.send(help);
   } else if (command == - 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('These are the commands')
-      .setFooter('.Warn\n .website\n .info\n .advice\n .say\n .spank\n .slap\n hi\n .punch\n .dropkickanime\n .play\n .premium\n .User\n .serverinfo\n .rate(Requires a number under 10)\n .ban <user> <reason>\n .kick <user> <reason>')
+      .setFooter('.Warn\n .website\n .info\n . .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar')
 
 
     message.channel.send(commands);
@@ -233,7 +233,8 @@ userg.kick(args[1]);
 }else if(command === 'avatar'){
   const avaraat = new Discord.MessageEmbed()
   .setTitle(`${message.author.tag}`)
-  .setThumbnail(message.author.displayAvatarURL());
+  .setThumbnail(message.author.displayAvatarURL())
+  message.channel.send(avaraat);
 }
 
 
