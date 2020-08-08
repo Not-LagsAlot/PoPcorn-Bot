@@ -50,7 +50,7 @@ client.on('message', message => {
       .addField('Please select this option to get the list of commands', commands)
 
     message.channel.send(help);
-  } else if (command == - 'commands') {
+  } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('These are the commands')
       .setFooter('.Warn\n .website\n .info\n . .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar')
