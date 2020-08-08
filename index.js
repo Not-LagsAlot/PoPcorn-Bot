@@ -1,26 +1,29 @@
 
-const Discord = require("discord.js");
-const bot = new Discord.Client();
-var version = 'v0.3';
-const ytdl = require('ytdl-core')
-const moment = require("moment");
-require("moment-duration-format");
-var command = '.commands';
-const PREFIX = '.';
+const Discord = require('discord.js');
+
+const client = new Discord.Client();
+
+const prefix = '.';
+
 var changes = 'Added 2 new command (ban and kick), Fixed bugs and crashes, removed splay command';
+
 var AI = 'AI currently in work';
 
+var command = '.commands';
+
+var version = 'v0.3';
 
 
 
 
 
 
-bot.on('ready', () => {
+
+client.once('ready', () => {
   bot.user.setActivity('people type .help', {type: 'WATCHING'});
   console.log('This bot is online');
   
-})
+});
 
 
 
@@ -31,15 +34,15 @@ bot.on('ready', () => {
 
 
 
-bot.on('message',  message => {
+client.on('message',  message => {
 
 
-  let args = message.content.slice(PREFIX.length).split(" ");
+  let args = message.content.slice(prefix.length).split(/ +/);
 
   
 
 
-  switch (args[0]) {
+  switch(args[0]) {
 
 
 
@@ -57,7 +60,7 @@ bot.on('message',  message => {
 
       const help = new Discord.MessageEmbed()
         .setTitle('Help command')
-        .addField('Please select .command to get a list of our commands', command)
+        .addField('Please select this option to get the list of commands', command)
 
       message.channel.send(help)
       break;
@@ -69,7 +72,7 @@ bot.on('message',  message => {
 
       const commands = new Discord.MessageEmbed()
         .setTitle('These are the commands')
-        .setFooter('.Warn, .website, .info, .advice, .say, .spank, .slap, hi, .punch, .dropkickanime, .play, .premium, .User, .serverinfo, .rate(Requires a number under 10), .ban <user> <reason>, .kick <user> <reason>')
+        .setFooter('.Warn\n .website\n .info\n .advice\n .say\n .spank\n .slap\n hi\n .punch\n .dropkickanime\n .play\n .premium\n .User\n .serverinfo\n .rate(Requires a number under 10)\n .ban <user> <reason>\n .kick <user> <reason>')
 
 
       message.channel.send(commands)
@@ -78,7 +81,7 @@ bot.on('message',  message => {
 
 
 
-    case 'Warn':
+    case 'warn':
       if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 
         const warn = new Discord.MessageEmbed()
@@ -398,7 +401,16 @@ bot.on('message',  message => {
         message.channel.send(kickedf)
         userg.kick(args[1])
 
+        break;
 
+
+        case 'avatar':
+          const avatar = new Discord.MessageEmbed()
+           .setTitle(`${message.author.username}`)
+           .setImage(`${message.author.avatar}`)
+           .setColor(0x3BF04B)
+          message.channel.send(avatar)
+        break;
 
     
 
@@ -457,5 +469,5 @@ bot.on('message',  message => {
   }
 });
 
-bot.login(process.env.token);
+client.login(process.env.token);
 
