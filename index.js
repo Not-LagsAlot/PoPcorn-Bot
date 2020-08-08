@@ -290,7 +290,7 @@ userg.kick(args[1]);
 
 
 
-}
+
 });
 
 client.login(process.env.token);
