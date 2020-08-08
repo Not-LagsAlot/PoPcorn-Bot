@@ -13,6 +13,11 @@ var commands = '.commands';
 var version = 'v0.3';
 
 
+const EmbedColor = "RANDOM";
+const ErrorMessage = `Error In Getting Information | Please Try Again Later!`;
+const ErrorEmbedColor = "RED";
+
+
 
 
 
@@ -249,7 +254,17 @@ userg.kick(args[1]);
   .setDescription(`${days}, ${months} ${date.getDate()}, ${date.getFullYear()}`)
   .setTimestamp();
   message.channel.send(dats);
-}
+}else if(command === 'reverse'){
+  if (!args[0]) { 
+		return message.channel.send(`Please Give Me Text!`) 
+       } else {
+        const embed = new MessageEmbed()
+          .setColor(`${EmbedColor}`)
+          .setDescription(args.join(' ').split('').reverse().join(''))
+		  message.channel.send(embed)};
+
+      await message.delete();
+    }
 
 
 
