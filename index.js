@@ -5,17 +5,15 @@ const client = new Discord.Client();
 
 const prefix = '.';
 
-var changes = 'Added 2 new command (ban and kick), Fixed bugs and crashes, removed splay command';
+var changes = 'Added 2 new command (date and reverse <your message here>), Fixed bugs and crashes, removed alot of commands';
 
 
 var commands = '.commands';
 
-var version = 'v0.3';
+var version = 'v0.4';
 
 
 const EmbedColor = "RANDOM";
-const ErrorMessage = `Error In Getting Information | Please Try Again Later!`;
-const ErrorEmbedColor = "RED";
 
 
 
@@ -58,7 +56,7 @@ client.on('message',async message => {
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('These are the commands')
-      .setFooter('.Warn\n .website\n .info\n . .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar')
+      .setFooter('.Warn\n .website\n .info\n . .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>')
 
 
     message.channel.send(commands);
