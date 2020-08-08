@@ -241,7 +241,7 @@ userg.kick(args[1]);
   let day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   let days = day[date.getDay()]
   
-  let month = ["Januari", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   let months = month[date.getMonth()]
   const dats = new Discord.MessageEmbed()
   .setColor('RANDOM')
