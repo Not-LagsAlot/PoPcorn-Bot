@@ -241,7 +241,7 @@ userg.kick(args[1]);
         .setColor('RANDOM')
         .setTitle("Poll Information!")
         .setDescription(
-          `${Prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
+          `${prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
         )
         .setFooter(`Command Requested By : ${message.author.username}`)
         .setTimestamp();
