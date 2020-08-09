@@ -16,9 +16,6 @@ var version = 'v0.4';
 const EmbedColor = "RANDOM";
 const Poll_Emoji_1 = "👍";
 const Poll_Emoji_2 = "👎";
-const EmbedColor = "RANDOM";
-const ErrorMessage = `Error In Creating Poll | Please Try Again Later!`;
-const ErrorEmbedColor = "RED";
 
 
 
