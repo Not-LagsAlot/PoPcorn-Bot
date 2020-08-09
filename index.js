@@ -241,7 +241,7 @@ userg.kick(args[1]);
       await message.delete();
     }else if(command === 'poll'){
       const Embed = new Discord.MessageEmbed()
-        .setColor(`${EmbedColor}`)
+        .setColor('RANDOM')
         .setTitle("Poll Information!")
         .setDescription(
           `${Prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
@@ -256,7 +256,7 @@ userg.kick(args[1]);
       let Message = args.slice(0).join(" ");
 
       let Poll = await message.channel.send(
-        new MessageEmbed()
+        new Discord.MessageEmbed()
           .setColor(`${EmbedColor}`)
           .setDescription(`📋 ${Message}"`)
           .setFooter(`Poll Created By : ${message.author.username}`)
