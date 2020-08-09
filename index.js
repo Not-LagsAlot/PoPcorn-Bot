@@ -255,7 +255,7 @@ userg.kick(args[1]);
       let Poll = await message.channel.send(
         new Discord.MessageEmbed()
           .setColor(`${EmbedColor}`)
-          .setDescription(`📋 ${Message}"`)
+          .setTitle(`${Message}"`)
           .setFooter(`Poll Created By : ${message.author.username}`)
           .setTimestamp()
       );
@@ -263,8 +263,14 @@ userg.kick(args[1]);
       await Poll.react(`${Poll_Emoji_1}`);
       await Poll.react(`${Poll_Emoji_2}`);
       await message.delete();
-       }
-
+       }else if(command === 'hug'){
+        let huggeds = message.mentions.members.first();
+        let embed = new discord.MessageEmbed()
+        .setDescription(`${huggeds} was hugged by ${message.author.username}`)
+        .setImage('https://i.imgur.com/V7PbDYd.gif')
+        .setColor("#d09dd4")
+        message.channel.send(embed); 
+        }
 
 
 
