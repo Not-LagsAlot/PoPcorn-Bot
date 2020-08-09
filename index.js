@@ -273,7 +273,7 @@ userg.kick(args[1]);
         }else if(command === 'meme'){
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
-         message.channel.send(`https://ctk-api.herokuapp.com/meme/ ${num}`);S
+         message.channel.send(`https://ctk-api.herokuapp.com/meme/ ${num}`);
         }
 
 
