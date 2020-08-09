@@ -265,11 +265,15 @@ userg.kick(args[1]);
       await message.delete();
        }else if(command === 'hug'){
         let huggeds = message.mentions.members.first();
-        let embed = new discord.MessageEmbed()
+        let embed = new Discord.MessageEmbed()
         .setDescription(`${huggeds} was hugged by ${message.author.username}`)
         .setImage('https://i.imgur.com/V7PbDYd.gif')
         .setColor("#d09dd4")
         message.channel.send(embed); 
+        }else if(command === 'meme'){
+          var num = Math.floor(Math.random() * (500 - 1) + 1)
+
+         message.channel.send(`https://ctk-api.herokuapp.com/meme/ ${num}`);S
         }
 
 
