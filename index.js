@@ -14,7 +14,11 @@ var version = 'v0.4';
 
 
 const EmbedColor = "RANDOM";
-
+const Poll_Emoji_1 = "👍";
+const Poll_Emoji_2 = "👎";
+const EmbedColor = "RANDOM";
+const ErrorMessage = `Error In Creating Poll | Please Try Again Later!`;
+const ErrorEmbedColor = "RED";
 
 
 
@@ -45,7 +49,7 @@ client.on('message',async message => {
 
 
   if (command === 'ping') {
-    message.channel.send(`Pong \`${Math.round(bot.ws.ping)}ms\``);
+    message.channel.send(`Pong \`${Math.round(client.ws.ping)}ms\``);
 
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
@@ -56,7 +60,7 @@ client.on('message',async message => {
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('These are the commands')
-      .setFooter('.Warn\n .website\n .info\n . .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>')
+      .setFooter('.Warn\n .website\n .info\n .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>\n .roast\n .slap')
 
 
     message.channel.send(commands);
@@ -87,7 +91,7 @@ client.on('message',async message => {
       .setFooter('PoPcorn bot is a discord bot made by LagsAlot#5671, this bot had many features (fun and moderation)')
 
     message.channel.send(info);
-  } else if (command === 'clear') {
+  } else if (command === 'purge') {
     if (!message.member.hasPermission(['MANAGE_MESSAGES'])) {
 
       message.channel.send('You require the `Manage Messages` permission to execute this command')
@@ -125,42 +129,15 @@ client.on('message',async message => {
     const serverinfo = new Discord.MessageEmbed()
     .setTitle('Server Info')
     .addField('Server Owner', message.guild.owner)
-    .addField('Created At', message.guild.createdAt)
+    .addField('Created At', message.guild.channels.cache)
     .addField('Reigon', message.guild.region)
     .addField('AFK voice channel', message.guild.afkChannel)
     .addField('Member count', message.guild.memberCount)
-    .addField('online', message.guild.voice)
-    .addField('Server roles', message.guild.roles.cache)
+    .addField('emojis', message.guild.emojis)
+    .addField('Created', message.guild.createdTimestamp)
     .setThumbnail(message.guild.iconURL)
     .setColor(0xfd0000)
   message.channel.send(serverinfo);
-
-  }else if(command === 'new'){
-    const changed = new Discord.MessageEmbed()
-    .setTitle('Whats New!')
-    .addField('Current Version', version)
-    .addField('Changes To The Bot', changes)
-    .setTimestamp(Date.now())
-    .setColor(0xec1581)
-  message.channel.send(changed);
-  }else if(command === 'poll'){
-    const poll = new Discord.MessageEmbed()
-    .setColor(0xFFC300)
-    .setTitle('Poll Help Command')
-    .setTimestamp(Date.now())
-    .setDescription('Type .poll (your message goes here) to start a new poll')
-
-
-  if (!args[1]) {
-    message.channel.send(poll);
-  }
-
-  let msgArgs = args.slice(1).join(" ")
-
-  message.channel.send("**" + msgArgs + "**").then(messageReaction => {
-    messageReaction.react("👍");
-    messageReaction.react("👎");
-  })
 
   }else if(command === 'ban'){if (!message.member.hasPermission(['BAN_MEMBERS'])) {
     message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
@@ -248,7 +225,7 @@ userg.kick(args[1]);
   let months = month[date.getMonth()]
   const dats = new Discord.MessageEmbed()
   .setColor('RANDOM')
-  .setTitle("Date 📆")
+  .setTitle("Today\'s Date 📆")
   .setDescription(`${days}, ${months} ${date.getDate()}, ${date.getFullYear()}`)
   .setTimestamp();
   message.channel.send(dats);
@@ -262,7 +239,34 @@ userg.kick(args[1]);
 		  message.channel.send(embed)};
 
       await message.delete();
-    }
+    }else if(command === 'poll'){
+      const Embed = new Discord.MessageEmbed()
+        .setColor(`${EmbedColor}`)
+        .setTitle("Poll Information!")
+        .setDescription(
+          `${Prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
+        )
+        .setFooter(`Command Requested By : ${message.author.username}`)
+        .setTimestamp();
+
+      if (args.length === 0) {
+        return message.channel.send(Embed);
+      }
+
+      let Message = args.slice(0).join(" ");
+
+      let Poll = await message.channel.send(
+        new MessageEmbed()
+          .setColor(`${EmbedColor}`)
+          .setDescription(`📋 ${Message}"`)
+          .setFooter(`Poll Created By : ${message.author.username}`)
+          .setTimestamp()
+      );
+
+      await Poll.react(`${Poll_Emoji_1}`);
+      await Poll.react(`${Poll_Emoji_2}`);
+      await message.delete();
+       }
 
 
 
