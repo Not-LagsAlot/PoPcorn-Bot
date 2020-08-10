@@ -22,7 +22,7 @@ client.once('ready', () => {
   client.user.setActivity('people type .help', { type: 'WATCHING' });
   console.log('This bot is online');
 
-client.on('message',async message => {
+client.on('message', async message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
