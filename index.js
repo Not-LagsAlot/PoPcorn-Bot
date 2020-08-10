@@ -6,7 +6,6 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 2 new command (date and reverse <your message here>), Fixed bugs and crashes, removed alot of commands';
-const user = message.mentions.members.first() || message.member
 
 
 var commands = '.commands';
@@ -272,6 +271,7 @@ userg.kick(args[1]);
 
          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
         }else if(command === 'whois'){let member =  message.mentions.members.first() || message.author;
+          const user = message.mentions.members.first() || message.author
       
           if(!member)
           return message.channel.send("Please mention a member!");
