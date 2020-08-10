@@ -102,13 +102,11 @@ client.on('message', async message => {
       .setThumbnail(client.user.avatarURL())
 
       .setTitle("Botinfo!")
-      .addField("Username:", client.user.username)
-      .addField("Tag:", `**${client.user.discriminator}**`)
-      .addField("ID:", client.user.id)
-      .addField("Owner:", `LagsAlot#5671`)
-      .addField("Channel's:", `${client.channels.cache.size}`)
-      .addField("Server's:", `${client.guilds.cache.size}`)
-      .addField("users's:", `${client.users.cache.size}`)
+      .addField("Bot username:", client.user.username)
+      .addField("Bot tag:", `**${client.user.discriminator}**`)
+      .addField("bot ID:", client.user.id)
+      .addField("Owner of boy:", `LagsAlot#5671`)
+      .addField("Server's using the bot:", `${client.guilds.cache.size}`)
       .addField("Created:", client.user.createdAt)
       .setFooter(
         message.member.user.username.toUpperCase(),
@@ -126,8 +124,8 @@ client.on('message', async message => {
     .addField('Reigon', message.guild.region)
     .addField('AFK voice channel', message.guild.afkChannel)
     .addField('Member count', message.guild.memberCount)
-    .addField('emojis', message.guild.emojis)
-    .addField('Created',  createdAt)
+    .addField("Server's using the bot:", `${client.guilds.cache.size}`)
+    .addField("Created:", client.user.createdAt)
     .setThumbnail(message.guild.iconURL)
     .setColor(0xfd0000)
   message.channel.send(serverinfo);
