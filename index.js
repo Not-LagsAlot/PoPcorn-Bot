@@ -270,29 +270,7 @@ userg.kick(args[1]);
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
-        }else if(command === 'whois'){let member =  message.mentions.members.first() || message.author;
-          const user = message.mentions.members.first() || message.author
-      
-          if(!member)
-          return message.channel.send("Please mention a member!");
-        
-          const roles = member.roles.cache
-              .filter(r => r.id !== message.guild.id)
-              .map(r => r.name).join(", ") || 'none'
-  
-          const bruh = new Discord.MessageEmbed()
-              .setTitle("User Info")
-              .setFooter(message.guild.name, message.guild.iconURL())
-              .setThumbnail(member.user.displayAvatarURL({ dynamic: true}))
-              .setColor("RANDOM")
-              .addField(`${member.displayName}`)
-              .addField("**ID**", `${member.user.id}`)
-              .addField("**Tag**", `${member.user.tag}`)
-              .addField("**Roles**", `${roles}`, true)
-              .setTimestamp()
-  
-          message.channel.send(bruh);
-
+        }else if(command === 'whois'){message.channel.send('Your a **HUMAN**');
         }
       })
 
