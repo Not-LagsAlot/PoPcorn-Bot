@@ -125,7 +125,7 @@ client.on('message', async message => {
     .addField('Reigon', message.guild.region)
     .addField('AFK voice channel ID', message.guild.afkChannel.id)
     .addField('Member count', message.guild.memberCount)
-    .addField("Channel's:", message.guild.channels.cache.size)
+    .addField("Channel's:", message.guild.channels.cache)
     .addField("Created:", client.user.createdAt)
     .setThumbnail(message.guild.iconURL)
     .setColor(0xfd0000)
