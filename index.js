@@ -23,10 +23,6 @@ client.once('ready', () => {
   console.log('This bot is online');
 
 client.on('message', async message => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  const args = message.content.slice(prefix.length).split(/ +/);
-  const command = args.shift().toLowerCase();
   const { createCanvas, loadImage, registerFont } = require('canvas');
 const request = require('node-superfetch');
 const path = require('path');
@@ -57,6 +53,10 @@ module.exports = client => {
             return channel.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
         }
     });
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
 
   if (command === 'ping') {
     message.channel.send(`Pong \`${Math.round(client.ws.ping)}ms\``);
