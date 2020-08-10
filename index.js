@@ -96,15 +96,27 @@ client.on('message', async message => {
     message.channel.send('Your so ugly that when you went to an ugly looking contest they rejected you as they didn\'t want professionals');
 
   }else if(command === 'user'){
-    const User = new Discord.MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle('User Profile')
-    .addField('Author', message.author.username)
-    .addField('Current Server', message.guild.name)
-    .addField('Member Roles', message.member.roles.cache)
-    .setThumbnail(message.author.displayAvatarURL())
-    .setTimestamp(Date.now())
-  message.channel.send(User);
+    let user = new Discord.MessageEmbed()
+      .setColor(`RANDOM`)
+      .setAuthor(client.user.username, client.user.avatarURL())
+      .setThumbnail(client.user.avatarURL())
+
+      .setTitle("Botinfo!")
+      .addField("Username:", client.user.username)
+      .addField("Tag:", `**${client.user.discriminator}**`)
+      .addField("ID:", client.user.id)
+      .addField("Owner:", `OWNER NAME`)
+      .addField("Channel's:", `${client.channels.cache.size}`)
+      .addField("Server's:", `${client.guilds.cache.size}`)
+      .addField("users's:", `${client.users.cache.size}`)
+      .addField("Created:", client.user.createdAt)
+      .setFooter(
+        message.member.user.username.toUpperCase(),
+        message.member.user.displayAvatarURL()
+      )
+      .setTimestamp();
+
+    message.channel.send(user);
 
   }else if(command === 'serverinfo'){
     const serverinfo = new Discord.MessageEmbed()
