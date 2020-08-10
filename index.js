@@ -6,6 +6,7 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 2 new command (date and reverse <your message here>), Fixed bugs and crashes, removed alot of commands';
+const user = message.mentions.members.first() || message.member
 
 
 var commands = '.commands';
@@ -95,7 +96,7 @@ client.on('message', async message => {
   }else if(command === 'roast'){
     message.channel.send('Your so ugly that when you went to an ugly looking contest they rejected you as they didn\'t want professionals');
 
-  }else if(command === 'user'){
+  }else if(command === 'botinfo'){
     let user = new Discord.MessageEmbed()
       .setColor(`RANDOM`)
       .setAuthor(client.user.username, client.user.avatarURL())
@@ -105,7 +106,7 @@ client.on('message', async message => {
       .addField("Username:", client.user.username)
       .addField("Tag:", `**${client.user.discriminator}**`)
       .addField("ID:", client.user.id)
-      .addField("Owner:", `OWNER NAME`)
+      .addField("Owner:", `LagsAlot#5671`)
       .addField("Channel's:", `${client.channels.cache.size}`)
       .addField("Server's:", `${client.guilds.cache.size}`)
       .addField("users's:", `${client.users.cache.size}`)
@@ -127,7 +128,7 @@ client.on('message', async message => {
     .addField('AFK voice channel', message.guild.afkChannel)
     .addField('Member count', message.guild.memberCount)
     .addField('emojis', message.guild.emojis)
-    .addField('Created', message.guild.createdTimestamp)
+    .addField('Created',  createdAt)
     .setThumbnail(message.guild.iconURL)
     .setColor(0xfd0000)
   message.channel.send(serverinfo);
@@ -270,6 +271,28 @@ userg.kick(args[1]);
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
+        }else if(command === 'whois'){let member =  message.mentions.members.first() || message.author;
+      
+          if(!member)
+          return message.channel.send("Please mention a member!");
+        
+          const roles = member.roles.cache
+              .filter(r => r.id !== message.guild.id)
+              .map(r => r.name).join(", ") || 'none'
+  
+          const bruh = new Discord.MessageEmbed()
+              .setTitle("User Info")
+              .setFooter(message.guild.name, message.guild.iconURL())
+              .setThumbnail(member.user.displayAvatarURL({ dynamic: true}))
+              .setColor("RANDOM")
+              .addField(`${member.displayName}`)
+              .addField("**ID**", `${member.user.id}`)
+              .addField("**Tag**", `${member.user.tag}`)
+              .addField("**Roles**", `${roles}`, true)
+              .setTimestamp()
+  
+          message.channel.send(bruh);
+
         }
       })
 
