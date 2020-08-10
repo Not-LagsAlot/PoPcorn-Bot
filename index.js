@@ -27,6 +27,36 @@ client.on('message',async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
+  const { createCanvas, loadImage, registerFont } = require('canvas');
+const request = require('node-superfetch');
+const path = require('path');
+registerFont(path.join(__dirname, '..', 'cores', 'fonts', 'Heroes Legend.ttf'), { family: 'Heroes Legend' });
+module.exports = client => { 
+    client.on("guildMemberAdd", async (member,msg) => {
+        const channel = member.guild.systemChannel;
+               const firstAvatarURL = member.user.displayAvatarURL({ format: 'png', size: 512 });
+        try {
+            const firstAvatarData = await request.get(firstAvatarURL);
+            const firstAvatar = await loadImage(firstAvatarData.body);
+            const base = await loadImage(path.join(__dirname, '..', 'cores', 'img', 'welcome.png'));
+            const canvas = createCanvas(base.width, base.height);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(firstAvatar, -6, 35, 400, 400);
+            ctx.drawImage(base, 0, 0);
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#40e9ff';
+            ctx.font = '24px Heroes Legend';
+            ctx.fillStyle = 'black';
+            ctx.fillText(member.user.tag, 358, 288);
+            ctx.font = '18px Heroes Legend';
+                    ctx.fillStyle = 'white';
+                    ctx.fillText(member.guild.name, 408, 358)
+            return channel.send({ files: [{ attachment: canvas.toBuffer(), name: 'Nancywlcm.png' }] });
+        } catch (err) {
+            return channel.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
+        }
+    });
 
   if (command === 'ping') {
     message.channel.send(`Pong \`${Math.round(client.ws.ping)}ms\``);
