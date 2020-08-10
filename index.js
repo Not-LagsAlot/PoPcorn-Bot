@@ -257,10 +257,7 @@ userg.kick(args[1]);
 
       await Poll.react(`${Poll_Emoji_1}`);
       await Poll.react(`${Poll_Emoji_2}`);
-      await message.delete()
-      if(message.reactions.removeAll){
-        message.channel.send(`${message.author.username}, has removed reactons!`);
-      }
+      await message.delete();
        }else if(command === 'hug'){
         let huggeds = message.mentions.members.first();
         let embed = new Discord.MessageEmbed()
