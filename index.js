@@ -5,22 +5,24 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 2 new command (date and reverse <your message here>), Fixed bugs and crashes, removed alot of commands';
+var changes = 'Added 1 new command (.play <song link here>), Fixed bugs and crashes, added PoPcorn AI';
 
 
 var commands = '.commands';
 
-var version = 'v0.4';
+var version = 'v0.5';
 
 
 const EmbedColor = "RANDOM";
+
+const ytdl = require("ytdl-core")
 
 
 
 
 client.once('ready', () => {
   client.user.setActivity('people type .help', { type: 'WATCHING' });
-  console.log('This bot is online');
+    console.log('This bot is online');
 
 client.on('message', async message => {
   
@@ -41,7 +43,7 @@ client.on('message', async message => {
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('These are the commands')
-      .setFooter('.Warn\n .website\n .info\n .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>\n .roast\n .slap')
+      .setFooter('.Warn\n .website\n .info\n .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>\n .roast\n .slap\n ..play <song link here>')
 
 
     message.channel.send(commands);
@@ -270,7 +272,39 @@ userg.kick(args[1]);
 
          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
         }else if(command === 'whois'){message.channel.send('Your a **HUMAN**');
-        }
+        }else if(command === 'play'){const voiceChannel = message.member.voice.channel
+          const play = new Discord.MessageEmbed()
+         .setTitle('You need to be in a Voice Channel to run this command')
+         .setColor(0xf0ff00)
+
+
+          if(!voiceChannel) return message.channel.send(
+
+             message.channel.send(play)
+
+          );
+         const permissions = voiceChannel.permissionsFor(message.client.user)
+         if(!permissions.has('CONNECT')) return message.channel.send(':no_entry_sign: I dont have the permission `connect` so i can\'t run this command')
+         if(!permissions.has('SPEAK')) return message.channel.send(':no_entry_sign: I don\'t have `Speak` permission')
+
+
+         try{
+                var connection = await voiceChannel.join()
+         }catch (error){
+           console.log('Erorr connecting: {erorr}')
+           message.channel.send(':x: Erorr while connection to the Voice Channel')
+         }
+
+         const dispatcher = connection.play(ytdl(args[1]))
+         .on('finish', () => {
+           voiceChannel.leave()
+           message.channel.send('I have left the voice channel after playing the music ')
+         })
+    .on('error', error =>{
+      console.log(error)
+    })
+    dispatcher.setVolumeLogarithmic(5 / 5)
+}
       })
 
 
