@@ -30,6 +30,7 @@ client.on('message', async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
+  
 
   if (command === 'ping') {
     message.channel.send(`Pong \`${Math.round(client.ws.ping)}ms\``);
