@@ -167,7 +167,8 @@ client.on('message', async message => {
     .setFooter(`Banned by ${message.author.tag}`)
 
   message.channel.send(ban)
-  target.ban(args[1]);
+  target.ban(args[1])
+  target.send(`You were **BANNED** in ${message.guild.name}, banned by: ${message.author.username}`)
 }else if(command === 'kick'){if (!message.member.hasPermission(['KICK_MEMBERS'])) {
   message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
 }
