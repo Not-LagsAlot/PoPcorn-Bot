@@ -92,7 +92,7 @@ client.on('message', async message => {
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
 
   }else if(command === 'slap'){
-    if (!args[1]) return message.content.reply('User specification is required')
+    if (!args[1]) return message.channel.send('User specification is required')
   message.channel.send('Slapped specified user https://tenor.com/view/vanderpump-rules-pump-rules-slap-gif-4474446');
 
   }else if(command === 'roast'){
@@ -303,6 +303,33 @@ userg.kick(args[1]);
       console.log(error)
     })
     dispatcher.setVolumeLogarithmic(5 / 5)
+}else if(command === 'nick'){
+
+  if(message.member.hasPermission(['MANAGE_NICKNAMES'])){
+    message.channel.send(':x: You dont have `change nickname` permission')
+  }
+
+
+  const usertag = message.mentions.members.first();
+
+  if(!usertag){
+    message.channel.send(':x: You havent mention a user')
+
+    usertag.setNickname(args.slice(1).join(" "));
+  }
+}else if(command === 'new'){
+  const updates = new Discord.MessageEmbed()
+  .setTitle('Whats new!')
+  .addField('Current version', version)
+  .addField('Changes To The Bot', changes)
+  .setFooter(`PoPcorn Bot | Made by LagsAlot#5671`)
+  .setTimestamp(Date.now())
+
+  message.channel.send(updates);
+
+
+
+
 }
       })
 
