@@ -323,6 +323,7 @@ userg.kick(args[1]);
   .addField('Current version', version)
   .addField('Changes To The Bot', changes)
   .setFooter(`PoPcorn Bot | Made by LagsAlot#5671`)
+  .setColor('RANDOM')
   .setTimestamp(Date.now())
 
   message.channel.send(updates);
