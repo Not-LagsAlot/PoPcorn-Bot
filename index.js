@@ -277,14 +277,11 @@ userg.kick(args[1]);
         }else if(command === 'play'){const voiceChannel = message.member.voice.channel
           const play = new Discord.MessageEmbed()
          .setTitle('You need to be in a Voice Channel to run this command')
-         .setColor(0xf0ff00)
+         .setColor(0xf0ff00);
 
 
-          if(!voiceChannel) return message.channel.send(
+          if(!voiceChannel) return message.channel.send(play)
 
-             message.channel.send(play)
-
-          );
          const permissions = voiceChannel.permissionsFor(message.client.user)
          if(!permissions.has('CONNECT')) return message.channel.send(':no_entry_sign: I dont have the permission `connect` so i can\'t run this command')
          if(!permissions.has('SPEAK')) return message.channel.send(':no_entry_sign: I don\'t have `Speak` permission')
@@ -293,7 +290,7 @@ userg.kick(args[1]);
          try{
                 var connection = await voiceChannel.join()
          }catch (error){
-           console.log('Erorr connecting: {erorr}')
+           console.log(`error connecting ${error}`)
            message.channel.send(':x: Erorr while connection to the Voice Channel')
          }
 
