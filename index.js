@@ -205,7 +205,8 @@ let kickedf = new Discord.MessageEmbed()
   .setFooter(`kicked by ${message.author.tag}`)
 
 message.channel.send(kickedf)
-userg.kick(args[1]);
+userg.kick(args[1])
+userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
 }else if(command === 'avatar'){
   const avaraat = new Discord.MessageEmbed()
   .setTitle(`${message.author.tag}`)
@@ -304,19 +305,23 @@ userg.kick(args[1]);
     })
     dispatcher.setVolumeLogarithmic(5 / 5)
 }else if(command === 'setnick'){
+let name = args.slice(1).join(" ")
 
-  if(!message.member.hasPermission(['MANAGE_NICKNAMES'])) {
-    message.channel.send(':x: You dont have `change nickname` permission')
-  }
+if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
+  message.channel.send(':x: you dont have `MANAGE MESSAGES` permission')
+  if(args[0]) return message.channel.send(':x: Mention a USER!')
 
+  const changenick = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
 
-  const usertag = message.mentions.members.first();
+  if(!changenick) return message.channel.send('Unable to find that user')
 
-  if(!usertag){
-    message.channel.send(':x: You havent mention a user')
+  if(!name) return message.channel.send(':x: what should the name be')
 
-    usertag.setNickname(args.slice(1).join(" "));
-  }
+  if(changenick.kickable) return message.channel.send('I can tchange there username')
+  changenick.setNickname(name)
+
+  message.channel.send('Changed there nickname');
+}
 }else if(command === 'new'){
   const updates = new Discord.MessageEmbed()
   .setTitle('Whats new!')
