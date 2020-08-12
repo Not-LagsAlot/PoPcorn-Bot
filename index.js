@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.play <song link here>), Fixed bugs and crashes, added PoPcorn AI';
+var changes = 'Added 2 new command (.play <song link here>) .setnick <user> <nickname> Fixed bugs and crashes, added PoPcorn AI';
 
 
 var commands = '.commands';
@@ -303,7 +303,7 @@ userg.kick(args[1]);
       console.log(error)
     })
     dispatcher.setVolumeLogarithmic(5 / 5)
-}else if(command === 'nick'){
+}else if(command === 'setnick'){
 
   if(message.member.hasPermission(['MANAGE_NICKNAMES'])){
     message.channel.send(':x: You dont have `change nickname` permission')
