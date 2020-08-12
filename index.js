@@ -305,7 +305,7 @@ userg.kick(args[1]);
     dispatcher.setVolumeLogarithmic(5 / 5)
 }else if(command === 'setnick'){
 
-  if(message.member.hasPermission(['MANAGE_NICKNAMES'])){
+  if(!message.member.hasPermission(['MANAGE_NICKNAMES'])) {
     message.channel.send(':x: You dont have `change nickname` permission')
   }
 
