@@ -9,7 +9,7 @@ var changes = 'Added 5 new commands (.lock (on or off), .unban (user), .purge (n
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '`.ban (user)`, `.kick (user)`, `.warn (user)`, `.unban (user)`, `.purge`, `.lock (on or off)` .'
-var fun = '`.meme`'
+var fun = '```.meme, .date, .reverse (message here)```'
 
 var version = 'v0.6';
 
@@ -434,6 +434,12 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       } else {
           return message.channel.send("You are not able to force the bot to restart.");
       }
+  }else if(command === 'check'){
+
+message.channel.send('Checking...')
+message.edit(':check: Bot works PERFECTLY :check:');
+
+
   }
       })
 
