@@ -377,8 +377,8 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
   }
 }else if(command === 'lock'){
   if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
-    message.channel.send('You dont have `MANAGE CHANNELS` permission')
-  };
+    return message.channel.send('You dont have `MANAGE CHANNELS` permission')
+  }
   
   
   const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
