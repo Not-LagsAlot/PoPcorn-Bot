@@ -423,7 +423,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       } else message.reply("you aren't listening to Spotify.");
     }
   }else if(command === 'restart'){
-      const { OWNER_ID } = '642308656217456641'; 
+      const OWNER_ID  = '642308656217456641'; 
   
       if (message.author.id === OWNER_ID) {
           message.channel.send(`Ok, ${message.author}, I'll restart....`);
