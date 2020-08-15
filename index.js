@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 2 new command (.play <song link here>) .setnick <user> <nickname> Fixed bugs and crashes, added PoPcorn AI';
+var changes = 'Added 5 new commands (.lock (on or off), .unban (user), .purge (number 1-100), updated .help command) Fixed bugs and crashes, fixed PoPcorn AI';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '`.ban (user)`, `.kick (user)`, `.warn (user)`, `.unban (user)`, `.purge`, `.lock (on or off)` .'
 var fun = '`.meme`'
 
-var version = 'v0.5';
+var version = 'v0.6';
 
 
 const EmbedColor = "RANDOM";
