@@ -163,7 +163,7 @@ client.on('message', async message => {
 
 
   let ban = new Discord.MessageEmbed()
-    .setTitle(`successfully Banned ${target}`)
+    .setTitle(`:verified: successfully Banned ${target}`)
     .setColor(0x3BF04B)
     .setFooter(`Banned by ${message.author.tag}`)
 
@@ -336,6 +336,8 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
 
 
 
+}else if(command === 'emoji'){
+  guild.emojis.create('emoji_url', 'emoji_name')
 }
       })
 
