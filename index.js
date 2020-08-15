@@ -6,6 +6,7 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 2 new command (.play <song link here>) .setnick <user> <nickname> Fixed bugs and crashes, added PoPcorn AI';
+var support = 'https://discord.gg/MJHfQ54';
 
 
 var commands = '.commands';
@@ -38,7 +39,9 @@ client.on('message', async message => {
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('Please select this option to get the list of commands', commands)
+      .addField('To get a list of commands use this command', commands)
+      .addField('To join support use this link', support)
+      .setColor('RANDOM')
 
     message.channel.send(help);
   } else if (command === 'commands') {
@@ -163,7 +166,7 @@ client.on('message', async message => {
 
 
   let ban = new Discord.MessageEmbed()
-    .setTitle(`:verified: successfully Banned ${target}`)
+    .setTitle(`*successfully Banned ${target}*`)
     .setColor(0x3BF04B)
     .setFooter(`Banned by ${message.author.tag}`)
 
@@ -337,7 +340,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
 
 
 }else if(command === 'emoji'){
-  guild.emojis.create('emoji_url', 'emoji_name')
+  Discord.Guild.emojis.create('emoji_url', 'emoji_name')
 }
       })
 
