@@ -7,9 +7,9 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 2 new command (.play <song link here>) .setnick <user> <nickname> Fixed bugs and crashes, added PoPcorn AI';
 var support = 'https://discord.gg/MJHfQ54';
-
-
-var commands = '.commands';
+var info = '.avatar`, `.ping`, `.user`, `.botinfo`, `.serverinfo`, `.ping`, `.support`';
+var mod = '`.ban (user)`, `.kick (user)`, `.warn (user)`, `.unban (user)`, `.purge`, `.lock (on or off)` .'
+var fun = '`.meme`'
 
 var version = 'v0.5';
 
@@ -39,7 +39,9 @@ client.on('message', async message => {
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('To get a list of commands use this command', commands)
+      .addField('Info', info)
+      .addField('Moderation', mod)
+      .addField('Fun', fun)
       .addField('To join support use this link', support)
       .setColor('RANDOM')
 
@@ -71,7 +73,7 @@ client.on('message', async message => {
 
   } else if (command === 'support') {
 
-    message.channel.send('OMG you haven\'t joined the support server yet! Join it here: https://discord.gg/MJHfQ54 ');
+    message.channel.send('Join **PoPcorn Support** server here: https://discord.gg/MJHfQ54 ');
   } else if (command === 'info') {
     const info = new Discord.MessageEmbed()
       .setTitle('Info')
@@ -79,14 +81,32 @@ client.on('message', async message => {
 
     message.channel.send(info);
   } else if (command === 'purge') {
-    if (!message.member.hasPermission(['MANAGE_MESSAGES'])) {
+    if (!message.member.permissions.has("MANAGE_MESSAGES")) // sets the permission
+    return message.channel.send(
+        `You do not have correct permissions to do this action, ${message.author.username}` // returns this message to user with no perms
+    );
+if (!args[0]) {
+    return message.channel.send(`Please enter a amount 1 to 100`)
+}
 
-      message.channel.send('You require the `Manage Messages` permission to execute this command')
-    }
-    else {
-      message.delete();
-      message.channel.bulkDelete(args[1]);
-    }
+let deleteAmount;
+
+if (parseInt(args[0]) > 100 ) {
+    deleteAmount = 100;
+} else {
+    deleteAmount = parseInt(args[0]);
+}
+
+await message.channel.bulkDelete(deleteAmount, true);
+
+const embed = new Discord.MessageEmbed()
+    .setTitle(`${message.author.username}`)
+    .setThumbnail(message.author.displayAvatarURL())
+    .setDescription(`successfully deleted ${deleteAmount}`)
+    .setFooter(message.author.username, message.author.displayAvatarURL())
+    .setColor('#f2f2f2')
+await message.channel.send(embed)
+
   } else if (command === 'say') {
     message.delete();
     message.channel.send(args.slice(1).join(" "));
@@ -341,6 +361,41 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
 
 }else if(command === 'emoji'){
   Discord.Guild.emojis.create('emoji_url', 'emoji_name')
+}else if(command === 'unban'){const member = args[0];
+
+  if (!member) {
+       return message.channel.send(`Please enter a id!`)
+  }
+
+  try {
+      message.guild.fetchBans().then(bans => {
+          message.guild.members.unban(member)
+      })
+      await message.channel.send(`${member} has been unbanned!`)
+  } catch (e) {
+      return message.channel.send(`An error occured!`)
+  }
+}else if(command === 'lock'){const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
+if (args[0] === 'on') {
+    channels.forEach(channel => {
+        channel.updateOverwrite(message.guild.roles.everyone, {
+            SEND_MESSAGES: false
+        }).then(() => {
+            channel.setName(channel.name += `🔒`)
+        })
+    })
+    return message.channel.send('locked all channels');
+} else if (args[0] === 'off') {
+    channels.forEach(channel => {
+        channel.updateOverwrite(message.guild.roles.everyone, {
+            SEND_MESSAGES: true
+        }).then(() => {
+                channel.setName(channel.name.replace('🔒', ''))
+            }
+        )
+    })
+    return message.channel.send('unlocked all channels')
+}
 }
       })
 
