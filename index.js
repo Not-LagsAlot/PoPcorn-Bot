@@ -436,8 +436,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       }
   }else if(command === 'check'){
 
-message.channel.send('Checking...')
-await message.edit(':check: Bot works PERFECTLY :check:');
+message.channel.send(':check: Bot works PERFECTLY :check:');
 
 
   }
