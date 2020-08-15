@@ -108,7 +108,6 @@ const embed = new Discord.MessageEmbed()
 await message.channel.send(embed)
 
   } else if (command === 'say') {
-    message.delete()
     message.channel.send(args.slice(1).join(" "));
   }else if(command === 'spank'){
     if (!args) return message.content.reply('state user')
