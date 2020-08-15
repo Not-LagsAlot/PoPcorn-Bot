@@ -7,7 +7,7 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 2 new command (.play <song link here>) .setnick <user> <nickname> Fixed bugs and crashes, added PoPcorn AI';
 var support = 'https://discord.gg/MJHfQ54';
-var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support';
+var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '`.ban (user)`, `.kick (user)`, `.warn (user)`, `.unban (user)`, `.purge`, `.lock (on or off)` .'
 var fun = '`.meme`'
 
@@ -376,10 +376,12 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       return message.channel.send(`An error occured!`)
   }
 }else if(command === 'lock'){
-
-  if(message.member.hasPermission(['MANAGE_CHANNELS'])){
-    message.channel.send('You dont have `MANAGE MESSAGES` permission')
-  }else{const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
+  if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
+    message.channel.send('You dont have `MANAGE CHANNELS` permission')
+  };
+  
+  
+  const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
   if (args[0] === 'on') {
       channels.forEach(channel => {
           channel.updateOverwrite(message.guild.roles.everyone, {
@@ -399,11 +401,8 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
           )
       })
       return message.channel.send('unlocked all channels')
-  }}
-  
-  
-  
-}
+    }
+  }
       })
 
 
