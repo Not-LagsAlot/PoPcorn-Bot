@@ -110,7 +110,7 @@ await message.channel.send(embed)
   } else if (command === 'say') {
     message.channel.send(args.slice(1).join(" "));
   }else if(command === 'spank'){
-    if (!args) return message.content.reply('state user')
+    if (!args[1]) return message.content.reply('state user')
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
 
   }else if(command === 'slap'){
@@ -400,6 +400,27 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
           )
       })
       return message.channel.send('unlocked all channels')
+    }
+  }else if(command === 'spotify'){checkStatus(client.users.get(message.author.id).presence);
+    function checkStatus(a) {
+      if (a.game != null && a.game.name === "Spotify") {
+        let Song = a.game.details,
+          Artist = a.game.state;
+        const spotifyEmbed = new Discord.MessageEmbed()
+          .setTitle("Current Song You're Listening to on Spotify:")
+          .setDescription(
+            "Song Title: " +
+              Song +
+              " - " +
+              Artist
+          )
+          .setThumbnail(
+            "https://lh3.googleusercontent.com/UrY7BAZ-XfXGpfkeWg0zCCeo-7ras4DCoRalC_WXXWTK9q5b0Iw7B0YQMsVxZaNB7DM=s180"
+          )
+          .setImage(a.game.assets.largeImageURL)
+          .setColor(0x1ed761);
+        message.channel.send(spotifyEmbed);
+      } else message.reply("you aren't listening to Spotify.");
     }
   }
       })
