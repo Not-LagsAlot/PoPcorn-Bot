@@ -389,7 +389,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
               channel.setName(channel.name += `🔒`)
           })
       })
-      return message.channel.send('locked all channels');
+      return message.channel.send('locked all channels \n Note that after a SERVER LOCKDOWN is over all the channel permission IS SET TO YES meaning that user can send messages in ANY CHANNEL you have to fix that manually by going in channel settings');
   } else if (args[0] === 'off') {
       channels.forEach(channel => {
           channel.updateOverwrite(message.guild.roles.everyone, {
