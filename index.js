@@ -422,6 +422,18 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
         message.channel.send(spotifyEmbed);
       } else message.reply("you aren't listening to Spotify.");
     }
+  }else if(command === 'restart'){
+      const { OWNER_ID } = '642308656217456641'; 
+  
+      if (message.author.id === OWNER_ID) {
+          message.channel.send(`Ok, ${message.author}, I'll restart....`);
+          message.channel.send(`Shutting down port...`)
+          setTimeout(() => {
+              process.exit(0);
+          }, 5000);
+      } else {
+          return message.channel.send("You are not able to force the bot to restart.");
+      }
   }
       })
 
