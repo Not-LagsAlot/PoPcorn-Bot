@@ -8,8 +8,8 @@ const Poll_Emoji_1 = "👍";
 var changes = 'Added 5 new commands (.lock (on or off), .unban (user), .purge (number 1-100), updated .help command) Fixed bugs and crashes, fixed PoPcorn AI';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
-var mod = '`.ban (user)`, `.kick (user)`, `.warn (user)`, `.unban (user)`, `.purge`, `.lock (on or off)` .'
-var fun = '```.meme, .date, .reverse (message here)```'
+var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
+var fun = '```.meme, .date, .reverse (message here), .unban (member here)```'
 
 var version = 'v0.6';
 
@@ -23,7 +23,7 @@ const ytdl = require("ytdl-core")
 
 client.once('ready', () => {
   client.user.setActivity('people type .help', { type: 'WATCHING' });
-    console.log('This bot is online');
+    console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
   
@@ -39,10 +39,10 @@ client.on('message', async message => {
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
+      .addField('Support Link', support)
       .addField('Info', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
-      .addField('To join support use this link', support)
       .setColor('RANDOM')
 
     message.channel.send(help);
