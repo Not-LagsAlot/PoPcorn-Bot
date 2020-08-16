@@ -286,12 +286,20 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
       await Poll.react(`${Poll_Emoji_2}`);
       await message.delete();
        }else if(command === 'hug'){
-        let huggeds = message.mentions.members.first();
-        let embed = new Discord.MessageEmbed()
-        .setDescription(`${huggeds} was hugged by ${message.author.username}`)
-        .setImage('https://i.imgur.com/V7PbDYd.gif')
-        .setColor("#d09dd4")
-        message.channel.send(embed); 
+        var member= message.mentions.members.first();
+        var images = ["https://media0.giphy.com/media/3ZnBrkqoaI2hq/giphy.gif?cid=ecf05e47a04f6d3c6d7f959b6b190b1cda88ce59d34605ac&rid=giphy.gif", "https://media2.giphy.com/media/PHZ7v9tfQu0o0/giphy.gif?cid=ecf05e477106e2fc0d1ed0906595b65067262ab482a12b5d&rid=giphy.gif", "https://media3.giphy.com/media/u9BxQbM5bxvwY/giphy.gif?cid=ecf05e4761cb7e6abcb1ce7cd71e633f635d55fb953813bb&rid=giphy.gif", "https://media1.giphy.com/media/ZQN9jsRWp1M76/giphy.gif?cid=ecf05e476aa1056a2b1672677a82b9415bb06e0a8925f15a&rid=giphy.gif", "https://media2.giphy.com/media/IRUb7GTCaPU8E/giphy.gif?cid=ecf05e4791de990a3943c06a4dd525151df03fc7667807a5&rid=giphy.gif", "https://media0.giphy.com/media/BXrwTdoho6hkQ/giphy.gif?cid=ecf05e4783c7a876015ea9dd1be3b1cfeb7d9af9183e1f97&rid=giphy.gif" ];
+        var image = Math.floor(Math.random() * images.length);
+        if(!member) return message.channel.send("you need to mention someone")
+        let HugEmbed = new Discord.MessageEmbed()
+          .setTitle(`${message.author.username} you can't hug yourself but come here I'll hug you`)
+          .setImage(String([images[image]]))
+          .setColor(0xF000FF)
+            if(member.id === message.author.id) return message.channel.send(HugEmbed);
+         let HugEmbed = new Discord.MessageEmbed()
+          .setTitle(`${message.author.username} hugs ${member.user.username}, how cute`)
+          .setImage(String([images[image]]))
+          .setColor(0xF000FF)
+         return message.channel.send(HugEmbed);
         }else if(command === 'meme'){
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
@@ -401,27 +409,6 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       })
       return message.channel.send('unlocked all channels')
     }
-  }else if(command === 'spotify'){checkStatus(client.users.get(message.author.id).presence);
-    function checkStatus(a) {
-      if (a.game != null && a.game.name === "Spotify") {
-        let Song = a.game.details,
-          Artist = a.game.state;
-        const spotifyEmbed = new Discord.MessageEmbed()
-          .setTitle("Current Song You're Listening to on Spotify:")
-          .setDescription(
-            "Song Title: " +
-              Song +
-              " - " +
-              Artist
-          )
-          .setThumbnail(
-            "https://lh3.googleusercontent.com/UrY7BAZ-XfXGpfkeWg0zCCeo-7ras4DCoRalC_WXXWTK9q5b0Iw7B0YQMsVxZaNB7DM=s180"
-          )
-          .setImage(a.game.assets.largeImageURL)
-          .setColor(0x1ed761);
-        message.channel.send(spotifyEmbed);
-      } else message.reply("you aren't listening to Spotify.");
-    }
   }else if(command === 'restart'){
       const OWNER_ID  = '642308656217456641'; 
   
@@ -436,7 +423,8 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       }
   }else if(command === 'check'){
 
-message.channel.send(':check: Bot works PERFECTLY :check:');
+message.channel.send(' No problem found in the bot');
+
 
 
   }
