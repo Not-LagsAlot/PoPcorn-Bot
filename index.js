@@ -102,13 +102,13 @@ await message.channel.bulkDelete(deleteAmount, true);
 const embed = new Discord.MessageEmbed()
     .setTitle(`${message.author.username}`)
     .setThumbnail(message.author.displayAvatarURL())
-    .setDescription(`successfully deleted ${deleteAmount}`)
+    .setDescription(`successfully deleted ${deleteAmount} message(s)`)
     .setFooter(message.author.username, message.author.displayAvatarURL())
     .setColor('#f2f2f2')
 await message.channel.send(embed)
 
   } else if (command === 'say') {
-    message.channel.send(args.slice(1).join(" "));
+    message.channel.send(args.slice(0).join(" "));
   }else if(command === 'spank'){
     if (!args[1]) return message.content.reply('state user')
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
@@ -161,7 +161,7 @@ await message.channel.send(embed)
   }
 
   if (!message.guild.me.hasPermission(['BAN_MEMBERS'])) {
-    return message.channel.send(`**${message.author.username}, i do not have the permission to ban someone`)
+    return message.channel.send(`**${message.author.username}**, i do not have the permission to ban someone`)
   }
 
   const target = message.mentions.members.first();
@@ -232,7 +232,7 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
 }else if(command === 'avatar'){
   const avaraat = new Discord.MessageEmbed()
   .setTitle(`${message.author.tag}`)
-  .setThumbnail(message.author.displayAvatarURL())
+  .setImage(message.author.displayAvatarURL())
   message.channel.send(avaraat);
 }else if(command === 'date'){
   let date = new Date();
@@ -332,6 +332,7 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
          })
     .on('error', error =>{
       console.log(error)
+      message.channel.send(':x: oopsie an error occurred')
     })
     dispatcher.setVolumeLogarithmic(5 / 5)
 }else if(command === 'setnick'){
