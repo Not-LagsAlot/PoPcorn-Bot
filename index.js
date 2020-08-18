@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.clyde (message here)) Fixed bugs and crashes, fixed say command';
+var changes = 'Added 1 new command (.emojify (message here) Fixed bugs and crashes, fixed avatar command';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis```'
 
-var version = 'v0.8';
+var version = 'v0.9';
 
 
 const EmbedColor = "RANDOM";
@@ -488,7 +488,6 @@ message.channel.send(encodedLink)
 }else if(command === 'emojify'){if(args.length < 1) {
   message.channel.send('You must provide some text to emojify!');
  }
-await message.delete();
 message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));}
       })
 
