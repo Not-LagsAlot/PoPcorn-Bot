@@ -236,7 +236,6 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
   .setTitle(`${user.username}'s Avatar!`)
   .setImage(user.avatarURL({size: 2048, dynamic: true, format: "png"}))
   .setColor("RANDOM")
-  .addField(`Link`, `[Click Me](${member.displayAvatarURL()})`);
   message.channel.send(embed);
 
 }else if(command === 'date'){
@@ -464,6 +463,15 @@ let clydeMessage = args.slice(0).join(' ');
 let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
 
 message.channel.send(encodedLink)
+}else if(command === 'math'){if (!args[0]) return message.channel.send("Please Give Me Equation!");
+
+const embed = new MessageEmbed()
+  .setColor(`${Color}`)
+  .setTitle(`Result`)
+  .setDescription(math.evaluate(args.join(" ")))
+  .setTimestamp();
+
+message.channel.send(embed);
 }
       })
 
