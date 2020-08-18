@@ -64,7 +64,7 @@ client.on('message', async message => {
       .addField('Support Link', support)
       .addField('Info', info)
       .addField(':shield: Moderation', mod)
-      .addField('Fun', fun)
+      .addField('🤣 Fun', fun)
       .setColor('RANDOM')
 
     message.channel.send(help);
