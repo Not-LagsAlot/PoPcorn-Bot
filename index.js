@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.penis (mentioning user is optional)) Fixed bugs and crashes, fixed say command';
+var changes = 'Added 1 new command (.clyde (message here)) Fixed bugs and crashes, fixed say command';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis```'
 
-var version = 'v0.7';
+var version = 'v0.8';
 
 
 const EmbedColor = "RANDOM";
@@ -454,6 +454,14 @@ message.channel.send(':check: No problem found in the bot');
 .setColor('RANDOM');
 
   message.channel.send(peniss);
+}else if(command === 'clyde'){if (!args[0]) return message.channel.send('What do you want clyde to say?');
+let clydeMessage = args.slice(0).join(' ');
+let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
+const clydeEmbed = new Discord.MessageEmbed()
+  .setTitle('Clyde!')
+  .setImage(encodedLink);
+
+message.channel.send(clydeEmbed)
 }
       })
 
