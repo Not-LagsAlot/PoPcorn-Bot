@@ -501,40 +501,6 @@ message.channel.send(clydeembed)
   message.channel.send('You must provide some text to emojify!');
  }
 message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));
-}else if(command === 'covid'){if (!args.length) {
-  return message.channel.send("Please give the name of country");
-}
-
-if (args.join(" ") === "all") {
-  let corona = await track.all(); //it will give global cases
-
-  let embedssss = new Discord.MessageEmbed()
-    .setTitle("Global Cases")
-    .setColor("#ff2050")
-    .setDescription("Sometimes cases number may differ from small amount.")
-    .addField("Total Cases", corona.cases, true)
-    .addField("Total Deaths", corona.deaths, true)
-    .addField("Total Recovered", corona.recovered, true)
-    .addField("Today's Cases", corona.todayCases, true)
-    .addField("Today's Deaths", corona.todayDeaths, true)
-    .addField("Active Cases", corona.active, true);
-
-  return message.channel.send(embedssss);
-} else {
-  let corona = await track.countries(args.join(" ")); //change it to countries
-
-  let embedofsomething = new Discord.MessageEmbed()
-    .setTitle(`${corona.country}`)
-    .setColor("#ff2050")
-    .setDescription("Sometimes cases number may differ from small amount.")
-    .addField("Total Cases", corona.cases, true)
-    .addField("Total Deaths", corona.deaths, true)
-    .addField("Total Recovered", corona.recovered, true)
-    .addField("Today's Cases", corona.todayCases, true)
-    .addField("Today's Deaths", corona.todayDeaths, true)
-    .addField("Active Cases", corona.active, true);
-
-  return message.channel.send(embedofsomething);}
 }
       })
 
