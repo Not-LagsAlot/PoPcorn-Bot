@@ -48,7 +48,7 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
-  
+
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -63,7 +63,7 @@ client.on('message', async message => {
       .setTitle('Help command')
       .addField('Support Link', support)
       .addField('Info', info)
-      .addField('Moderation', mod)
+      .addField(':shield: Moderation', mod)
       .addField('Fun', fun)
       .setColor('RANDOM')
 
@@ -291,7 +291,7 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
         .setDescription(
           `${prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
         )
-        .setFooter(`Command Requested By : ${message.author.username}`)
+        .setFooter(`Command Requested By ${message.author.username}`)
         .setTimestamp();
 
       if (args.length === 0) {
@@ -484,7 +484,14 @@ message.channel.send(':check: No problem found in the bot');
 let clydeMessage = args.slice(0).join(' ');
 let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
 
-message.channel.send(encodedLink)
+const clydeembed = new Discord.MessageEmbed()
+.setImage(encodedLink)
+.setColor('RANDOM')
+
+message.channel.send(clydeembed)
+
+
+
 }else if(command === 'emojify'){if(args.length < 1) {
   message.channel.send('You must provide some text to emojify!');
  }
