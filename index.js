@@ -6,7 +6,6 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 1 new command (.emojify (message here) Fixed bugs and crashes, fixed avatar command';
-var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here)```'
@@ -61,7 +60,6 @@ client.on('message', async message => {
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('Support Link', support)
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
       .addField('🤣 Fun', fun)
