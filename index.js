@@ -9,7 +9,7 @@ var changes = 'Added 1 new command (.emojify (message here) Fixed bugs and crash
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
-var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis```'
+var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here)```'
 
 var version = 'v0.9';
 
