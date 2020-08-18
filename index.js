@@ -12,8 +12,7 @@ var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug 
 
 var version = 'v0.9';
 
-const { NovelCovid } = require("novelcovid");
-const track = new NovelCovid();
+
 
 
 
