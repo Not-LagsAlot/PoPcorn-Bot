@@ -230,15 +230,14 @@ message.channel.send(kickedf)
 userg.kick(args[1])
 userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
 }else if(command === 'avatar'){
-  const member = message.mentions.users.first() || message.author;
+  let user = message.author || message.mentions.users.first();
 
-    const Embed = new Discord.MessageEmbed()
-      .setColor('RANDOM')
-      .setTitle(`${member.username}`)
-      .setImage(member.displayAvatarURL())
-      .addField(`Link`, `[Click Me](${member.displayAvatarURL()})`);
-
-    message.channel.send(Embed);
+  let embed = new Discord.MessageEmbed()
+  .setTitle(`${user.username}'s Avatar!`)
+  .setImage(user.avatarURL({size: 2048, dynamic: true, format: "png"}))
+  .setColor("RANDOM")
+  .addField(`Link`, `[Click Me](${member.displayAvatarURL()})`);
+  message.channel.send(embed);
 
 }else if(command === 'date'){
   let date = new Date();
