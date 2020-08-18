@@ -5,11 +5,11 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 5 new commands (.lock (on or off), .unban (user), .purge (number 1-100), updated .help command) Fixed bugs and crashes, fixed PoPcorn AI';
+var changes = 'Added 5 new commands (.lock (on or off), .purge (number 1-100), updated .help command) Fixed bugs and crashes, fixed PoPcorn AI';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
-var fun = '```.meme, .date, .reverse (message here), .unban (member here)```'
+var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis```'
 
 var version = 'v0.6';
 
@@ -110,7 +110,7 @@ await message.channel.send(embed)
   } else if (command === 'say') {
     message.channel.send(args.slice(0).join(" "));
   }else if(command === 'spank'){
-    if (!args[1]) return message.content.reply('state user')
+    if (!args[1]) return message.channel.send('state user')
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
 
   }else if(command === 'slap'){
@@ -277,8 +277,8 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
       let Poll = await message.channel.send(
         new Discord.MessageEmbed()
           .setColor(`${EmbedColor}`)
-          .setTitle(`${Message}"`)
-          .setFooter(`Poll Created By : ${message.author.username}`)
+          .setTitle(`${Message}`)
+          .setFooter(`Poll Created By ${message.author.username}`)
           .setTimestamp()
       );
 
@@ -424,11 +424,36 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       }
   }else if(command === 'check'){
 
-message.channel.send(' No problem found in the bot');
+message.channel.send(':check: No problem found in the bot');
 
 
 
-  }
+  }else if(command === 'penis'){var facts = [
+    "",
+    "=",
+    "==",
+    "===",
+    "====",
+    "=====",
+    "======",
+    "=======",
+    "========",
+    "=========",
+    "==========",
+    "===========",
+    "============",
+    "=============",
+    "==============" //little pyramid tho
+  ];
+  var fact = Math.floor(Math.random() * facts.length);
+  let ppuser = message.mentions.users.first() || message.member.user;
+  const peniss = new Discord.MessageEmbed()
+  .setTitle("Penis Generator")
+    .setDescription(`${ppuser.username} penis 
+8${facts[fact]}D`);
+
+  message.channel.send(peniss);
+}
       })
 
 
