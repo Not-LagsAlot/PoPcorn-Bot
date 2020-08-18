@@ -62,7 +62,7 @@ client.on('message', async message => {
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
       .addField('Support Link', support)
-      .addField('Info', info)
+      .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
       .addField('🤣 Fun', fun)
       .setColor('RANDOM')
