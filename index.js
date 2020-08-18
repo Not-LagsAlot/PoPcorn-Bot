@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 5 new commands (.lock (on or off), .purge (number 1-100), updated .help command) Fixed bugs and crashes, fixed PoPcorn AI';
+var changes = 'Added 1 new command (.penis (mentioning user is optional)) Fixed bugs and crashes, fixed say command';
 var support = 'https://discord.gg/MJHfQ54';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis```'
 
-var version = 'v0.6';
+var version = 'v0.7';
 
 
 const EmbedColor = "RANDOM";
@@ -449,8 +449,9 @@ message.channel.send(':check: No problem found in the bot');
   let ppuser = message.mentions.users.first() || message.member.user;
   const peniss = new Discord.MessageEmbed()
   .setTitle("Penis Generator")
-    .setDescription(`${ppuser.username} penis 
-8${facts[fact]}D`);
+    .setDescription(`${ppuser.username}'s penis 
+8${facts[fact]}D`)
+.setColor('RANDOM');
 
   message.channel.send(peniss);
 }
