@@ -17,6 +17,28 @@ var version = 'v0.8';
 const EmbedColor = "RANDOM";
 
 const ytdl = require("ytdl-core")
+const mapping = {
+  ' ': '   ',
+  '0': ':zero:',
+  '1': ':one:',
+  '2': ':two:',
+  '3': ':three:',
+  '4': ':four:',
+  '5': ':five:',
+  '6': ':six:',
+  '7': ':seven:',
+  '8': ':eight:',
+  '9': ':nine:',
+  '!': ':grey_exclamation:',
+  '?': ':grey_question:',
+  '#': ':hash:',
+  '*': ':asterisk:'
+};
+
+'abcdefghijklmnopqrstuvwxyz'.split('').forEach(c => {
+  mapping[c] = mapping[c.toUpperCase()] = ` :regional_indicator_${c}:`;
+});
+
 
 
 
@@ -463,16 +485,11 @@ let clydeMessage = args.slice(0).join(' ');
 let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
 
 message.channel.send(encodedLink)
-}else if(command === 'math'){if (!args[0]) return message.channel.send("Please Give Me Equation!");
-
-const embed = new Discord.MessageEmbed()
-  .setColor('RANDOM')
-  .setTitle(`Result`)
-  .setDescription(math.evaluate(args.join(" ")))
-  .setTimestamp(Date.now());
-
-message.channel.send(embed);
-}
+}else if(command === 'emojify'){if(args.length < 1) {
+  message.channel.send('You must provide some text to emojify!');
+ }
+await message.delete();
+message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));}
       })
 
 
