@@ -233,7 +233,7 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
   const member = message.mentions.users.first() || message.author;
 
     const Embed = new Discord.MessageEmbed()
-      .setColor(`${Color}`)
+      .setColor('RANDOM')
       .setTitle(`${member.username}`)
       .setImage(member.displayAvatarURL())
       .addField(`Link`, `[Click Me](${member.displayAvatarURL()})`);
