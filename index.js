@@ -465,11 +465,11 @@ let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}
 message.channel.send(encodedLink)
 }else if(command === 'math'){if (!args[0]) return message.channel.send("Please Give Me Equation!");
 
-const embed = new MessageEmbed()
-  .setColor(`${Color}`)
+const embed = new Discord.MessageEmbed()
+  .setColor('RANDOM')
   .setTitle(`Result`)
   .setDescription(math.evaluate(args.join(" ")))
-  .setTimestamp();
+  .setTimestamp(Date.now());
 
 message.channel.send(embed);
 }
