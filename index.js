@@ -230,10 +230,16 @@ message.channel.send(kickedf)
 userg.kick(args[1])
 userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
 }else if(command === 'avatar'){
-  const avaraat = new Discord.MessageEmbed()
-  .setTitle(`${message.author.tag}`)
-  .setImage(message.author.displayAvatarURL())
-  message.channel.send(avaraat);
+  const member = message.mentions.users.first() || message.author;
+
+    const Embed = new Discord.MessageEmbed()
+      .setColor(`${Color}`)
+      .setTitle(`${member.username}`)
+      .setImage(member.displayAvatarURL())
+      .addField(`Link`, `[Click Me](${member.displayAvatarURL()})`);
+
+    message.channel.send(Embed);
+
 }else if(command === 'date'){
   let date = new Date();
                 
@@ -457,11 +463,8 @@ message.channel.send(':check: No problem found in the bot');
 }else if(command === 'clyde'){if (!args[0]) return message.channel.send('What do you want clyde to say?');
 let clydeMessage = args.slice(0).join(' ');
 let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
-const clydeEmbed = new Discord.MessageEmbed()
-  .setTitle('Clyde!')
-  .setImage(encodedLink);
 
-message.channel.send(clydeEmbed)
+message.channel.send(encodedLink)
 }
       })
 
