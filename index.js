@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 3 new commands (.8ball (your message here), .rate (user name here (user name is optional), .kill (user name here)) Fixed bugs and crashes,';
+var changes = 'Added 1 new commands (.coin) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .rate (user name here (user name is optional), .kill (user name here))```'
 
-var version = 'v1.1 :tada: ';
+var version = 'v1.2 ';
 
 
 
@@ -574,6 +574,13 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
             return message.channel.send('Please include who you are rating.')
         }
         return message.channel.send('I would rate ' + user.username + ' a ' + number + '/100')}
+      }else if(command === 'coin'){ let number = Math.floor(Math.random() * 2);
+        if (number == 1) {
+            message.channel.send('Heads')
+        }
+        if (number == 0) {
+            message.channel.send('Tails')
+        }
       }
       })
 
