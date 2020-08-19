@@ -540,7 +540,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     message.channel.send(`Set the slowmode of this channel to **${args[0]}**, slowmode set by **${message.author.username}**`)
   }else if(command === 'rps'){
     if(!args[1]){
-      return message.channel.send('Please include your choice')
+      return message.channel.send('Please include your choice');
     }
 
     let choice = ['rock, paper, scissors']
