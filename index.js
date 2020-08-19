@@ -581,7 +581,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         if (number == 0) {
             message.channel.send('Tails')
         }
-      }else if(command === 'rps'){  if (!args[1]) {
+      }else if(command === 'rps'){  if (!args[0]) {
         return message.channel.send('Please include your choice.')
     }
 
