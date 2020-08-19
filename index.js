@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'removed 2 commands (.date, .unban (user here) (both of these are FUN commands)) Fixed bugs and crashes,';
+var changes = 'added 2 commands (mute and unmute) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
-var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here)```'
+var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .rate (user name here (user name is optional), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
 
-var version = 'v1.4';
+var version = 'v1.5';
 
 
 
@@ -580,7 +580,77 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         }
     } else {
         return message.channel.send('Please include either: Rock, Paper, or Scissors.')
-    }}
+    }}else if(command === 'mute'){
+      if (!message.member.hasPermission("MANAGE_ROLES")) {
+        return message.channel.send(
+          "Sorry but you do not have permission to unmute anyone"
+        );
+      }
+  
+      if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        return message.channel.send("I do not have permission to manage roles.");
+      }
+      const user = message.mentions.members.first();
+
+    if (!user) {
+      return message.channel.send(
+        "Please mention the member to who you want to unmute"
+      );
+    }
+ 
+    if(user.id === message.author.id) {
+      return message.channel.send("I won't mute you -_-");
+    }
+    let reason = args.slice(1).join(" ")
+    
+    
+    if(!reason) {
+      return message.channel.send("Please Give the reason to mute the member")
+    }
+    let muterole = message.guild.roles.cache.find(x => x.name === "muted")
+    
+    
+      if(!muterole) {
+      return message.channel.send("This server do not have role with name `muted`, make sure to deny send message permission for the role")
+    }
+    if(user.roles.cache.has(muterole)) {
+      return message.channel.send("Given User is already muted")
+    }
+    user.roles.add(muterole)
+    
+    await message.channel.send(`You muted **${message.mentions.users.first().username}** For \`${reason}\``)
+        
+        user.send(`You are muted in **${message.guild.name}** For \`${reason}\``);
+    }else if(command === 'unmute'){
+      if (!message.member.hasPermission("MANAGE_ROLES")) {
+        return message.channel.send(
+          "Sorry but you do not have permission to unmute anyone"
+        );
+      }
+  
+      if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        return message.channel.send("I do not have permission to manage roles.");
+      }
+      const user = message.mentions.members.first();
+
+    if (!user) {
+      return message.channel.send(
+        "Please mention the member to who you want to unmute"
+      );
+    }
+    let muterole = message.guild.roles.cache.find(x => x.name === "muted")
+    
+    
+ if(user.roles.cache.has(muterole)) {
+      return message.channel.send("Given User do not have mute role so what i am suppose to take")
+    }
+    user.roles.remove(muterole)
+    
+    await message.channel.send(`**${message.mentions.users.first().username}** is unmuted`)
+    
+    user.send(`You are now unmuted from **${message.guild.name}**`)
+
+    }
       })
 
 
