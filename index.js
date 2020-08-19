@@ -548,13 +548,13 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 
       let number = Math.floor(Math.random() * 3);
 
-      if(number === 1){
+      if(number == 1){
         return message.channel.send('It was a tie!')
       }
-      if(number === 2){
+      if(number == 2){
         return message.channel.send('I won!')
       }
-      if(number === 3){
+      if(number == 3){
         return message.channel.send('You won!')
       }
 
