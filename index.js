@@ -589,27 +589,27 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     if (choices.includes((args[1]).toLowerCase())) {
         let number = Math.floor(Math.random() * 3);
         if (number == 1) {
-            return message.channel.send('It was a tie, we both had ' + (args[1]).toLowerCase())
+            return message.channel.send('It was a tie, we both had ' + (args[0]).toLowerCase())
         }
         if (number == 2) {
-            if ((args[1]).toLowerCase() == "rock") {
+            if ((args[0]).toLowerCase() == "rock") {
                 return message.channel.send('I won, I had paper.')
             }
-            if ((args[1]).toLowerCase() == "paper") {
+            if ((args[0]).toLowerCase() == "paper") {
                 return message.channel.send('I won, I had scissors.')
             }
-            if ((args[1]).toLowerCase() == "scissors") {
+            if ((args[0]).toLowerCase() == "scissors") {
                 return message.channel.send('I won, I rock.')
             }
         }
         if (number == 0) {
-            if ((args[1]).toLowerCase() == "rock") {
+            if ((args[0]).toLowerCase() == "rock") {
                 return message.channel.send('You won, I had scissors.')
             }
-            if ((args[1]).toLowerCase() == "paper") {
+            if ((args[0]).toLowerCase() == "paper") {
                 return message.channel.send('You won, I had rock.')
             }
-            if ((args[1]).toLowerCase() == "scissors") {
+            if ((args[0]).toLowerCase() == "scissors") {
                 return message.channel.send('You won, I paper.')
             }
         }
