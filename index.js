@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.emojify (message here) Fixed bugs and crashes, fixed avatar command';
+var changes = 'Added 2 new commands (.softban (user here), .slowmode) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here)```'
 
-var version = 'v0.9';
+var version = 'v1.0 :tada: ';
 
 
 
@@ -74,8 +74,8 @@ client.on('message', async message => {
     message.channel.send(help);
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
-      .setTitle('These are the commands')
-      .setFooter('.Warn\n .website\n .info\n .say\n .User\n .serverinfo\n .poll <type your poll here>\n .ban <user> <reason>\n .kick <user> <reason>\n .avatar\n .date\n .reverse <type your message here>\n .roast\n .slap\n ..play <song link here>')
+      .setTitle('oopsie')
+      .setFooter('Oh it looks like this command has been **MOVED**, please do .help and try again!')
 
 
     message.channel.send(commands);
@@ -518,17 +518,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
   
      
   
-      let embed = new Discord.MessageEmbed()
-      .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL)
-      .setThumbnail(banMember.user.displayAvatarURL())
-      .addField("Moderation:", "SOFT BAN")
-      .addField("Banned:", banMember.user.username)
-      .addField("Moderator:", message.author.username)
-      .addField("Reason:", reason)
-      .setTimestamp()
-      
-          let sChannel = message.guild.channels.cache.find(c => c.name === "mod-logs")
-          sChannel.send(embed)
+     
+       
   
           message.channel.send({embed: {color: "#10de47", description: `<a:tick:724636137653534720> ${banMember.user.username} has successfully been soft banned from the server.`}});message.delete();
 
