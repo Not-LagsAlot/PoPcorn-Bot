@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new commands (.rps (rock, paper or scissors)) Fixed bugs and crashes,';
+var changes = 'removed 2 commands (.date, .unban (user here) (both of these ar FUN commands)) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here)```'
-var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .rate (user name here (user name is optional), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .rate (user name here (user name is optional), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
 
-var version = 'v1.3';
+var version = 'v1.4';
 
 
 
@@ -263,21 +263,6 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
   .setImage(user.avatarURL({size: 2048, dynamic: true, format: "png"}))
   .setColor("RANDOM")
   message.channel.send(embed);
-
-}else if(command === 'date'){
-  let date = new Date();
-                
-  let day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  let days = day[date.getDay()]
-  
-  let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-  let months = month[date.getMonth()]
-  const dats = new Discord.MessageEmbed()
-  .setColor('RANDOM')
-  .setTitle("Today\'s Date 📆")
-  .setDescription(`${days}, ${months} ${date.getDate()}, ${date.getFullYear()}`)
-  .setTimestamp();
-  message.channel.send(dats);
 }else if(command === 'reverse'){
   if (!args[0]) { 
 		return message.channel.send(`Please Give Me Text!`) 
@@ -393,26 +378,6 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
   .setTimestamp(Date.now())
 
   message.channel.send(updates);
-
-
-
-
-}else if(command === 'emoji'){
-  Discord.Guild.emojis.create('emoji_url', 'emoji_name')
-}else if(command === 'unban'){const member = args[0];
-
-  if (!member) {
-       return message.channel.send(`Please enter a id!`)
-  }
-
-  try {
-      message.guild.fetchBans().then(bans => {
-          message.guild.members.unban(member)
-      })
-      await message.channel.send(`${member} has been unbanned!`)
-  } catch (e) {
-      return message.channel.send(`An error occured!`)
-  }
 }else if(command === 'lock'){
   if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
     return message.channel.send('You dont have `MANAGE CHANNELS` permission')
