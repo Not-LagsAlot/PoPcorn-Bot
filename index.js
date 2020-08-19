@@ -7,7 +7,7 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 1 new command (.emojify (message here) Fixed bugs and crashes, fixed avatar command';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
-var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off)```'
+var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here)```'
 var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here)```'
 
 var version = 'v0.9';
@@ -493,7 +493,82 @@ message.channel.send(clydeembed)
 }else if(command === 'emojify'){if(args.length < 1) {
   message.channel.send('You must provide some text to emojify!');
  }
-message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));}
+message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));
+}else if(command === 'softban'){message.delete()
+
+  if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You do not have permission to perform this command!")
+  if(!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("I dont have permission to perform this command")
+  
+     let banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) 
+     if(!banMember) return message.channel.send("Please provide a user to ban!")
+  
+     let reason = args.slice(1).join(" ");
+     if(!reason) reason = "No reason given!"
+  
+     
+  
+     banMember.send({embed: {color: "#ff0019", description:`Hello, you have been banned from ${message.guild.name} for: ${reason}`}}).then(() =>
+     message.guild.member(banMember).ban(banMember, { days: 1, reason: reason})).then(() => message.guild.members.unban(banMember.id).catch(err => console.log(err)));
+  
+     
+  
+      let embed = new Discord.MessageEmbed()
+      .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL)
+      .setThumbnail(banMember.user.displayAvatarURL())
+      .addField("Moderation:", "SOFT BAN")
+      .addField("Banned:", banMember.user.username)
+      .addField("Moderator:", message.author.username)
+      .addField("Reason:", reason)
+      .setTimestamp()
+      
+          let sChannel = message.guild.channels.cache.find(c => c.name === "mod-logs")
+          sChannel.send(embed)
+  
+          message.channel.send({embed: {color: "#10de47", description: `<a:tick:724636137653534720> ${banMember.user.username} has successfully been soft banned from the server.`}});message.delete()
+
+          if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You do not have permission to perform this command!")
+          if(!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("I dont have permission to perform this command")
+          
+             let banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) 
+             if(!banMember) return message.channel.send("Please provide a user to ban!")
+          
+             let reason = args.slice(1).join(" ");
+             if(!reason) reason = "No reason given!"
+          
+             
+          
+             banMember.send({embed: {color: "#ff0019", description:`Hello, you have been banned from ${message.guild.name} for: ${reason}`}}).then(() =>
+             message.guild.member(banMember).ban(banMember, { days: 1, reason: reason})).then(() => message.guild.members.unban(banMember.id).catch(err => console.log(err)));
+          
+             
+          
+              let embed = new Discord.MessageEmbed()
+              .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL)
+              .setThumbnail(banMember.user.displayAvatarURL())
+              .addField("Moderation:", "SOFT BAN")
+              .addField("Banned:", banMember.user.username)
+              .addField("Moderator:", message.author.username)
+              .addField("Reason:", reason)
+              .setTimestamp()
+              
+                  let sChannel = message.guild.channels.cache.find(c => c.name === "mod-logs")
+                  sChannel.send(embed)
+          
+                  message.channel.send({embed: {color: "#10de47", description: `<a:tick:724636137653534720> ${banMember.user.username} has successfully been soft banned from the server.`}});
+        
+  }else if(command === 'slowmode'){
+    if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
+      return message.channel.send('You dont have the permission to run this command')
+    }
+    if(!args[0]){
+      return message.channel.send('Please mention the time of the slowmode')
+    }
+
+    if(isNaN(args[0])){
+      return message.channel.send('That is not a number!')
+    }
+    message.channel.setRateLimitPerUser(args[0]);
+  }
       })
 
 
