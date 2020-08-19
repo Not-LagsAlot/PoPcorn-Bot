@@ -536,7 +536,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     if(isNaN(args[0])){
       return message.channel.send('That is not a number!')
     }
-    message.channel.setRateLimitPerUser(args[0]);
+    message.channel.setRateLimitPerUser(args[0])
+    message.channel.send(`Set the slowmode of this channel to **${args[0]}**, slowmode set by ${message.author.username}`)
   }
       })
 
