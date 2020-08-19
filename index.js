@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 2 new commands (.softban (user here), .slowmode) Fixed bugs and crashes,';
+var changes = 'Added 1 new commands (.rps (your choice here)) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here)```'
-var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here)```'
+var fun = '```.meme, .date, .reverse (message here), .unban (member here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .rps (your choice here)```'
 
-var version = 'v1.0 :tada: ';
+var version = 'v1.1 :tada: ';
 
 
 
@@ -537,7 +537,30 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       return message.channel.send('That is not a number!')
     }
     message.channel.setRateLimitPerUser(args[0])
-    message.channel.send(`Set the slowmode of this channel to **${args[0]}**, slowmode set by ${message.author.username}`)
+    message.channel.send(`Set the slowmode of this channel to **${args[0]}**, slowmode set by **${message.author.username}**`)
+  }else if(command === 'rps'){
+    if(!args[1]){
+      return message.channel.send('Please include your choice')
+    }
+
+    let choice = ['rock, paper, scissors']
+    if(choice.includes(args[1].toLocaleLowerCase())) {
+
+      let number = Math.floor(Math.random() * 3);
+
+      if(number === 1){
+        return message.channel.send('It was a tie!')
+      }
+      if(number === 2){
+        return message.channel.send('I won!')
+      }
+      if(number === 3){
+        return message.channel.send('You won!')
+      }
+
+    }else {
+      return message.channel.send('Please select **rock**, **paper** or **scissors**')
+    }
   }
       })
 
