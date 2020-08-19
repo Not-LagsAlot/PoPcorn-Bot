@@ -586,7 +586,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     }
 
     let choices = ['rock', 'paper', 'scissors'];
-    if (choices.includes((args[1]).toLowerCase())) {
+    if (choices.includes((args[0]).toLowerCase())) {
         let number = Math.floor(Math.random() * 3);
         if (number == 1) {
             return message.channel.send('It was a tie, we both had ' + (args[0]).toLowerCase())
