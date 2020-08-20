@@ -647,11 +647,6 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         correct: 3,
       },
     ];
-    module.exports = {
-      name: "trivia",
-      description: "Test your knowledge!",
-      category: "fun",
-      run: async (bot, message, args) => {
         let q = questions[Math.floor(Math.random() * questions.length)];
         let i = 0;
         const Embed = new MessageEmbed()
@@ -680,8 +675,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         } catch (e) {
           return message.channel.send(`You did not answer!`);
         }
-      },
-    };}
+      }
 
   })
       });
