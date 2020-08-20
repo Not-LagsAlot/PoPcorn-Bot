@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'removed 1 command (.rate) Fixed bugs and crashes,';
+var changes = 'added 1 command (.trivia) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
-var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors)```'
 
-var version = 'v1.6';
+var version = 'v1.7';
 
 
 
@@ -635,10 +635,57 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     
     user.send(`You are now unmuted from **${message.guild.name}**`)
 
-    }
-      })
+    }else if(command === 'trivia'){let questions = [
+      {
+        title: "Best programming language",
+        options: ["JavaScript/TypeScript", "Python", "Ruby", "Rust"],
+        correct: 1,
+      },
+      {
+        title: "Best NPM package",
+        options: ["int.engine", "ms", "ws", "discord.js"],
+        correct: 3,
+      },
+    ];
+    module.exports = {
+      name: "trivia",
+      description: "Test your knowledge!",
+      category: "fun",
+      run: async (bot, message, args) => {
+        let q = questions[Math.floor(Math.random() * questions.length)];
+        let i = 0;
+        const Embed = new MessageEmbed()
+          .setTitle(q.title)
+          .setDescription(
+            q.options.map((opt) => {
+              i++;
+              return `${i} - ${opt}\n`;
+            })
+          )
+          .setColor(`GREEN`)
+          .setFooter(
+            `Reply to this message with the correct question number! You have 15 seconds.`
+          );
+        message.channel.send(Embed);
+        try {
+          let msgs = await message.channel.awaitMessages(
+            (u2) => u2.author.id === message.author.id,
+            { time: 15000, max: 1, errors: ["time"] }
+          );
+          if (parseInt(msgs.first().content) == q.correct) {
+            return message.channel.send(`You got it correct!`);
+          } else {
+            return message.channel.send(`You got it incorrect.`);
+          }
+        } catch (e) {
+          return message.channel.send(`You did not answer!`);
+        }
+      },
+    };}
 
-
+  })
       });
+
+
 
       client.login(process.env.token); 
