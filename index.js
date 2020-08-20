@@ -646,6 +646,17 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         options: ["int.engine", "ms", "ws", "discord.js"],
         correct: 3,
       },
+      {
+        title: "What is the best photo editing PC program",
+        options: ["Photoshop", "Windows photo editor", "gimp", "Paint.NET"],
+        correct: 1,
+      },
+      {
+        title: "What is better",
+        options: ["Skype", "Zoom", "Microsoft Teams", "Discord"],
+        correct: 1,
+      },
+      
     ];
         let q = questions[Math.floor(Math.random() * questions.length)];
         let i = 0;
