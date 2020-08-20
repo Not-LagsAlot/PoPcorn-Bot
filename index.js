@@ -5,12 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 2 commands (mute and unmute) Fixed bugs and crashes,';
+var changes = 'removed 1 command (.rate) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
-var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .rate (user name here (user name is optional), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .coin (heads or tail), .rps (rock, paper or scissors)```'
 
-var version = 'v1.5';
+var version = 'v1.6';
+
 
 
 
@@ -530,23 +531,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
           return message.channel.send('Please include who you are killing.')
       }
       return message.channel.send(message.author.username + ' Killed ' + user.username)
-  }else if(command === 'rate'){ let number = Math.floor(Math.random() * 101);
-    if (!args[1]) {
-        return message.channel.send('I would rate you a ' + number + '/100')
-    } else {
-        let user = message.mentions.users.first();
-        if (!user) {
-            return message.channel.send('Please include who you are rating.')
-        }
-        return message.channel.send('I would rate ' + user.username + ' a ' + number + '/100')}
-      }else if(command === 'coin'){ let number = Math.floor(Math.random() * 2);
-        if (number == 1) {
-            message.channel.send('Heads')
-        }
-        if (number == 0) {
-            message.channel.send('Tails')
-        }
-      }else if(command === 'rps'){  if (!args[0]) {
+  }else if(command === 'rps'){  if (!args[0]) {
         return message.channel.send('Please include your choice.')
     }
 
