@@ -649,7 +649,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     ];
         let q = questions[Math.floor(Math.random() * questions.length)];
         let i = 0;
-        const Embed = new MessageEmbed()
+        const Embed = new Discord.MessageEmbed()
           .setTitle(q.title)
           .setDescription(
             q.options.map((opt) => {
