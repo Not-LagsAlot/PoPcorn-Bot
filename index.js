@@ -8,7 +8,7 @@ const Poll_Emoji_1 = "👍";
 var changes = 'added 1 command (.trivia) Fixed bugs and crashes,';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
-var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors)```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia```'
 
 var version = 'v1.7';
 
