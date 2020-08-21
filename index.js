@@ -5,8 +5,8 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 command (.trivia) Fixed bugs and crashes,';
-var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
+var changes = 'added 1 command (.announce) Fixed bugs and crashes,';
+var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support, .announce```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia```'
 
@@ -707,6 +707,29 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         } catch (e) {
           return message.channel.send(`You did not answer!`);
         }
+      }else if(command === 'announce'){ 
+
+        if(!message.member.hasPermission(['MANAGE_MESSAGES'])){
+          return message.channel.send('You dont have the permission to announce')
+        }
+        
+        let channel = message.mentions.channels.first();
+
+        if (!channel) {
+          return message.channel.send("Please Mention the channel first");
+        }
+      if(!args.slice[1]) {
+          return message.channel.send("Please put the message you want to Announce ;-;")
+        }
+        
+        let embed = new Discord.MessageEmbed()
+          .setColor(`RANDOM`)
+          .setTitle("ANNOUNCEMENT!")
+          .setDescription(args.slice(1).join(" "))
+          .setTimestamp();
+        message.channel.send("Message Sended");
+    
+        channel.send(embed);
       }
 
   })
