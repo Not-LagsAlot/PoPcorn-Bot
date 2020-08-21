@@ -568,7 +568,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     }}else if(command === 'mute'){
       if (!message.member.hasPermission("MANAGE_ROLES")) {
         return message.channel.send(
-          "Sorry but you do not have permission to unmute anyone"
+          "Sorry but you do not have permission to mute anyone"
         );
       }
   
