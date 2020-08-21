@@ -654,8 +654,29 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       {
         title: "What is better",
         options: ["Skype", "Zoom", "Microsoft Teams", "Discord"],
+        correct: 4,
+      },
+      {
+        title: "What won oscar",
+        options: ["Joaquin Phoenix", "Renee Zellweger", "Brad Pitt", "All of the ABOVE"],
+        correct: 4,
+      },
+      {
+        title: "Which one of these company's sue apple",
+        options: ["Samsung", "Epic Games", "Nokia", "OnePlus"],
+        correct: 2,
+      },
+      {
+        title: "Which one of these companies is the most wealthy",
+        options: ["Samsung", "Apple", "Google", "Tencent Games"],
         correct: 1,
       },
+      {
+        title: "What empire became the end of Mongole empire",
+        options: ["British Empire", "Egyption Empire", "Ottam Empire", "Roman Empire"],
+        correct: 3,
+      },
+      
       
     ];
         let q = questions[Math.floor(Math.random() * questions.length)];
