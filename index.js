@@ -718,14 +718,14 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         if (!channel) {
           return message.channel.send("Please Mention the channel first");
         }
-      if(!args.slice[1]) {
+      if(!args.slice[0]) {
           return message.channel.send("Please put the message you want to Announce ;-;")
         }
         
         let embed = new Discord.MessageEmbed()
           .setColor(`RANDOM`)
           .setTitle("ANNOUNCEMENT!")
-          .setDescription(args.slice(1).join(" "))
+          .setDescription(args.slice(0).join(" "))
           .setTimestamp();
         message.channel.send("Message Sended");
     
