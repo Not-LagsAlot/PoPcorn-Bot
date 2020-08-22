@@ -210,6 +210,10 @@ await message.channel.send(embed)
     return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
   }
 
+  if(target.bannable){
+    return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
+  }
+
 
   let ban = new Discord.MessageEmbed()
     .setTitle(`*successfully Banned ${target}*`)
@@ -657,8 +661,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         correct: 4,
       },
       {
-        title: "What won oscar",
-        options: ["Joaquin Phoenix", "Renee Zellweger", "Brad Pitt", "All of the ABOVE"],
+        title: "What won the oscar",
+        options: ["Joaquin Phoenix", "Renee Zellweger", "Brad Pitt", "All of the above"],
         correct: 4,
       },
       {
@@ -672,8 +676,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         correct: 1,
       },
       {
-        title: "What empire became the end of Mongole empire",
-        options: ["British Empire", "Egyption Empire", "Ottam Empire", "Roman Empire"],
+        title: "What empire became the end of Mongol empire",
+        options: ["British Empire", "Egyption Empire", "Ottoman Empire", "Roman Empire"],
         correct: 3,
       },
       
