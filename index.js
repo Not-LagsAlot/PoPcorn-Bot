@@ -210,9 +210,8 @@ await message.channel.send(embed)
     return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
   }
 
-  if(target.bannable){
-    return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
-  }
+  if(!target.bannable) return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
+  
 
 
   let ban = new Discord.MessageEmbed()
