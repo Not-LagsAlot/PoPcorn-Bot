@@ -15,7 +15,7 @@ var version = 'v1.7';
 const { badwords } = require("./swear.json") 
 
 
-var report = 'Title\nThe Bug\nWhere this occured\nAdditional info'
+var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
 
 
@@ -739,7 +739,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       }else if(command === 'report'){
         const bugreport = new Discord.MessageEmbed()
         .setTitle('Bug Report Format')
-        .addField('The bug report format is this', report)
+        .setFooter('To file a bug report, you must follow the format, as slowmode is set to 1 hour.')
+        .addField('Example:', report)
         .setColor('RANDOM')
 
 
