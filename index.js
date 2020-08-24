@@ -447,9 +447,6 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       } else {
           return message.channel.send("You are not able to force the bot to restart.");
       }
-  }else if(command === 'check'){
-
-message.channel.send(':check: No problem found in the bot');
 
 
 
