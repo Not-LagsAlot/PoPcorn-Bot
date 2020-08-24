@@ -741,7 +741,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         .setTitle('Bug Report Format')
         .setFooter('To file a bug report, you must follow the format, as slowmode is set to 1 hour.')
         .addField('Example:', report)
-        .setColor('RANDOM')
+        .setColor(0Xed1329)
 
 
         message.channel.send(bugreport);
