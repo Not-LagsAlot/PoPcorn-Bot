@@ -68,8 +68,9 @@ client.on('message', async message => {
     if(confirm) {
       message.delete()
       const badwords = new Discord.MessageEmbed()
-      .setTitle('Auto Swear Warn')
-      .addField(`${message.author.username} has been warned`, reason )
+      .setTitle(`${message.author.username} has been warned`)
+      .setDescription('**Reason:** Auto swear filter')
+      .setThumbnail(message.author.displayAvatarURL())
       .setColor('BLUE')
       return message.channel.send(badwords)
 
