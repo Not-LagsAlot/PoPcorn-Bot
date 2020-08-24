@@ -14,7 +14,8 @@ var version = 'v1.7';
 
 const { badwords } = require("./swear.json") 
 
-var reason = 'bad words usage'
+
+var report = 'Title\nThe Bug\nWhere this occured\nAdditional info'
 
 
 
@@ -55,7 +56,7 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
-  if(!message.member.hasPermission(["ADMINISTRATOR"])) {
+  if(!message.member.hasPermission(['ADMINISTRATOR'])) {
     let confirm = false;
    
     var i;
@@ -735,6 +736,14 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         } catch (e) {
           return message.channel.send(`You did not answer!`);
         }
+      }else if(command === 'report'){
+        const bugreport = new Discord.MessageEmbed()
+        .setTitle('Bug Report Format')
+        .addField('The bug report format is this', report)
+        .setColor('RANDOM')
+
+
+        message.channel.send(bugreport);
       }
 
   })
