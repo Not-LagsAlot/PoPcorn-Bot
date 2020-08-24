@@ -754,7 +754,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 
             const suggestion = new Discord.MessageEmbed()
             .setTitle(`${message.author.username} suggestes`)
-            .setFooter(args.slice(1).join(" "))
+            .setFooter(args.slice(0).join(" "))
               channel.send(suggestion);
           })
       } else {
