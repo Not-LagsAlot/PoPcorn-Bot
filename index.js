@@ -88,8 +88,7 @@ client.on('message', async message => {
   
 
   if (command === 'ping') {
-    message.channel.send(`Pinging <a:aBF_ColorsLoad:747063061399208069>`);
-    message.edit(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
+  message.channel.send(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
 
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
@@ -770,6 +769,9 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         .setColor('BLUE')
 
 message.channel.send(format);
+      }else if(command === 'check'){
+
+        let check = ["<a:aBF_CheckYes:747070401729003581> bot works", "<a:aBF_CheckNo:747070419668041788> Bot does not work properly"]
       }
 
   })
