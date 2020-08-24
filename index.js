@@ -751,11 +751,15 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       }
       if (client.channels.fetch('735422598493503539')) {
           client.channels.fetch('735422598493503539').then(channel => {
-              channel.send(args.slice(1).join(" "))
+              channel.send(`${message.author.username} suggests:`, args.slice(1).join(" "))
           })
       } else {
           return message.channel.send('There was an error doing this.')
       }
+      }else if(command === 'format'){
+        const format = new Discord.MessageEmbed()
+        .setTitle('Suggestion Format')
+        .setDescription('To submite a suggestion do .suggestion <suggestion here>,\n suuggestion needs to have ATLEAST 2')
       }
 
   })
