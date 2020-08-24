@@ -753,7 +753,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
           client.channels.fetch('735422598493503539').then(channel => {
 
             const suggestion = new Discord.MessageEmbed()
-            .setTitle(`${message.author.username} suggestes`)
+            .setTitle(`${message.author.username}'s suggestion `)
             .setFooter(args.slice(0).join(" "))
             .setColor('RANDOM')
               channel.send(suggestion);
