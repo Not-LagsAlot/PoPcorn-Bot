@@ -745,6 +745,17 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 
 
         message.channel.send(bugreport);
+      }else if(command === 'suggestion'){
+        if (!args[1]) {
+          return message.channel.send('Please include your suggestion.')
+      }
+      if (client.channels.fetch('735422598493503539')) {
+          client.channels.fetch('735422598493503539').then(channel => {
+              channel.send(args.slice(1).join(" "))
+          })
+      } else {
+          return message.channel.send('There was an error doing this.')
+      }
       }
 
   })
