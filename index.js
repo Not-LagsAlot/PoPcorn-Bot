@@ -14,6 +14,8 @@ var version = 'v1.7';
 
 const { badwords } = require("./swear.json") 
 
+var reason = 'bad words usage'
+
 
 
 
@@ -65,8 +67,11 @@ client.on('message', async message => {
     }
     if(confirm) {
       message.delete()
-      message.author.send('You are not allowed to say that word here! :x:')
-      return message.channel.send("You are not allowed to send badwords here")
+      const badwords = new Discord.MessageEmbed()
+      .setTitle('Auto Swear Warn')
+      .addField(`${message.author.username} has been warned`, reason )
+      .setColor('BLUE')
+      return message.channel.send(badwords)
 
     }    
   }
