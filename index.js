@@ -770,6 +770,8 @@ message.channel.send(format);
 
         let check = ["<a:aBF_CheckYes:747070401729003581> bot works", "<a:aBF_CheckNo:747070419668041788> Bot does not work properly"]
         let response = check[Math.random() * check.length]
+
+        message.channel.send(response);
       }
 
   })
