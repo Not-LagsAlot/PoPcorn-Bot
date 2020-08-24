@@ -755,8 +755,10 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
             const suggestion = new Discord.MessageEmbed()
             .setTitle(`${message.author.username} suggestes`)
             .setFooter(args.slice(0).join(" "))
+            .setColor('RANDOM')
               channel.send(suggestion);
           })
+          message.channel.send('Your suggestion has been submitted')
       } else {
           return message.channel.send('There was an error doing this.')
       }
