@@ -751,7 +751,11 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       }
       if (client.channels.fetch('735422598493503539')) {
           client.channels.fetch('735422598493503539').then(channel => {
-              channel.send(`${message.author.username} suggests:`, args.slice(1).join(" "))
+
+            const suggestion = new Discord.MessageEmbed()
+            .setTitle(`${message.author.username} suggestes`)
+            .setFooter(args.slice(1).join(" "))
+              channel.send(suggestion);
           })
       } else {
           return message.channel.send('There was an error doing this.')
