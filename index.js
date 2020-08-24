@@ -765,7 +765,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       }else if(command === 'format'){
         const format = new Discord.MessageEmbed()
         .setTitle('Suggestion Format')
-        .setDescription('To submite a suggestion do .suggestion <suggestion here>,\n suuggestion needs to have ATLEAST 2')
+        .setDescription('To submite a suggestion do .suggestion <suggestion here>,\n suuggestion needs to have ATLEAST 2 WORDS')
         .setColor('BLUE')
 
 message.channel.send(format);
