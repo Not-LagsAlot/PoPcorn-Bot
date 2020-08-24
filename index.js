@@ -12,6 +12,8 @@ var fun = '```.meme, .reverse (message here), .hug (user here), .say (message he
 
 var version = 'v1.7';
 
+const { badwords } = require("./swear.json") 
+
 
 
 
@@ -51,6 +53,21 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
+  if(!message.member.hasPermission(["ADMINISTRATOR"])) {
+    let confirm = false;
+   
+    var i;
+    for(i = 0;i < badwords.length; i++) {
+      
+      if(message.content.toLowerCase().includes(badwords[i].toLowerCase()))
+        confirm = true;
+      
+    }
+    if(confirm) {
+      message.delete()
+      return message.channel.send("You are not allowed to send badwords here")
+    }    
+  }
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
