@@ -87,7 +87,7 @@ client.on('message', async message => {
   
 
   if (command === 'ping') {
-    message.channel.send(`Pong \`${Math.round(client.ws.ping)}ms\``);
+    message.channel.send(`**Pong!** \`${Math.round(client.ws.ping)}ms\``);
 
   } else if (command === 'help') {
     const help = new Discord.MessageEmbed()
