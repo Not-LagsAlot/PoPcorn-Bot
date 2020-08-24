@@ -65,7 +65,9 @@ client.on('message', async message => {
     }
     if(confirm) {
       message.delete()
+      message.author.send('You are not allowed to say that word here! :x:')
       return message.channel.send("You are not allowed to send badwords here")
+
     }    
   }
 
