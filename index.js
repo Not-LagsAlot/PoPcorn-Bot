@@ -154,11 +154,9 @@ await message.channel.send(embed)
       return message.channel.send('BRUH you cant slap yourself')
     }
 
-    const slap = new Discord.MessageEmbed()
-    .setTitle(`${message.author.username} slapped ${member}`)
-    .setFooter('https://tenor.com/view/slap-bears-gif-10422113')
+   
 
-    return message.channel.send(slap);
+  message.channel.send(`${message.author.username} slapped ${member} https://tenor.com/view/slap-bears-gif-10422113`);
   
 
   }else if(command === 'roast'){
