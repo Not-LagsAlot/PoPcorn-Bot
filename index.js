@@ -56,27 +56,6 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
-  if(!message.member.hasPermission(['ADMINISTRATOR'])) {
-    let confirm = false;
-   
-    var i;
-    for(i = 0;i < badwords.length; i++) {
-      
-      if(message.content.toLowerCase().includes(badwords[i].toLowerCase()))
-        confirm = true;
-      
-    }
-    if(confirm) {
-      message.delete()
-      const badwords = new Discord.MessageEmbed()
-      .setTitle(`${message.author.username} has been warned`)
-      .setDescription('**Reason:** Auto swear filter')
-      .setThumbnail(message.author.displayAvatarURL())
-      .setColor('BLUE')
-      return message.channel.send(badwords)
-
-    }    
-  }
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -167,8 +146,19 @@ await message.channel.send(embed)
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
 
   }else if(command === 'slap'){
-    if (!args[1]) return message.channel.send('User specification is required')
-  message.channel.send('Slapped specified user https://tenor.com/view/vanderpump-rules-pump-rules-slap-gif-4474446');
+    const member = message.mentions.members.first();
+
+    if(!member){
+      return message.channel.send('Who are you gonna slap?')
+    }
+    if(!member.id === message.author.id){
+      return message.channel.send('BRUH you cant slap yourself')
+    }
+
+    const slap = new Discord.MessageEmbed()
+    .setTitle(`${message.author.username} slapped ${member}`)
+    .setFooter('https://tenor.com/view/slap-bears-gif-10422113')
+  
 
   }else if(command === 'roast'){
     message.channel.send('Your so ugly that when you went to an ugly looking contest they rejected you as they didn\'t want professionals');
@@ -702,7 +692,11 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         options: ["British Empire", "Egyption Empire", "Ottoman Empire", "Roman Empire"],
         correct: 3,
       },
-      
+      {
+        title: "In 2012 the German-speaking microstate \"Liechtenstein\" in Central Europe had a population of how many inhabitants?",
+        options: ["2,400", "323,400", "36,600", "90,000"],
+        correct: 3,
+      },
       
     ];
         let q = questions[Math.floor(Math.random() * questions.length)];
@@ -768,8 +762,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 message.channel.send(format);
       }else if(command === 'check'){
 
-        let check = ["<a:aBF_CheckYes:747070401729003581> bot works", "<a:aBF_CheckNo:747070419668041788> Bot does not work properly"]
-        let response = Math.floor(Math.random() * check.length)
+        var check = ["<a:aBF_CheckYes:747070401729003581> bot works", "<a:aBF_CheckNo:747070419668041788> Bot does not work properly"]
+        var response = Math.floor(Math.random() * check.length)
 
         message.channel.send(`${check[response]}`);
       }
