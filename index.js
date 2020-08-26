@@ -230,7 +230,7 @@ await message.channel.send(embed)
 
 
   let ban = new Discord.MessageEmbed()
-    .setTitle(`*successfully Banned ${target}*`)
+    .setTitle(`successfully Banned ${target}`)
     .setColor(0x3BF04B)
     .setFooter(`Banned by ${message.author.tag}`)
 
