@@ -746,8 +746,22 @@ message.channel.send(format);
         
         message.channel.send(invite);
       
-      }else if(command === 'henry'){
-        message.channel.send('<a:aBF_henryStickman:748159120640835645>')
+      }else if(command === 'disturb'){
+
+        const disturb = message.mentions.members.find()
+
+        if(!disturb){
+          return message.channel.send('Who do you want to disturb')
+        }
+        if(!disturb.id === message.author.id){
+          return message.channel.send('HUH you can\'t disturb yourself')
+        }
+       const disturb = new Discord.MessageEmbed()
+       .setTitle(`${message.author.username} is disturbing ${disturb}`)
+       .setDescription('<a:aBF_henryStickman:748159120640835645>')
+       .setColor('RANDOM')
+
+       message.channel.send(disturb)
       }
 
   })
