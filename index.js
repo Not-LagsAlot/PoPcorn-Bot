@@ -746,6 +746,8 @@ message.channel.send(format);
         
         message.channel.send(invite);
       
+      }else if(command === 'henry'){
+        message.channel.send('<a:aBF_henryStickman:748159120640835645>')
       }
 
   })
