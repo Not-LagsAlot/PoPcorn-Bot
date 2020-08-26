@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 command (.slap) Fixed bugs and crashes, removed swear filter';
+var changes = 'added 1 command (.timelock) Fixed bugs and crashes';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .lock (on or off), .softban (user here), .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap```'
 
-var version = 'v1.8';
+var version = 'v1.9';
 
 
 
@@ -398,32 +398,23 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
 
   message.channel.send(updates);
 }else if(command === 'lock'){
-  if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
-    return message.channel.send('You dont have `MANAGE CHANNELS` permission')
-  }
   
-  
-  const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
-  if (args[0] === 'on') {
-      channels.forEach(channel => {
-          channel.updateOverwrite(message.guild.roles.everyone, {
-              SEND_MESSAGES: false
-          }).then(() => {
-              channel.setName(channel.name += `🔒`)
-          })
-      })
-      return message.channel.send('locked all channels \n Note that after a SERVER LOCKDOWN is over all the channel permission IS SET TO YES meaning that user can send messages in ANY CHANNEL you have to fix that manually by going in channel settings');
-  } else if (args[0] === 'off') {
-      channels.forEach(channel => {
-          channel.updateOverwrite(message.guild.roles.everyone, {
-              SEND_MESSAGES: true
-          }).then(() => {
-                  channel.setName(channel.name.replace('🔒', ''))
-              }
-          )
-      })
-      return message.channel.send('unlocked all channels')
+  if (!message.member.hasPermission('MANAGE_SERVER', 'MANAGE_CHANNELS')) {
+    return message.channel.send("You don't have enough Permissions")
     }
+    message.channel.overwritePermissions([
+      {
+         id: message.guild.id,
+         deny : ['SEND_MESSAGES'],
+      },
+     ],);
+    const embed = new Discord.MessageEmbed()
+    .setTitle("Channel Updates")
+    .setDescription(`ðŸ”’ ${message.channel} has been Locked`)
+    .setColor("RANDOM");
+    await message.channel.send(embed);
+    message.delete();
+ 
   }else if(command === 'restart'){
       const OWNER_ID  = '642308656217456641'; 
   
@@ -772,6 +763,59 @@ message.channel.send(format);
       .setColor('RANDOM')
         
         message.channel.send(invite);
+      }else if(command === 'unlock'){
+        if (!message.member.hasPermission('MANAGE_SERVER', 'MANAGE_CHANNELS')) {
+          return message.channel.send("You don't have enough Permissions")
+          }
+          message.channel.overwritePermissions([
+            {
+               id: message.guild.id,
+               null : ['SEND_MESSAGES'],
+            },
+           ],);
+          const embed = new Discord.MessageEmbed()
+          .setTitle("Channel Updates")
+          .setDescription(`ðŸ”“ ${message.channel}  has been Unlocked`)
+          .setColor("RANDOM");
+          await message.channel.send(embed);
+          message.delete();
+       
+      }else if(command === 'timelock'){
+        const time = args.join(" ");
+        if (!time) {
+        return message.channel.send("Enter a valid time period in `Seconds`, `Minutes` or `Hours`")
+        }
+        if (!message.member.hasPermission("MANAGE_SERVER", "MANAGE_CHANNELS")) {
+            return message.channel.send(`You don't have enough Permisions`)
+        }
+        message.channel.overwritePermissions([
+            {
+               id: message.guild.id,
+               deny : ['SEND_MESSAGES'],
+            },
+           ],);
+           const embed = new Discord.MessageEmbed()
+           .setTitle("Channel Updates")
+           .setDescription(`${message.channel} has been placed under lockdown for `${time}``)
+           .setColor("RANDOM");
+           message.channel.send(embed)
+
+           let time1 = (`${time}`)
+           setTimeout(function(){
+           message.channel.overwritePermissions([
+               {
+               id: message.guild.id,
+               null: ['SEND_MESSAGES'],
+               },
+            ],);
+           const embed2 = new Discord.MessageEmbed()
+           .setTitle("Channel Updates")
+           .setDescription(`Locked has been lifted in ${message.channel}`)
+           .setColor("RANDOM");
+           message.channel.send(embed2);
+        }, ms(time1));
+        message.delete();
+
       }
 
   })
