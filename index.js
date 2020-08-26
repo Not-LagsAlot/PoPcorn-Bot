@@ -141,6 +141,8 @@ await message.channel.send(embed)
   } else if (command === 'say') {
     const sayater = new Discord.MessageEmbed()
     .setDescription(args.slice(0).join(" "))
+    .setColor('RANDOM')
+    message.channel.send(sayater);
   }else if(command === 'spank'){
     if (!args[1]) return message.channel.send('state user')
   message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
