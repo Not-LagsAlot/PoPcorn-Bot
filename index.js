@@ -397,25 +397,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
   .setTimestamp(Date.now())
 
   message.channel.send(updates);
-}else if(command === 'lock'){
-  
-  if (!message.member.hasPermission('MANAGE_SERVER', 'MANAGE_CHANNELS')) {
-    return message.channel.send("You don't have enough Permissions")
-    }
-    message.channel.overwritePermissions([
-      {
-         id: message.guild.id,
-         deny : ['SEND_MESSAGES'],
-      },
-     ],);
-    const embed = new Discord.MessageEmbed()
-    .setTitle("Channel Updates")
-    .setDescription(`ðŸ”’ ${message.channel} has been Locked`)
-    .setColor("RANDOM");
-    await message.channel.send(embed);
-    message.delete();
- 
-  }else if(command === 'restart'){
+}else if(command === 'restart'){
       const OWNER_ID  = '642308656217456641'; 
   
       if (message.author.id === OWNER_ID) {
@@ -763,59 +745,7 @@ message.channel.send(format);
       .setColor('RANDOM')
         
         message.channel.send(invite);
-      }else if(command === 'unlock'){
-        if (!message.member.hasPermission('MANAGE_SERVER', 'MANAGE_CHANNELS')) {
-          return message.channel.send("You don't have enough Permissions")
-          }
-          message.channel.overwritePermissions([
-            {
-               id: message.guild.id,
-               null : ['SEND_MESSAGES'],
-            },
-           ],);
-          const embed = new Discord.MessageEmbed()
-          .setTitle("Channel Updates")
-          .setDescription(`ðŸ”“ ${message.channel}  has been Unlocked`)
-          .setColor("RANDOM");
-          await message.channel.send(embed);
-          message.delete();
-       
-      }else if(command === 'timelock'){
-        const time = args.join(" ");
-        if (!time) {
-        return message.channel.send("Enter a valid time period in `Seconds`, `Minutes` or `Hours`")
-        }
-        if (!message.member.hasPermission("MANAGE_SERVER", "MANAGE_CHANNELS")) {
-            return message.channel.send(`You don't have enough Permisions`)
-        }
-        message.channel.overwritePermissions([
-            {
-               id: message.guild.id,
-               deny : ['SEND_MESSAGES'],
-            },
-           ],);
-           const embed = new Discord.MessageEmbed()
-           .setTitle("Channel Updates")
-           .setDescription(`${message.channel} has been placed under lockdown for `${time}``)
-           .setColor("RANDOM");
-           message.channel.send(embed)
-
-           let time1 = (`${time}`)
-           setTimeout(function(){
-           message.channel.overwritePermissions([
-               {
-               id: message.guild.id,
-               null: ['SEND_MESSAGES'],
-               },
-            ],);
-           const embed2 = new Discord.MessageEmbed()
-           .setTitle("Channel Updates")
-           .setDescription(`Locked has been lifted in ${message.channel}`)
-           .setColor("RANDOM");
-           message.channel.send(embed2);
-        }, ms(time1));
-        message.delete();
-
+      
       }
 
   })
