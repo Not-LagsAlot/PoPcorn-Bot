@@ -748,7 +748,7 @@ message.channel.send(format);
       
       }else if(command === 'disturb'){
 
-        const disturb = message.mentions.members.find()
+        const disturb = message.mentions.members.first()
 
         if(!disturb){
           return message.channel.send('Who do you want to disturb')
