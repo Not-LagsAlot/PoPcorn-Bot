@@ -758,7 +758,7 @@ message.channel.send(format);
         }
        const disturbed = new Discord.MessageEmbed()
        .setTitle(`${message.author.username} is disturbing ${disturb}`)
-       .setDescription('<a:aBF_henryStickman:748159120640835645>')
+       .setImage('<a:aBF_henryStickman:748159120640835645>')
        .setColor('RANDOM')
 
        message.channel.send(disturbed);
