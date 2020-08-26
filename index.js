@@ -756,12 +756,12 @@ message.channel.send(format);
         if(!disturb.id === message.author.id){
           return message.channel.send('HUH you can\'t disturb yourself')
         }
-       const disturb = new Discord.MessageEmbed()
+       const disturbed = new Discord.MessageEmbed()
        .setTitle(`${message.author.username} is disturbing ${disturb}`)
        .setDescription('<a:aBF_henryStickman:748159120640835645>')
        .setColor('RANDOM')
 
-       message.channel.send(disturb)
+       message.channel.send(disturbed);
       }
 
   })
