@@ -16,6 +16,8 @@ var version = 'v1.9';
 
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
+const botban = '642308656217456641';
+
 
 
 
@@ -55,6 +57,13 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
+
+
+  if(!message.author.id === '336159680244219905'){
+    return;
+  }
+
+
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -761,7 +770,7 @@ message.channel.send(format);
         }
        const disturbed = new Discord.MessageEmbed()
        .setTitle(`${message.author.username} is disturbing ${disturb}`)
-       .setImage('<a:aBF_henryStickman:748159120640835645>')
+       .setFooter('<a:aBF_henryStickman:748159120640835645>')
        .setColor('RANDOM')
 
        message.channel.send(disturbed);
