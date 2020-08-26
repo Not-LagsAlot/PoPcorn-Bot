@@ -59,13 +59,6 @@ client.once('ready', () => {
 client.on('message', async message => {
 
 
-  if(!message.author.id === '336159680244219905'){
-    return;
-  }
-
-  if(!message.author.id === '642308656217456641'){
-    return;
-  }
 
 
 
