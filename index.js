@@ -767,7 +767,6 @@ message.channel.send(format);
         message.channel.send(`${check[response]}`);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
-        const invite = new Discord.MessageEmbed()
       .setTitle('Invite')
       .setDescription(`**[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)**\n**[Support](https://discord.gg/MJHfQ54)**`)
       .setColor('RANDOM')
