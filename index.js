@@ -68,7 +68,7 @@ client.on('message', async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
-  const usedCommand = new Set();
+  
 
 
   
