@@ -9,7 +9,7 @@ var changes = 'added 1 command (.giveaway) Fixed bugs and crashes, fixed say com
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap```'
-var giveaways = '```.giveaway (time here) (channel here) (prize here)'
+var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
 var version = 'v2.0';
 
 const ms = require("ms");
