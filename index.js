@@ -5,12 +5,14 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'removed 2 commands (.lock, .softban) Fixed bugs and crashes';
+var changes = 'added 1 command (.giveaway) Fixed bugs and crashes, fixed say command issue';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap```'
+var giveaways = '```.giveaway (time here) (channel here) (prize here)'
+var version = 'v2.0';
 
-var version = 'v1.9';
+const ms = require("ms");
 
 
 
@@ -66,6 +68,7 @@ client.on('message', async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
+  const usedCommand = new Set();
 
 
   
@@ -80,6 +83,7 @@ client.on('message', async message => {
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
       .addField('🤣 Fun', fun)
+      .addField(':tada: GiveAway', giveaways)
       .setColor('RANDOM')
 
     message.channel.send(help);
@@ -754,6 +758,8 @@ message.channel.send(format);
       .setColor('RANDOM')
         
         message.channel.send(invite);
+        
+  
       
       }else if(command === 'disturb'){
 
@@ -768,7 +774,53 @@ message.channel.send(format);
        
        
 
-       message.channel.send(`${message.author.tag} has disturbed ${disturb} <a:aBF_henryStickman:748159120640835645>`);
+       message.channel.send(`${message.author.tag} has disturbed ${disturb}\n<a:aBF_henryStickman:748159120640835645>`);
+      
+
+      }else if(command === 'giveaway'){
+        if (!args[0]) return message.channel.send(`You did not specify your time!`);
+    if (
+      !args[0].endsWith("d") &&
+      !args[0].endsWith("h") &&
+      !args[0].endsWith("m")
+    )
+      return message.channel.send(
+        `You did not use the correct formatting for the time!\n**PROTIP:** the formatting time is like this:\nm = minute Use example: 1m or 2m\nh = hour Use example: 1h or 2h\nd = day Use example: 1d or 2d`
+      );
+    if (isNaN(args[0][0])) return message.channel.send(`That is not a number!`);
+    let channel = message.mentions.channels.first();
+    if (!channel)
+      return message.channel.send(
+        `I could not find that channel in the guild!`
+      );
+    let prize = args.slice(2).join(" ");
+    if (!prize) return message.channel.send(`No prize specified!`);
+    message.channel.send(`*Giveaway created in ${channel}*`);
+    let Embed = new Discord.MessageEmbed()
+      .setTitle(`New giveaway!`)
+      .setDescription(
+        `The user ${message.author} is hosting a giveaway for the prize of **${prize}**`
+      )
+      .setTimestamp(Date.now() + ms(args[0]))
+      .setColor(`BLUE`);
+    let m = await channel.send(Embed);
+    m.react("🎉");
+    setTimeout(() => {
+      if (m.reactions.cache.get("🎉").count <= 1) {
+        message.channel.send(`Reactions: ${m.reactions.cache.get("🎉").count}`);
+        return message.channel.send(
+          `Not enough people reacted for me to start draw a winner!`
+        );
+      }
+
+      let winner = m.reactions.cache
+        .get("🎉")
+        .users.cache.filter((u) => !u.bot)
+        .random();
+      channel.send(
+        `The winner of the giveaway for **${prize}** is... ${winner}`
+      );
+    }, ms(args[0]));
       }
 
   })
