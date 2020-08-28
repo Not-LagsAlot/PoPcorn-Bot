@@ -18,7 +18,6 @@ const ms = require("ms");
 
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
-const botban = '642308656217456641';
 
 
 
@@ -741,7 +740,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       }else if(command === 'format'){
         const format = new Discord.MessageEmbed()
         .setTitle('Suggestion Format')
-        .setDescription('To submite a suggestion do .suggestion <suggestion here>,\n suuggestion needs to have ATLEAST 2 WORDS')
+        .setDescription('To submite a suggestion do .suggestion <suggestion here>,\n suggestion needs to have ATLEAST 2 WORDS')
         .setColor('BLUE')
 
 message.channel.send(format);
