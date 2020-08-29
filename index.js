@@ -103,16 +103,17 @@ return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** h
      return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user')
      }
 
-     const reasonss =  args.slice(0).join(" ")
+     if(message.mentions.users.first().bot) {
+      return message.channel.send("You can not warn bots")
+    }
+
+     const reasonss =  args.slice(1).join(" ")
 
      if(!reasonss){
        return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason')
      }
 
-     const userwarned = new Discord.MessageEmbed()
-     .setTitle(`${userwarn} has gotten warned succesfully`)
-     .setColor('RANDOM')
-     message.channel.send(userwarned)
+     message.channel.send(`**${userwarn}** has gotten his warn`)
 
      userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
 
