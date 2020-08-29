@@ -95,16 +95,7 @@ client.on('message', async message => {
     message.channel.send(commands);
   } else if (command === 'warn') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-
-      const warn = new Discord.MessageEmbed()
-        .setTitle('You require `Manage Messages` permission to run this command')
-        .setColor(0x15ff00)
-
-
-
-
-      message.channel.send(warn)
-
+return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** have the correct permissions to run this command')
     }
    const userwarn = message.mentions.members.first()
 
@@ -120,11 +111,12 @@ client.on('message', async message => {
 
      const userwarned = new Discord.MessageEmbed()
      .setTitle(`${userwarn} has gotten warned succesfully`)
+     .setColor('RANDOM')
      message.channel.send(userwarned)
 
-     userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`)
+     userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
 
-  } else if (command === 'support') {
+    } else if (command === 'support') {
 
     message.channel.send('Join **PoPcorn Support** server here: https://discord.gg/MJHfQ54 ');
   } else if (command === 'info') {
