@@ -112,7 +112,17 @@ client.on('message', async message => {
      return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user')
      }
 
-     const reasonss =  
+     const reasonss =  args.slice(0).join(" ")
+
+     if(!reasonss){
+       return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason')
+     }
+
+     const userwarned = new Discord.MessageEmbed()
+     .setTitle(`${userwarn} has gotten warned succesfully`)
+     message.channel.send(userwarned)
+
+     userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`)
 
   } else if (command === 'support') {
 
