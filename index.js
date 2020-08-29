@@ -101,15 +101,18 @@ client.on('message', async message => {
         .setColor(0x15ff00)
 
 
-      message.channel.send(warn)
-    } else {
-      if (!args[1]) return message.channel.send('Please state a user')
 
-      const warn2 = new Discord.MessageEmbed()
-        .setTitle('User has been warned')
-        .addField('Reason', (args[2]))
-      message.channel.send(warn2)
+
+      message.channel.send(warn)
+
     }
+   const userwarn = message.mentions.members.first()
+
+   if(!userwarn){
+     return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user')
+     }
+
+     const reasonss =  
 
   } else if (command === 'support') {
 
@@ -148,6 +151,9 @@ const embed = new Discord.MessageEmbed()
 await message.channel.send(embed)
 
   } else if (command === 'say') {
+    if(!args[0]){
+      return message.channel.send('Please give me some text')
+    }
     const sayater = new Discord.MessageEmbed()
     .setDescription(args.slice(0).join(" "))
     .setColor('RANDOM')
