@@ -288,7 +288,6 @@ if (target.id === message.guild.ownerID) {
 
 let kickedf = new Discord.MessageEmbed()
   .setTitle(`successfully kicked ${userg}`)
-  .setDescription()
   .setColor(0x15daea)
   .setFooter(`kicked by ${message.author.tag}`)
 
