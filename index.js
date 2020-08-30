@@ -396,13 +396,13 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
   message.channel.send(':x: you dont have `MANAGE MESSAGES` permission')
   if(args[0]) return message.channel.send(':x: Mention a USER!')
 
-  const changenick = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
+  const changenick = message.mentions.members.first()
 
   if(!changenick) return message.channel.send('Unable to find that user')
 
   if(!name) return message.channel.send(':x: what should the name be')
 
-  if(changenick.kickable) return message.channel.send('I can tchange there username')
+  if(changenick.kickable) return message.channel.send('I can\'t change there username')
   changenick.setNickname(name)
 
   message.channel.send('Changed there nickname');
