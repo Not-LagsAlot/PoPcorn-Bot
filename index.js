@@ -421,7 +421,7 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
       const OWNER_ID  = '642308656217456641'; 
   
       if (message.author.id === OWNER_ID) {
-          message.channel.send(`Ok, ${message.author}, I'll restart....`);
+          message.channel.send(`Ok, ${message.author}, I'll restart <a:aBF_ColorsLoad:747063061399208069>`);
           message.channel.send(`Shutting down port...`)
           setTimeout(() => {
               process.exit(0);
