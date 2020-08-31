@@ -5,12 +5,12 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 command (.giveaway) Fixed bugs and crashes, fixed say command issue';
+var changes = 'added 1 command (.youtube) Fixed bugs and crashes, fixed say command issue';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
-var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
-var version = 'v2.0';
+var version = 'v2.1';
 
 const ms = require("ms");
 
@@ -828,7 +828,13 @@ message.channel.send(format);
         `The winner of the giveaway for **${prize}** is... ${winner}`
       );
     }, ms(args[0]));
-      }
+  }else if(command === 'youtube'){
+    const randomvid = new Discord.MessageEmbed()
+    .setTitle('Here is a random Youtube vid')
+    .setDescription(`**[Random Video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)**`)
+    .setColor('RANDOM')
+    message.channel.send(randomvid)
+  }
 
   })
       });
