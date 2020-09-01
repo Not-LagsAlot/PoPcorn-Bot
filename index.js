@@ -838,6 +838,8 @@ message.channel.send(format);
     const dashbords = new Discord.MessageEmbed()
     .setTitle('PoPcorn Bot\'s dashbord')
     .setDescription(`[Dashboard](https://www.youtube.com/watch?v=iik25wqIuFo)`)
+    .setColor('RANDOM')
+    message.channel.send(dashbords);
   }
 
   })
