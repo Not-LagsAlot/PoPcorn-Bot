@@ -834,6 +834,10 @@ message.channel.send(format);
     .setDescription(`**[Random Video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)**`)
     .setColor('RANDOM')
     message.channel.send(randomvid)
+  }else if(command === 'dashboard'){
+    const dashbords = new Discord.MessageEmbed()
+    .setTitle('PoPcorn Bot\'s dashbord')
+    .setDescription(`[Dashboard](https://www.youtube.com/watch?v=iik25wqIuFo)`)
   }
 
   })
