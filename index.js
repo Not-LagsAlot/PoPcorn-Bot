@@ -785,6 +785,9 @@ message.channel.send(format);
       
 
       }else if(command === 'giveaway'){
+        if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
+          return message.channel.send(`${message.author.tag} You cannot use that`)
+        }
         if (!args[0]) return message.channel.send(`You did not specify your time!`);
     if (
       !args[0].endsWith("d") &&
