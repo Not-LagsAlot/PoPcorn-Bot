@@ -77,6 +77,7 @@ client.on('message', async message => {
   message.channel.send(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
 
   } else if (command === 'help') {
+    
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
       .addField(':information_source: Info', info)
@@ -761,7 +762,7 @@ message.channel.send(format);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
       .setTitle('Invite')
-      .setDescription(`**[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)**\n**[Support](https://discord.gg/MJHfQ54)**`)
+      .setDescription(`**[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)**\n**[Support](https://discord.gg/MJHfQ54)**\n**[top.gg](https://top.gg/bot/723506760299839499)**`)
       .setColor('RANDOM')
         
         message.channel.send(invite);
