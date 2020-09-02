@@ -5,15 +5,15 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 command (.youtube) Fixed bugs and crashes, fixed say command issue';
+var changes = 'added 1 command (.whois) Fixed bugs and crashes, fixed say command issue';
 var info = '```.avatar , .ping, .user, .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
-var version = 'v2.1';
+var version = 'v2.2';
 
 const ms = require("ms");
-
+const moment = require("moment")
 
 
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
@@ -359,7 +359,47 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
-        }else if(command === 'whois'){message.channel.send('Your a **HUMAN**');
+        }else if(command === 'whois'){
+          let user = message.mentions.users.first() || message.author;
+    
+    if (user.presence.status === "dnd") user.presence.status = "Do Not Disturb";
+    if (user.presence.status === "idle") user.presence.status = "Idle";
+    if (user.presence.status === "offline") user.presence.status = "Offline";
+    if (user.presence.status === "online") user.presence.status = "Online";
+    
+    function game() {
+      let game;
+      if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
+      else if (user.presence.activities.length < 1) game = "None"; // This will check if the user doesn't playing anything.
+      return game; // Return the result.
+    }
+    
+    let x = Date.now() - user.createdAt; // Since the user created their account.
+    let y = Date.now() - message.guild.members.cache.get(user.id).joinedAt; // Since the user joined the server.
+    let created = Math.floor(x / 86400000); // 5 digits-zero.
+    let joined = Math.floor(y / 86400000);
+    
+    const memberssss = message.guild.member(user);
+    let nickname = memberssss.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
+    let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
+    let joindate = moment.utc(memberssss.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
+    let status = user.presence.status;
+    let avatar = user.avatarURL({size: 2048}); // Use 2048 for high quality avatar.
+    
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(user.tag, avatar)
+    .setThumbnail(avatar)
+    .setTimestamp()
+    .setColor(0x7289DA)
+    .addField("ID", user.id, true)
+    .addField("Nickname", nickname, true)
+    .addField("Created Account Date", `${createdate} \nsince ${created} day(s) ago`, true)
+    .addField("Joined Guild Date", `${joindate} \nsince ${joined} day(s) ago`, true)
+    .addField("Status", status, true)
+    .addField("Game", game(), true)
+    
+    message.channel.send(embed); // Let's see if it's working.
+        
         }else if(command === 'play'){const voiceChannel = message.member.voice.channel
           const play = new Discord.MessageEmbed()
          .setTitle('You need to be in a Voice Channel to run this command')
