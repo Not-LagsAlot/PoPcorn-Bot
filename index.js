@@ -379,10 +379,10 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
     let created = Math.floor(x / 86400000); // 5 digits-zero.
     let joined = Math.floor(y / 86400000);
     
-    const memberssss = message.guild.member(user);
-    let nickname = memberssss.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
+    const members = message.guild.member(user);
+    let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
     let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
-    let joindate = moment.utc(memberssss.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
+    let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
     let status = user.presence.status;
     let avatar = user.avatarURL({size: 2048}); // Use 2048 for high quality avatar.
     
