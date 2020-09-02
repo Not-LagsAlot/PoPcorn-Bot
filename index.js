@@ -802,7 +802,7 @@ message.channel.send(format);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
       .setTitle('Invite')
-      .setDescription(`**[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)**\n**[Support](https://discord.gg/MJHfQ54)**\n**[top.gg](https://top.gg/bot/723506760299839499)**`)
+      .setDescription(`Thanks for being interested in PoPcorn! Here are some important links for the bot!\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499)`)
       .setColor('RANDOM')
         
         message.channel.send(invite);
