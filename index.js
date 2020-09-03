@@ -5,13 +5,14 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 command (.whois) Fixed bugs and crashes, fixed say command issue';
+var changes = 're-added 1 plugin (.automod (can be enabled by doing .automod enable and disabled by doing .automod disable)) Fixed bugs and crashes, fixed say command issue';
 var info = '```.avatar , .ping, .whois (mentions are OPITIONAL), .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
+var automod = 'Anti-swear, Anti-link'
 var version = 'v2.2';
-
+const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const moment = require("moment")
 
@@ -80,6 +81,7 @@ client.on('message', async message => {
     
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
+      .addField('<:BF_DcStaff:747102891361304646> Auto Mod(can be enabled by doing .automod enable or disabled by doing .automod disable', automod )
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
       .addField('🤣 Fun', fun)
@@ -884,6 +886,55 @@ message.channel.send(format);
     .setDescription(`[Dashboard](https://www.youtube.com/watch?v=iik25wqIuFo)`)
     .setColor('RANDOM')
     message.channel.send(dashbords);
+  }else if(command === 'automod'){
+
+    if(!message.member.hasPermission(['ADMINISTRATOR'])){
+      return message.channel.send('You require `Administrator` permission to run this command ')
+    }
+    if(args[1] === 'disable'){
+      message.channel.send('Auto Mod has been disabled for this guild')
+    }
+
+    if(args[1] === 'enable'){
+
+      if(!message.member.hasPermission("ADMINISTRATOR")) {
+        let confirm = false;
+   
+    var i;
+    for(i = 0;i < badwords.length; i++) {
+      
+      if(message.content.toLowerCase().includes(badwords[i].toLowerCase()))
+        confirm = true;
+      
+   
+      }
+      if(confirm) {
+        message.delete()
+        return message.channel.send("You are not allowed to send badwords here")
+      }    
+
+    }
+    function is_url(str) {
+      let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+      if(regexp.test(str)) {
+        return true;
+      } else {
+        return false;
+      }
+      
+    }
+    
+
+      if(is_url(message.content) === true) {
+        message.delete()
+        return message.channel.send("You can not send link here :/")
+      
+     
+    }
+
+    message.channel.send('Auto-Mod has been enabled for this guild')
+    
+  }
   }
 
   })
