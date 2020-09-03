@@ -891,11 +891,11 @@ message.channel.send(format);
     if(!message.member.hasPermission(['ADMINISTRATOR'])){
       return message.channel.send('You require `Administrator` permission to run this command ')
     }
-    if(args[1] === 'disable'){
-      message.channel.send('Auto Mod has been disabled for this guild')
+    if(!args[1] === 'disable'){
+      return message.channel.send('Auto Mod has been disabled for this guild')
     }
 
-    if(args[1] === 'enable'){
+    if(!args[1] === 'enable'){
 
       if(!message.member.hasPermission("ADMINISTRATOR")) {
         let confirm = false;
@@ -932,7 +932,7 @@ message.channel.send(format);
      
     }
 
-    message.channel.send('Auto-Mod has been enabled for this guild')
+    return message.channel.send('Auto-Mod has been enabled for this guild')
     
   }
   }
