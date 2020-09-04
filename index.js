@@ -804,7 +804,7 @@ message.channel.send(format);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
       .setTitle('Invite')
-      .setDescription(`Hey! here some links ur gonna need them\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499)`)
+      .setDescription(`ello Thanks for taking intrest in me :) Here are some very IMPORTANT links that are gonna come in handy, simply click on Bot invite to get me OR click on top.gg option for vote well have fun using me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499)`)
       .setColor('RANDOM')
         
         message.channel.send(invite);
