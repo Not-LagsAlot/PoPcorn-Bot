@@ -893,9 +893,7 @@ message.channel.send(format);
     }
     if(args[0] === 'disable'){
       return message.channel.send('Auto Mod has been disabled for this guild')
-    }
-
-    if(args[0] === 'enable'){
+    }else  if(args[0] === 'enable'){
 
     
       if(!message.member.hasPermission("ADMINISTRATOR")) {
@@ -939,7 +937,9 @@ message.channel.send(format);
     
   }
   }else if(command === 'simp'){
-    let ship = Math.floor(Math.random() * 100) + 1;
+
+    if(!message.guild.id === '726320118023454740'){
+      let ship = Math.floor(Math.random() * 100) + 1;
  
     let user = message.mentions.users.first() || message.author
  
@@ -953,6 +953,9 @@ message.channel.send(format);
           .setDescription(`**${user.username}** simp rate is... ${ship}%`)
           .setColor(`RANDOM`)
           message.channel.send(embed)
+    }else {
+      return message.channel.send('<a:aBF_CheckNo:747070419668041788> Due to avoid any sort of crash/lag this command is only available to use in the **SUPPORT** SERVER, type .support to join')
+    }
     
     }
 
