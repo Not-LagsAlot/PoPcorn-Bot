@@ -5,10 +5,10 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 're-added 1 plugin (.automod (can be enabled by doing .automod enable and disabled by doing .automod disable)) Fixed bugs and crashes, fixed say command issue';
+var changes = 'added 1 new command (.simp (mentions are OPITIONAL)) Fixed bugs and crashes, fixed say command issue';
 var info = '```.avatar , .ping, .whois (mentions are OPITIONAL), .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
-var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube```'
+var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube, .simp (mention is optional)```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
 var automod = '```Anti-swear, Anti-link```'
 var version = 'v2.2';
@@ -935,7 +935,23 @@ message.channel.send(format);
     return message.channel.send('Auto-Mod has been enabled for this guild')
     
   }
-  }
+  }else if(command === 'simp'){
+    let ship = Math.floor(Math.random() * 100) + 1;
+ 
+    let user = message.mentions.users.first() || message.author
+ 
+      if(!user) {
+        return message.channel.send("Make sure you pick a person who you want to ship!");
+      }
+ 
+    let embed = new Discord.MessageEmbed()
+          .setTimestamp(Date.now())
+          .setTitle("Hmmmm what is your simp rate at?")
+          .setDescription(`**${user.username}** simp rate is... ${ship}%`)
+          .setColor(`RANDOM`)
+          message.channel.send(embed)
+    
+    }
 
   })
       });
