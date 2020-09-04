@@ -78,7 +78,8 @@ client.on('message', async message => {
   message.channel.send(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
 
   } else if (command === 'help') {
-    
+
+
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
       .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
@@ -87,8 +88,7 @@ client.on('message', async message => {
       .addField('🤣 Fun', fun)
       .addField(':tada: GiveAway', giveaways)
       .setColor('RANDOM')
-
-    message.channel.send(help);
+      message.channel.send(help);
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('oopsie')
@@ -891,11 +891,11 @@ message.channel.send(format);
     if(!message.member.hasPermission(['ADMINISTRATOR'])){
       return message.channel.send('You require `Administrator` permission to run this command ')
     }
-    if(!args[1] === 'disable'){
+    if(args[0] === 'disable'){
       return message.channel.send('Auto Mod has been disabled for this guild')
     }
 
-    if(!args[1] === 'enable'){
+    if(!args[0] === 'enable'){
 
       if(!message.member.hasPermission("ADMINISTRATOR")) {
         let confirm = false;
