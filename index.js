@@ -897,6 +897,7 @@ message.channel.send(format);
 
     if(args[0] === 'enable'){
 
+    
       if(!message.member.hasPermission("ADMINISTRATOR")) {
         let confirm = false;
    
@@ -931,6 +932,7 @@ message.channel.send(format);
       
      
     }
+
     return message.channel.send('Auto-Mod has been enabled for this guild')
 
                
