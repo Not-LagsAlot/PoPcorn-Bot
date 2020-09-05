@@ -55,7 +55,7 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity('people type .help', { type: 'WATCHING' })
+  client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
