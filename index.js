@@ -95,7 +95,7 @@ client.on('message', async message => {
 
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('<:owner:752053432621334548> Devs ONLY', )
+      .addField('<:owner:752053432621334548> Devs ONLY', devsonly )
       .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
