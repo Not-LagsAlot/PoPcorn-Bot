@@ -839,9 +839,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         message.channel.send(bugreport);
       }else if(command === 'suggestion'){
 
-        if(!message.author.id === blacklisted.id){
-          return message.channel.send('You have been blacklisted from submitting suggestions')
-        }
+        
         
         if (!args[1]) {
           return message.channel.send('Suggestion needs to have atleast 2 words')
