@@ -225,14 +225,13 @@ await message.channel.send(embed)
 
   }else if(command === 'serverinfo'){
     const serverinfo = new Discord.MessageEmbed()
-    .setTitle('Server Info')
     .addField('Server Owner', message.guild.owner)
     .addField('Guild owner ID', `${message.guild.owner.id}`)
     .addField('Reigon', message.guild.region)
     .addField('Member count', `${message.guild.memberCount}`)
     .addField("Channel's:", `${message.guild.channels.cache.size}`)
     .addField("Created:", `${message.guild.createdAt}`)
-    .setThumbnail(message.guild.iconURL)
+    .setThumbnail(message.guild.icon)
     .setColor(0xfd0000)
   message.channel.send(serverinfo);
 
