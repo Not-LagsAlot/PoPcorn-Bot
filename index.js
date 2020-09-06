@@ -95,7 +95,7 @@ client.on('message', async message => {
   } else if (command === 'help') {
 
 
-    try{
+  
       const help = new Discord.MessageEmbed()
       .setTitle('Help command')
       .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
@@ -104,12 +104,7 @@ client.on('message', async message => {
       .addField('🤣 Fun', fun)
       .addField(':tada: GiveAway', giveaways)
       .setColor('RANDOM')
-      message.author.send(help);
-      message.channel.send('A DM has been sent to you')
-    } 
-    catch {
-     return message.channel.send('Uh oh it looks like you have your DM\'s off or you have blocked the bot')
-    } 
+   message.channel.send(help)
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('oopsie')
