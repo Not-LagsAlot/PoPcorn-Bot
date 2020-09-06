@@ -224,16 +224,60 @@ await message.channel.send(embed)
     message.channel.send(user);
 
   }else if(command === 'serverinfo'){
-    const serverinfo = new Discord.MessageEmbed()
-    .addField('Server Owner', message.guild.owner)
-    .addField('Guild owner ID', `${message.guild.owner.id}`)
-    .addField('Reigon', message.guild.region)
-    .addField('Member count', `${message.guild.memberCount}`)
-    .addField("Channel's:", `${message.guild.channels.cache.size}`)
-    .addField("Created:", `${message.guild.createdAt}`)
-    .setThumbnail(message.guild.icon)
-    .setColor(0xfd0000)
-  message.channel.send(serverinfo);
+    let icon = message.guild.iconURL({size: 2048}); // Server Avatar
+    
+    let region = {
+      "brazil": "Brazil",
+      "eu-central": "Central Europe",
+      "singapore": "Singapore",
+      "london": "London",
+      "russia": "Russia",
+      "japan": "Japan",
+      "hongkong": "Hongkong",
+      "sydney": "Sydney",
+      "us-central": "U.S. Central",
+      "us-east": "U.S. East",
+      "us-south": "U.S. South",
+      "us-west": "U.S. West",
+      "eu-west": "Western Europe"
+    }
+    
+    // Members
+    let memberss = message.guild.members;
+    let offline = memberss.cache.filter(m => m.user.presence.status === "offline").size,
+        online = memberss.cache.filter(m => m.user.presence.status === "online").size,
+        idle = memberss.cache.filter(m => m.user.presence.status === "idle").size,
+        dnd = memberss.cache.filter(m => m.user.presence.status === "dnd").size,
+        robot = memberss.cache.filter(m => m.user.bot).size,
+        total = message.guild.memberCount;
+    
+    // Channels
+    let channels = message.guild.channels;
+    let text = channels.cache.filter(r => r.type === "text").size,
+        vc = channels.cache.filter(r => r.type === "voice").size,
+        category = channels.cache.filter(r => r.type === "category").size,
+        totalchan = channels.cache.size;
+    
+    // Region
+    let location = region[message.guild.region];
+    
+    // Date
+    let x = Date.now() - message.guild.createdAt;
+    let h = Math.floor(x / 86400000) // 86400000, 5 digits-zero.
+    let created = message.guild.createdAt // Install "dateformat" first.
+    
+    const embed = new Discord.MessageEmbed()
+    .setColor(0x7289DA)
+    .setTimestamp(new Date())
+    .setThumbnail(icon)
+    .setAuthor(message.guild.name, icon)
+    .setDescription(`**ID:** ${message.guild.id}`)
+    .addField("Region", location)
+    .addField("Date Created", `${created}`)
+    .addField("Owner", `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``)
+    .addField(`Members [${total}]`, `Online: ${online} \nIdle: ${idle} \nDND: ${dnd} \nOffline: ${offline} \nBots: ${robot}`)
+    .addField(`Channels [${totalchan}]`, `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`)
+    message.channel.send(embed); // Let's see if it's working!;
 
   }else if(command === 'ban'){if (!message.member.hasPermission(['BAN_MEMBERS'])) {
     message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
