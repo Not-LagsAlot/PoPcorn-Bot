@@ -106,9 +106,10 @@ client.on('message', async message => {
       .setColor('RANDOM')
       message.author.send(help);
       message.channel.send('A DM has been sent to you')
-    } catch (e) {
-      message.reply('Uh oh it looks like you have your DM\'s off or you have blocked the bot')
-    }
+    } 
+    catch {
+      message.channel.send('Uh oh it looks like you have your DM\'s off or you have blocked the bot')
+    } 
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('oopsie')
