@@ -240,7 +240,8 @@ await message.channel.send(embed)
       "us-south": "U.S. South",
       "us-west": "U.S. West",
       "eu-west": "Western Europe",
-      "india": "india"
+      "india": "india",
+      "europe": "europe"
     }
     
     // Members
