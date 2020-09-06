@@ -245,10 +245,10 @@ await message.channel.send(embed)
     
     // Members
     let memberss = message.guild.members;
-    let offline = memberss.cache.filter(m => m.user.presence.status === "<:Offline:751334314343530538>").size,
-        online = memberss.cache.filter(m => m.user.presence.status === "<:Online:751334258592710757>").size,
-        idle = memberss.cache.filter(m => m.user.presence.status === "<:idle:752069859130736750>").size,
-        dnd = memberss.cache.filter(m => m.user.presence.status === "<:DND:751334386842206208>").size,
+    let offline = memberss.cache.filter(m => m.user.presence.status === "offline").size,
+        online = memberss.cache.filter(m => m.user.presence.status === "online").size,
+        idle = memberss.cache.filter(m => m.user.presence.status === "idle").size,
+        dnd = memberss.cache.filter(m => m.user.presence.status === "dnd").size,
         robot = memberss.cache.filter(m => m.user.bot).size,
         total = message.guild.memberCount;
     
