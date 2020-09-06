@@ -276,7 +276,7 @@ await message.channel.send(embed)
     .addField("Region", location)
     .addField("Date Created", `${created}`)
     .addField("Owner", `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``)
-    .addField(`Members [${total}]`, `Online: ${online} \nIdle: ${idle} \nDND: ${dnd} \nOffline: ${offline} \nBots: ${robot}`)
+    .addField(`Members [${total}]`, `<:Online:751334258592710757>: ${online} \n<:idle:752069859130736750>: ${idle} \n<:DND:751334386842206208>: ${dnd} \n<:Offline:751334314343530538>: ${offline} \nBots: ${robot}`)
     .addField(`Channels [${totalchan}]`, `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`)
     message.channel.send(embed); // Let's see if it's working!;
 
