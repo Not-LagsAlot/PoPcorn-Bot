@@ -81,6 +81,12 @@ client.on('message', async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
+
+  const blacklistedddd = '642308656217456641'
+
+  if(!message.author.id === blacklistedddd){
+    return;
+  }
   
 
 
