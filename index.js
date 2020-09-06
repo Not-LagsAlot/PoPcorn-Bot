@@ -5,13 +5,14 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 new command (.simp (mentions are OPITIONAL)) Fixed bugs and crashes, fixed say command issue';
+var changes = 'added 1 new command (.log) Fixed bugs and crashes';
 var info = '```.avatar , .ping, .whois (mentions are OPITIONAL), .botinfo, .serverinfo, .ping, .support```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube, .simp (mention is optional)```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v2.3';
+var devsonly = '.suggest-blacklist (user), .fun-blacklist (user), .blacklist (user)'
+var version = 'v2.4';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const moment = require("moment")
@@ -62,6 +63,16 @@ client.on('message', async message => {
 
 
 
+  const blacklisted = message.mentions.members.first()
+  
+
+
+  
+
+  
+
+
+
 
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -84,6 +95,7 @@ client.on('message', async message => {
 
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
+      .addField('<:owner:752053432621334548> Devs ONLY', )
       .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
@@ -774,8 +786,13 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 
         message.channel.send(bugreport);
       }else if(command === 'suggestion'){
+
+        if(!message.author.id === blacklisted.id){
+          return message.channel.send('You have been blacklisted from submitting suggestions')
+        }
+        
         if (!args[1]) {
-          return message.channel.send('Please include your suggestion.')
+          return message.channel.send('Suggestion needs to have atleast 2 words')
       }
       if (client.channels.fetch('735422598493503539')) {
           client.channels.fetch('735422598493503539').then(channel => {
@@ -954,6 +971,25 @@ message.channel.send(format);
           .setColor(`RANDOM`)
           message.channel.send(embed)
     
+    }else if(command === 'logs'){
+      message.channel.send('Please create a channel with the name `bot-log` for me to start logging')
+    }else if(command === 'suggest-blacklist'){
+      if(!message.author.id === '642308656217456641'){
+        return message.channel.send('You __**CANNOT**__ blacklist users from submitting suggestions')
+      }
+      
+
+      if(!blacklisted){
+        return message.channel.send('Please give a user to blacklist from suggesting')
+      }
+
+      const xDblacklisted = new Discord.MessageEmbed()
+      .setTitle('Blacklist')
+      .setDescription(`${message.author.tag} has blacklisted ${blacklisted} from submitting suggestiongs`)
+      .setColor('RANDOM')
+      message.channel.send(xDblacklisted)
+
+      blacklisted.send(`You were blacklisted from submitting suggestions by ${message.author.tag}`)
     }
 
   })
