@@ -239,15 +239,16 @@ await message.channel.send(embed)
       "us-east": "U.S. East",
       "us-south": "U.S. South",
       "us-west": "U.S. West",
-      "eu-west": "Western Europe"
+      "eu-west": "Western Europe",
+      "india": "india"
     }
     
     // Members
     let memberss = message.guild.members;
-    let offline = memberss.cache.filter(m => m.user.presence.status === "offline").size,
-        online = memberss.cache.filter(m => m.user.presence.status === "online").size,
-        idle = memberss.cache.filter(m => m.user.presence.status === "idle").size,
-        dnd = memberss.cache.filter(m => m.user.presence.status === "dnd").size,
+    let offline = memberss.cache.filter(m => m.user.presence.status === "<:Offline:751334314343530538>").size,
+        online = memberss.cache.filter(m => m.user.presence.status === "<:Online:751334258592710757>").size,
+        idle = memberss.cache.filter(m => m.user.presence.status === "<:idle:752069859130736750>").size,
+        dnd = memberss.cache.filter(m => m.user.presence.status === "<:DND:751334386842206208>").size,
         robot = memberss.cache.filter(m => m.user.bot).size,
         total = message.guild.memberCount;
     
@@ -421,10 +422,10 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
         }else if(command === 'whois'){
           let user = message.mentions.users.first() || message.author;
     
-    if (user.presence.status === "dnd") user.presence.status = "Do Not Disturb";
-    if (user.presence.status === "idle") user.presence.status = "Idle";
-    if (user.presence.status === "offline") user.presence.status = "Offline";
-    if (user.presence.status === "online") user.presence.status = "Online";
+    if (user.presence.status === "dnd") user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
+    if (user.presence.status === "idle") user.presence.status = "<:idle:752069859130736750> | Idle";
+    if (user.presence.status === "offline") user.presence.status = "<:Offline:751334314343530538> | Offline";
+    if (user.presence.status === "online") user.presence.status = "<:Online:751334258592710757> | Online";
     
     function game() {
       let game;
