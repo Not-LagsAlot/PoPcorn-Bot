@@ -108,7 +108,7 @@ client.on('message', async message => {
       message.channel.send('A DM has been sent to you')
     } 
     catch {
-      message.channel.send('Uh oh it looks like you have your DM\'s off or you have blocked the bot')
+     return message.channel.send('Uh oh it looks like you have your DM\'s off or you have blocked the bot')
     } 
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
