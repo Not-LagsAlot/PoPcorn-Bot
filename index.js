@@ -61,11 +61,7 @@ client.once('ready', () => {
 
 client.on('message', async message => {
 
-  if(message.author.id === no){
-    return
-  }
-
-  const no = '642308656217456641'
+  
 
 
 
