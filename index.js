@@ -61,6 +61,12 @@ client.once('ready', () => {
 
 client.on('message', async message => {
 
+  if(message.author.id === no){
+    return
+  }
+
+  const no = '642308656217456641'
+
 
 
   const blacklisted = message.mentions.members.first()
@@ -261,6 +267,7 @@ await message.channel.send(embed)
         vc = channels.cache.filter(r => r.type === "voice").size,
         category = channels.cache.filter(r => r.type === "category").size,
         totalchan = channels.cache.size;
+       
     
     // Region
     let location = region[message.guild.region];
