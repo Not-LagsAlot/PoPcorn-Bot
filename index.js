@@ -5,14 +5,14 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'added 1 new command (.serverinfo) Fixed bugs and crashes';
+var changes = 'updated how 1 command looked (.giveaway) Fixed bugs and crashes';
 var info = '```.avatar , .ping, .whois (mentions are OPITIONAL), .botinfo, .serverinfo, .ping, .support, .serverinfo```';
 var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number here), .mute (user here), .unmute (user here)```'
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube, .simp (mention is optional)```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
 var automod = '```Anti-swear, Anti-link```'
 var devsonly = '```.suggest-blacklist (user), .fun-blacklist (user), .blacklist (user)```'
-var version = 'v2.4';
+var version = 'v2.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const moment = require("moment")
@@ -60,6 +60,7 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
+
 
   
 
@@ -895,6 +896,7 @@ message.channel.send(format);
       
 
       }else if(command === 'giveaway'){
+      
         if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
           return message.channel.send(`${message.author.tag} You cannot use that`)
         }
@@ -907,29 +909,28 @@ message.channel.send(format);
       return message.channel.send(
         `You did not use the correct formatting for the time!\n**PROTIP:** the formatting time is like this:\nm = minute Use example: 1m or 2m\nh = hour Use example: 1h or 2h\nd = day Use example: 1d or 2d`
       );
-    if (isNaN(args[0][0])) return message.channel.send(`That is not a number!`);
+    if (isNaN(args[0][0])) return message.channel.send(`Please enter a **VALID** number`);
     let channel = message.mentions.channels.first();
     if (!channel)
       return message.channel.send(
-        `I could not find that channel in the guild!`
+        `That channel doesn\t exist`
       );
     let prize = args.slice(2).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);
-    message.channel.send(`*Giveaway created in ${channel}*`);
+    message.channel.send(`*Giveaway has been started in ${channel}*`);
     let Embed = new Discord.MessageEmbed()
-      .setTitle(`New giveaway!`)
-      .setDescription(
-        `The user ${message.author} is hosting a giveaway for the prize of **${prize}**`
-      )
+      .setTitle(`**${prize}**`)
+      .setDescription('React with :tada: to enter')
+      .addField('Hosted by', `${message.author.username}`)
       .setTimestamp(Date.now() + ms(args[0]))
-      .setColor(`BLUE`);
+      .setColor(`RANDOM`);
     let m = await channel.send(Embed);
     m.react("🎉");
     setTimeout(() => {
       if (m.reactions.cache.get("🎉").count <= 1) {
         message.channel.send(`Reactions: ${m.reactions.cache.get("🎉").count}`);
         return message.channel.send(
-          `Not enough people reacted for me to start draw a winner!`
+          `Uh oh not enough people reacted for me to draw a winner!`
         );
       }
 
@@ -938,7 +939,7 @@ message.channel.send(format);
         .users.cache.filter((u) => !u.bot)
         .random();
       channel.send(
-        `The winner of the giveaway for **${prize}** is... ${winner}`
+        `And the winner for ${prize} hosted by ${message.author.tag} is...${winner}!!!`
       );
     }, ms(args[0]));
   }else if(command === 'youtube'){
