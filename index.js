@@ -920,8 +920,7 @@ message.channel.send(format);
     message.channel.send(`*Giveaway has been started in ${channel}*`);
     let Embed = new Discord.MessageEmbed()
       .setTitle(`**${prize}**`)
-      .setDescription('React with :tada: to enter')
-      .addField('Hosted by', `${message.author.username}`)
+      .setDescription(`React with :tada: to enter\nHosted by: ${message.author.username}!!!`)
       .setTimestamp(Date.now() + ms(args[0]))
       .setColor(`RANDOM`);
     let m = await channel.send(Embed);
