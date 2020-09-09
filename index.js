@@ -145,7 +145,7 @@ return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** h
   } else if (command === 'info') {
     const info = new Discord.MessageEmbed()
       .setTitle('Info')
-      .setFooter('PoPcorn bot is a discord bot made by LagsAlot#5671, this bot had many features (fun and moderation)')
+      .setFooter('PoPcorn bot is a discord bot made by LagsAlot#5671, this bot has many features (fun and moderation)')
 
     message.channel.send(info);
   } else if (command === 'purge') {
