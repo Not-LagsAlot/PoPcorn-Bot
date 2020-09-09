@@ -62,9 +62,7 @@ client.once('ready', () => {
 
 client.on('message', async message => {
 
-  if(message.guild.id === '752157758790565969'){
-    return
-  }
+  
 
 
   
@@ -1050,7 +1048,7 @@ message.channel.send(format);
         .setDescription('This guild has been blacklisted from using popcorn bot\nDuration: Permenat\nBy: LagsAlot#5671\nReason: Attempting to raid PoPcorn official support server')
         .setColor('RANDOM')
         message.channel.send(bbb)
-        message.delete
+        message.delete()
        }else {
          return message.channel.send('You cannot blacklist guild')
        }
