@@ -121,7 +121,7 @@ return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** h
    const userwarn = message.mentions.members.first()
 
    if(!userwarn){
-     return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user')
+     return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user <a:aBF_CheckNo:747070419668041788>')
      }
 
      if(message.mentions.users.first().bot) {
@@ -131,10 +131,10 @@ return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** h
      const reasonss =  args.slice(1).join(" ")
 
      if(!reasonss){
-       return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason')
+       return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason <a:aBF_CheckNo:747070419668041788>')
      }
 
-     message.channel.send(`**${userwarn}** has gotten his warn`)
+     message.channel.send(`**${userwarn}** has been warned`)
 
      userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
 
@@ -318,7 +318,7 @@ await message.channel.send(embed)
 
 
   let ban = new Discord.MessageEmbed()
-    .setTitle(`successfully Banned ${target}`)
+    .setDescription(`successfully Banned ${target}`)
     .setColor(0x3BF04B)
     .setFooter(`Banned by ${message.author.tag}`)
 
