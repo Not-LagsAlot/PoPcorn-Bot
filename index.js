@@ -349,13 +349,13 @@ if (!args[1]) {
   return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
 }
 
-if (target.id === message.guild.ownerID) {
+if (userg.id === message.guild.ownerID) {
   return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
 }
 
 
 let kickedf = new Discord.MessageEmbed()
-  .setTitle(`successfully kicked ${userg}`)
+  .setDescription(`successfully kicked ${userg}`)
   .setColor(0x15daea)
   .setFooter(`kicked by ${message.author.tag}`)
 
