@@ -319,7 +319,7 @@ await message.channel.send(embed)
 
 
   let ban = new Discord.MessageEmbed()
-    .setDescription(`***successfully Banned ${target}***`)
+    .setDescription(`***Successfully Banned ${target} (\`${target.id}\`)***`)
     .setColor(0x3BF04B)
     .setFooter(`Banned by ${message.author.tag}`)
 
@@ -355,7 +355,7 @@ if (userg.id === message.guild.ownerID) {
 
 
 let kickedf = new Discord.MessageEmbed()
-  .setDescription(`***successfully kicked ${userg}***`)
+  .setDescription(`***Successfully kicked ${userg} (\`${userg.id}\`) ***`)
   .setColor(0x15daea)
   .setFooter(`kicked by ${message.author.tag}`)
 
