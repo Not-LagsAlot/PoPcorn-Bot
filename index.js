@@ -67,6 +67,7 @@ client.on('message', async message => {
   }
 
 
+
   
 
 
@@ -1009,7 +1010,15 @@ message.channel.send(format);
     
   }
   }else if(command === 'simp'){
-    let ship = Math.floor(Math.random() * 100) + 1;
+    if(message.author.id === '642308656217456641'){
+      let simpss = new Discord.MessageEmbed()
+          .setTimestamp(Date.now())
+          .setTitle("Hmmmm what is your simp rate at?")
+          .setDescription(`**${user.username}** simp rate is...100%`)
+          .setColor(`RANDOM`)
+          message.channel.send(simpss)
+    }else {
+      let ship = Math.floor(Math.random() * 100) + 1;
  
     let user = message.mentions.users.first() || message.author
  
@@ -1023,6 +1032,7 @@ message.channel.send(format);
           .setDescription(`**${user.username}** simp rate is... ${ship}%`)
           .setColor(`RANDOM`)
           message.channel.send(embed)
+    }
     
     }else if(command === 'logs'){
       message.channel.send('Please create a channel with the name `bot-log` for me to start logging')
