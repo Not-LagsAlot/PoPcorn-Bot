@@ -15,6 +15,7 @@ var devsonly = '```.suggest-blacklist (user), .fun-blacklist (user), .blacklist 
 var version = 'v2.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
+
 const moment = require("moment")
 
 
@@ -60,6 +61,10 @@ client.once('ready', () => {
     console.log(`Bot is online | used in server LOL`);
 
 client.on('message', async message => {
+
+  if(message.guild.id === '752157758790565969'){
+    return
+  }
 
 
   
@@ -1038,6 +1043,17 @@ message.channel.send(format);
       message.channel.send(xDblacklisted)
 
       blacklisted.send(`You were blacklisted from submitting suggestions by ${message.author.tag}`)
+    }else if(command === 'guild'){
+      if(message.author.id === '492571742192009226'){
+        const bbb = new Discord.MessageEmbed()
+        .setTitle('Guild Blacklist')
+        .setDescription('This guild has been blacklisted from using popcorn bot\nDuration: Permenat\nBy: LagsAlot#5671\nReason: Attempting to raid PoPcorn official support server')
+        .setColor('RANDOM')
+        message.channel.send(bbb)
+        message.delete
+       }else {
+         return message.channel.send('You cannot blacklist guild')
+       }
     }
 
   })
