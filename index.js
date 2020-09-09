@@ -1014,7 +1014,7 @@ message.channel.send(format);
       let simpss = new Discord.MessageEmbed()
           .setTimestamp(Date.now())
           .setTitle("Hmmmm what is your simp rate at?")
-          .setDescription(`**${user.username}** simp rate is...100%`)
+          .setDescription(`**LagsAlot** simp rate is...100%`)
           .setColor(`RANDOM`)
           message.channel.send(simpss)
     }else {
