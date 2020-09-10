@@ -11,7 +11,6 @@ var mod = '```.ban (user), .kick (user), .warn (user), .purge, .slowmode (number
 var fun = '```.meme, .reverse (message here), .hug (user here), .say (message here), .penis, .emojify (message here), .clyde (message here), .8ball (your message here), .kill (user name here)), .rps (rock, paper or scissors), .trivia, .slap, .youtube, .simp (mention is optional)```'
 var giveaways = '```.giveaway (time here) (channel here) (prize here)```'
 var automod = '```Anti-swear, Anti-link```'
-var devsonly = '```.suggest-blacklist (user), .fun-blacklist (user), .blacklist (user)```'
 var version = 'v2.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -85,6 +84,11 @@ client.on('message', async message => {
 
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  if(!message.guild){
+    message.delete()
+    return message.reply('Hey the bot isnt ready for DM\'s yet please go in a server for me to respond')
+  }
 
   
 
@@ -587,6 +591,7 @@ message.channel.send(clydeembed)
 }else if(command === 'emojify'){if(args.length < 1) {
   message.channel.send('You must provide some text to emojify!');
  }
+
 message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join(''));
 }else if(command === 'softban'){message.delete()
 
