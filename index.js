@@ -14,6 +14,7 @@ var automod = '```Anti-swear, Anti-link```'
 var version = 'v2.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
+const usedCommand = new Set();
 
 const moment = require("moment")
 
@@ -28,7 +29,6 @@ var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\
 
 const EmbedColor = "RANDOM";
 
-const ytdl = require("ytdl-core")
 const mapping = {
   ' ': '   ',
   '0': ':zero:',
@@ -107,9 +107,11 @@ client.on('message', async message => {
 
   } else if (command === 'help') {
 
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
 
-  
-      const help = new Discord.MessageEmbed()
+    const help = new Discord.MessageEmbed()
       .setTitle('Help command')
       .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
       .addField(':information_source: Info', info)
@@ -118,6 +120,18 @@ client.on('message', async message => {
       .addField(':tada: GiveAway', giveaways)
       .setColor('RANDOM')
    message.channel.send(help)
+    
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+
+
+  
+      
   } else if (command === 'commands') {
     const commands = new Discord.MessageEmbed()
       .setTitle('oopsie')
@@ -126,28 +140,39 @@ client.on('message', async message => {
 
     message.channel.send(commands);
   } else if (command === 'warn') {
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** have the correct permissions to run this command')
-    }
-   const userwarn = message.mentions.members.first()
-
-   if(!userwarn){
-     return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user <a:aBF_CheckNo:747070419668041788>')
-     }
-
-     if(message.mentions.users.first().bot) {
-      return message.channel.send("You can not warn bots")
-    }
-
-     const reasonss =  args.slice(1).join(" ")
-
-     if(!reasonss){
-       return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason <a:aBF_CheckNo:747070419668041788>')
-     }
-
-     message.channel.send(`**${userwarn}** has been warned`)
-
-     userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
+      return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** have the correct permissions to run this command')
+          }
+         const userwarn = message.mentions.members.first()
+      
+         if(!userwarn){
+           return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user <a:aBF_CheckNo:747070419668041788>')
+           }
+      
+           if(message.mentions.users.first().bot) {
+            return message.channel.send("You can not warn bots")
+          }
+      
+           const reasonss =  args.slice(1).join(" ")
+      
+           if(!reasonss){
+             return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason <a:aBF_CheckNo:747070419668041788>')
+           }
+      
+           message.channel.send(`**${userwarn}** has been warned`)
+      
+           userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+    
 
     } else if (command === 'support') {
 
@@ -159,6 +184,10 @@ return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** h
 
     message.channel.send(info);
   } else if (command === 'purge') {
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
+
     if (!message.member.permissions.has("MANAGE_MESSAGES")) // sets the permission
     return message.channel.send(
         `You do not have correct permissions to do this action, ${message.author.username}` // returns this message to user with no perms
@@ -184,6 +213,15 @@ const embed = new Discord.MessageEmbed()
     .setFooter(message.author.username, message.author.displayAvatarURL())
     .setColor('#f2f2f2')
 await message.channel.send(embed)
+    
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+    
 
   } else if (command === 'say') {
     if(!args[0]){
@@ -297,82 +335,122 @@ await message.channel.send(embed)
     .addField(`Channels [${totalchan}]`, `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`)
     message.channel.send(embed); // Let's see if it's working!;
 
-  }else if(command === 'ban'){if (!message.member.hasPermission(['BAN_MEMBERS'])) {
-    message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
+  }else if(command === 'ban'){
+    
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
+
+
+    if (!message.member.hasPermission(['BAN_MEMBERS'])) {
+      message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
+    }
+  
+    if (!message.guild.me.hasPermission(['BAN_MEMBERS'])) {
+      return message.channel.send(`**${message.author.username}**, i do not have the permission to ban someone`)
+    }
+  
+    const target = message.mentions.members.first();
+  
+    if (!target) {
+      return message.channel.send(`**${message.author.username}**, you need to menton a user`)
+    }
+  
+    if (target.id === message.author.id) {
+      return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
+    }
+  
+  
+    if (!args[1]) {
+      return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
+    }
+  
+    if (target.id === message.guild.ownerID) {
+      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
+    }
+  
+    if(!target.bannable) return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
+    
+  
+  
+    let ban = new Discord.MessageEmbed()
+      .setDescription(`***Successfully Banned ${target} (\`${target.id}\`)***`)
+      .setColor(0x3BF04B)
+      .setFooter(`Banned by ${message.author.tag}`)
+  
+    message.channel.send(ban)
+    target.ban(args[1])
+    target.send(`You were **BANNED** in ${message.guild.name}, banned by: ${message.author.username}`)
+      
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
   }
+    
+    
+    
+}else if(command === 'kick'){
+  
+  if(usedCommand.has(message.author.id)){
+    message.reply('You cannot use the command beacuse of the cooldown.')
+} else {
 
-  if (!message.guild.me.hasPermission(['BAN_MEMBERS'])) {
-    return message.channel.send(`**${message.author.username}**, i do not have the permission to ban someone`)
+  if (!message.member.hasPermission(['KICK_MEMBERS'])) {
+    message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
   }
-
-  const target = message.mentions.members.first();
-
-  if (!target) {
+  
+  if (!message.guild.me.hasPermission(['KICK_MEMBERS'])) {
+    return message.channel.send(`**${message.author.username}, i do not have the permission to kick someone`)
+  }
+  
+  const userg = message.mentions.members.first();
+  
+  if (!userg) {
     return message.channel.send(`**${message.author.username}**, you need to menton a user`)
   }
-
-  if (target.id === message.author.id) {
-    return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
-  }
-
-
-  if (!args[1]) {
-    return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
-  }
-
-  if (target.id === message.guild.ownerID) {
-    return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
-  }
-
-  if(!target.bannable) return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
   
-
-
-  let ban = new Discord.MessageEmbed()
-    .setDescription(`***Successfully Banned ${target} (\`${target.id}\`)***`)
-    .setColor(0x3BF04B)
-    .setFooter(`Banned by ${message.author.tag}`)
-
-  message.channel.send(ban)
-  target.ban(args[1])
-  target.send(`You were **BANNED** in ${message.guild.name}, banned by: ${message.author.username}`)
-}else if(command === 'kick'){if (!message.member.hasPermission(['KICK_MEMBERS'])) {
-  message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
+  if (userg.id === message.author.id) {
+    return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
+  }
+  
+  
+  if (!args[1]) {
+    return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
+  }
+  
+  if (userg.id === message.guild.ownerID) {
+    return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
+  }
+  
+  
+  let kickedf = new Discord.MessageEmbed()
+    .setDescription(`***Successfully kicked ${userg} (\`${userg.id}\`) ***`)
+    .setColor(0x15daea)
+    .setFooter(`kicked by ${message.author.tag}`)
+  
+  message.channel.send(kickedf)
+  userg.kick(args[1])
+  userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
+    
+    
+    
+    usedCommand.add(message.author.id);
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
 }
-
-if (!message.guild.me.hasPermission(['KICK_MEMBERS'])) {
-  return message.channel.send(`**${message.author.username}, i do not have the permission to kick someone`)
-}
-
-const userg = message.mentions.members.first();
-
-if (!userg) {
-  return message.channel.send(`**${message.author.username}**, you need to menton a user`)
-}
-
-if (userg.id === message.author.id) {
-  return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
-}
-
-
-if (!args[1]) {
-  return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
-}
-
-if (userg.id === message.guild.ownerID) {
-  return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
-}
-
-
-let kickedf = new Discord.MessageEmbed()
-  .setDescription(`***Successfully kicked ${userg} (\`${userg.id}\`) ***`)
-  .setColor(0x15daea)
-  .setFooter(`kicked by ${message.author.tag}`)
-
-message.channel.send(kickedf)
-userg.kick(args[1])
-userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
+  
+  
+  
 }else if(command === 'avatar'){
+
+  if(usedCommand.has(message.author.id)){
+    message.reply('You cannot use the command beacuse of the cooldown.')
+} else {
+
   let user = message.author || message.mentions.users.first();
 
   let embed = new Discord.MessageEmbed()
@@ -380,7 +458,21 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
   .setImage(user.avatarURL({size: 2048, dynamic: true, format: "png"}))
   .setColor("RANDOM")
   message.channel.send(embed);
+   
+    
+    
+    usedCommand.add(message.author.id);
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+}
+  
 }else if(command === 'reverse'){
+
+  if(usedCommand.has(message.author.id)){
+    message.reply('You cannot use the command beacuse of the cooldown.')
+} else {
+
   if (!args[0]) { 
 		return message.channel.send(`Please Give Me Text!`) 
        } else {
@@ -390,34 +482,55 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
 		  message.channel.send(embed)};
 
       await message.delete();
+  
+    
+    
+    usedCommand.add(message.author.id);
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+}
+  
     }else if(command === 'poll'){
+      if(usedCommand.has(message.author.id)){
+        message.reply('You cannot use the command beacuse of the cooldown.')
+    } else {
       const Embed = new Discord.MessageEmbed()
-        .setColor('RANDOM')
-        .setTitle("Poll Information!")
-        .setDescription(
-          `${prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
-        )
-        .setFooter(`Command Requested By ${message.author.username}`)
-        .setTimestamp();
+      .setColor('RANDOM')
+      .setTitle("Poll Information!")
+      .setDescription(
+        `${prefix}Poll <Message> To Create A Simple Yes Or No Poll!`
+      )
+      .setFooter(`Command Requested By ${message.author.username}`)
+      .setTimestamp();
 
-      if (args.length === 0) {
-        return message.channel.send(Embed);
-      }
+    if (args.length === 0) {
+      return message.channel.send(Embed);
+    }
 
-      let Message = args.slice(0).join(" ");
+    let Message = args.slice(0).join(" ");
 
-      let Poll = await message.channel.send(
-        new Discord.MessageEmbed()
-          .setColor(`${EmbedColor}`)
-          .setTitle(`${Message}`)
-          .setFooter(`Poll Created By ${message.author.username}`)
-          .setTimestamp()
-      );
+    let Poll = await message.channel.send(
+      new Discord.MessageEmbed()
+        .setColor(`${EmbedColor}`)
+        .setTitle(`${Message}`)
+        .setFooter(`Poll Created By ${message.author.username}`)
+        .setTimestamp()
+    );
 
-      await Poll.react(`${Poll_Emoji_1}`);
-      await Poll.react(`${Poll_Emoji_2}`);
-      await message.delete();
+    await Poll.react(`${Poll_Emoji_1}`);
+    await Poll.react(`${Poll_Emoji_2}`);
+    await message.delete();
+        
+        
+        usedCommand.add(message.author.id);
+        setTimeout(() => {
+            usedCommand.delete(message.author.id);
+        }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+    }
+      
        }else if(command === 'hug'){
+         
         var member= message.mentions.members.first();
         var images = ["https://media0.giphy.com/media/3ZnBrkqoaI2hq/giphy.gif?cid=ecf05e47a04f6d3c6d7f959b6b190b1cda88ce59d34605ac&rid=giphy.gif", "https://media2.giphy.com/media/PHZ7v9tfQu0o0/giphy.gif?cid=ecf05e477106e2fc0d1ed0906595b65067262ab482a12b5d&rid=giphy.gif", "https://media3.giphy.com/media/u9BxQbM5bxvwY/giphy.gif?cid=ecf05e4761cb7e6abcb1ce7cd71e633f635d55fb953813bb&rid=giphy.gif", "https://media1.giphy.com/media/ZQN9jsRWp1M76/giphy.gif?cid=ecf05e476aa1056a2b1672677a82b9415bb06e0a8925f15a&rid=giphy.gif", "https://media2.giphy.com/media/IRUb7GTCaPU8E/giphy.gif?cid=ecf05e4791de990a3943c06a4dd525151df03fc7667807a5&rid=giphy.gif", "https://media0.giphy.com/media/BXrwTdoho6hkQ/giphy.gif?cid=ecf05e4783c7a876015ea9dd1be3b1cfeb7d9af9183e1f97&rid=giphy.gif" ];
         var image = Math.floor(Math.random() * images.length);
@@ -433,99 +546,74 @@ userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.au
           .setColor(0xF000FF)
          return message.channel.send(HugEmbed2);
         }else if(command === 'meme'){
+          if(usedCommand.has(message.author.id)){
+            message.reply('You cannot use the command beacuse of the cooldown.')
+        } else {
           var num = Math.floor(Math.random() * (500 - 1) + 1)
 
-         message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
+          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
+           
+            
+            
+            usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+        }
+         
         }else if(command === 'whois'){
+          if(usedCommand.has(message.author.id)){
+            message.reply('You cannot use the command beacuse of the cooldown.')
+        } else {
           let user = message.mentions.users.first() || message.author;
     
-    if (user.presence.status === "dnd") user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
-    if (user.presence.status === "idle") user.presence.status = "<:idle:752069859130736750> | Idle";
-    if (user.presence.status === "offline") user.presence.status = "<:Offline:751334314343530538> | Offline";
-    if (user.presence.status === "online") user.presence.status = "<:Online:751334258592710757> | Online";
-    
-    function game() {
-      let game;
-      if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
-      else if (user.presence.activities.length < 1) game = "None"; // This will check if the user doesn't playing anything.
-      return game; // Return the result.
-    }
-    
-    let x = Date.now() - user.createdAt; // Since the user created their account.
-    let y = Date.now() - message.guild.members.cache.get(user.id).joinedAt; // Since the user joined the server.
-    let created = Math.floor(x / 86400000); // 5 digits-zero.
-    let joined = Math.floor(y / 86400000);
-    
-    const members = message.guild.member(user);
-    let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
-    let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
-    let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
-    let status = user.presence.status;
-    let avatar = user.avatarURL({size: 2048}); // Use 2048 for high quality avatar.
-    
-    const embed = new Discord.MessageEmbed()
-    .setAuthor(user.tag, avatar)
-    .setThumbnail(avatar)
-    .setTimestamp()
-    .setColor(0x7289DA)
-    .addField("ID", user.id, true)
-    .addField("Nickname", nickname, true)
-    .addField("Created Account Date", `${createdate} \nsince ${created} day(s) ago`, true)
-    .addField("Joined Guild Date", `${joindate} \nsince ${joined} day(s) ago`, true)
-    .addField("Status", status, true)
-    .addField("Game", game(), true)
-    
-    message.channel.send(embed); // Let's see if it's working.
+          if (user.presence.status === "dnd") user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
+          if (user.presence.status === "idle") user.presence.status = "<:idle:752069859130736750> | Idle";
+          if (user.presence.status === "offline") user.presence.status = "<:Offline:751334314343530538> | Offline";
+          if (user.presence.status === "online") user.presence.status = "<:Online:751334258592710757> | Online";
+          
+          function game() {
+            let game;
+            if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
+            else if (user.presence.activities.length < 1) game = "None"; // This will check if the user doesn't playing anything.
+            return game; // Return the result.
+          }
+          
+          let x = Date.now() - user.createdAt; // Since the user created their account.
+          let y = Date.now() - message.guild.members.cache.get(user.id).joinedAt; // Since the user joined the server.
+          let created = Math.floor(x / 86400000); // 5 digits-zero.
+          let joined = Math.floor(y / 86400000);
+          
+          const members = message.guild.member(user);
+          let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
+          let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
+          let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
+          let status = user.presence.status;
+          let avatar = user.avatarURL({size: 2048}); // Use 2048 for high quality avatar.
+          
+          const embed = new Discord.MessageEmbed()
+          .setAuthor(user.tag, avatar)
+          .setThumbnail(avatar)
+          .setTimestamp()
+          .setColor(0x7289DA)
+          .addField("ID", user.id, true)
+          .addField("Nickname", nickname, true)
+          .addField("Created Account Date", `${createdate} \nsince ${created} day(s) ago`, true)
+          .addField("Joined Guild Date", `${joindate} \nsince ${joined} day(s) ago`, true)
+          .addField("Status", status, true)
+          .addField("Game", game(), true)
+          
+          message.channel.send(embed); // Let's see if it's working.
+            
+            
+            usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+        }
+          
         
-        }else if(command === 'play'){const voiceChannel = message.member.voice.channel
-          const play = new Discord.MessageEmbed()
-         .setTitle('You need to be in a Voice Channel to run this command')
-         .setColor(0xf0ff00);
-
-
-          if(!voiceChannel) return message.channel.send(play)
-
-         const permissions = voiceChannel.permissionsFor(message.client.user)
-         if(!permissions.has('CONNECT')) return message.channel.send(':no_entry_sign: I dont have the permission `connect` so i can\'t run this command')
-         if(!permissions.has('SPEAK')) return message.channel.send(':no_entry_sign: I don\'t have `Speak` permission')
-
-
-         try{
-                var connection = await voiceChannel.join()
-         }catch (error){
-           console.log(`error connecting ${error}`)
-           message.channel.send(':x: Erorr while connection to the Voice Channel')
-         }
-
-         const dispatcher = connection.play(ytdl(args[1]))
-         .on('finish', () => {
-           voiceChannel.leave()
-           message.channel.send('I have left the voice channel after playing the music ')
-         })
-    .on('error', error =>{
-      console.log(error)
-      message.channel.send(':x: oopsie an error occurred')
-    })
-    dispatcher.setVolumeLogarithmic(5 / 5)
-}else if(command === 'setnick'){
-let name = args.slice(1).join(" ")
-
-if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
-  message.channel.send(':x: you dont have `MANAGE MESSAGES` permission')
-  if(args[0]) return message.channel.send(':x: Mention a USER!')
-
-  const changenick = message.mentions.members.first()
-
-  if(!changenick) return message.channel.send('Unable to find that user')
-
-  if(!name) return message.channel.send(':x: what should the name be')
-
-  if(changenick.kickable) return message.channel.send('I can\'t change there username')
-  changenick.setNickname(name)
-
-  message.channel.send('Changed there nickname');
-}
-}else if(command === 'new'){
+        }else if(command === 'new'){
   const updates = new Discord.MessageEmbed()
   .setTitle('Whats new!')
   .addField('Current version', version)
@@ -550,33 +638,55 @@ if(!message.member.hasPermission(['MANAGE_NICKNAMES'])){
 
 
 
-  }else if(command === 'penis'){var facts = [
-    "",
-    "=",
-    "==",
-    "===",
-    "====",
-    "=====",
-    "======",
-    "=======",
-    "========",
-    "=========",
-    "==========",
-    "===========",
-    "============",
-    "=============",
-    "==============" //little pyramid tho
-  ];
-  var fact = Math.floor(Math.random() * facts.length);
-  let ppuser = message.mentions.users.first() || message.member.user;
-  const peniss = new Discord.MessageEmbed()
-  .setTitle("Penis Generator")
-    .setDescription(`${ppuser.username}'s penis 
-8${facts[fact]}D`)
-.setColor('RANDOM');
+  }else if(command === 'penis'){
 
-  message.channel.send(peniss);
-}else if(command === 'clyde'){if (!args[0]) return message.channel.send('What do you want clyde to say?');
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
+
+    var facts = [
+      "",
+      "=",
+      "==",
+      "===",
+      "====",
+      "=====",
+      "======",
+      "=======",
+      "========",
+      "=========",
+      "==========",
+      "===========",
+      "============",
+      "=============",
+      "==============" //little pyramid tho
+    ];
+    var fact = Math.floor(Math.random() * facts.length);
+    let ppuser = message.mentions.users.first() || message.member.user;
+    const peniss = new Discord.MessageEmbed()
+    .setTitle("Penis Generator")
+      .setDescription(`${ppuser.username}'s penis 
+  8${facts[fact]}D`)
+  .setColor('RANDOM');
+  
+    message.channel.send(peniss);
+    
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+    
+    
+}else if(command === 'clyde'){
+
+  if(usedCommand.has(message.author.id)){
+    message.reply('You cannot use the command beacuse of the cooldown.')
+} else {
+
+  if (!args[0]) return message.channel.send('What do you want clyde to say?');
 let clydeMessage = args.slice(0).join(' ');
 let encodedLink = encodeURI(`https://ctk-api.herokuapp.com/clyde/${clydeMessage}`);
 
@@ -585,6 +695,16 @@ const clydeembed = new Discord.MessageEmbed()
 .setColor('RANDOM')
 
 message.channel.send(clydeembed)
+   
+    
+    
+    usedCommand.add(message.author.id);
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+}
+  
+  
 
 
 
@@ -619,6 +739,10 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
           
         
   }else if(command === 'slowmode'){
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
+
     if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
       return message.channel.send('You dont have the permission to run this command')
     }
@@ -631,68 +755,106 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     }
     message.channel.setRateLimitPerUser(args[0])
     message.channel.send(`Set the slowmode of this channel to **${args[0]}**, slowmode set by **${message.author.username}**`)
+      
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+    
   }else if(command === '8ball'){
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
     if (!args[2]) {
-        return message.channel.send('Please ask a full questions.')
-    }
-    let number = Math.floor(Math.random() * 6);
-    if (number == 0) {
-        return message.channel.send('Yes, definitely so.')
-    }
-    if (number == 1) {
-        return message.channel.send('No, definitely not.')
-    }
-    if (number == 2) {
-        return message.channel.send('Ask again later.')
-    }
-    if (number == 3) {
-        return message.channel.send('It is uncertain.')
-    }
-    if (number == 4) {
-        return message.channel.send('Odds are not in your favor.')
-    }
-    if (number == 5) {
-        return message.channel.send('Odds are in your favor.')
-    }}else if(command === 'kill'){let user = message.mentions.users.first();
+      return message.channel.send('Please ask a full questions.')
+  }
+  let number = Math.floor(Math.random() * 6);
+  if (number == 0) {
+      return message.channel.send('Yes, definitely so.')
+  }
+  if (number == 1) {
+      return message.channel.send('No, definitely not.')
+  }
+  if (number == 2) {
+      return message.channel.send('Ask again later.')
+  }
+  if (number == 3) {
+      return message.channel.send('It is uncertain.')
+  }
+  if (number == 4) {
+      return message.channel.send('Odds are not in your favor.')
+  }
+  if (number == 5) {
+      return message.channel.send('Odds are in your favor.')
+  }
+     
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+   }else if(command === 'kill'){let user = message.mentions.users.first();
       if (!user) {
           return message.channel.send('Please include who you are killing.')
       }
       return message.channel.send(message.author.username + ' Killed ' + user.username)
-  }else if(command === 'rps'){  if (!args[0]) {
-        return message.channel.send('Please include your choice.')
-    }
+  }else if(command === 'rps'){  
+    
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  } else {
 
-    let choices = ['rock', 'paper', 'scissors'];
-    if (choices.includes((args[0]).toLowerCase())) {
-        let number = Math.floor(Math.random() * 3);
-        if (number == 1) {
-            return message.channel.send('It was a tie, we both had ' + (args[0]).toLowerCase())
-        }
-        if (number == 2) {
-            if ((args[0]).toLowerCase() == "rock") {
-                return message.channel.send('I won, I had paper.')
-            }
-            if ((args[0]).toLowerCase() == "paper") {
-                return message.channel.send('I won, I had scissors.')
-            }
-            if ((args[0]).toLowerCase() == "scissors") {
-                return message.channel.send('I won, I rock.')
-            }
-        }
-        if (number == 0) {
-            if ((args[0]).toLowerCase() == "rock") {
-                return message.channel.send('You won, I had scissors.')
-            }
-            if ((args[0]).toLowerCase() == "paper") {
-                return message.channel.send('You won, I had rock.')
-            }
-            if ((args[0]).toLowerCase() == "scissors") {
-                return message.channel.send('You won, I paper.')
-            }
-        }
-    } else {
-        return message.channel.send('Please include either: Rock, Paper, or Scissors.')
-    }}else if(command === 'mute'){
+    if (!args[0]) {
+      return message.channel.send('Please include your choice.')
+  }
+
+  let choices = ['rock', 'paper', 'scissors'];
+  if (choices.includes((args[0]).toLowerCase())) {
+      let number = Math.floor(Math.random() * 3);
+      if (number == 1) {
+          return message.channel.send('It was a tie, we both had ' + (args[0]).toLowerCase())
+      }
+      if (number == 2) {
+          if ((args[0]).toLowerCase() == "rock") {
+              return message.channel.send('I won, I had paper.')
+          }
+          if ((args[0]).toLowerCase() == "paper") {
+              return message.channel.send('I won, I had scissors.')
+          }
+          if ((args[0]).toLowerCase() == "scissors") {
+              return message.channel.send('I won, I rock.')
+          }
+      }
+      if (number == 0) {
+          if ((args[0]).toLowerCase() == "rock") {
+              return message.channel.send('You won, I had scissors.')
+          }
+          if ((args[0]).toLowerCase() == "paper") {
+              return message.channel.send('You won, I had rock.')
+          }
+          if ((args[0]).toLowerCase() == "scissors") {
+              return message.channel.send('You won, I paper.')
+          }
+      }
+  } else {
+      return message.channel.send('Please include either: Rock, Paper, or Scissors.')
+  }
+     
+      
+      
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+    
+    
+    }else if(command === 'mute'){
       if (!message.member.hasPermission("MANAGE_ROLES")) {
         return message.channel.send(
           "Sorry but you do not have permission to mute anyone"
@@ -762,69 +924,86 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     
     user.send(`You are now unmuted from **${message.guild.name}**`)
 
-    }else if(command === 'trivia'){let questions = [
-      {
-        title: "Best programming language",
-        options: ["JavaScript/TypeScript", "Python", "Ruby", "Rust"],
-        correct: 1,
-      },
-      {
-        title: "Best NPM package",
-        options: ["int.engine", "ms", "ws", "discord.js"],
-        correct: 3,
-      },
-      {
-        title: "What is the best photo editing PC program",
-        options: ["Photoshop", "Windows photo editor", "gimp", "Paint.NET"],
-        correct: 1,
-      },
-      {
-        title: "What is better",
-        options: ["Skype", "Zoom", "Microsoft Teams", "Discord"],
-        correct: 4,
-      },
-      {
-        title: "What won the oscar",
-        options: ["Joaquin Phoenix", "Renee Zellweger", "Brad Pitt", "All of the above"],
-        correct: 4,
-      },
-      {
-        title: "Which one of these company's sue apple",
-        options: ["Samsung", "Epic Games", "Nokia", "OnePlus"],
-        correct: 2,
-      },
-      {
-        title: "Which one of these companies is the most wealthy",
-        options: ["Samsung", "Apple", "Google", "Tencent Games"],
-        correct: 1,
-      },
-      {
-        title: "What empire became the end of Mongol empire",
-        options: ["British Empire", "Egyption Empire", "Ottoman Empire", "Roman Empire"],
-        correct: 3,
-      },
-      {
-        title: "In 2012 the German-speaking microstate \"Liechtenstein\" in Central Europe had a population of how many inhabitants?",
-        options: ["2,400", "323,400", "36,600", "90,000"],
-        correct: 3,
-      },
+    }else if(command === 'trivia'){
       
-    ];
-        let q = questions[Math.floor(Math.random() * questions.length)];
-        let i = 0;
-        const Embed = new Discord.MessageEmbed()
-          .setTitle(q.title)
-          .setDescription(
-            q.options.map((opt) => {
-              i++;
-              return `${i} - ${opt}\n`;
-            })
-          )
-          .setColor(`GREEN`)
-          .setFooter(
-            `Reply to this message with the correct question number! You have 15 seconds.`
-          );
-        message.channel.send(Embed);
+        if(usedCommand.has(message.author.id)){
+            message.reply('You cannot use the command beacuse of the cooldown.')
+        } else {
+          
+          let questions = [
+            {
+              title: "Best programming language",
+              options: ["JavaScript/TypeScript", "Python", "Ruby", "Rust"],
+              correct: 1,
+            },
+            {
+              title: "Best NPM package",
+              options: ["int.engine", "ms", "ws", "discord.js"],
+              correct: 3,
+            },
+            {
+              title: "What is the best photo editing PC program",
+              options: ["Photoshop", "Windows photo editor", "gimp", "Paint.NET"],
+              correct: 1,
+            },
+            {
+              title: "What is better",
+              options: ["Skype", "Zoom", "Microsoft Teams", "Discord"],
+              correct: 4,
+            },
+            {
+              title: "What won the oscar",
+              options: ["Joaquin Phoenix", "Renee Zellweger", "Brad Pitt", "All of the above"],
+              correct: 4,
+            },
+            {
+              title: "Which one of these company's sue apple",
+              options: ["Samsung", "Epic Games", "Nokia", "OnePlus"],
+              correct: 2,
+            },
+            {
+              title: "Which one of these companies is the most wealthy",
+              options: ["Samsung", "Apple", "Google", "Tencent Games"],
+              correct: 1,
+            },
+            {
+              title: "What empire became the end of Mongol empire",
+              options: ["British Empire", "Egyption Empire", "Ottoman Empire", "Roman Empire"],
+              correct: 3,
+            },
+            {
+              title: "In 2012 the German-speaking microstate \"Liechtenstein\" in Central Europe had a population of how many inhabitants?",
+              options: ["2,400", "323,400", "36,600", "90,000"],
+              correct: 3,
+            },
+            
+          ];
+              let q = questions[Math.floor(Math.random() * questions.length)];
+              let i = 0;
+              const Embed = new Discord.MessageEmbed()
+                .setTitle(q.title)
+                .setDescription(
+                  q.options.map((opt) => {
+                    i++;
+                    return `${i} - ${opt}\n`;
+                  })
+                )
+                .setColor(`GREEN`)
+                .setFooter(
+                  `Reply to this message with the correct question number! You have 15 seconds.`
+                );
+              message.channel.send(Embed);
+           
+            
+            
+            usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+        }
+      
+      
+      
         try {
           let msgs = await message.channel.awaitMessages(
             (u2) => u2.author.id === message.author.id,
@@ -849,8 +1028,9 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
         message.channel.send(bugreport);
       }else if(command === 'suggestion'){
 
-        
-        
+        if(usedCommand.has(message.author.id)){
+          message.reply('As this is a suggestion command and to avoid raid/spam with this the slowmode has been increased to being **1 HOUR**')
+      } else {
         if (!args[1]) {
           return message.channel.send('Suggestion needs to have atleast 2 words')
       }
@@ -867,6 +1047,18 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       } else {
           return message.channel.send('There was an error doing this.')
       }
+          
+          
+          
+          usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 3600000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+      }
+
+        
+        
+        
       }else if(command === 'format'){
         const format = new Discord.MessageEmbed()
         .setTitle('Suggestion Format')
@@ -890,24 +1082,11 @@ message.channel.send(format);
         
   
       
-      }else if(command === 'disturb'){
-
-        const disturb = message.mentions.members.first()
-
-        if(!disturb){
-          return message.channel.send('Who do you want to disturb')
-        }
-        if(!disturb.id === message.author.id){
-          return message.channel.send('HUH you can\'t disturb yourself')
-        }
-       
-       
-
-       message.channel.send(`${message.author.tag} has disturbed ${disturb}\n<a:aBF_henryStickman:748159120640835645>`);
-      
-
       }else if(command === 'giveaway'){
-      
+
+        if(usedCommand.has(message.author.id)){
+          message.reply('You cannot use the command beacuse of the cooldown.')
+      } else {
         if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
           return message.channel.send(`${message.author.tag} You cannot use that`)
         }
@@ -952,6 +1131,16 @@ message.channel.send(format);
         `And the winner for ${prize} hosted by ${message.author.tag} is...${winner}!!!`
       );
     }, ms(args[0]));
+         
+          
+          
+          usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+      }
+      
+        
   }else if(command === 'youtube'){
     const randomvid = new Discord.MessageEmbed()
     .setTitle('Here is a random Youtube vid')
