@@ -61,9 +61,7 @@ client.once('ready', () => {
 
 client.on('message', async message => {
 
-  if(message.guild.id === '752157758790565969'){
-    return
-  }
+  
 
 
 
