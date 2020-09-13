@@ -111,7 +111,6 @@ client.on('message', async message => {
 
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField('<:BF_DcStaff:747102891361304646> Auto Mod', automod )
       .addField(':information_source: Info', info)
       .addField(':shield: Moderation', mod)
       .addField('🤣 Fun', fun)
