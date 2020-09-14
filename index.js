@@ -84,8 +84,7 @@ client.on('message', async message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if(!message.guild){
-    message.delete()
-    return message.reply('Hey the bot isnt ready for DM\'s yet please go in a server for me to respond')
+    return
   }
 
   
