@@ -990,6 +990,20 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
                   `Reply to this message with the correct question number! You have 15 seconds.`
                 );
               message.channel.send(Embed);
+              try {
+                let msgs = await message.channel.awaitMessages(
+                  (u2) => u2.author.id === message.author.id,
+                  { time: 15000, max: 1, errors: ["time"] }
+                );
+                if (parseInt(msgs.first().content) == q.correct) {
+                  return message.channel.send(`You got it correct!`);
+                } else {
+                  return message.channel.send(`You got it incorrect.`);
+                }
+              } catch (e) {
+                return message.channel.send(`You did not answer!`);
+              }
+            }
            
             
             
@@ -1001,20 +1015,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
       
       
       
-        try {
-          let msgs = await message.channel.awaitMessages(
-            (u2) => u2.author.id === message.author.id,
-            { time: 15000, max: 1, errors: ["time"] }
-          );
-          if (parseInt(msgs.first().content) == q.correct) {
-            return message.channel.send(`You got it correct!`);
-          } else {
-            return message.channel.send(`You got it incorrect.`);
-          }
-        } catch (e) {
-          return message.channel.send(`You did not answer!`);
-        }
-      }else if(command === 'report'){
+       else if(command === 'report'){
         const bugreport = new Discord.MessageEmbed()
         .setTitle('Bug Report Format')
         .setFooter('To file a bug report, you must follow the format, as slowmode is set to 1 hour.')
