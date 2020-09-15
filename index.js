@@ -393,47 +393,46 @@ await message.channel.send(embed)
   if(usedCommand.has(message.author.id)){
     message.reply('You cannot use the command beacuse of the cooldown.')
 } else {
-// Assuming we mention someone in the message, this will return the user
-    // Read more about mentions over at https://discord.js.org/#/docs/main/master/class/MessageMentions
-    const userssss = message.mentions.users.first();
-    // If we have a user mentioned
-    if (userssss) {
-      // Now we get the member from the user
-      const membe = message.guild.member(userssss);
-      // If the member is in the guild
-      if (membe) {
-        /**
-         * Kick the member
-         * Make sure you run this on a member, not a user!
-         * There are big differences between a user and a member
-         */
-        membe
-          .kick('Optional reason that will display in the audit logs')
-          .then(() => {
-            const kickeddd = new Discord.MessageEmbed()
-            .setDescription(`***Successfully kicked ${target} (\`${target.id}\`)***`)
-            .setColor('RANDOM')
-            // We let the message author know we were able to kick the person
-            message.reply(kickeddd);
-          })
-          .catch(err => {
-            // An error happened
-            // This is generally due to the bot not being able to kick the member,
-            // either due to missing permissions or role hierarchy
-            message.reply('I was unable to kick the member');
-            // Log the error
-            console.error(err);
-          });
-      } else {
-        // The mentioned user isn't in this guild
-        message.reply("That user isn't in this guild!");
-      }
-      // Otherwise, if no user was mentioned
-    } else {
-      message.reply("You didn't mention the user to kick!");
-    }
 
-// Log our bot in using the token from https://discord.com/developers/applications
+  if (!message.member.hasPermission(['KICK_MEMBERS'])) {
+    message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
+  }
+  
+  if (!message.guild.me.hasPermission(['KICK_MEMBERS'])) {
+    return message.channel.send(`**${message.author.username}, i do not have the permission to kick someone`)
+  }
+  
+  const userg = message.mentions.members.first();
+  
+  if (!userg) {
+    return message.channel.send(`**${message.author.username}**, you need to menton a user`)
+  }
+  
+  if (userg.id === message.author.id) {
+    return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
+  }
+  
+  
+  if (!args[1]) {
+    return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
+  }
+  
+  if (userg.id === message.guild.ownerID) {
+    return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
+  }
+  
+  
+  let kickedf = new Discord.MessageEmbed()
+    .setDescription(`***Successfully kicked ${userg} (\`${userg.id}\`) ***`)
+    .setColor(0x15daea)
+    .setFooter(`kicked by ${message.author.tag}`)
+  
+  message.channel.send(kickedf)
+  userg.kick(args[1])
+  userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
+
+    
+    
     
     usedCommand.add(message.author.id);
     setTimeout(() => {
