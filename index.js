@@ -341,42 +341,47 @@ await message.channel.send(embed)
     if (!message.member.hasPermission(['BAN_MEMBERS'])) {
       message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
     }
-  
+    
     if (!message.guild.me.hasPermission(['BAN_MEMBERS'])) {
-      return message.channel.send(`**${message.author.username}**, i do not have the permission to ban someone`)
+      return message.channel.send(`**${message.author.username}, i do not have the permission to ban someone`)
     }
-  
-    const target = message.mentions.members.first();
-  
-    if (!target) {
+    
+    const targer = message.mentions.members.first();
+    
+    if (!targer) {
       return message.channel.send(`**${message.author.username}**, you need to menton a user`)
     }
-  
-    if (target.id === message.author.id) {
-      return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
-    }
-  
-  
-    if (!args[1]) {
-      return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
-    }
-  
-    if (target.id === message.guild.ownerID) {
-      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
-    }
-  
-    if(!target.bannable) return message.channel.send('That user is a Moderator or my roles are not high enough to ban that user')
     
-  
-  
-    let ban = new Discord.MessageEmbed()
-      .setDescription(`***Successfully Banned ${target} (\`${target.id}\`)***`)
-      .setColor(0x3BF04B)
-      .setFooter(`Banned by ${message.author.tag}`)
-  
-    message.channel.send(ban)
-    target.ban(args[1])
-    target.send(`You were **BANNED** in ${message.guild.name}, banned by: ${message.author.username}`)
+    if (targer.id === message.author.id) {
+      return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
+    }
+    
+    
+    if (!args[1]) {
+      return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
+    }
+    
+    if (targer.id === message.guild.ownerID) {
+      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
+    }
+
+    if(!targer.bannable){
+      const bannable = new Discord.MessageEmbed()
+      .setDescription(':BF_Information: You can\'t ban a Moderator/Administrator')
+      .setColor('RED')
+      message.reply(bannable)
+    }
+    
+    
+    let banneddf = new Discord.MessageEmbed()
+      .setDescription(`***Successfully kicked ${targer} (\`${targer.id}\`) ***`)
+      .setColor(0x15daea)
+      .setFooter(`kicked by ${message.author.tag}`)
+    
+    message.channel.send(banneddf)
+    targer.ban(`Responsible user: ${message.author.tag}`)
+    targer.send(`You were **banned* in ${message.guild.name}, kicked by ${message.author.username}`)
+      
       
       
       
@@ -420,6 +425,12 @@ await message.channel.send(embed)
   if (userg.id === message.guild.ownerID) {
     return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
   }
+  if(!userg.kickable){
+    const kickedable = new Discord.MessageEmbed()
+    .setDescription(':BF_Information: You can\'t kick a Moderator/Administrator')
+    .setColor('RED')
+    message.reply(kickedable)
+  }
   
   
   let kickedf = new Discord.MessageEmbed()
@@ -428,7 +439,7 @@ await message.channel.send(embed)
     .setFooter(`kicked by ${message.author.tag}`)
   
   message.channel.send(kickedf)
-  userg.kick(args[1])
+  userg.kick(`Responsible user: ${message.author.tag}`)
   userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
 
     
