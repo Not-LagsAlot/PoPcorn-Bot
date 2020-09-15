@@ -1267,7 +1267,10 @@ message.channel.send(format);
        }else {
          return message.channel.send('You cannot blacklist guild')
        }
+    }else if(command === '0'){
+      message.channel.send('<:You_Get_0:729330499062988875>')
     }
+    
 
   })
       });
