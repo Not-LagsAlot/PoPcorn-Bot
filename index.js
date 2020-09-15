@@ -374,13 +374,13 @@ await message.channel.send(embed)
     
     
     let banneddf = new Discord.MessageEmbed()
-      .setDescription(`***Successfully kicked ${targer} (\`${targer.id}\`) ***`)
+      .setDescription(`***Successfully banned ${targer} (\`${targer.id}\`) ***`)
       .setColor(0x15daea)
-      .setFooter(`kicked by ${message.author.tag}`)
+      .setFooter(`banned by ${message.author.tag}`)
     
     message.channel.send(banneddf)
     targer.ban(`Responsible user: ${message.author.tag}`)
-    targer.send(`You were **banned* in ${message.guild.name}, kicked by ${message.author.username}`)
+    targer.send(`You were **banned* in ${message.guild.name}, banned by ${message.author.username}`)
       
       
       
