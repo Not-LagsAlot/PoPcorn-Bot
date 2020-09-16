@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'updated how 1 command looked (.giveaway) Fixed bugs and crashes';
+var changes = 'Added 1 new command (.spoiler) Fixed bugs and crashes';
 var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `ping` , `support` , `serverinfo`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp`'
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v2.5';
+var version = 'v2.6';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1267,9 +1267,19 @@ message.channel.send(format);
        }else {
          return message.channel.send('You cannot blacklist guild')
        }
-    }else if(command === '0'){
-      message.channel.send('<:You_Get_0:729330499062988875>')
+    }else if(command === 'spoiler'){
+      if(!args[0]){
+        return message.channel.send('Hey! give me something to put in spoiler')
+      }
+      const sopoiled = new Discord.MessageEmbed()
+      .setDescription(`||${args.slice(0).join(" ")} ||`)
+      .setColor('RANDOM')
+
+      message.channel.send(sopoiled);
+
+
     }
+    
     
 
   })
