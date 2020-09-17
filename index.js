@@ -6,9 +6,9 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added 1 new command (.spoiler) Fixed bugs and crashes';
-var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `ping` , `support` , `serverinfo`';
+var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
-var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp`'
+var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
 var version = 'v2.6';
@@ -1271,9 +1271,11 @@ message.channel.send(format);
       if(!args[0]){
         return message.channel.send('Hey! give me something to put in spoiler')
       }
+      
       const sopoiled = new Discord.MessageEmbed()
       .setDescription(`||${args.slice(0).join(" ")} ||`)
       .setColor('RANDOM')
+      message.delete()
 
       message.channel.send(sopoiled);
 
