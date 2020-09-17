@@ -369,7 +369,7 @@ await message.channel.send(embed)
       const bannable = new Discord.MessageEmbed()
       .setDescription(':BF_Information: You can\'t ban a Moderator/Administrator')
       .setColor('RED')
-      message.reply(bannable)
+     return message.channel.send(bannable)
     }
     
     
@@ -380,7 +380,7 @@ await message.channel.send(embed)
     
     message.channel.send(banneddf)
     targer.ban(`Responsible user: ${message.author.tag}`)
-    targer.send(`You were **banned* in ${message.guild.name}, banned by ${message.author.username}`)
+    targer.send(`You were **banned** in ${message.guild.name}, banned by ${message.author.username}`)
       
       
       
