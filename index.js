@@ -1315,7 +1315,7 @@ message.channel.send(format);
           url = `https:/open.spotify.com/track/${status.syncID}`,
           name = status.details,
           artist = status.state,
-          album = status.assets.largeText,
+          album = status.assets.largeText;
           
         const embed = new Discord.MessageEmbed()
           .setAuthor(
