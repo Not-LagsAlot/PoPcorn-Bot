@@ -15,6 +15,7 @@ var version = 'v2.6';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
+const db = require("quick.db")
 
 const moment = require("moment")
 
