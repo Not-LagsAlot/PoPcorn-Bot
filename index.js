@@ -5,17 +5,17 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.spotify) Fixed bugs and crashes';
+var changes = 'Made it so mentioning the bot will give you specific bot info Fixed bugs and crashes';
 var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v2.6';
+var version = 'v2.7';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
-const convert = require('ms');
+
 
 
 const moment = require("moment")
@@ -95,7 +95,9 @@ client.on('message', async message => {
   const command = args.shift().toLowerCase();
 
 
-  
+  if(message.content.includes(`${client.user.id}`)) {
+    message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
+    }
 
 
   
@@ -1065,7 +1067,9 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
           setTimeout(() => {
               usedCommand.delete(message.author.id);
           }, 3600000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
-      }
+        }
+
+       
 
         
         
