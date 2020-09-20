@@ -6,7 +6,7 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Made it so mentioning the bot will give you specific bot info Fixed bugs and crashes';
-var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo`';
+var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
@@ -15,6 +15,7 @@ var version = 'v2.7';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
+const pbl = 'https://discord.gg/RfaWpnV\nhttps://paradisebots.net/'
 
 
 
@@ -60,6 +61,8 @@ const mapping = {
 client.once('ready', () => {
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
+   
+})
 
 client.on('message', async message => {
 
@@ -1090,7 +1093,7 @@ message.channel.send(format);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
       .setTitle('PoPcorn Invite')
-      .setDescription(`Ello ello! I'm quite excited you chose interest in me, down below are some very important links that help me out! Click **Bot Invite** to invite me to your server, Click **Support Server** for info how to use me, Click **top.gg** To vote me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499)`)
+      .setDescription(`Ello ello! I'm quite excited you chose interest in me, down below are some very important links that help me out! Click **Bot Invite** to invite me to your server, Click **Support Server** for info how to use me, Click **top.gg** To vote me, you can also click **pbl** to vote for me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499\n[pbl](https://paradisebots.net/bots/723506760299839499)`)
       .setColor('RANDOM')
         
         message.channel.send(invite);
@@ -1124,6 +1127,7 @@ message.channel.send(format);
     if (!prize) return message.channel.send(`No prize specified!`);
     message.channel.send(`*Giveaway has been started in ${channel}*`);
     let Embed = new Discord.MessageEmbed()
+
       .setTitle(`**${prize}**`)
       .setDescription(`React with :tada: to enter\nHosted by: ${message.author.username}!!!`)
       .setTimestamp(Date.now() + ms(args[0]))
@@ -1337,12 +1341,16 @@ message.channel.send(format);
             false
           );
         return message.channel.send(embed);
+      }else if(command === 'partners'){
+        const partners = new Discord.MessageEmbed()
+        .setTitle('PoPcorn Partners')
+        .addField('PBL | Paradise Bot\'s list', pbl)
       }
     }
     
     
 
-  })
+  
       });
 
 
