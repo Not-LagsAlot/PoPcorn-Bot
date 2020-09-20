@@ -1345,6 +1345,8 @@ message.channel.send(format);
         const partners = new Discord.MessageEmbed()
         .setTitle('PoPcorn Partners')
         .addField('PBL | Paradise Bot\'s list', pbl)
+        .setColor('RANDOM')
+        message.channel.send(partners);
       }
     }
     
