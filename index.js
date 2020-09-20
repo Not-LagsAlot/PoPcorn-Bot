@@ -81,6 +81,9 @@ client.on('message', async message => {
   
 
   
+  if(message.content.includes(`${client.user.id}`)) {
+    message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
+    }
 
 
 
@@ -98,9 +101,6 @@ client.on('message', async message => {
   const command = args.shift().toLowerCase();
 
 
-  if(message.content.includes(`${client.user.id}`)) {
-    message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
-    }
 
 
   
