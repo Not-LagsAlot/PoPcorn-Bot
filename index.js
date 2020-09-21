@@ -1341,13 +1341,13 @@ message.channel.send(format);
             false
           );
         return message.channel.send(embed);
-      }else if(command === 'partners'){
-        const partners = new Discord.MessageEmbed()
-        .setTitle('PoPcorn Partners')
-        .addField('PBL | Paradise Bot\'s list', pbl)
-        .setColor('RANDOM')
-        message.channel.send(partners);
       }
+    }else if(command === 'partners'){
+      const partners = new Discord.MessageEmbed()
+      .setTitle('PoPcorn Partners')
+      .addField('PBL | Paradise Bot\'s list', pbl)
+      .setColor('RANDOM')
+      message.channel.send(partners);
     }
     
     
