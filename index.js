@@ -15,7 +15,7 @@ var version = 'v2.7';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
-const pbl = 'https://discord.gg/RfaWpnV\nhttps://paradisebots.net/'
+const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
 
 
 
