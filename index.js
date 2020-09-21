@@ -19,7 +19,8 @@ const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://pa
 
 
 
-const moment = require("moment")
+const moment = require("moment");
+
 
 
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
@@ -81,15 +82,18 @@ client.on('message', async message => {
   
 
   
-  if(message.content.includes(`${client.user.id}`)) {
-    message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
-    }
+  
+
+if(message.author.bot){
+  return
+}
+
+if(message.content.includes(`${client.user.id}`)) {
+  message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
+  }
 
 
-
-
-
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
 
   if(!message.guild){
     return
@@ -230,6 +234,7 @@ await message.channel.send(embed)
     if(!args[0]){
       return message.channel.send('Please give me some text')
     }
+
     const sayater = new Discord.MessageEmbed()
     .setDescription(args.slice(0).join(" "))
     .setColor('RANDOM')
@@ -360,21 +365,21 @@ await message.channel.send(embed)
     }
     
     if (targer.id === message.author.id) {
-      return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
+      return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
     }
     
     
     if (!args[1]) {
-      return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
+      return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
     }
     
     if (targer.id === message.guild.ownerID) {
-      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
+      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
     }
 
     if(!targer.bannable){
       const bannable = new Discord.MessageEmbed()
-      .setDescription(':BF_Information: You can\'t ban a Moderator/Administrator')
+      .setDescription(':x: You can\'t ban a Moderator/Administrator')
       .setColor('RED')
      return message.channel.send(bannable)
     }
@@ -406,50 +411,27 @@ await message.channel.send(embed)
     message.reply('You cannot use the command beacuse of the cooldown.')
 } else {
 
-  if (!message.member.hasPermission(['KICK_MEMBERS'])) {
-    message.channel.send(`**${message.author.username}**, you dont have permission to kick someone`)
-  }
-  
-  if (!message.guild.me.hasPermission(['KICK_MEMBERS'])) {
-    return message.channel.send(`**${message.author.username}, i do not have the permission to kick someone`)
-  }
-  
-  const userg = message.mentions.members.first();
-  
-  if (!userg) {
-    return message.channel.send(`**${message.author.username}**, you need to menton a user`)
-  }
-  
-  if (userg.id === message.author.id) {
-    return message.channel.send(`**${message.author.username}**, you cannot kick yourself!`)
-  }
-  
-  
-  if (!args[1]) {
-    return message.channel.send(`**${message.author.username}**, you need to provide a reason to kick a user`)
-  }
-  
-  if (userg.id === message.guild.ownerID) {
-    return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot kick that user`)
-  }
-  if(!userg.kickable){
-    const kickedable = new Discord.MessageEmbed()
-    .setDescription(':BF_Information: You can\'t kick a Moderator/Administrator')
-    .setColor('RED')
-    message.reply(kickedable)
-  }
-  
-  
-  let kickedf = new Discord.MessageEmbed()
-    .setDescription(`***Successfully kicked ${userg} (\`${userg.id}\`) ***`)
-    .setColor(0x15daea)
-    .setFooter(`kicked by ${message.author.tag}`)
-  
-  message.channel.send(kickedf)
-  userg.kick(`Responsible user: ${message.author.tag}`)
-  userg.send(`You were **KICKED** in ${message.guild.name}, kicked by ${message.author.username}`)
+  if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** You can not do that. Missing permission: `KICK MEMBERS`');
+  if (!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** I can not do that. Missing permission: `KICK MEMBERS`');
 
-    
+  const memberssssss = message.mentions.members.first() 
+
+  if (!memberssssss) return message.reply('Please mention a valid member of this server');
+  if (!memberssssss.kickable) return message.reply('I cannot kick this user.');
+
+  let reason = args.slice(1).join(' ');
+  if (!reason) reason = 'No reason provided';
+
+  let kickedf= new Discord.MessageEmbed()
+      .setDescription(`***Successfully banned ${memberssssss} (\`${memberssssss.id}\`) ***`)
+      .setColor(0x15daea)
+      .setFooter(`banned by ${message.author.tag}`)
+      message.channel.send(kickedf);
+
+
+if(console.error()){
+ message.reply(`Something went wrong!\nIf this problem countinues please contact our support team [here](https://discord.com/invite/MJHfQ54)`)
+}
     
     
     usedCommand.add(message.author.id);
