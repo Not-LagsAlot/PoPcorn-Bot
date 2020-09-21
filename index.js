@@ -422,8 +422,10 @@ await message.channel.send(embed)
   let reason = args.slice(1).join(' ');
   if (!reason) reason = 'No reason provided';
 
+  memberssssss.kick(reason)
+
   let kickedf= new Discord.MessageEmbed()
-      .setDescription(`***Successfully banned ${memberssssss} (\`${memberssssss.id}\`) ***`)
+      .setDescription(`***Successfully kicked ${memberssssss} (\`${memberssssss.id}\`) ***`)
       .setColor(0x15daea)
       .setFooter(`banned by ${message.author.tag}`)
       message.channel.send(kickedf);
