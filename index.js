@@ -1292,7 +1292,10 @@ message.channel.send(format);
         user.presence.activities.length === 0 ||
         (status.name !== "Spotify" && status.type !== "LISTENING")
       ) {
-        return message.channel.send("This user isn't listening to Spotify.");
+        const nospotify = new Discord.MessageEmbed()
+        .setDescription('That user is not listening to spotify or they haven\'t connected there spotify account')
+        .setColor('RANDOM')
+        return message.channel.send(nospotify);
       }
 
       if (
