@@ -357,14 +357,14 @@ await message.channel.send(embed)
   
     if (!successfullybanned) return message.reply('Please mention a user');
     const banneds = new Discord.MessageEmbed()
-    .setDescription('<:BF_Information:> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
     .setColor('RANDOM')
     if (!successfullybanned.bannable) return message.reply(banneds);
   
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
   
-    memberssssss.kick(`${message.author.tag} banned ${memberssssss} with the reason: ${reason}`)
+    successfullybanned.ban(`${message.author.tag} banned ${successfullybanned} with the reason: ${reason}`)
   
     let kickedf= new Discord.MessageEmbed()
         .setDescription(`***Successfully banned ${successfullybanned} (\`${successfullybanned.id}\`) ***`)
@@ -398,7 +398,7 @@ await message.channel.send(embed)
 
   if (!memberssssss) return message.reply('Please mention a user');
   const kicked = new Discord.MessageEmbed()
-  .setDescription('<a:BF_Information:> You cannot kick a moderator/administrator')
+  .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
   .setColor('RANDOM')
   if (!memberssssss.kickable) return message.reply(kicked);
 
