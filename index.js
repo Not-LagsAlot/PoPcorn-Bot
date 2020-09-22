@@ -416,8 +416,8 @@ await message.channel.send(embed)
 
   const memberssssss = message.mentions.members.first() 
 
-  if (!memberssssss) return message.reply('Please mention a valid member of this server');
-  if (!memberssssss.kickable) return message.reply('I cannot kick this user.');
+  if (!memberssssss) return message.reply('Please mention a user');
+  if (!memberssssss.kickable) return message.reply(':w5i1rmM: You cannot kick a moderator/administrator');
 
   let reason = args.slice(1).join(' ');
   if (!reason) reason = 'No reason provided';
