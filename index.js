@@ -350,50 +350,30 @@ await message.channel.send(embed)
   } else {
 
 
-    if (!message.member.hasPermission(['BAN_MEMBERS'])) {
-      message.channel.send(`**${message.author.username}**, you dont have permission to ban someone`)
-    }
-    
-    if (!message.guild.me.hasPermission(['BAN_MEMBERS'])) {
-      return message.channel.send(`**${message.author.username}, i do not have the permission to ban someone`)
-    }
-    
-    const targer = message.mentions.members.first();
-    
-    if (!targer) {
-      return message.channel.send(`**${message.author.username}**, you need to menton a user`)
-    }
-    
-    if (targer.id === message.author.id) {
-      return message.channel.send(`**${message.author.username}**, you cannot ban yourself!`)
-    }
-    
-    
-    if (!args[1]) {
-      return message.channel.send(`**${message.author.username}**, you need to provide a reason to ban a user`)
-    }
-    
-    if (targer.id === message.guild.ownerID) {
-      return message.channel.send(`**${message.author.username}**, that user is the server owner i cannot ban that user`)
-    }
-
-    if(!targer.bannable){
-      const bannable = new Discord.MessageEmbed()
-      .setDescription(':x: You can\'t ban a Moderator/Administrator')
-      .setColor('RED')
-     return message.channel.send(bannable)
-    }
-    
-    
-    let banneddf = new Discord.MessageEmbed()
-      .setDescription(`***Successfully banned ${targer} (\`${targer.id}\`) ***`)
-      .setColor(0x15daea)
-      .setFooter(`banned by ${message.author.tag}`)
-    
-    message.channel.send(banneddf)
-    targer.ban(`Responsible user: ${message.author.tag}`)
-    targer.send(`You were **banned** in ${message.guild.name}, banned by ${message.author.username}`)
-      
+    if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** as you do not have `BAN MEMBERS` permission');
+    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission');
+  
+    const successfullybanned = message.mentions.members.first() 
+  
+    if (!successfullybanned) return message.reply('Please mention a user');
+    const banneds = new Discord.MessageEmbed()
+    .setDescription('<:BF_Information:> You cannot ban a moderator/administrator')
+    .setColor('RANDOM')
+    if (!successfullybanned.bannable) return message.reply(banneds);
+  
+    let reason = args.slice(1).join(' ');
+    if (!reason) reason = `No reason provided`;
+  
+    memberssssss.kick(`${message.author.tag} banned ${memberssssss} with the reason: ${reason}`)
+  
+    let kickedf= new Discord.MessageEmbed()
+        .setDescription(`***Successfully banned ${successfullybanned} (\`${successfullybanned.id}\`) ***`)
+        .setColor(0x15daea)
+        .setFooter(`banned by ${message.author.tag}`)
+        message.channel.send(kickedf);
+  
+  
+ 
       
       
       
@@ -417,12 +397,15 @@ await message.channel.send(embed)
   const memberssssss = message.mentions.members.first() 
 
   if (!memberssssss) return message.reply('Please mention a user');
-  if (!memberssssss.kickable) return message.reply('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator');
+  const kicked = new Discord.MessageEmbed()
+  .setDescription('<a:BF_Information:> You cannot kick a moderator/administrator')
+  .setColor('RANDOM')
+  if (!memberssssss.kickable) return message.reply(kicked);
 
   let reason = args.slice(1).join(' ');
-  if (!reason) reason = 'No reason provided';
+  if (!reason) reason = `No reason provided`;
 
-  memberssssss.kick(reason)
+  memberssssss.kick(`${message.author.tag} kicked ${memberssssss} with the reason: ${reason}`)
 
   let kickedf= new Discord.MessageEmbed()
       .setDescription(`***Successfully kicked ${memberssssss} (\`${memberssssss.id}\`) ***`)
@@ -431,9 +414,6 @@ await message.channel.send(embed)
       message.channel.send(kickedf);
 
 
-if(console.error()){
- message.reply(`Something went wrong!\nIf this problem countinues please contact our support team [here](https://discord.com/invite/MJHfQ54)`)
-}
     
     
     usedCommand.add(message.author.id);
