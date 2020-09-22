@@ -405,7 +405,7 @@ await message.channel.send(embed)
   let reason = args.slice(1).join(' ');
   if (!reason) reason = `No reason provided`;
 
-  memberssssss.kick(`${message.author.tag} kicked ${memberssssss} with the reason: ${reason}`)
+  memberssssss.kick(`${message.author.tag} kicked a member with the reason: ${reason}`)
 
   let kickedf= new Discord.MessageEmbed()
       .setDescription(`***Successfully kicked ${memberssssss} (\`${memberssssss.id}\`) ***`)
