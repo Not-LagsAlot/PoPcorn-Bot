@@ -160,7 +160,7 @@ if(message.content.includes(`${client.user.id}`)) {
            }
       
            if(message.mentions.users.first().bot) {
-            return message.channel.send("You can not warn bots")
+            return message.channel.send("Hey! thats a **bot** back off from my kind you human!")
           }
       
            const reasonss =  args.slice(1).join(" ")
@@ -171,7 +171,7 @@ if(message.content.includes(`${client.user.id}`)) {
       
            message.channel.send(`**${userwarn}** has been warned`)
       
-           userwarn.send(`You were warned in ${message.guild.name}\nReason: ${reasonss}`);
+           userwarn.send(`You were warned in ${message.guild.name} by ${message.author.tag}\nReason: \`${reasonss}\``);
       
       
       usedCommand.add(message.author.id);
@@ -365,10 +365,14 @@ const slapped = new Discord.MessageEmbed()
     const successfullybanned = message.mentions.members.first() 
   
     if (!successfullybanned) return message.reply('Please mention a user');
-    const banneds = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
-    .setColor('RANDOM')
-    if (!successfullybanned.bannable) return message.reply(banneds);
+    if(successfullybanned.hasPermission('BAN_MEMBERS')){
+      const banneds = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      message.reply(banneds);
+    }
+   
+
   
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
@@ -406,10 +410,14 @@ const slapped = new Discord.MessageEmbed()
   const memberssssss = message.mentions.members.first() 
 
   if (!memberssssss) return message.reply('Please mention a user');
-  const kicked = new Discord.MessageEmbed()
+  if(memberssssss.hasPermission('BAN_MEMBERS')){
+    const kicked = new Discord.MessageEmbed()
   .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
   .setColor('RANDOM')
-  if (!memberssssss.kickable) return message.reply(kicked);
+  message.reply(kicked)
+  }
+  
+
 
   let reason = args.slice(1).join(' ');
   if (!reason) reason = `No reason provided`;
