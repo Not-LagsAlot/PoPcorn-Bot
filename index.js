@@ -359,8 +359,8 @@ const slapped = new Discord.MessageEmbed()
   } else {
 
 
-    if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** as you do not have `BAN MEMBERS` permission');
-    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission');
+    if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** as you do not have `BAN MEMBERS` permission you can\'t use this');
+    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission I can\'t do this');
   
     const successfullybanned = message.mentions.members.first() 
   
@@ -373,7 +373,7 @@ const slapped = new Discord.MessageEmbed()
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
   
-    successfullybanned.ban(`${message.author.tag} banned ${successfullybanned} with the reason: ${reason}`)
+    successfullybanned.ban(reason)
   
     let kickedf= new Discord.MessageEmbed()
         .setDescription(`***Successfully banned ${successfullybanned} (\`${successfullybanned.id}\`) ***`)
@@ -400,8 +400,8 @@ const slapped = new Discord.MessageEmbed()
     message.reply('You cannot use the command beacuse of the cooldown.')
 } else {
 
-  if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** You can not do that. Missing permission: `KICK MEMBERS`');
-  if (!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** I can not do that. Missing permission: `KICK MEMBERS`');
+  if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** you don\t have `KICK MEMBERS` permission');
+  if (!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** I don\'t have `KICK MEMBERS` permission');
 
   const memberssssss = message.mentions.members.first() 
 
@@ -414,12 +414,12 @@ const slapped = new Discord.MessageEmbed()
   let reason = args.slice(1).join(' ');
   if (!reason) reason = `No reason provided`;
 
-  memberssssss.kick(`${message.author.tag} kicked a member with the reason: ${reason}`)
+  memberssssss.kick(reason)
 
-  let kickedf= new Discord.MessageEmbed()
+  let kickedf = new Discord.MessageEmbed()
       .setDescription(`***Successfully kicked ${memberssssss} (\`${memberssssss.id}\`) ***`)
       .setColor(0x15daea)
-      .setFooter(`banned by ${message.author.tag}`)
+      .setFooter(`kicked by ${message.author.tag}`)
       message.channel.send(kickedf);
 
 
