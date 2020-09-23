@@ -1331,7 +1331,7 @@ message.channel.send(format);
         return message.channel.send('Please mention a user to check the love rate ')
       }
       const loverate = new Discord.MessageEmbed()
-      .setDescription(`The love rate between ${message.author.username} and ${loved} is...${loverates}`)
+      .setDescription(`The love rate between ${message.author.username} and ${loved} is...${loverates}%`)
       .setImage('https://tenor.com/view/heart-emoji-gif-3555133')
       .setColor('RANDOM')
       message.channel.send(loverate);
