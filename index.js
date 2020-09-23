@@ -369,7 +369,7 @@ const slapped = new Discord.MessageEmbed()
       const banneds = new Discord.MessageEmbed()
       .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
       .setColor('RANDOM')
-      message.reply(banneds);
+      return message.reply(banneds);
     }
    
 
@@ -414,7 +414,7 @@ const slapped = new Discord.MessageEmbed()
     const kicked = new Discord.MessageEmbed()
   .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
   .setColor('RANDOM')
-  message.reply(kicked)
+  return message.reply(kicked)
   }
   
 
