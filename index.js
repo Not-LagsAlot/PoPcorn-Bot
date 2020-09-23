@@ -5,13 +5,13 @@ const client = new Discord.Client();
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.partners) Fixed bugs and crashes';
+var changes = 'Added 1 new command (.love) Fixed bugs and crashes';
 var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
-var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify`';
+var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v2.8';
+var version = 'v2.9';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -206,7 +206,7 @@ if (!args[0]) {
 let deleteAmount;
 
 if (parseInt(args[0]) > 100 ) {
-    deleteAmount = 100;
+    message.channel.send('Error: Number can\'t be more then 100')
 } else {
     deleteAmount = parseInt(args[0]);
 }
@@ -216,7 +216,7 @@ await message.channel.bulkDelete(deleteAmount, true);
 const embed = new Discord.MessageEmbed()
     .setTitle(`${message.author.username}`)
     .setThumbnail(message.author.displayAvatarURL())
-    .setDescription(`successfully deleted ${deleteAmount} message(s)`)
+    .setDescription(`Successfully deleted ${deleteAmount} message(s)`)
     .setFooter(message.author.username, message.author.displayAvatarURL())
     .setColor('#f2f2f2')
 await message.channel.send(embed)
@@ -240,9 +240,16 @@ await message.channel.send(embed)
     .setColor('RANDOM')
     message.channel.send(sayater);
   }else if(command === 'spank'){
-    if (!args[1]) return message.channel.send('state user')
-  message.channel.send('spanked the user https://tenor.com/view/spank-tomandjerry-gif-5196956');
+   const spanked = message.mentions.members.first()
 
+   if(!spanked){
+     return message.channel.send('Hey! please mention a user')
+   }
+   const spankedd = new Discord.MessageEmbed()
+   .setDescription(`${message.author.tag} spanked ${spanked}`)
+   .setImage('https://tenor.com/view/spank-tomandjerry-gif-5196956')
+   .setColor('RANDOM')
+   message.channel.send(spankedd);
   }else if(command === 'slap'){
     const member = message.mentions.members.first();
 
@@ -254,9 +261,11 @@ await message.channel.send(embed)
     }
 
    
-
-  message.channel.send(`${message.author.username} slapped ${member} https://tenor.com/view/slap-bears-gif-10422113`);
-  
+const slapped = new Discord.MessageEmbed()
+.setDescription(`${message.author.tag} slapped ${member}`)
+.setImage('https://tenor.com/view/spank-tomandjerry-gif-5196956')
+  .setColor('RANDOM')
+  message.channel.send(slapped);
 
   }else if(command === 'roast'){
     message.channel.send('Your so ugly that when you went to an ugly looking contest they rejected you as they didn\'t want professionals');
@@ -301,8 +310,8 @@ await message.channel.send(embed)
       "us-south": "U.S. South",
       "us-west": "U.S. West",
       "eu-west": "Western Europe",
-      "india": "india",
-      "europe": "europe"
+      "india": "India",
+      "europe": "Europe"
     }
     
     // Members
@@ -1315,6 +1324,17 @@ message.channel.send(format);
       .addField('PBL | Paradise Bot\'s list', pbl)
       .setColor('RANDOM')
       message.channel.send(partners);
+    }else if(command === 'love'){
+      let loverates = Math.floor(Math.random() * 100) + 1;
+      const loved = message.mentions.members.first()
+      if(!loved){
+        return message.channel.send('Please mention a user to check the love rate ')
+      }
+      const loverate = new Discord.MessageEmbed()
+      .setDescription(`The love rate between ${message.author.username} and ${loved} is...${loverates}`)
+      .setImage('https://tenor.com/view/heart-emoji-gif-3555133')
+      .setColor('RANDOM')
+      message.channel.send(loverate);
     }
     
     
