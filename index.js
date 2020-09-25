@@ -125,7 +125,6 @@ if(message.content.includes(`${client.user.id}`)) {
   } else {
 
     const help = new Discord.MessageEmbed()
-      .setTitle('Help command')
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
