@@ -1,21 +1,26 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  disableMentions: "all",
+  partials: ["REACTION"],
+});
 
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.love) Fixed bugs and crashes';
-var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners`';
+var changes = 'Added 1 new command (.timer) Fixed bugs and crashes';
+var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners` , `timer`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v2.9';
+var version = 'v3.0';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
+const snipes = new Map();
+const Timers = new Map();
 
 
 
@@ -121,10 +126,10 @@ if(message.content.includes(`${client.user.id}`)) {
 
     const help = new Discord.MessageEmbed()
       .setTitle('Help command')
-      .addField(':information_source: Info', info)
-      .addField(':shield: Moderation', mod)
-      .addField('🤣 Fun', fun)
-      .addField(':tada: GiveAway', giveaways)
+      .addField('Utility', info)
+      .addField('Moderation', mod)
+      .addField('Fun', fun)
+      .addField('GiveAway', giveaways)
       .setColor('RANDOM')
    message.channel.send(help)
     
@@ -371,9 +376,42 @@ const slapped = new Discord.MessageEmbed()
       .setColor('RANDOM')
       return message.reply(banneds);
     }
-   
-
-  
+    if(successfullybanned.hasPermission('KICK_MEMBERS')){
+      const bannedss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedss);
+    }
+    if(successfullybanned.hasPermission('ADMINISTRATOR')){
+      const bannedsss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedsss);
+    }
+    if(successfullybanned.hasPermission('MANAGE_CHANNELS')){
+      const bannedssss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedssss);
+    }
+    if(successfullybanned.hasPermission('MANAGE_ROLES')){
+      const bannedsssss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedsssss);
+    }
+    if(successfullybanned.hasPermission('MANAGE_MESSAGES')){
+      const bannedssssss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedssssss);
+    }
+    if(successfullybanned.hasPermission('MANAGE_GUILD')){
+      const bannedsssssss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedsssssss);
+    }
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
   
@@ -1340,10 +1378,57 @@ message.channel.send(format);
       }
       const loverate = new Discord.MessageEmbed()
       .setDescription(`The love rate between ${message.author.tag} and ${loved} is...${loverates}%`)
-      .setImage('https://tenor.com/view/heart-emoji-gif-3555133')
+      .setImage('https://tenor.com/view/baby-yoda-ilove-you-heartbeat-heart-love-gif-15951417')
       .setColor('RANDOM')
       message.channel.send(loverate);
+    }else if(command === 'timer'){
+      if (!args[0]) {
+        return message.channel.send(
+          `Please specify an amount of time`
+        );
+      }
+      if (!args[0].endsWith("d")) {
+        if (!args[0].endsWith("h")) {
+          if (!args[0].endsWith("m")) {
+            return message.channel.send(
+              `You did not use the correct formatting for the time!\n**PROTIP:** the formatting time is like this:\nm = minute Use example: 1m or 2m\nh = hour Use example: 1h or 2h\nd = day Use example: 1d or 2d`
+            );
+          }
+        }
+      }
+      if (isNaN(args[0][0])) {
+        return message.channel.send(`Please type a **NUMBER**`);
+      }
+      Timers.set(message.author.id + " G " + message.guild.name, {
+        Guild: message.guild.name,
+        Author: {
+          Tag: message.author.tag,
+          ID: message.author.id,
+        },
+        Time: ms(args[0]),
+      });
+      message.channel.send(
+        `${message.author.tag} you have set a timer for ${args[0]} (${ms(
+          args[0]
+        )}MS)`
+      );
+      setTimeout(() => {
+        let Embed = new Discord.MessageEmbed()
+          .setTitle(`Timer has been set for ${message.guild.name}..`)
+          .setDescription(
+            `Your timer for ${args[0]} (${ms(args[0])}MS) has been finished`
+          )
+          .setColor(`GREEN`);
+        message.author.send(Embed);
+        Timers.delete(message.author.id + " G " + message.guild.name);
+      }, ms(args[0]));
+    
     }
+
+
+
+
+    
     
     
 
