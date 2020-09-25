@@ -240,10 +240,7 @@ await message.channel.send(embed)
       return message.channel.send('Please give me some text')
     }
 
-    const sayater = new Discord.MessageEmbed()
-    .setDescription(args.slice(0).join(" "))
-    .setColor('RANDOM')
-    message.channel.send(sayater);
+    message.channel.send(args.slice(0).join(" "));
   }else if(command === 'spank'){
    const spanked = message.mentions.members.first()
 
@@ -1165,8 +1162,11 @@ message.channel.send(format);
         .get("🎉")
         .users.cache.filter((u) => !u.bot)
         .random();
+        const winners = new Discord.MessageEmbed()
+        .setDescription(`And the winner for ${prize} hosted by ${message.author.tag} is...${winner}!!!`)
+       .setColor('RANDOM')
       channel.send(
-        `And the winner for ${prize} hosted by ${message.author.tag} is...${winner}!!!`
+        winners
       );
     }, ms(args[0]));
          
@@ -1310,6 +1310,9 @@ message.channel.send(format);
 
 
     }else if (command === "spotify") {
+      if(usedCommand.has(message.author.id)){
+        message.reply('You cannot use the command beacuse of the cooldown.')
+    }else{
       let user;
       if (message.mentions.users.first()) {
         user = message.mentions.users.first();
@@ -1364,6 +1367,11 @@ message.channel.send(format);
           );
         return message.channel.send(embed);
       }
+    }
+    usedCommand.add(message.author.id);
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
     }else if(command === 'partners'){
       const partners = new Discord.MessageEmbed()
       .setTitle('PoPcorn Partners')
@@ -1382,6 +1390,9 @@ message.channel.send(format);
       .setColor('RANDOM')
       message.channel.send(loverate);
     }else if(command === 'timer'){
+      if(usedCommand.has(message.author.id)){
+        message.reply('You cannot use the command beacuse of the cooldown.')
+    }else {
       if (!args[0]) {
         return message.channel.send(
           `Please specify an amount of time`
@@ -1422,6 +1433,14 @@ message.channel.send(format);
         message.author.send(Embed);
         Timers.delete(message.author.id + " G " + message.guild.name);
       }, ms(args[0]));
+    
+
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+  }
+  
     
     }
 
