@@ -8,18 +8,18 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.timer) Fixed bugs and crashes';
+var changes = 'removed 1 command (.say) Fixed bugs and crashes';
 var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners` , `timer`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
-var fun = '`meme` , `reverse` , `hug` , `say` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
+var fun = '`meme` , `reverse` , `hug` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var automod = '```Anti-swear, Anti-link```'
-var version = 'v3.0';
+var version = 'v3.1';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-const snipes = new Map();
+
 const Timers = new Map();
 
 
@@ -235,12 +235,6 @@ await message.channel.send(embed)
   }
     
 
-  } else if (command === 'say') {
-    if(!args[0]){
-      return message.channel.send('Please give me some text')
-    }
-
-    message.channel.send(args.slice(0).join(" "));
   }else if(command === 'spank'){
    const spanked = message.mentions.members.first()
 
@@ -1419,7 +1413,7 @@ message.channel.send(format);
         Time: ms(args[0]),
       });
       message.channel.send(
-        `${message.author.tag} you have set a timer for ${args[0]} (${ms(
+        `${message.author.tag} you have set a timer for ${args[0]} (make sure you have DM's on and have not blocked the bot) (${ms(
           args[0]
         )}MS)`
       );
