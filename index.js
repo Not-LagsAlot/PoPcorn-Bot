@@ -13,7 +13,7 @@ var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `sup
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-var Invites = '`invite`'
+var Invites = '`invite-logs`'
 var version = 'v3.2';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -1456,7 +1456,7 @@ message.channel.send(format);
     }
   
     
-    }else if(command === 'invite'){
+    }else if(command === 'invite-logs'){
       message.channel.send('Please create a channel named as `invite-log` and give me the following perms in that channel: `Embed Links`, `Read Messages`, `Send Messages` after you have done this I should start logging invites in that channel ')
     }
 
