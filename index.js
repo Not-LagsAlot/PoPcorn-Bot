@@ -8,7 +8,7 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added invite logging Fixed bugs and crashes';
+var changes = 'removed invite logging as it spams the console alot on errors Fixed bugs and crashes';
 var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners` , `timer`';
 var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
 var fun = '`meme` , `reverse` , `hug` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
@@ -67,36 +67,12 @@ const mapping = {
 client.once('ready', () => {
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
-    client.guilds.cache.forEach(guild => {
-      guild.fetchInvites()
-          .then(invites => guildInvites.set(guild.id, invites))
-          .catch(err => console.log(err));
-  });
+  
 })
 
 client.on('message', async message => {
 
-  client.on('guildMemberAdd', async member => {
-    const cachedInvites = guildInvites.get(member.guild.id);
-    const newInvites = await member.guild.fetchInvites();
-    guildInvites.set(member.guild.id, newInvites);
-    try {
-        const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
-        const inviteembed = new Discord.MessageEmbed()
-            .setDescription(`${member.user.tag} is the ${member.guild.memberCount} to join.\nJoined using ${usedInvite.inviter.tag}\nNumber of uses: ${usedInvite.uses}`)
-            .setTimestamp()
-            .setTitle(`${usedInvite.url}`);
-        const welcomeChannel =  member.guild.channels.cache.find(
-          (ch) => ch.name === "invite-log"
-        );
-        if(welcomeChannel) {
-          welcomeChannel.send(inviteembed).catch(err => console.log(err));
-      }
-    }
-    catch(err) {
-      console.log(err);
-  }
-});
+  
     
 
 
@@ -149,7 +125,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Moderation', mod)
       .addField('Fun', fun)
       .addField('GiveAway', giveaways)
-      .addField('Invite Logging', Invites)
+   
       .setColor('RANDOM')
    message.channel.send(help)
     
@@ -1457,7 +1433,7 @@ message.channel.send(format);
   
     
     }else if(command === 'invite-logs'){
-      message.channel.send('Please create a channel named as `invite-log` and give me the following perms in that channel: `Embed Links`, `Read Messages`, `Send Messages` after you have done this I should start logging invites in that channel ')
+      message.channel.send('Command removed due to huge memory use ')
     }
 
 
