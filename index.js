@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 const client = new Discord.Client({
-  disableMentions: "all",
+  disableMentions: "everyone",
   partials: ["REACTION"],
 });
 
@@ -21,7 +21,7 @@ const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
 
 const Timers = new Map();
-
+client.snipes = new Discord.Collection()
 
 
 const moment = require("moment");
@@ -1432,7 +1432,7 @@ message.channel.send(format);
       setTimeout(() => {
           usedCommand.delete(message.author.id);
       }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
-  }
+    }
   
     
     }
