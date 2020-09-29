@@ -67,6 +67,7 @@ const mapping = {
 client.once('ready', () => {
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
+    
   
 })
 
@@ -398,6 +399,12 @@ const slapped = new Discord.MessageEmbed()
       .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedsssssss);
+    }
+    if(!successfullybanned.bannable){
+      const bannedssssssss = new Discord.MessageEmbed()
+      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setColor('RANDOM')
+      return message.reply(bannedssssssss);
     }
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
