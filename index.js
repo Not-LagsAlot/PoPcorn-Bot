@@ -485,7 +485,12 @@ const slapped = new Discord.MessageEmbed()
     return message.reply(bannedssssssss);
   }
   
-
+  if(!memberssssss.kickable){
+    const bannedsssssssss= new Discord.MessageEmbed()
+    .setDescription('<a:aBF_CheckNo:747070419668041788> Due to `Role Hierarchy` I am unable to ban that user')
+    .setColor('RANDOM')
+    return message.reply(bannedsssssssss);
+  }
 
   let reason = args.slice(1).join(' ');
   if (!reason) reason = `No reason provided`;
