@@ -1480,7 +1480,7 @@ message.channel.send(format);
     
     }else if(command === 'invite-logs'){
       message.channel.send('Command removed due to huge memory use ')
-    }else if(commnd === 'hack'){
+    }else if(command === 'hack'){
       var email = [
         "hack@gmail.com",
         "pepe@gmai.com",
