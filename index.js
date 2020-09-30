@@ -8,13 +8,13 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'removed invite logging as it spams the console alot on errors Fixed bugs and crashes';
-var info = '`avatar` , `ping` , `whois [user]` , `botinfo` , `serverinfo` , `support` , `serverinfo` , `partners` , `timer`';
-var mod = '`ban` , `kick` , `warn` , `purge` , `slowmode` , `mute` , `unmute`'
-var fun = '`meme` , `reverse` , `hug` , `penis` , `emojify` , `clyde` , `8ball` , `kill` , `rps`  `trivia` , `slap` , `youtube` , `simp` , `spoiler` , `spotify` , `love`';
+var changes = 'Added 1 new command (hack) Fixed bugs and crashes';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`';
+var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
+var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var Invites = '`invite-logs`'
-var version = 'v3.3';
+var version = 'v3.4';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1457,9 +1457,7 @@ message.channel.send(format);
         Time: ms(args[0]),
       });
       message.channel.send(
-        `${message.author.tag} you have set a timer for ${args[0]} (make sure you have DM's on and have not blocked the bot) (${ms(
-          args[0]
-        )}MS)`
+        `A timer has been set for ${message.author.tag} with the time of: ${args[0]} (make sure you have DM's on and have not blocked the bot)`
       );
       setTimeout(() => {
         let Embed = new Discord.MessageEmbed()
@@ -1482,6 +1480,44 @@ message.channel.send(format);
     
     }else if(command === 'invite-logs'){
       message.channel.send('Command removed due to huge memory use ')
+    }else if(commnd === 'hack'){
+      var email = [
+        "hack@gmail.com",
+        "pepe@gmai.com",
+        "retroX@gmai.com",
+        "cyra@gmai.com",
+        "IAmAHuman@gmai.com",
+        "bestro@gmail.com",
+        "dummy@gmail.com",
+        "extremely@gmail.com",
+        "simp@gmail.com",
+        "bruh@gmail.com" //little pyramid tho
+      ];
+      var emails = Math.floor(Math.random() * email.length);
+      var pass = [
+        "r2rtrt34tbbfb",
+        "sakfpegkk404g",
+        "4444444444444444444444",
+        "104t58203",
+        "59539642046y94-3",
+        "r3t9ttytmgrgke-0g4i",
+        "01010101010000000000000000000000",
+        "20456292-5549",
+        "40t30-2tjf",
+        "294tu4025u5305fo2gj" //little pyramid tho
+      ];
+      var password = Math.floor(Math.random() * pass.length);
+      let ppusersss = message.mentions.users.first()
+      if(!ppusersss){
+        return message.channel.send('Please mention a user to hack!')
+      }
+      const hacked = new Discord.MessageEmbed()
+        .setDescription(`${ppusersss}'s email: ${emails[email]} password: ${password[pass]} `)
+    .setColor('RANDOM');
+    
+      message.channel.send(hacked);
+
+
     }
 
 
