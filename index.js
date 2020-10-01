@@ -8,7 +8,7 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'You can now only submit suggestions while being in the support server';
+var changes = 'Removed the suggestions command restrictions';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`';
@@ -1100,7 +1100,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
 
         if(usedCommand.has(message.author.id)){
           message.reply('As this is a suggestion command and to avoid raid/spam with this the slowmode has been increased to being **1 HOUR**')
-      } else if(message.guild.id === '726320118023454740') {
+      } else  {
         if (!args[1]) {
           return message.channel.send('Suggestion needs to have atleast 2 words')
       }
@@ -1520,7 +1520,7 @@ message.channel.send(format);
 
     }
 
-
+   
 
 
     
