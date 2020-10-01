@@ -189,7 +189,7 @@ if(message.content.includes(`${client.user.id}`)) {
   } else if (command === 'info') {
     const info = new Discord.MessageEmbed()
       .setTitle('Info')
-      .setFooter('PoPcorn bot is a discord bot made by LagsAlot#5671, this bot has many features (fun and moderation)')
+      .setFooter('PoPcorn bot is a discord bot made by LagsAlot#0001, this bot has many features (fun and moderation)')
 
     message.channel.send(info);
   } else if (command === 'purge') {
@@ -273,7 +273,7 @@ const slapped = new Discord.MessageEmbed()
       .addField("Username:", client.user.username)
       .addField("Tag:", `**${client.user.discriminator}**`)
       .addField("ID:", client.user.id)
-      .addField("Owner:", `LagsAlot#5671`)
+      .addField("Owner:", `LagsAlot#0001`)
       .addField("Channel's:", `${client.channels.cache.size}`)
       .addField("Server's using the bot:", `${client.guilds.cache.size}`)
       .addField("users's know PoPcorn:", `${client.users.cache.size}`)
@@ -687,7 +687,7 @@ const slapped = new Discord.MessageEmbed()
   .setTitle('Whats new!')
   .addField('Current version', version)
   .addField('Changes To The Bot', changes)
-  .setFooter(`PoPcorn Bot | Made by LagsAlot#5671`)
+  .setFooter(`PoPcorn Bot | Made by LagsAlot#0000`)
   .setColor('RANDOM')
   .setTimestamp(Date.now())
 
