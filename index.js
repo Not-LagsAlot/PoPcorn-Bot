@@ -1565,7 +1565,7 @@ message.channel.send(format);
                   let recovered = data.recovered.value.toLocaleString()
                   let deaths = data.deaths.value.toLocaleString()
   
-                  const embed = new discord.MessageEmbed()
+                  const embed = new Discord.MessageEmbed()
                   .setTitle(`Worldwide COVID-19 Stats 🌎`)
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
@@ -1581,7 +1581,7 @@ message.channel.send(format);
                   let recovered = data.recovered.value.toLocaleString()
                   let deaths = data.deaths.value.toLocaleString()
   
-                  const embed = new discord.MessageEmbed()
+                  const embed = new Discord.MessageEmbed()
                   .setTitle(`COVID-19 Stats for **${countries}**`)
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
