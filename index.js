@@ -1565,13 +1565,13 @@ message.channel.send(format);
                   let recovered = data.recovered.value.toLocaleString()
                   let deaths = data.deaths.value.toLocaleString()
   
-                  const embed = new Discord.MessageEmbed()
+                  const all = new Discord.MessageEmbed()
                   .setTitle(`Worldwide COVID-19 Stats 🌎`)
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
                   .addField('Deaths', deaths)
   
-                  message.channel.send(embed)
+                  message.channel.send(AbortController)
               })
           } else {
               fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
@@ -1581,13 +1581,13 @@ message.channel.send(format);
                   let recovered = data.recovered.value.toLocaleString()
                   let deaths = data.deaths.value.toLocaleString()
   
-                  const embed = new Discord.MessageEmbed()
+                  const only = new Discord.MessageEmbed()
                   .setTitle(`COVID-19 Stats for **${countries}**`)
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
                   .addField('Deaths', deaths)
   
-                  message.channel.send(embed)
+                  message.channel.send(only)
               }).catch(e => {
                   return message.channel.send('Invalid country')
               })
