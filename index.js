@@ -1549,7 +1549,7 @@ message.channel.send(format);
   
           //Credit to Sarastro#7725 for the command :)
   
-          const noArgs = new discord.MessageEmbed()
+          const noArgs = new Discord.MessageEmbed()
           .setTitle('Missing arguments')
           .setColor(0xFF0000)
           .setDescription('You are missing some args (ex: !covid all || !covid Canada)')
