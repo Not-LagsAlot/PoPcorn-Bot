@@ -8,13 +8,14 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added `@everyone` mention blocker aka people won\'t be able to use the bot\'s command to ping';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`';
+var changes = 'Added 1 new command (.covid)';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
+
 var Invites = '`invite-logs`'
-var version = 'v3.7';
+var version = 'v3.8';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -23,7 +24,7 @@ const guildInvites = new Map();
 const Timers = new Map();
 client.snipes = new Discord.Collection()
 
-
+const fetch = require('node-fetch')
 
 const moment = require("moment");
 
@@ -73,9 +74,6 @@ client.once('ready', () => {
 })
 
 client.on('message', async message => {
-
-
-
 
   
 
@@ -1545,7 +1543,56 @@ message.channel.send(format);
       } else if (args[0].toLowerCase() === "decode") {
           return message.channel.send(decode(text));
       }
-    }
+    }else  
+    if(command === 'covid'){
+       let countries = args.join(" ");
+  
+          //Credit to Sarastro#7725 for the command :)
+  
+          const noArgs = new discord.MessageEmbed()
+          .setTitle('Missing arguments')
+          .setColor(0xFF0000)
+          .setDescription('You are missing some args (ex: !covid all || !covid Canada)')
+          .setTimestamp()
+  
+          if(!args[0]) return message.channel.send(noArgs);
+  
+          if(args[0] === "all"){
+              fetch(`https://covid19.mathdro.id/api`)
+              .then(response => response.json())
+              .then(data => {
+                  let confirmed = data.confirmed.value.toLocaleString()
+                  let recovered = data.recovered.value.toLocaleString()
+                  let deaths = data.deaths.value.toLocaleString()
+  
+                  const embed = new discord.MessageEmbed()
+                  .setTitle(`Worldwide COVID-19 Stats 🌎`)
+                  .addField('Confirmed Cases', confirmed)
+                  .addField('Recovered', recovered)
+                  .addField('Deaths', deaths)
+  
+                  message.channel.send(embed)
+              })
+          } else {
+              fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
+              .then(response => response.json())
+              .then(data => {
+                  let confirmed = data.confirmed.value.toLocaleString()
+                  let recovered = data.recovered.value.toLocaleString()
+                  let deaths = data.deaths.value.toLocaleString()
+  
+                  const embed = new discord.MessageEmbed()
+                  .setTitle(`COVID-19 Stats for **${countries}**`)
+                  .addField('Confirmed Cases', confirmed)
+                  .addField('Recovered', recovered)
+                  .addField('Deaths', deaths)
+  
+                  message.channel.send(embed)
+              }).catch(e => {
+                  return message.channel.send('Invalid country provided')
+              })
+            }
+          }
    
 
 
