@@ -8,13 +8,13 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Removed the suggestions command restrictions';
+var changes = 'Added 1 new command (.code)';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
-var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`';
+var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var Invites = '`invite-logs`'
-var version = 'v3.5';
+var version = 'v3.6';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -22,6 +22,7 @@ const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://pa
 const guildInvites = new Map();
 const Timers = new Map();
 client.snipes = new Discord.Collection()
+
 
 
 const moment = require("moment");
@@ -74,11 +75,6 @@ client.once('ready', () => {
 client.on('message', async message => {
 
 
-
-
-
-
-  
 
 
   
@@ -1518,8 +1514,38 @@ message.channel.send(format);
       message.channel.send(hacked);
 
 
-    }
+    }else if(command === 'code'){
+      if (!args[0]) return message.channel.send("Please choose either to input (`.code input`) or to decode (`.code decode`)");
 
+      let choice = ["encode", "decode"];
+      if (!choice.includes(args[0].toLowerCase())) return message.channel.send("Unknown parameter. Please choose the method first, either decode or encode it.");
+  
+      let text = args.slice(1).join(" ");
+      // binary <encode | decode> <text>
+      // binary encode blob development
+  
+      if (!text) return message.channel.send("Please give me some text");
+  
+      // Do this because more than that, the binary code wouldn't be fit anymore.
+      if (text.length > 1024) return message.channel.send("Please make sure the character limit is below or is `1,024`");
+  
+      function encode(char) {
+          return char.split("").map(str => {
+              const converted = str.charCodeAt(0).toString(2);
+              return converted.padStart(8, "0");
+          }).join(" ")
+      };
+  
+      function decode(char) {
+          return char.split(" ").map(str => String.fromCharCode(Number.parseInt(str, 2))).join("");
+      };
+  
+      if (args[0].toLowerCase() === "encode") {
+          return message.channel.send(encode(text));
+      } else if (args[0].toLowerCase() === "decode") {
+          return message.channel.send(decode(text));
+      }
+    }
    
 
 
