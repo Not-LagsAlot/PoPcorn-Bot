@@ -1571,7 +1571,7 @@ message.channel.send(format);
                   .addField('Recovered', recovered)
                   .addField('Deaths', deaths)
   
-                  message.channel.send(AbortController)
+                  message.channel.send(all)
               })
           } else {
               fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
