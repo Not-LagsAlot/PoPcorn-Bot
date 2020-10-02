@@ -8,13 +8,13 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.code)';
+var changes = 'Added `@everyone` mention blocker aka people won\'t be able to use the bot\'s command to ping';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var Invites = '`invite-logs`'
-var version = 'v3.6';
+var version = 'v3.7';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -683,7 +683,7 @@ const slapped = new Discord.MessageEmbed()
   .setTitle('Whats new!')
   .addField('Current version', version)
   .addField('Changes To The Bot', changes)
-  .setFooter(`PoPcorn Bot | Made by LagsAlot#0000`)
+  .setFooter(`PoPcorn Bot | Made by LagsAlot#0001`)
   .setColor('RANDOM')
   .setTimestamp(Date.now())
 
@@ -1515,10 +1515,10 @@ message.channel.send(format);
 
 
     }else if(command === 'code'){
-      if (!args[0]) return message.channel.send("Please choose either to input (`.code input`) or to decode (`.code decode`)");
+      if (!args[0]) return message.channel.send("Please choose either to encode (`.code encode`) or to decode (`.code decode`)");
 
       let choice = ["encode", "decode"];
-      if (!choice.includes(args[0].toLowerCase())) return message.channel.send("Unknown parameter. Please choose the method first, either decode or encode it.");
+      if (!choice.includes(args[0].toLowerCase())) return message.channel.send("Unknown choice the correct choices are: encode (`.code encode`) and decode (`.code decode`) ");
   
       let text = args.slice(1).join(" ");
       // binary <encode | decode> <text>
