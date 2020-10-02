@@ -1552,7 +1552,7 @@ message.channel.send(format);
           const noArgs = new Discord.MessageEmbed()
           .setTitle('Missing arguments')
           .setColor(0xFF0000)
-          .setDescription('You are missing some args (ex: !covid all || !covid Canada)')
+          .setDescription('Please choose either `.covid all` or `.covid {country})`')
           .setTimestamp()
   
           if(!args[0]) return message.channel.send(noArgs);
