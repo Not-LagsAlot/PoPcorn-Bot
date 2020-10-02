@@ -1589,7 +1589,7 @@ message.channel.send(format);
   
                   message.channel.send(embed)
               }).catch(e => {
-                  return message.channel.send('Invalid country provided')
+                  return message.channel.send('Invalid country')
               })
             }
           }
