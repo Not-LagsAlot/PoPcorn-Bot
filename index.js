@@ -76,7 +76,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
   const something = `<#${oldMessage.channel.id}>`
   try {
     let updated = new Discord.MessageEmbed()
-      .setTitle(`Message Edit Logs`)
+      .setTitle(`Message Edited`)
       .setColor(`GREEN`)
       .addField(`Member`, oldMessage.author.tag, true)
       .addField(`Channel`, something)
@@ -96,7 +96,6 @@ client.on("messageDelete", async (message) => {
   const by = message.author.tag
   const deleted = new Discord.MessageEmbed()
   .setTitle("Message Deleted")
-  .setDescription(`Message deleted in <#${message.channel.id}> by **${message.author.tag}** \n> ${message.content}`)
   .addField('Message Deleted By', by )
   .addField('Channel Deleted In', ind)
   .addField('Message Content', content)
