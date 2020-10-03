@@ -33,7 +33,7 @@ client.snipes = new Discord.Collection();
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
 
-const something = `<#${oldMessage.channel.id}>`
+
 
 
 
@@ -73,11 +73,11 @@ client.once('ready', () => {
   
 })
 client.on("messageUpdate", async (oldMessage, newMessage) => {
+  const something = `<#${oldMessage.channel.id}>`
   try {
     let updated = new Discord.MessageEmbed()
       .setTitle(`Message Edit Logs`)
       .setColor(`GREEN`)
-      
       .addField(`Member`, oldMessage.author.tag, true)
       .addField(`Channel`, something)
       .addField(`Old Message:`, oldMessage.content, true)
