@@ -72,27 +72,27 @@ client.once('ready', () => {
     
   
 })
+client.on("messageUpdate", async (oldMessage, newMessage) => {
+  try {
+    let updated = new Discord.MessageEmbed()
+      .setTitle(`Message Edit Logs`)
+      .setColor(`GREEN`)
+      .setDescription(
+        `**The user ${oldMessage.author.tag} has edited a message in <#${oldMessage.channel.id}>**`
+      )
+      .addField(`Old Message:`, oldMessage.content, true)
+      .addField(`New Message:`, newMessage.content, true);
+    let channel = oldMessage.guild.channels.cache.find(
+      (ch) => ch.name === "message-logs"
+    );
+    if (!channel) return;
+    channel.send(updated);
+  } catch (e) {}  (oldMessage, newMessage);
+});
 
 client.on('message', async message => {
 
  
-  client.on("messageUpdate", async (oldMessage, newMessage) => {
-    try {
-      let updated = new Discord.MessageEmbed()
-        .setTitle(`Message Edit Logs`)
-        .setColor(`GREEN`)
-        .setDescription(
-          `**The user ${oldMessage.author.tag} has edited a message in <#${oldMessage.channel.id}>**`
-        )
-        .addField(`Old Message:`, oldMessage.content, true)
-        .addField(`New Message:`, newMessage.content, true);
-      let channel = oldMessage.guild.channels.cache.find(
-        (ch) => ch.name === "message-logs"
-      );
-      if (!channel) return;
-      channel.send(updated);
-    } catch (e) {}  (oldMessage, newMessage);
-  });
   
   
 
