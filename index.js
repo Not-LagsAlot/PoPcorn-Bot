@@ -153,7 +153,9 @@ if(message.content.includes(`${client.user.id}`)) {
     const help = new Discord.MessageEmbed()
       .addField('Utility', info)
       .addField('Moderation', mod)
+    
       .addField('Fun', fun)
+      .addField('Logging', logging)
       .addField('GiveAway', giveaways)
    
       .setColor('RANDOM')
