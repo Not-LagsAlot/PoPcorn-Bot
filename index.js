@@ -22,14 +22,14 @@ const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
 const guildInvites = new Map();
 const Timers = new Map();
-client.snipes = new Discord.Collection()
+
 
 const fetch = require('node-fetch')
 
 const moment = require("moment");
 
 
-
+client.snipes = new Discord.Collection();
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
 
@@ -75,8 +75,24 @@ client.once('ready', () => {
 
 client.on('message', async message => {
 
-  
-
+ 
+  client.on("messageUpdate", async (oldMessage, newMessage) => {
+    try {
+      let updated = new Discord.MessageEmbed()
+        .setTitle(`Message Edit Logs`)
+        .setColor(`GREEN`)
+        .setDescription(
+          `**The user ${oldMessage.author.tag} has edited a message in <#${oldMessage.channel.id}>**`
+        )
+        .addField(`Old Message:`, oldMessage.content, true)
+        .addField(`New Message:`, newMessage.content, true);
+      let channel = oldMessage.guild.channels.cache.find(
+        (ch) => ch.name === "message-logs"
+      );
+      if (!channel) return;
+      channel.send(updated);
+    } catch (e) {}  (oldMessage, newMessage);
+  });
   
   
 
@@ -1570,7 +1586,7 @@ message.channel.send(format);
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
                   .addField('Deaths', deaths)
-  
+                  .setColor(0xD22C2C)
                   message.channel.send(all)
               })
           } else {
@@ -1586,6 +1602,7 @@ message.channel.send(format);
                   .addField('Confirmed Cases', confirmed)
                   .addField('Recovered', recovered)
                   .addField('Deaths', deaths)
+                  .setColor(0xD22C2C)
   
                   message.channel.send(only)
               }).catch(e => {
