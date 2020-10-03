@@ -8,14 +8,14 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added 1 new command (.covid)';
+var changes = 'Added Message Logging';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-
+var logging = '`message-logs`'
 var Invites = '`invite-logs`'
-var version = 'v3.8';
+var version = 'v3.9';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -80,8 +80,8 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
       .setColor(`GREEN`)
       .addField(`Member`, oldMessage.author.tag, true)
       .addField(`Channel`, something)
-      .addField(`Old Message:`, oldMessage.content, true)
-      .addField(`New Message:`, newMessage.content, true);
+      .addField(`Old Message`, oldMessage.content, true)
+      .addField(`New Message`, newMessage.content, true);
     let channel = oldMessage.guild.channels.cache.find(
       (ch) => ch.name === "message-logs"
     );
@@ -89,7 +89,26 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     channel.send(updated);
   } catch (e) {}  (oldMessage, newMessage);
 });
-
+client.on("messageDelete", async (message) => {
+  if (message.partial) await message.fetch();
+  const content = message.content
+  const ind = `<#${message.channel.id}>`
+  const by = message.author.tag
+  const deleted = new Discord.MessageEmbed()
+  .setTitle("Message Deleted")
+  .setDescription(`Message deleted in <#${message.channel.id}> by **${message.author.tag}** \n> ${message.content}`)
+  .addField('Message Deleted By', by )
+  .addField('Channel Deleted In', ind)
+  .addField('Message Content', content)
+  .setTimestamp()
+  .setColor('RED')
+  let deletedin = message.guild.channels.cache.find(
+    (ch) => ch.name === "message-logs"
+  );
+  if (!deletedin) return;
+  deletedin.send(deleted);
+  (message);
+});
 client.on('message', async message => {
 
  
@@ -1608,7 +1627,9 @@ message.channel.send(format);
               }).catch(e => {
                   return message.channel.send('Invalid country')
               })
-            }
+            } 
+          }else if(command === 'message-logs'){
+            message.channel.send('Please create a channel with the name of `message-logs` for me to start message logging in it')
           }
    
 
