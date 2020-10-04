@@ -73,6 +73,7 @@ client.once('ready', () => {
   
 })
 client.on("messageUpdate", async (oldMessage, newMessage) => {
+  if(oldMessage.author.bot) return
   const something = `<#${oldMessage.channel.id}>`
   try {
     let updated = new Discord.MessageEmbed()
@@ -90,14 +91,15 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
   } catch (e) {}  (oldMessage, newMessage);
 });
 client.on("messageDelete", async (message) => {
+  if(message.author.bot) return
   if (message.partial) await message.fetch();
   const content = message.content
   const ind = `<#${message.channel.id}>`
   const by = message.author.tag
   const deleted = new Discord.MessageEmbed()
   .setTitle("Message Deleted")
-  .addField('Message Deleted By', by )
-  .addField('Channel Deleted In', ind)
+  .addField('Member', by )
+  .addField('Channel', ind)
   .addField('Message Content', content)
   .setTimestamp()
   .setColor('RED')
