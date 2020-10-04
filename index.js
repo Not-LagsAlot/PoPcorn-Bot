@@ -72,6 +72,28 @@ client.once('ready', () => {
     
   
 })
+client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
+client.on('guildMemberAdd', async member => {
+  const cachedInvites = guildInvites.get(member.guild.id);
+  const newInvites = await member.guild.fetchInvites();
+  guildInvites.set(member.guild.id, newInvites);
+  try {
+      const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
+      const invite = new Discord.MessageEmbed()
+          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThat user now has ${usedInvite.uses} invites`)
+          .setTimestamp()
+          .setTitle(`${usedInvite.url}`);
+      const welcomeChannel = member.guild.channels.cache.find(
+        (ch) => ch.name === "invite-logs"
+      );
+      if(welcomeChannel) {
+          welcomeChannel.send(invite)
+      }
+  }
+  catch(err) {
+      console.log(err);
+  }
+});
 client.on("messageUpdate", async (oldMessage, newMessage) => {
   if(oldMessage.author.bot) return
   const something = `<#${oldMessage.channel.id}>`
