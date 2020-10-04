@@ -8,14 +8,14 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added Message Logging';
+var changes = 'Added Invite logging';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-var logging = '`message-logs`'
+var logging = '`message-logs`, `invite-logs`'
 var Invites = '`invite-logs`'
-var version = 'v3.9';
+var version = 'v4.0';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -80,7 +80,7 @@ client.on('guildMemberAdd', async member => {
   try {
       const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
       const invite = new Discord.MessageEmbed()
-          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThat user now has ${usedInvite.uses} invites`)
+          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}th member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThat user now has ${usedInvite.uses} invites`)
           .setTimestamp()
           .setTitle(`${usedInvite.url}`);
       const welcomeChannel = member.guild.channels.cache.find(
@@ -1654,6 +1654,8 @@ message.channel.send(format);
             } 
           }else if(command === 'message-logs'){
             message.channel.send('Please create a channel with the name of `message-logs` for me to start message logging in it')
+          }else if(command === 'invite-logs'){
+            message.channel.send('Please create a channel with the name of `invite-logs` for me to start invite logging')
           }
    
 
