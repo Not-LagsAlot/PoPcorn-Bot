@@ -80,9 +80,11 @@ client.on('guildMemberAdd', async member => {
   try {
       const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
       const invite = new Discord.MessageEmbed()
-          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}th member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThat user now has ${usedInvite.uses} invites`)
+          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}th member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThe invite that was used is ${usedInvite.url}\n${usedInvite.inviter.tag} now has ${usedInvite.uses} invites`)
           .setTimestamp()
-          .setTitle(`${usedInvite.url}`);
+          .setColor('RANDOM')
+          .setTitle('PoPcorn Invite Logging');
+    
       const welcomeChannel = member.guild.channels.cache.find(
         (ch) => ch.name === "invite-logs"
       );
