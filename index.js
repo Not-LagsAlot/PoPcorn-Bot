@@ -499,43 +499,43 @@ const slapped = new Discord.MessageEmbed()
   if (!memberssssss) return message.reply('Please mention a user');
   if(memberssssss.hasPermission('BAN_MEMBERS')){
     const bannedss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedss);
   }
   if(memberssssss.hasPermission('KICK_MEMBERS')){
     const bannedsss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsss);
   }
   if(memberssssss.hasPermission('ADMINISTRATOR')){
     const bannedssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssss);
   }
   if(memberssssss.hasPermission('MANAGE_CHANNELS')){
     const bannedsssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsssss);
   }
   if(memberssssss.hasPermission('MANAGE_ROLES')){
     const bannedssssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssssss);
   }
   if(memberssssss.hasPermission('MANAGE_MESSAGES')){
     const bannedsssssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsssssss);
   }
   if(memberssssss.hasPermission('MANAGE_GUILD')){
     const bannedssssssss= new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssssssss);
   }
