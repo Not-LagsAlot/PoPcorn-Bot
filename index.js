@@ -408,7 +408,7 @@ const slapped = new Discord.MessageEmbed()
 
 
     if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** as you do not have `BAN MEMBERS` permission you can\'t use this');
-    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission I can\'t do this');
+    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission ');
   
     const successfullybanned = message.mentions.members.first() 
   
