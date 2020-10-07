@@ -148,7 +148,10 @@ if(message.author.bot){
 }
 
 if(message.content.includes(`${client.user.id}`)) {
-  message.reply("Hey! I am PoPcorn, my prefix is `.` type `.help` to get list of all commands CYA :)")
+  const somerandomshithere = new Discord.MessageEmbed()
+  .setTitle('Some important stuff')
+  .setDescription(`1. Bot's prefix is \`.\`2. Bot's main command is \`.help\`\nYou can join the support server by clicking [here](https://discord.gg/MJHfQ54)`)
+  message.reply(somerandomshithere)
   }
 
 
@@ -179,13 +182,14 @@ if(message.content.includes(`${client.user.id}`)) {
   } else {
 
     const help = new Discord.MessageEmbed()
-    .setDescription('Prefix: `.`')
+    
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
       .addField('Logging', logging)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
+      
    
       .setColor('RANDOM')
    message.channel.send(help)
