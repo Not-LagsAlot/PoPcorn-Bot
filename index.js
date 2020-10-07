@@ -2,20 +2,21 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client({
   disableMentions: "everyone",
-  partials: ["REACTION"],
+  partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
 
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added Invite logging';
+var changes = 'Added (.chat) command';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
 var Invites = '`invite-logs`'
-var version = 'v4.0';
+const Artificial = '`chat`'
+var version = 'v4.1';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -95,6 +96,8 @@ client.on('guildMemberAdd', async member => {
   catch(err) {
       console.log(err);
   }
+
+  
 });
 client.on("messageUpdate", async (oldMessage, newMessage) => {
   if(oldMessage.author.bot) return
@@ -180,6 +183,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Moderation', mod)
       .addField('Fun', fun)
       .addField('Logging', logging)
+      .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
    
       .setColor('RANDOM')
@@ -1656,6 +1660,15 @@ message.channel.send(format);
             message.channel.send('Please create a channel with the name of `message-logs` for me to start message logging in it')
           }else if(command === 'invite-logs'){
             message.channel.send('Please create a channel with the name of `invite-logs` for me to start invite logging')
+          }else if (command === "chat") {
+            if(!args[0]){
+              return message.channel.send('Please type a message for me to reply to its')
+            }
+            message.channel.startTyping()
+            const response = await fetch(`https://some-random-api.ml/chatbot?message=${encodeURIComponent(args.slice(0).join(" "))}`)
+            const json = await response.json()
+            message.channel.send(json.response)
+            return message.channel.stopTyping(true)
           }
    
 
