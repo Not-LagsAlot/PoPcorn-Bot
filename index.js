@@ -9,7 +9,7 @@ const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 var changes = 'Added (.chat) command';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
@@ -150,7 +150,7 @@ if(message.author.bot){
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
   .setTitle('Some important stuff')
-  .setDescription(`1. Bot's prefix is \`.\`2. Bot's main command is \`.help\`\nYou can join the support server by clicking [here](https://discord.gg/MJHfQ54)`)
+  .setDescription(`1. Bot's prefix is \`.\`\n2. Bot's main command is \`.help\`\n3. You can join the support server by clicking [here](https://discord.gg/MJHfQ54)`)
   message.reply(somerandomshithere)
   }
 
@@ -1581,6 +1581,9 @@ message.channel.send(format);
 
 
     }else if(command === 'code'){
+      if(usedCommand.has(message.author.id)){
+        message.reply('You cannot use the command beacuse of the cooldown.')
+    }else {
       if (!args[0]) return message.channel.send("Please choose either to encode (`.code encode`) or to decode (`.code decode`)");
 
       let choice = ["encode", "decode"];
@@ -1611,8 +1614,15 @@ message.channel.send(format);
       } else if (args[0].toLowerCase() === "decode") {
           return message.channel.send(decode(text));
       }
-    }else  
-    if(command === 'covid'){
+      usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+    }
+    }else if(command === 'covid'){
+      if(usedCommand.has(message.author.id)){
+        message.reply('You cannot use the command beacuse of the cooldown.')
+    }else {
        let countries = args.join(" ");
   
           //Credit to Sarastro#7725 for the command :)
@@ -1661,6 +1671,12 @@ message.channel.send(format);
                   return message.channel.send('Invalid country')
               })
             } 
+          }
+          usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+    
           }else if(command === 'message-logs'){
             message.channel.send('Please create a channel with the name of `message-logs` for me to start message logging in it')
           }else if(command === 'invite-logs'){
