@@ -70,13 +70,16 @@ const mapping = {
 client.once('ready', () => {
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
-    const channelsss = configs.CHANNEL_ID
+    if (client.channels.fetch('763971750936838155')) {
+      client.channels.fetch('763971750936838155').then(channelsss => {
     const nowonline = new Discord.MessageEmbed()
-    .setDescription(`Now logged in as \`${client.user.tag}`)
+    .setDescription(`Now logged in as \`${client.user.tag}\``)
     .setColor(0x879ffa)
     channelsss.send(nowonline)
+
+      })
     
-  
+    }
 })
 client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
 client.on('guildMemberAdd', async member => {
