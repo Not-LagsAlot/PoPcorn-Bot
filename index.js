@@ -1188,8 +1188,8 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
               channel.send(suggestion);
             
           }).then(m => {
-            message.react(":ThumbsUP:")
-            message.react(":ThumbsDOWN:")      
+            message.react("<:ThumbsUP:763976100850040862>")
+            message.react("<:ThumbsDOWN:763976301505544212> ")      
           })
           message.channel.send('Your suggestion has been submitted')
       } else {
