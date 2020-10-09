@@ -1180,10 +1180,16 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
           client.channels.fetch('735422598493503539').then(channel => {
 
             const suggestion = new Discord.MessageEmbed()
-            .setTitle(`${message.author.username}'s suggestion `)
-            .setFooter(args.slice(0).join(" "))
-            .setColor('RANDOM')
+            .setAuthor("SUGGESTION: " + message.author.tag, message.author.avatarURL())
+             .setThumbnail(message.author.avatarURL())
+                .setColor("#ff2050")
+               .setDescription(args.join(" "))
+                   .setTimestamp()
               channel.send(suggestion);
+            
+          }).then(m => {
+            m.react(":ThumbsUP:")
+            m.react(":ThumbsDOWN:")      
           })
           message.channel.send('Your suggestion has been submitted')
       } else {
