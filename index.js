@@ -23,7 +23,7 @@ const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
 const guildInvites = new Map();
 const Timers = new Map();
-
+const configs = require('./logs.json')
 
 const fetch = require('node-fetch')
 
@@ -70,6 +70,11 @@ const mapping = {
 client.once('ready', () => {
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
+    const channelsss = configs.CHANNEL_ID
+    const nowonline = new Discord.MessageEmbed()
+    .setDescription(`Now logged in as \`${client.user.tag}`)
+    .setColor(0x879ffa)
+    channelsss.send(nowonline)
     
   
 })
