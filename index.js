@@ -912,7 +912,7 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
     if (!args[2]) {
       return message.channel.send('Please ask a full questions.')
   }
-  let number = Math.floor(Math.random() * 6);
+  let number = Math.floor(Math.random() * 8);
   if (number == 0) {
       return message.channel.send('Yes, definitely so.')
   }
@@ -931,7 +931,12 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
   if (number == 5) {
       return message.channel.send('Odds are in your favor.')
   }
-     
+  if (number == 6) {
+    return message.channel.send('I am not so sure about that one chief')
+}
+if (number == 7) {
+  return message.channel.send('Yes 100%')
+}    
       
       
       usedCommand.add(message.author.id);
