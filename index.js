@@ -1182,14 +1182,14 @@ message.channel.send(args.join(' ').split('').map(c => mapping[c] || c).join('')
             const suggestion = new Discord.MessageEmbed()
             .setAuthor("SUGGESTION: " + message.author.tag, message.author.avatarURL())
              .setThumbnail(message.author.avatarURL())
-                .setColor("#ff2050")
+                .setColor("RANDOM")
                .setDescription(args.join(" "))
                    .setTimestamp()
               channel.send(suggestion);
             
           }).then(m => {
-            m.react(":ThumbsUP:")
-            m.react(":ThumbsDOWN:")      
+            message.react(":ThumbsUP:")
+            message.react(":ThumbsDOWN:")      
           })
           message.channel.send('Your suggestion has been submitted')
       } else {
