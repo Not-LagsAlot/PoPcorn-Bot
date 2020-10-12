@@ -8,15 +8,16 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added (.chat) command';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`';
+var changes = 'Added (.uptime) command';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
-var Invites = '`invite-logs`'
+
 const Artificial = '`chat`'
-var version = 'v4.1';
+
+var version = 'v4.2';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -181,7 +182,9 @@ if(message.content.includes(`${client.user.id}`)) {
   
 
   if (command === 'ping') {
-  message.channel.send(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
+  message.channel.send('Pinging...').then(message =>{
+    message.edit(`**Pong!** \`${Math.round(client.ws.ping)}ms\``)
+  })
 
   } else if (command === 'help') {
 
@@ -1191,11 +1194,10 @@ if (number == 7) {
                .setDescription(args.join(" "))
                    .setTimestamp()
               channel.send(suggestion);
-            
-          }).then(m => {
-            message.react("<:ThumbsUP:763976100850040862>")
-            message.react("<:ThumbsDOWN:763976301505544212> ")      
+             
+        
           })
+     
           message.channel.send('Your suggestion has been submitted')
       } else {
           return message.channel.send('You can now only suggest while being in the support server, please run the `.support` command to get a link to it')
@@ -1245,7 +1247,7 @@ message.channel.send(format);
         if(!message.member.hasPermission(['MANAGE_CHANNELS'])){
           return message.channel.send(`${message.author.tag} You cannot use that`)
         }
-        if (!args[0]) return message.channel.send(`You did not specify your time!`);
+        if (!args[0]) return message.channel.send('Invalid Format: `.giveaway (Time) (Channel) (Prize)`. You have not entered the time ');
     if (
       !args[0].endsWith("d") &&
       !args[0].endsWith("h") &&
@@ -1258,10 +1260,10 @@ message.channel.send(format);
     let channel = message.mentions.channels.first();
     if (!channel)
       return message.channel.send(
-        `That channel doesn\t exist`
+        'Invalid Format: `.giveaway (Time) (Channel) (Prize)`. You have not entered the channel '
       );
     let prize = args.slice(2).join(" ");
-    if (!prize) return message.channel.send(`No prize specified!`);
+    if (!prize) return message.channel.send('Invalid Format: `.giveaway (Time) (Channel) (Prize)`. You have not entered the prize ');
     message.channel.send(`*Giveaway has been started in ${channel}*`);
     let Embed = new Discord.MessageEmbed()
 
@@ -1709,8 +1711,32 @@ message.channel.send(format);
             const json = await response.json()
             message.channel.send(json.response)
             return message.channel.stopTyping(true)
+          }else if(command === 'uptime'){
+            let totalseconds = client.uptime / 1000
+            let dayss = Math.floor(totalseconds / 86400)
+            let hourss = Math.floor(totalseconds / 3600)
+            totalseconds % 3600
+            let minutess = Math.floor(totalseconds / 60)
+            let secondss = Number.parseInt(totalseconds & 60)
+
+            let dDay = `${dayss} Day`
+            let dHour = `${hourss} Hour`
+            let dMinute = `${minutess} Minute`
+            let dSecond = `${secondss} Second`
+
+            if(dayss == 0 ) dDay = ""
+            else if(dayss > 1) dDay  += "s", ""
+            if(hourss == 0 ) dHour = ""
+            else if(hourss > 1) dHour  += "s", ""
+            if(minutess == 0 ) dMinute = ""
+            else if(minutess > 1) dMinute  += "s", ""
+            if(secondss == 0 ) dSecond = ""
+            else if(secondss > 1) dSecond  += "s", ""
+
+          const plsuptime = new Discord.MessageEmbed()
+          .setTitle('<:BF_Information:750731802301431939> PoPcon Uptime')
+          .setDescription(`${dDay + dHour + dMinute + dSecond}`)
           }
-   
 
 
     
