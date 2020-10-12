@@ -1735,7 +1735,7 @@ message.channel.send(format);
 
           const plsuptime = new Discord.MessageEmbed()
           .setTitle('PoPcon Uptime')
-          .setDescription(`The current Uptime is: ${dDay + dHour + dMinute + dSecond}`)
+          .setDescription(`The current Uptime is: ${dDay} ${dHour} ${dMinute} ${dSecond}`)
           .setColor('RED')
           message.channel.send(plsuptime)
           }
