@@ -1734,8 +1734,8 @@ message.channel.send(format);
             else if(secondss > 1) dSecond  += "s", ""
 
           const plsuptime = new Discord.MessageEmbed()
-          .setTitle('<:BF_Information:750731802301431939> PoPcon Uptime')
-          .setDescription(`${dDay + dHour + dMinute + dSecond}`)
+          .setTitle('PoPcon Uptime')
+          .setDescription(`The current Uptime is: ${dDay + dHour + dMinute + dSecond}`)
           .setColor('RED')
           message.channel.send(plsuptime)
           }
