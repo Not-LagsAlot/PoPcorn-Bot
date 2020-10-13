@@ -1759,6 +1759,9 @@ message.channel.send(format);
             message.channel.send(json.response)
             return message.channel.stopTyping(true)
           }else if(command === 'uptime'){
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
             let totalseconds = client.uptime / 1000
             let dayss = Math.floor(totalseconds / 86400)
             let hourss = Math.floor(totalseconds / 3600)
@@ -1785,11 +1788,25 @@ message.channel.send(format);
           .setDescription(`The current Uptime is: ${dDay} ${dHour} ${dMinute} ${dSecond}`)
           .setColor('RED')
           message.channel.send(plsuptime)
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'panda-fact'){
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
             const fact = await fetch('https://some-random-api.ml/facts/panda')
             const plsfact = await fact.json()
             message.channel.send(plsfact.fact)
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'rank'){
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
             let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
 
   let level = client.db.get(`level_${user.id}`) || 0;
@@ -1812,6 +1829,10 @@ message.channel.send(format);
          
           
           return message.channel.send(new MessageAttachment(img, "rank.png"));
+        }usedCommand.add(message.author.id);
+        setTimeout(() => {
+            usedCommand.delete(message.author.id);
+        }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if (command === "prefix") {
             if (!message.member.hasPermission("ADMINISTRATOR")) {
               return message.channel.send(
