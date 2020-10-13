@@ -1777,7 +1777,7 @@ message.channel.send(format);
      avatarURL: user.displayAvatarURL({ format: "png" }),
      background: "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&w=1000&q=80"
   });
-          const img = await card.build();
+         
           
           return message.channel.send(new MessageAttachment(img, "rank.png"));
           }
