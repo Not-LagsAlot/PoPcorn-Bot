@@ -1809,7 +1809,7 @@ message.channel.send(format);
               return await message.channel.send("Reseted Prefix ✅");
             }
             db.set(`prefix_${message.guild.id}`, args[0]);
-            await message.channel.send(`Seted Bot Prefix to ${args[0]}`);
+            await message.channel.send(` <:TickYes:765122562845704192> Changed bot's prefix to ${args[0]}`);
           }
 
 
