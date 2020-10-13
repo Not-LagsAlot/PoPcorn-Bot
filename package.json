@@ -19,6 +19,6 @@
     "opusscript": "0.0.7",
     "ytdl-core": "^3.1.2",
     "quick.db": "7.1.2",
-    "Canvacord": "5.0.7"
+    "canvacord": "4.0.2"
   }
 }
