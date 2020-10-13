@@ -4,13 +4,14 @@ const client = new Discord.Client({
   disableMentions: "everyone",
   partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
+const {default_prefix } = require("./config.json");
 
-const prefix = '.';
+
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added ranking to the bot';
+var changes = 'Added changeable prefix to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`';
-var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
+var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
@@ -20,7 +21,7 @@ const { MessageAttachment } = require("discord.js");
 client.db = require("quick.db");
 client.canvas = require("canvacord");
 const Artificial = '`chat`'
-
+const db = require("quick.db")
 var version = 'v4.3';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -159,6 +160,8 @@ client.on('message', async message => {
 if(message.author.bot){
   return
 }
+let prefix = db.get(`prefix_${message.guild.id}`);
+    if (prefix === null) prefix = default_prefix;
 let xp = client.db.add(`xp_${message.author.id}`, 1);
     let level = Math.floor(0.3 * Math.sqrt(xp));
     let lvl =
@@ -175,7 +178,7 @@ let xp = client.db.add(`xp_${message.author.id}`, 1);
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
   .setTitle('Some important stuff')
-  .setDescription(`1. Bot's prefix is \`.\`\n2. Bot's main command is \`.help\`\n3. You can join the support server by clicking [here](https://discord.gg/MJHfQ54)`)
+  .setDescription(`1. Bot's prefix is \`${prefix}\`\n2. Bot's main command is \`.help\`\n3. You can join the support server by clicking [here](https://discord.gg/MJHfQ54)`)
   message.reply(somerandomshithere)
   }
 
@@ -1782,6 +1785,31 @@ message.channel.send(format);
          
           
           return message.channel.send(new MessageAttachment(img, "rank.png"));
+          }else if (command === "prefix") {
+            if (!message.member.hasPermission("ADMINISTRATOR")) {
+              return message.channel.send(
+                "<:UnAuthorized:765122345278242827> You require `Administrator` permission to change the bot's prefix"
+              );
+            }
+            if (!args[0]) {
+              return message.channel.send(
+                "<:UnAuthorized:765122345278242827> Please give a number/letter to set as a prefix"
+              );
+            }
+            if (args[1]) {
+              return message.channel.send("You can not set prefix a double argument");
+            }
+            if (args[0].length > 3) {
+              return message.channel.send(
+                "<:UnAuthorized:765122345278242827> Prefix can't be more then 3 letters"
+              );
+            }
+            if (args.join("") === default_prefix) {
+              db.delete(`prefix_${message.guild.id}`);
+              return await message.channel.send("Reseted Prefix ✅");
+            }
+            db.set(`prefix_${message.guild.id}`, args[0]);
+            await message.channel.send(`Seted Bot Prefix to ${args[0]}`);
           }
 
 
