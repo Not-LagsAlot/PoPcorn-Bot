@@ -212,26 +212,7 @@ if(message.content.includes(`${client.user.id}`)) {
 
   if (!message.content.startsWith(prefix)) return;
 
-  const cmd = args.shift().toLowerCase();
-
-  if (cmd.length === 0) return;
-
-let cmdx = db.get(`cmd_${message.guild.id}`)
-
-if(cmdx) {
-  let cmdy = cmdx.find(x => x.name === cmd)
-  if(cmdy) message.channel.send(cmdy.responce)
-}
-
-  // Get the command
-  let commando = client.commands.get(cmd);
-  // If none is found, try to find it by alias
-  if (!commando) command = client.commands.get(client.aliases.get(cmd));
-
-
-
-  // If a command is finally found, run the command
-  if (commando) commando.run(client, message, args);
+ ;
 
   if(!message.guild){
     return
@@ -1912,30 +1893,6 @@ message.channel.send(format);
             }
       
             message.channel.send(urafk);
-          }else if(command === 'cc-create'){
-            if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You need `MANAGE_MESSAGES` perms to use this command")
-
-    let cmdname = args[0]
-
-    if(!cmdname) return message.channel.send(`:x: You have to give command name, \`addcmd <cmd_name> <cmd_responce>\``)
-
-    let cmdresponce = args.slice(1).join(" ")
-
-    if(!cmdresponce) return message.channel.send(`:x: You have to give command cmd responce, \`addcmd <cmd_name> <cmd_responce>\``)
-
-    let database = db.get(`cmd_${message.guild.id}`)
-
-    if(database && database.find(x => x.name === cmdname.toLowerCase())) return message.channel.send(":x: This command name is already added in guild custom commands.")
-
-    let data = {
-      name: cmdname.toLowerCase(),
-      responce: cmdresponce
-    }
-
-    db.push(`cmd_${message.guild.id}`, data)
-
-    return message.channel.send("Added **" + cmdname.toLowerCase() + "** as a custom command in guild.")
-
           }
 
 
