@@ -8,7 +8,7 @@ const client = new Discord.Client({
 const prefix = '.';
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-var changes = 'Added (.panda-fact) command';
+var changes = 'Added ranking to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
@@ -21,7 +21,7 @@ client.db = require("quick.db");
 client.canvas = require("canvacord");
 const Artificial = '`chat`'
 
-var version = 'v4.2';
+var version = 'v4.3';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
