@@ -1738,6 +1738,10 @@ message.channel.send(format);
           .setDescription(`The current Uptime is: ${dDay} ${dHour} ${dMinute} ${dSecond}`)
           .setColor('RED')
           message.channel.send(plsuptime)
+          }else if(command === 'panda-fact'){
+            const fact = await fetch('https://some-random-api.ml/facts/panda')
+            const plsfact = await fact.json()
+            message.channel.send(plsfact.fact)
           }
 
 
