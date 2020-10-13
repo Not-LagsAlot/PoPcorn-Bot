@@ -14,6 +14,7 @@ var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
+const plslevelme = '`rank`'
 const canvacord = require("canvacord");
 const { MessageAttachment } = require("discord.js");
 client.db = require("quick.db");
@@ -212,6 +213,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
+      .addField('Levelling', plslevelme)
       .addField('Logging', logging)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
