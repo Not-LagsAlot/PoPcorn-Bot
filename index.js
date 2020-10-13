@@ -11,7 +11,7 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ohyea = '`balance`, `work`, `pay`, `daily`, `beg`, `leaderboard`'
 var changes = 'Added economy and (.trigger) command';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
@@ -176,6 +176,30 @@ let xp = client.db.add(`xp_${message.author.id}`, 1);
       );
     }
 
+    let afk = new db.table("AFKs"),
+      authorStatus = await afk.fetch(message.author.id),
+      mentioned = message.mentions.members.first();
+  
+  if (mentioned) {
+    let status = await afk.fetch(mentioned.id);
+    
+    if (status) {
+      const embed = new Discord.MessageEmbed()
+      .setColor(0xffffff)
+      .setDescription(`This user (${mentioned.user.tag}) is AFK: **${status}**`)
+      .setColor('RANDOM')
+      message.channel.send(embed).then(i => i.delete({timeout: 5000}));
+    }
+  }
+  
+  if (authorStatus) {
+    const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setDescription(`**${message.author.tag}** is no longer AFK.`)
+    .setColor('RANDOM')
+    message.channel.send(embed).then(i => i.delete({timeout: 5000}));
+    afk.delete(message.author.id)
+  }
 
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
@@ -1830,6 +1854,21 @@ message.channel.send(format);
             let triggered = await canvacord.Canvas.trigger(user.displayAvatarURL({ format: "png", dynamic: false }));
             let gettriggered = new MessageAttachment(triggered, "triggered.gif");
             return message.channel.send(gettriggered);
+          }if (message.content.startsWith(".afk")) {
+            const status = new db.table("AFKs");
+            let afk = await status.fetch(message.author.id);
+            const urafk = new Discord.MessageEmbed().setColor(0xffffff);
+      
+            if (!afk) {
+              urafk.setDescription(`**${message.author.tag}** now AFK.`);
+              urafk.setFooter(`Reason: ${args.join(" ") ? args.join(" ") : "AFK"}`);
+              status.set(message.author.id, args.join(" ") || `AFK`);
+            } else {
+              urafk.setDescription("You are no longer AFK.");
+              status.delete(message.author.id);
+            }
+      
+            message.channel.send(urafk);
           }
 
 
