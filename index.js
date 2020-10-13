@@ -10,7 +10,7 @@ const {default_prefix } = require("./config.json");
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ohyea = '`balance`, `work`, `pay`, `daily`, `beg`, `leaderboard`'
-var changes = 'Added changeable prefix to the bot';
+var changes = 'Added economy and (.trigger) command';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
@@ -24,7 +24,7 @@ client.db = require("quick.db");
 client.canvas = require("canvacord");
 const Artificial = '`chat`'
 const db = require("quick.db")
-var version = 'v4.4';
+var version = 'v4.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1825,6 +1825,11 @@ message.channel.send(format);
             return eco.beg(message);
           } else if (command === "leaderboard") {
             return eco.leaderboard(message);
+          }else if(command === 'trigger'){
+            let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
+            let triggered = await canvacord.Canvas.trigger(user.displayAvatarURL({ format: "png", dynamic: false }));
+            let gettriggered = new MessageAttachment(triggered, "triggered.gif");
+            return message.channel.send(gettriggered);
           }
 
 
