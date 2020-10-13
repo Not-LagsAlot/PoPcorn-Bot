@@ -14,7 +14,10 @@ var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
-
+const canvacord = require("canvacord");
+const { MessageAttachment } = require("discord.js");
+client.db = require("quick.db");
+client.canvas = require("canvacord");
 const Artificial = '`chat`'
 
 var version = 'v4.2';
@@ -155,6 +158,18 @@ client.on('message', async message => {
 if(message.author.bot){
   return
 }
+let xp = client.db.add(`xp_${message.author.id}`, 1);
+    let level = Math.floor(0.3 * Math.sqrt(xp));
+    let lvl =
+      client.db.get(`level_${message.author.id}`) ||
+      client.db.set(`level_${message.author.id}`, 1);
+    if (level > lvl) {
+      let newLevel = client.db.set(`level_${message.author.id}`, level);
+      message.channel.send(
+        `${message.author.toString()}, You just advanced to **level ${newLevel}!** GG`
+      );
+    }
+
 
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
@@ -1742,6 +1757,28 @@ message.channel.send(format);
             const fact = await fetch('https://some-random-api.ml/facts/panda')
             const plsfact = await fact.json()
             message.channel.send(plsfact.fact)
+          }else if(command === 'rank'){
+            let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
+
+  let level = client.db.get(`level_${user.id}`) || 0;
+  let exp = client.db.get(`xp_${user.id}`) || 0;
+  let neededXP = Math.floor(Math.pow(level / 0.1, 2));
+
+  let every = client.db.all().filter(i => i.ID.startsWith("xp_")).sort((a, b) => b.data - a.data);
+  let rank = every.map(x => x.ID).indexOf(`xp_${user.id}`) + 1;
+            const card = new canvacord.Rank()
+            .setUsername(user.username)
+            .setDiscriminator(user.discriminator)
+            .setRank(rank)
+            .setLevel(level)
+            .setCurrentXP(exp)
+            .setRequiredXP(neededXP)
+            .setStatus(user.presence.status)
+            .setAvatar(user.displayAvatarURL({ format: "png", size: 1024 }));
+        
+          const img = await card.build();
+          
+          return message.channel.send(new MessageAttachment(img, "rank.png"));
           }
 
 
