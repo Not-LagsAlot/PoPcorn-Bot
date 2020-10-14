@@ -21,6 +21,7 @@
     "quick.db": "7.1.2",
     "canvacord": "4.0.2",
     "economy-for-discord": "0.0.2",
-    "parse-ms": "2.1.0"
+    "parse-ms": "2.1.0",
+    "paradiseapi.js": "^1.0.6"
   }
 }
