@@ -22,8 +22,7 @@ const canvacord = require("canvacord");
 const { MessageAttachment } = require("discord.js");
 client.db = require("quick.db");
 client.canvas = require("canvacord");
-const PBL = require("paradiseapi.js")
-const pbls = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
+
 const Artificial = '`chat`'
 const db = require("quick.db")
 var version = 'v4.6';
@@ -78,6 +77,8 @@ const mapping = {
 
 
 client.once('ready', () => {
+  const PBL = require("paradiseapi.js")
+const pbls = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
     if (client.channels.fetch('763971750936838155')) {
