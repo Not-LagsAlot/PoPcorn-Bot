@@ -77,8 +77,6 @@ const mapping = {
 
 
 client.once('ready', () => {
-  const PBL = require("paradiseapi.js")
-const pbls = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
   client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
     console.log(`Bot is online | used in server LOL`);
     if (client.channels.fetch('763971750936838155')) {
@@ -87,15 +85,9 @@ const pbls = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
     .setDescription(`Now logged in as \`${client.user.tag}\``)
     .setColor(0x879ffa)
     channelsss.send(nowonline)
-    setInterval(() => {
-      /* Here is where we Post the stats to the Site (Only use one of these) */
-      pbls.post(client.guilds.cache.size) /* Will `POST` server count*/
-         //pbl.post(client.shard.count) /* Will `POST` shard count*/
-         //pbl.post(client.guilds.cache.size, client.shard.count) /* Will `POST` server and shard count*/
-        })
-      }, 300000) //5 Minutes in MS
+    
 
-      
+      })
     
     }
 })
