@@ -10,7 +10,7 @@ const {default_prefix } = require("./config.json");
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ohyea = '`balance`, `work`, `pay`, `daily`, `beg`, `leaderboard`'
-var changes = 'Added welcomer to the bot';
+var changes = 'Removed invite logging due to huge memory usage';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
@@ -27,12 +27,12 @@ const { CanvasSenpai } = require("canvas-senpai");
 const canva = new CanvasSenpai();
 const Artificial = '`chat`'
 const db = require("quick.db")
-var version = 'v4.7';
+var version = 'v4.8';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-const guildInvites = new Map();
+
 const Timers = new Map();
 const configs = require('./logs.json')
 
@@ -95,28 +95,7 @@ client.once('ready', () => {
 })
 client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
 client.on('guildMemberAdd', async member => {
-  const cachedInvites = guildInvites.get(member.guild.id);
-  const newInvites = await member.guild.fetchInvites();
-  guildInvites.set(member.guild.id, newInvites);
-  try {
-      const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
-      const invite = new Discord.MessageEmbed()
-          .setDescription(`${member.user.tag} is the ${member.guild.memberCount}th member to join.\nHe was invited by ${usedInvite.inviter.tag}\nThe invite that was used is ${usedInvite.url}\n${usedInvite.inviter.tag} now has ${usedInvite.uses} invites`)
-          .setTimestamp()
-          .setColor('RANDOM')
-          .setTitle('PoPcorn Invite Logging');
-    
-      const welcomeChannel = member.guild.channels.cache.find(
-        (ch) => ch.name === "invite-logs"
-      );
-      if(welcomeChannel) {
-          welcomeChannel.send(invite)
-      }
-
-  }
-  catch(err) {
-      console.log(err);
-  }
+ 
 
   let chx = db.get(`welchannel_${member.guild.id}`); //defining var
 
