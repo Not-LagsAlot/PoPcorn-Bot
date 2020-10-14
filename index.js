@@ -23,7 +23,7 @@ const { MessageAttachment } = require("discord.js");
 client.db = require("quick.db");
 client.canvas = require("canvacord");
 const PBL = require("paradiseapi.js")
-const pbl = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
+const pbls = new PBL(client.user.id,"qflfhfjc21730xcfeccg43026dkiarok")
 const Artificial = '`chat`'
 const db = require("quick.db")
 var version = 'v4.6';
@@ -88,7 +88,7 @@ client.once('ready', () => {
     channelsss.send(nowonline)
     setInterval(() => {
       /* Here is where we Post the stats to the Site (Only use one of these) */
-         pbl.post(client.guilds.cache.size) /* Will `POST` server count*/
+      pbls.post(client.guilds.cache.size) /* Will `POST` server count*/
          //pbl.post(client.shard.count) /* Will `POST` shard count*/
          //pbl.post(client.guilds.cache.size, client.shard.count) /* Will `POST` server and shard count*/
         })
