@@ -133,7 +133,7 @@ client.on('guildMemberAdd', async member => {
 
   client.channels.cache
     .get(chx)
-    .send("Hello", member.user.username , `welcome! we know have ${member.guild.memberCount} members! `, attachment);
+    .send(`Hello ${member.user.username} welcome to ${member.guild.name} we now have ${member.guild.memberCount}`,  attachment);
 
   
 
