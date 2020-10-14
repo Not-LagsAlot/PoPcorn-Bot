@@ -10,19 +10,21 @@ const {default_prefix } = require("./config.json");
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ohyea = '`balance`, `work`, `pay`, `daily`, `beg`, `leaderboard`'
-var changes = 'Added 1 new command (.afk)';
+var changes = 'Added welcomer to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var logging = '`message-logs`, `invite-logs`'
+var plswelcomeme = '`welcome`'
 const plslevelme = '`rank`'
 const eco = require("economy-for-discord");
 const canvacord = require("canvacord");
 const { MessageAttachment } = require("discord.js");
 client.db = require("quick.db");
 client.canvas = require("canvacord");
-
+const { CanvasSenpai } = require("canvas-senpai");
+const canva = new CanvasSenpai();
 const Artificial = '`chat`'
 const db = require("quick.db")
 var version = 'v4.6';
@@ -110,10 +112,30 @@ client.on('guildMemberAdd', async member => {
       if(welcomeChannel) {
           welcomeChannel.send(invite)
       }
+
   }
   catch(err) {
       console.log(err);
   }
+
+  let chx = db.get(`welchannel_${member.guild.id}`); //defining var
+
+  if (chx === null) {
+    //check if var have value or not
+    return;
+  }
+
+  let data = await canva.welcome(member, {
+    link: "https://cdn.wallpapersafari.com/1/24/uqOXJ1.png"
+  });
+
+  const attachment = new Discord.MessageAttachment(data, "welcome-image.png");
+
+  client.channels.cache
+    .get(chx)
+    .send("Hello" + member.user.username + `welcome! we know have ${member.guild.memberCount} members! `, attachment);
+
+  
 
   
 });
@@ -251,6 +273,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Economy', ohyea)
       .addField('Logging', logging)
       .addField('Artificial Intelligence', Artificial)
+      .addField('Welcomer', plswelcomeme)
       .addField('GiveAway', giveaways)
       
    
@@ -1895,6 +1918,29 @@ message.channel.send(format);
             }
       
             message.channel.send(urafk);
+          }else if (command === "welcome") {
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
+            if (!message.member.hasPermission("MANAGE_CHANNELS")) {
+              return message.reply("You do not have the permission to set welcomer");
+            }
+            let channel = message.mentions.channels.first(); //mentioned channel
+      
+            if (!channel) {
+              //if channel is not mentioned
+              return message.channel.send("Please Mention the channel first");
+            }
+      
+            //Now we gonna use quick.db
+      
+            db.set(`welchannel_${message.guild.id}`, channel.id); //set id in var
+      
+            message.channel.send(`Welcome Channel has been set as ${channel}`); //send success message
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }
 
 
