@@ -4,7 +4,7 @@ const client = new Discord.Client({
   disableMentions: "everyone",
   partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
-const {default_prefix } = require("./config.json");
+
 
 
 const Poll_Emoji_2 = "👎";
@@ -25,8 +25,7 @@ const { badwords } = require("./swear.json")
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-const custom = require("./custom");
+
 const Timers = new Map();
 const configs = require('./logs.json')
 
