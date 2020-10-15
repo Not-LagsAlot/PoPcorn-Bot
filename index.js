@@ -159,9 +159,7 @@ if(message.content.includes(`${client.user.id}`)) {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  const cmd = args.shift().toLowerCase();
 
-  if (cmd.length === 0) return;
 
 
 
