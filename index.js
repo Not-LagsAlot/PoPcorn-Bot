@@ -9,30 +9,24 @@ const {default_prefix } = require("./config.json");
 
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-const ohyea = '`balance`, `work`, `pay`, `daily`, `beg`, `leaderboard`'
-var changes = 'Removed invite logging due to huge memory usage';
+
+var changes = 'Removed ranking, welcomer, afk, economy, custom prefix **CURRENTLY ONLY**';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-var logging = '`message-logs`, `invite-logs`'
-var plswelcomeme = '`welcome`'
-const plslevelme = '`rank`'
-const eco = require("economy-for-discord");
-const canvacord = require("canvacord");
-const { MessageAttachment } = require("discord.js");
-client.db = require("quick.db");
-client.canvas = require("canvacord");
-const { CanvasSenpai } = require("canvas-senpai");
-const canva = new CanvasSenpai();
+
+const mongoose = require("mongoose")
+
 const Artificial = '`chat`'
-const db = require("quick.db")
-var version = 'v4.8';
+
+var version = 'v4.9';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-
+mongoose.connent("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
+const custom = require("./custom");
 const Timers = new Map();
 const configs = require('./logs.json')
 
@@ -94,30 +88,7 @@ client.once('ready', () => {
     }
 })
 client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
-client.on('guildMemberAdd', async member => {
- 
 
-  let chx = db.get(`welchannel_${member.guild.id}`); //defining var
-
-  if (chx === null) {
-    //check if var have value or not
-    return;
-  }
-
-  let data = await canva.welcome(member, {
-    link: "https://cdn.wallpapersafari.com/1/24/uqOXJ1.png"
-  });
-
-  const attachment = new Discord.MessageAttachment(data, "welcome-image.png");
-
-  client.channels.cache
-    .get(chx)
-    .send(`Hello ${member.user} welcome to ${member.guild.name} we now have ${member.guild.memberCount} members!`,  attachment);
-
-  
-
-  
-});
 client.on("messageUpdate", async (oldMessage, newMessage) => {
   if(oldMessage.author.bot) return
   const something = `<#${oldMessage.channel.id}>`
@@ -166,44 +137,7 @@ if(message.author.bot){
   return
 }
 
-let prefix = db.get(`prefix_${message.guild.id}`);
-    if (prefix === null) prefix = default_prefix;
-let xp = client.db.add(`xp_${message.author.id}`, 1);
-    let level = Math.floor(0.3 * Math.sqrt(xp));
-    let lvl =
-      client.db.get(`level_${message.author.id}`) ||
-      client.db.set(`level_${message.author.id}`, 1);
-    if (level > lvl) {
-      let newLevel = client.db.set(`level_${message.author.id}`, level);
-      message.channel.send(
-        `${message.author.toString()}, You just advanced to **level ${newLevel}!** GG`
-      );
-    }
-
-    let afk = new db.table("AFKs"),
-      authorStatus = await afk.fetch(message.author.id),
-      mentioned = message.mentions.members.first();
-  
-  if (mentioned) {
-    let status = await afk.fetch(mentioned.id);
-    
-    if (status) {
-      const embed = new Discord.MessageEmbed()
-      .setColor(0xffffff)
-      .setDescription(`This user (${mentioned.user.tag}) is AFK: **${status}**`)
-      .setColor('RANDOM')
-      message.channel.send(embed).then(i => i.delete({timeout: 5000}));
-    }
-  }
-  
-  if (authorStatus) {
-    const embed = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-    .setDescription(`**${message.author.tag}** is no longer AFK.`)
-    .setColor('RANDOM')
-    message.channel.send(embed).then(i => i.delete({timeout: 5000}));
-    afk.delete(message.author.id)
-  }
+let prefix = '.'
 
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
@@ -248,11 +182,8 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
-      .addField('Levelling', plslevelme)
-      .addField('Economy', ohyea)
-      .addField('Logging', logging)
+    
       .addField('Artificial Intelligence', Artificial)
-      .addField('Welcomer', plswelcomeme)
       .addField('GiveAway', giveaways)
       
    
@@ -1810,116 +1741,38 @@ message.channel.send(format);
           setTimeout(() => {
               usedCommand.delete(message.author.id);
           }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
-          }else if(command === 'rank'){
-            if(usedCommand.has(message.author.id)){
-              message.reply('You cannot use the command beacuse of the cooldown.')
-          }else {
-            let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
-
-  let level = client.db.get(`level_${user.id}`) || 0;
-  let exp = client.db.get(`xp_${user.id}`) || 0;
-  let neededXP = Math.floor(Math.pow(level / 0.1, 2));
-
-  let every = client.db.all().filter(i => i.ID.startsWith("xp_")).sort((a, b) => b.data - a.data);
-  let rank = every.map(x => x.ID).indexOf(`xp_${user.id}`) + 1;
-            // v4 rank card
-   let img = await canvacord.rank({
-    username: user.username,
-  discrim: user.discriminator,
-     currentXP: exp.toString(),
-     neededXP: neededXP.toString(),
-    rank: rank.toString(),
-     level: level.toString(),
-     avatarURL: user.displayAvatarURL({ format: "png" }),
-     background: "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&w=1000&q=80"
-  });
-         
-          
-          return message.channel.send(new MessageAttachment(img, "rank.png"));
-        }usedCommand.add(message.author.id);
-        setTimeout(() => {
-            usedCommand.delete(message.author.id);
-        }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
-          }else if (command === "prefix") {
-            if (!message.member.hasPermission("ADMINISTRATOR")) {
-              return message.channel.send(
-                "<:UnAuthorized:765122345278242827> You require `Administrator` permission to change the bot's prefix"
-              );
-            }
-            if (!args[0]) {
-              return message.channel.send(
-                "<:UnAuthorized:765122345278242827> Please give a number/letter to set as a prefix"
-              );
-            }
-            if (args[1]) {
-              return message.channel.send("You can not set prefix a double argument");
-            }
-            if (args[0].length > 3) {
-              return message.channel.send(
-                "<:UnAuthorized:765122345278242827> Prefix can't be more then 3 letters"
-              );
-            }
-            if (args.join("") === default_prefix) {
-              db.delete(`prefix_${message.guild.id}`);
-              return await message.channel.send("Reseted Prefix ✅");
-            }
-            db.set(`prefix_${message.guild.id}`, args[0]);
-            await message.channel.send(` <:TickYes:765122562845704192> Changed bot's prefix to ${args[0]}`);
-          }else if (command === "balance") {
-            return eco.balance(message, args[0] || null);
-          } else if (command === "work") {
-            return eco.work(message);
-          } else if (command === "pay") {
-            return eco.pay(message, args[1] || null);
-          } else if (command === "daily") {
-            return eco.daily(message);
-          } else if (command === "beg") {
-            return eco.beg(message);
-          } else if (command === "leaderboard") {
-            return eco.leaderboard(message);
-          }else if(command === 'trigger'){
-            let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
-            let triggered = await canvacord.Canvas.trigger(user.displayAvatarURL({ format: "png", dynamic: false }));
-            let gettriggered = new MessageAttachment(triggered, "triggered.gif");
-            return message.channel.send(gettriggered);
-          }if (message.content.startsWith(".afk")) {
-            const status = new db.table("AFKs");
-            let afk = await status.fetch(message.author.id);
-            const urafk = new Discord.MessageEmbed().setColor(0xffffff);
+          }else if(command === 'cc-create'){
+            if (!message.member.permissions.has("MANAGE_MESSAGES"))
+            return message.channel.send(`Hey! You don't have enough permissions`);
+          if (!args[0])
+            return message.channel.send(`Please give a name for your custom command`);
+          if (!args.slice(1).join(" "))
+            return message.channel.send(`No content given`);
+          custom.findOne(
+            { Guild: message.guild.id, Command: args[0] },
+            async (err, data) => {
+              if (err) throw err;
+              if (data) {
+                data.Content = args.slice(1).join(" ");
+                data.save();
       
-            if (!afk) {
-              urafk.setDescription(`**${message.author.tag}** now AFK.`);
-              urafk.setFooter(`Reason: ${args.join(" ") ? args.join(" ") : "AFK"}`);
-              status.set(message.author.id, args.join(" ") || `AFK`);
-            } else {
-              urafk.setDescription("You are no longer AFK.");
-              status.delete(message.author.id);
+                message.channel.send(
+                  `Successfully updated the command \`${args[0]}\``
+                );
+              } else if (!data) {
+                let newData = new custom({
+                  Guild: message.guild.id,
+                  Command: args[0],
+                  Content: args.slice(1).join(" "),
+                });
+                newData.save();
+                message.channel.send(
+                  `Successfully created the command \`${args[0]}\``
+                );
+              }
             }
-      
-            message.channel.send(urafk);
-          }else if (command === "welcome") {
-            if(usedCommand.has(message.author.id)){
-              message.reply('You cannot use the command beacuse of the cooldown.')
-          }else {
-            if (!message.member.hasPermission("MANAGE_CHANNELS")) {
-              return message.reply("You do not have the permission to set welcomer");
-            }
-            let channel = message.mentions.channels.first(); //mentioned channel
-      
-            if (!channel) {
-              //if channel is not mentioned
-              return message.channel.send("Please Mention the channel first");
-            }
-      
-            //Now we gonna use quick.db
-      
-            db.set(`welchannel_${message.guild.id}`, channel.id); //set id in var
-      
-            message.channel.send(`Welcome Channel has been set as ${channel}`); //send success message
-          }usedCommand.add(message.author.id);
-          setTimeout(() => {
-              usedCommand.delete(message.author.id);
-          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+          );
+        
           }
 
 
