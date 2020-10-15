@@ -1776,8 +1776,7 @@ message.channel.send(format);
             }
           );
         
-          }else if(command === 'cc'){
-            
+          }if(message.content.startsWith(`${prefix}`)){
             custom.findOne(
               { Guild: message.guild.id, command: cmd },
               async (err, data) => {
@@ -1786,7 +1785,8 @@ message.channel.send(format);
                 else return;
               }
             );
-            }
+          }
+            
 
 
     
