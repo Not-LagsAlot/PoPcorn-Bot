@@ -25,7 +25,7 @@ const { badwords } = require("./swear.json")
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-mongoose.connent("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
+mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
 const custom = require("./custom");
 const Timers = new Map();
 const configs = require('./logs.json')
