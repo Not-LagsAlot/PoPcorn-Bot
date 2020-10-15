@@ -16,8 +16,8 @@ var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 
-const mongoose = require("mongoose")
 
+const prefix = '.'
 const Artificial = '`chat`'
 
 var version = 'v4.9';
@@ -136,7 +136,7 @@ if(message.author.bot){
   return
 }
 
-let prefix = '.'
+
 
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
