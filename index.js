@@ -160,6 +160,9 @@ if(message.content.includes(`${client.user.id}`)) {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
+  const cmd = args.shift().toLowerCase();
+
+  if (cmd.length === 0) return;
 
 
 
@@ -1774,6 +1777,15 @@ message.channel.send(format);
           );
         
           }
+            custom.findOne(
+              { Guild: message.guild.id, command: cmd },
+              async (err, data) => {
+                if (err) throw err;
+                if (data) return message.channel.send(data.Content);
+                else return;
+              }
+            );
+          
 
 
     
