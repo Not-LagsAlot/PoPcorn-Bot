@@ -1823,7 +1823,7 @@ message.channel.send(format);
           
             const plsdonate = new Discord.MessageEmbed()
             .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special Donator role in our [support server](https://www.invite.gg/popcorn)`)
-            .setThumbnail(message.author.displayAvatarURL())
+            .setThumbnail(client.userdisplayAvatarURL())
             .setTimestamp(Date.now())
             .setFooter(`Requested by: ${message.author.tag}`)
             .setColor('CYAN')
