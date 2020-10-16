@@ -1829,9 +1829,9 @@ message.channel.send(format);
             .setTimestamp(Date.now())
             .setFooter(`Requested by: ${message.author.tag}`)
             .setColor('CYAN')
-             message.channel.send(plsdonate).then(message =>{
+             message.channel.send(plsdonate)
                message.react("💖")
-             })
+     
           }usedCommand.add(message.author.id);
           setTimeout(() => {
               usedCommand.delete(message.author.id);
