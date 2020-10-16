@@ -29,7 +29,7 @@ const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://pa
 
 const Timers = new Map();
 const configs = require('./logs.json')
-
+const custom = require("./custom")
 const fetch = require('node-fetch')
 
 const moment = require("moment");
@@ -1769,7 +1769,7 @@ message.channel.send(format);
           });
           newData.save();
           message.channel.send(
-            `Successfully created the custom command \`${args[0]}\`, to use it simply type \`${prefix}${args[0]}\``
+            `Successfully created the custom command \`${args[0]}\`, to use it simply type \`.${args[0]}\``
           );
         }
         })
