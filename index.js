@@ -11,8 +11,8 @@ mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/tes
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 
-var changes = 'Added ranking to the bot';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
+var changes = 'Added 1 new command (.donate)';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
@@ -23,7 +23,7 @@ const Artificial = '`chat`'
 const Levels = require('discord-xp')
 
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.1';
+var version = 'v5.2';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1754,6 +1754,9 @@ message.channel.send(format);
               usedCommand.delete(message.author.id);
           }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'cc-create'){
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
             if (!message.member.permissions.has("ADMINISTRATOR")){
       return message.channel.send(`You require the \`Administrator\`permission to create custom commands!`);
             }
@@ -1784,19 +1787,55 @@ message.channel.send(format);
           );
         }
         })
+      }usedCommand.add(message.author.id);
+      setTimeout(() => {
+          usedCommand.delete(message.author.id);
+      }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }
-          
+          if(usedCommand.has(message.author.id)){
+            message.reply('You cannot use the command beacuse of the cooldown.')
+        }else { 
           custom.findOne(
             { Guild: message.guild.id, Command: command },
             async (err, data) => {
               if (err) throw err;
               if (data) return message.channel.send(data.Content);
               else return;
+            
+            
 
             });
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
             if(command === "rank") {
+              if(usedCommand.has(message.author.id)){
+                message.reply('You cannot use the command beacuse of the cooldown.')
+            }else { 
               const user = await Levels.fetch(message.author.id, message.guild.id);
               message.channel.send(`You are currently level **${user.level}**!`)
+            }usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+          }else if(command === 'donate'){
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else { 
+            const plsdonate = new Discord.MessageEmbed()
+            .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special <@&752790725065965588> role in our [support server](https://www.invite.gg/popcorn)`)
+            .setThumbnail(message.author.displayAvatarURL())
+            .setTimestamp(Date.now())
+            .setFooter(`Requested by: ${message.author.tag}`)
+            .setColor('CYAN')
+             message.channel.send(plsdonate).then(message =>{
+               message.react("💖")
+             })
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }
 
 
