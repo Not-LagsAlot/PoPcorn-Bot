@@ -1820,9 +1820,7 @@ message.channel.send(format);
                 usedCommand.delete(message.author.id);
             }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'donate'){
-            if(usedCommand.has(message.author.id)){
-              message.reply('You cannot use the command beacuse of the cooldown.')
-          }else { 
+          
             const plsdonate = new Discord.MessageEmbed()
             .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special <@&752790725065965588> role in our [support server](https://www.invite.gg/popcorn)`)
             .setThumbnail(message.author.displayAvatarURL())
@@ -1832,10 +1830,7 @@ message.channel.send(format);
              message.channel.send(plsdonate)
                message.react("💖")
      
-          }usedCommand.add(message.author.id);
-          setTimeout(() => {
-              usedCommand.delete(message.author.id);
-          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+          
           }
 
 
