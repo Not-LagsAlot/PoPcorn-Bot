@@ -5,7 +5,8 @@ const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
 
-
+const mongoose = require("mongoose")
+mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
 
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
@@ -1741,9 +1742,47 @@ message.channel.send(format);
           setTimeout(() => {
               usedCommand.delete(message.author.id);
           }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
+          }else if(command === 'cc-create'){
+            if (!message.member.permissions.has("ADMINISTRATOR")){
+      return message.channel.send(`You require the \`Administrator\`permission to create custom commands!`);
+            }
+    if (!args[0])
+      return message.channel.send(`Please give a name for your custom command!`);
+    if (!args.slice(1).join(" "))
+      return message.channel.send(`Please give some message content for your custom command!`);
+    custom.findOne(
+      { Guild: message.guild.id, Command: args[0] },
+      async (err, data) => {
+        if (err) throw err;
+        if (data) {
+          data.Content = args.slice(1).join(" ");
+          data.save();
+
+          message.channel.send(
+            `Successfully updated the command \`${args[0]}\``
+          );
+        } else if (!data) {
+          let newData = new custom({
+            Guild: message.guild.id,
+            Command: args[0],
+            Content: args.slice(1).join(" "),
+          });
+          newData.save();
+          message.channel.send(
+            `Successfully created the custom command \`${args[0]}\`, to use it simply type \`${prefix}${args[0]}\``
+          );
+        }
+        })
           }
           
-            
+          custom.findOne(
+            { Guild: message.guild.id, Command: cmd },
+            async (err, data) => {
+              if (err) throw err;
+              if (data) return message.channel.send(data.Content);
+              else return;
+
+            })
 
 
     
