@@ -16,6 +16,7 @@
     "movement": "0.0.13",
     "ms": "^2.1.2",
     "node.js": "0.0.1-security",
-    "mongoose": "5.10.7"
+    "mongoose": "5.10.7",
+    "discord-xp": "1.0.6"
   }
 }

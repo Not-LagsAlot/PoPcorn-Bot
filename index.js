@@ -17,10 +17,12 @@ var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 const ccplease = `cc-create`
-
+const plslevels = '`rank`, `leaderboard/lb`'
 const prefix = '.'
 const Artificial = '`chat`'
+const Levels = require('discord-xp')
 
+Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
 var version = 'v5.0';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -138,6 +140,14 @@ if(message.author.bot){
 }
 
 
+const randomXp = Math.floor(math.random() * 9) + 1; //Random amont of XP until the number you want + 1
+    const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXp);
+    if (hasLeveledUp) {
+        const user = await Levels.fetch(message.author.id, message.guild.id);
+        message.author.send(`You leveled up to ${user.level}! in ${message.guild.name} Keep it going!`);
+    }
+    
+
 
 if(message.content.includes(`${client.user.id}`)) {
   const somerandomshithere = new Discord.MessageEmbed()
@@ -183,6 +193,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
+      .addField('Levelling', plslevels)
       .addField('Custom Commands', ccplease)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
@@ -1782,7 +1793,20 @@ message.channel.send(format);
               if (data) return message.channel.send(data.Content);
               else return;
 
-            })
+            });
+            if(command === "rank") {
+              const user = await Levels.fetch(message.author.id, message.guild.id);
+              message.channel.send(`You are currently level **${user.level}**!`)
+          }else if(command === "leaderboard" || command === "lb") {
+              const rawLeaderboard = await Levels.fetchLeaderboard(message.guild.id, 5);
+              if (rawLeaderboard.length < 1) return reply("Nobody's in leaderboard yet.");
+      
+              const leaderboard = Levels.computeLeaderboard(bot, rawLeaderboard); 
+      
+              const lb = leaderboard.map(e => `${e.position}. ${e.username}#${e.discriminator}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`);
+      
+              message.channel.send(`${lb.join("\n\n")}}`)
+          }
 
 
     
