@@ -1755,7 +1755,7 @@ message.channel.send(format);
           }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'cc-create'){
             if(usedCommand.has(message.author.id)){
-              message.reply('You cannot use the command beacuse of the cooldown.')
+             return message.reply('You cannot use the command beacuse of the cooldown.')
           }else {
             if (!message.member.permissions.has("ADMINISTRATOR")){
       return message.channel.send(`You require the \`Administrator\`permission to create custom commands!`);
@@ -1822,7 +1822,7 @@ message.channel.send(format);
           }else if(command === 'donate'){
           
             const plsdonate = new Discord.MessageEmbed()
-            .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special <@&752790725065965588> role in our [support server](https://www.invite.gg/popcorn)`)
+            .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special Donator role in our [support server](https://www.invite.gg/popcorn)`)
             .setThumbnail(message.author.displayAvatarURL())
             .setTimestamp(Date.now())
             .setFooter(`Requested by: ${message.author.tag}`)
@@ -1831,7 +1831,7 @@ message.channel.send(format);
                message.react("💖")
      
           
-          }
+          } 
 
 
     
