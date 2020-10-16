@@ -11,19 +11,19 @@ mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/tes
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 
-var changes = 'Added custom commands';
+var changes = 'Added ranking to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 const ccplease = `cc-create`
-const plslevels = '`rank`, `leaderboard/lb`'
+const plslevels = '`rank`'
 const prefix = '.'
 const Artificial = '`chat`'
 const Levels = require('discord-xp')
 
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.0';
+var version = 'v5.1';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1797,15 +1797,6 @@ message.channel.send(format);
             if(command === "rank") {
               const user = await Levels.fetch(message.author.id, message.guild.id);
               message.channel.send(`You are currently level **${user.level}**!`)
-          }else if(command === "leaderboard" || command === "lb") {
-              const rawLeaderboard = await Levels.fetchLeaderboard(message.guild.id, 5);
-              if (rawLeaderboard.length < 1) return reply("Nobody's in leaderboard yet.");
-      
-              const leaderboard = Levels.computeLeaderboard(bot, rawLeaderboard); 
-      
-              const lb = leaderboard.map(e => `${e.position}. ${e.username}#${e.discriminator}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`);
-      
-              message.channel.send(`${lb.join("\n\n")}}`)
           }
 
 
