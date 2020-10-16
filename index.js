@@ -11,17 +11,17 @@ mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/tes
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 
-var changes = 'Removed ranking, welcomer, afk, economy, custom prefix **CURRENTLY ONLY**';
+var changes = 'Added custom commands';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `afk`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-
+const ccplease = `cc-create`
 
 const prefix = '.'
 const Artificial = '`chat`'
 
-var version = 'v4.9';
+var version = 'v5.0';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -183,7 +183,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Utility', info)
       .addField('Moderation', mod)
       .addField('Fun', fun)
-    
+      .addField('Custom Commands', ccplease)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
       
