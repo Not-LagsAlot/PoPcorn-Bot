@@ -144,7 +144,7 @@ const randomXp = Math.floor(Math.random() * 9) + 1; //Random amont of XP until t
     const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXp);
     if (hasLeveledUp) {
         const user = await Levels.fetch(message.author.id, message.guild.id);
-        message.author.send(`You leveled up to ${user.level}! in ${message.guild.name} Keep it going!`);
+        message.channel.send(`You leveled up to ${user.level}! in ${message.guild.name} Keep it going!`);
     }
     
 
