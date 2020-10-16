@@ -1776,7 +1776,7 @@ message.channel.send(format);
           }
           
           custom.findOne(
-            { Guild: message.guild.id, Command: cmd },
+            { Guild: message.guild.id, Command },
             async (err, data) => {
               if (err) throw err;
               if (data) return message.channel.send(data.Content);
