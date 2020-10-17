@@ -1827,7 +1827,7 @@ message.channel.send(format);
     function isCustomEmoji(emoji) {
       return emoji.split(":").length == 1 ? false : true;
     }
-    if (!message.guild.roles.cache.has(args[2]))
+    if (!message.guild.roles.cache.has(args[1]))
       return message.channel.send(`Uh Oh it looks like that role does not exist`);
     if (isCustomEmoji(args[3]))
       return message.channel.send(`Please don't use custom emojis`);
