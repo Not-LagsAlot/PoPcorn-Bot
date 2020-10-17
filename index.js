@@ -34,8 +34,10 @@ const Timers = new Map();
 const configs = require('./logs.json')
 const custom = require("./custom")
 const fetch = require('node-fetch')
-
+const  MessageReaction = require("discord.js");
+const user = require("discord.js")
 const moment = require("moment");
+const reaction = MessageReaction
 
 
 client.snipes = new Discord.Collection();
@@ -1814,7 +1816,6 @@ message.channel.send(format);
             message.react("💕")
             message.channel.send(plsdonate)
           }else if(command === 'reactrole-add'){
-    
  
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
@@ -1824,7 +1825,8 @@ message.channel.send(format);
       return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the role ID`);
     if (!args[2])
       return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the emoji!`);
-  
+ 
+     
     if (!message.guild.roles.cache.has(args[1]))
       return message.channel.send(`Invalid role given`);
  
@@ -1835,8 +1837,8 @@ message.channel.send(format);
       new Discord.MessageEmbed({
         title: `New Reaction Role!`,
         timestamp: Date.now(),
-        description: `Reactions:
-            ${args[2]} - ${message.guild.roles.cache.get(args[1]).name}
+        description: `
+            React with ${args[2]} to get the ${message.guild.roles.cache.get(args[1]).name} role
             `.trim(),
         color: `RANDOM`,
       })
@@ -1849,14 +1851,30 @@ message.channel.send(format);
       Role: args[1],
     });
     newData.save();
-  }
+
+    let member = reaction.message.guild.members.cache.get(user.id);
+  ReactionModel.findOne(
+    {
+      Guild: reaction.message.guild.id,
+      Reaction: reaction.emoji.toString(),
+      MessageID: reaction.message.id,
+    },
+    async (err, data) => {
+      if (err) throw err;
+      if (data) {
+        if (!member.roles.cache.has(data.Role)) {
+          member.roles.add(data.Role);
+        } 
+
+      }
+    })
           
 
 
     
     
     
-
+  }
   
       });
 
