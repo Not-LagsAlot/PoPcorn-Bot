@@ -1833,9 +1833,9 @@ message.channel.send(format);
       return message.channel.send(`That is not an existing channel for this guild!`);
     const msg = await ch.send(
       new Discord.MessageEmbed({
-        setTitle: `New Reaction Role!`,
-        setTimestamp: Date.now(),
-        setDescription: `Reactions:
+        title: `New Reaction Role!`,
+        timestamp: Date.now(),
+        description: `Reactions:
             ${args[2]} - ${message.guild.roles.cache.get(args[1]).name}
             `.trim(),
         color: `RANDOM`,
