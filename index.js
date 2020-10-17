@@ -10,13 +10,14 @@ mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/tes
 
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
-
+const ReactionModel = require("./ReactRole");
+const api = require("imageapi.js");
 var changes = 'Added ranking to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
-const ccplease = `cc-create`
+const ccplease = '`cc-create`'
 const plslevels = '`rank`'
 const prefix = '.'
 const Artificial = '`chat`'
@@ -690,10 +691,15 @@ const slapped = new Discord.MessageEmbed()
           if(usedCommand.has(message.author.id)){
             message.reply('You cannot use the command beacuse of the cooldown.')
         } else {
-          var num = Math.floor(Math.random() * (500 - 1) + 1)
-
-          message.channel.send(`https://ctk-api.herokuapp.com/meme/${num}`);
-           
+          let subreddits = ["comedyheaven", "dank", "meme", "memes"];
+    let subreddit = subreddits[Math.floor(Math.random() * subreddits.length)];
+    let img = await api(subreddit, true);
+    const plsEmbed = new Discord.MessageEmbed()
+      .setTitle(`A meme from r/${subreddit}`)
+      .setURL(`https://reddit.com/r/${subreddit}`)
+      .setColor("RANDOM")
+      .setImage(img);
+    message.channel.send(plsEmbed);
             
             
             usedCommand.add(message.author.id);
@@ -1807,7 +1813,47 @@ message.channel.send(format);
             .setColor('BLUE')
             message.react("💕")
             message.channel.send(plsdonate)
-          }
+          }else if(command === 'reactrole-add'){
+    
+ 
+    if (!message.member.permissions.has("MANAGE_GUILD"))
+      return message.channel.send(`You require \`Manage Guild\` permission!`);
+    if (!args[0])
+      return message.channel.send(`Please specify a channel`);
+    if (!args[1])
+      return message.channel.send(`Please give a role`);
+    if (!args[2])
+      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the emoji!`);
+    function isCustomEmoji(emoji) {
+      return emoji.split(":").length == 1 ? false : true;
+    }
+    if (!message.guild.roles.cache.has(args[1]))
+      return message.channel.send(`Uh Oh it looks like that role does not exist`);
+    if (isCustomEmoji(args[2]))
+      return message.channel.send(`Please don't use custom emojis`);
+    let ch = message.guild.channels.cache.get(args[0]);
+    if (!ch)
+      return message.channel.send(`That is not an existing channel for this guild!`);
+    const msg = await ch.send(
+      new Discord.MessageEmbed({
+        title: `New Reaction Role!`,
+        timestamp: Date.now(),
+        description: `Reactions:
+            ${args[2]} - ${message.guild.roles.cache.get(args[1]).name}
+            `.trim(),
+        color: `RANDOM`,
+      })
+    );
+    await msg.react(args[2]);
+    const newData = new ReactionModel({
+      Guild: message.guild.id,
+      Reaction: args[2],
+      MessageID: msg.id,
+      Role: args[1],
+    });
+    newData.save();
+  }
+          
 
 
     
