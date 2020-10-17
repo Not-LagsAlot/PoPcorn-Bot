@@ -1819,16 +1819,16 @@ message.channel.send(format);
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
-      return message.channel.send(`Please specify a channel`);
+      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the channel`);
     if (!args[1])
-      return message.channel.send(`Please give a role`);
+      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the role`);
     if (!args[2])
       return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the emoji!`);
     function isCustomEmoji(emoji) {
       return emoji.split(":").length == 1 ? false : true;
     }
     if (!message.guild.roles.cache.has(args[1]))
-      return message.channel.send(`Uh Oh it looks like that role does not exist`);
+      return message.channel.send(`Invalid role given`);
     if (isCustomEmoji(args[3]))
       return message.channel.send(`Please don't use custom emojis`);
     let ch = message.guild.channels.cache.get(args[0]);
@@ -1836,9 +1836,9 @@ message.channel.send(format);
       return message.channel.send(`That is not an existing channel for this guild!`);
     const msg = await ch.send(
       new Discord.MessageEmbed({
-        title: `New Reaction Role!`,
-        timestamp: Date.now(),
-        description: `Reactions:
+        setTitle: `New Reaction Role!`,
+        setTimestamp: Date.now(),
+        setDescription: `Reactions:
             ${args[2]} - ${message.guild.roles.cache.get(args[1]).name}
             `.trim(),
         color: `RANDOM`,
