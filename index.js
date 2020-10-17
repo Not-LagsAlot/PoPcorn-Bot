@@ -1819,11 +1819,11 @@ message.channel.send(format);
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
-      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the Message ID`);
+      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the Channel ID`);
     if (!args[1])
-      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the role ID`);
+      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the role ID`);
     if (!args[2])
-      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the emoji!`);
+      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the emoji!`);
   
     if (!message.guild.roles.cache.has(args[1]))
       return message.channel.send(`Invalid role given`);
