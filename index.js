@@ -1819,18 +1819,15 @@ message.channel.send(format);
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
-      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the channel`);
+      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the Message ID`);
     if (!args[1])
-      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the role`);
+      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the role ID`);
     if (!args[2])
-      return message.channel.send(`Invalid format: \`.reactole-add #channel @Role :Emoji:\` You are missing the emoji!`);
-    function isCustomEmoji(emoji) {
-      return emoji.split(":").length == 1 ? false : true;
-    }
+      return message.channel.send(`Invalid format: \`.reactole-add MessageID RoleID :Emoji:\` You are missing the emoji!`);
+  
     if (!message.guild.roles.cache.has(args[1]))
       return message.channel.send(`Invalid role given`);
-    if (isCustomEmoji(args[3]))
-      return message.channel.send(`Please don't use custom emojis`);
+ 
     let ch = message.guild.channels.cache.get(args[0]);
     if (!ch)
       return message.channel.send(`That is not an existing channel for this guild!`);
