@@ -12,11 +12,12 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added ranking to the bot';
+var changes = 'Added reaction roles to the bot';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
+var plsreact = '`reactrole-add`'
 const ccplease = '`cc-create`'
 const plslevels = '`rank`'
 const prefix = '.'
@@ -197,6 +198,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Fun', fun)
       .addField('Levelling', plslevels)
       .addField('Custom Commands', ccplease)
+      .addField('Reaction Roles', plsreact)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
       
@@ -1881,6 +1883,26 @@ message.channel.send(format);
             }
           }
         );
+      })
+
+      client.on("messageReactionRemove", async (reaction, user) =>{
+        let member = reaction.message.guild.members.cache.get(user.id);
+  ReactionModel.findOne(
+    {
+      Guild: reaction.message.guild.id,
+      Reaction: reaction.emoji.toString(),
+      MessageID: reaction.message.id,
+    },
+    async (err, data) => {
+      if (err) throw err;
+      if (data) {
+        if (member.roles.cache.has(data.Role)) {
+          member.roles.remove(data.Role);
+        } else {
+        }
+      }
+    }
+  );
       })
       
 
