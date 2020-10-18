@@ -25,7 +25,7 @@ const Artificial = '`chat`'
 const Levels = require('discord-xp')
 
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.2';
+var version = 'v5.3';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
