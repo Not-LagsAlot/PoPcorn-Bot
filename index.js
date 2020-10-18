@@ -29,15 +29,14 @@ const { badwords } = require("./swear.json")
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-
+const MessageReaction = require("discord.js")
+const user = require("discord.js")
 const Timers = new Map();
 const configs = require('./logs.json')
 const custom = require("./custom")
 const fetch = require('node-fetch')
-const  MessageReaction = require("discord.js");
-const user = require("discord.js")
 const moment = require("moment");
-const reaction = MessageReaction
+
 
 
 client.snipes = new Discord.Collection();
@@ -1862,7 +1861,7 @@ message.channel.send(format);
   
       });
 
-      client.on("messageReactionAdd", async reaction =>{
+      client.on("messageReactionAdd", async (reaction, user) =>{
 
 
         let member = reaction.message.guild.members.cache.get(user.id);
