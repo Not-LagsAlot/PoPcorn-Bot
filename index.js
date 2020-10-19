@@ -177,8 +177,37 @@ if(message.content.includes(`${client.user.id}`)) {
 
 
 
+  if(message.guild.me.hasPermission("EMBED_LINKS")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
+
+  if(message.guild.me.hasPermission("MANAGE_ROLES")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
+
+  if(message.guild.me.hasPermission("SEND_MESSAGES")){
+    return message.author.send("Hmm it appears that I dont have the permissions to send messages in the channel")
+  }
+
+  if(message.guild.me.hasPermission("MANAGE_MESSAGES")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
+
+  if(message.guild.me.hasPermission("MANAGE_CHANNELS")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
+
+  if(message.guild.me.hasPermission("MANAGE_NICKNAMES")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
+
+  if(message.guild.me.hasPermission("ADMINISTRATOR")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
   
-  
+  if(message.guild.me.hasPermission("ADD_REACTIONS")){
+    return message.channel.send("Hmm it appears that I dont have the right permissions to run that command do I?")
+  }
 
   if (command === 'ping') {
   message.channel.send('Pinging...').then(message =>{
