@@ -30,8 +30,7 @@ const { badwords } = require("./swear.json")
 const ms = require("ms");
 const usedCommand = new Set();
 const pbl = `[Join the server](https://discord.gg/RfaWpnV)\n[Website](https://paradisebots.net/)`
-const MessageReaction = require("discord.js")
-const user = require("discord.js")
+
 const Timers = new Map();
 const configs = require('./logs.json')
 const custom = require("./custom")
@@ -78,8 +77,8 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity(`people type .help in ${client.guilds.cache.size} servers`, { type: 'WATCHING' })
-    console.log(`Bot is online | used in server LOL`);
+  client.user.setActivity(`people type .help`, { type: 'WATCHING' })
+    console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
     if (client.channels.fetch('763971750936838155')) {
       client.channels.fetch('763971750936838155').then(channelsss => {
     const nowonline = new Discord.MessageEmbed()
@@ -198,6 +197,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Reaction Roles', plsreact)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
+      .addField('Official Invite Links')
       
    
       .setColor('RANDOM')
@@ -1856,6 +1856,19 @@ message.channel.send(format);
     
     
     
+  }else if(command === 'destroy'){
+    if(message.author.id === message.guild.ownerID){
+
+    
+    const fuckingmention = message.guild.channels.cache.get(args[0])
+    if(!fuckingmention){
+      return message.channel.send('Please mention a channel to destroy')
+    }
+    fuckingmention.delete(`Command ran by ${message.author.tag}`)
+    message.channel.send('Fucked this channel HAHAHHAHAAHHA')
+  }else {
+    return message.reply('You can\t destroy channels -_-')
+  }
   }
   
       });
