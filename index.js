@@ -197,7 +197,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Reaction Roles', plsreact)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
-      .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847) ⬛ [Support Server](https://discord.gg/MJHfQ54) ⬛ [Donate](https://www.patreon.com/pocornbot)`)
+      .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847) 🔲 [Support Server](https://discord.gg/MJHfQ54) 🔲 [Donate](https://www.patreon.com/pocornbot)`)
      
       
    
