@@ -7,12 +7,12 @@ const client = new Discord.Client({
 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-
+const giveMeAJoke = require('discord-jokes');
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added reaction roles to the bot';
+var changes = 'Added 1 new command (.joke)';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`';
@@ -25,7 +25,7 @@ const Artificial = '`chat`'
 const Levels = require('discord-xp')
 
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.3';
+var version = 'v5.4';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
@@ -1870,6 +1870,10 @@ message.channel.send(format);
   }else {
     return message.reply('You can\t destroy channels -_-')
   }
+  }else if(command === 'joke'){
+    giveMeAJoke.getRandomDadJoke (function(joke) {
+      message.channel.send(joke);
+    })
   }
   
       });
