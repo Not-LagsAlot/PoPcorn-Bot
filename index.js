@@ -13,7 +13,7 @@ const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
 var changes = 'Added 1 new command (.joke)';
-var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `serverinfo`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
+var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
@@ -77,7 +77,7 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity(`people type .help`, { type: 'WATCHING' })
+  client.user.setActivity(`.help`, { type: "STREAMING" })
     console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
     if (client.channels.fetch('763971750936838155')) {
       client.channels.fetch('763971750936838155').then(channelsss => {
@@ -272,8 +272,8 @@ if(message.content.includes(`${client.user.id}`)) {
   } else {
 
     if (!message.member.permissions.has("MANAGE_MESSAGES")) // sets the permission
-    return message.channel.send(
-        `You do not have correct permissions to do this action, ${message.author.username}` // returns this message to user with no perms
+    return message.reply(
+        `You do not have correct permissions to do this action` // returns this message to user with no perms
     );
 if (!args[0]) {
     return message.channel.send(`Please enter a amount 1 to 100`)
@@ -286,16 +286,10 @@ if (parseInt(args[0]) > 100 ) {
 } else {
     deleteAmount = parseInt(args[0]);
 }
-
+await message.delete()
 await message.channel.bulkDelete(deleteAmount, true);
 
-const embed = new Discord.MessageEmbed()
-    .setTitle(`${message.author.username}`)
-    .setThumbnail(message.author.displayAvatarURL())
-    .setDescription(`Successfully deleted ${deleteAmount} message(s)`)
-    .setFooter(message.author.username, message.author.displayAvatarURL())
-    .setColor('#f2f2f2')
-await message.channel.send(embed)
+await message.channel.send(`:thumbsup: I have succesfully deleted \`${deleteAmount} message(s)\``)
     
       
       
@@ -361,7 +355,7 @@ const slapped = new Discord.MessageEmbed()
     message.channel.send(user);
 
   }else if(command === 'serverinfo'){
-    let icon = message.guild.iconURL({size: 2048}); // Server Avatar
+    let icon = message.guild.iconURL({dyamic: true}); // Server Avatar
     
     let region = {
       "brazil": "Brazil",
@@ -737,7 +731,7 @@ const slapped = new Discord.MessageEmbed()
           let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
           let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
           let status = user.presence.status;
-          let avatar = user.avatarURL({size: 2048}); // Use 2048 for high quality avatar.
+          let avatar = user.avatarURL({dyamic: true}); // Use 2048 for high quality avatar.
           
           const embed = new Discord.MessageEmbed()
           .setAuthor(user.tag, avatar)
