@@ -77,7 +77,7 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity(`.help`, { type: "STREAMING" })
+  client.user.setActivity(`.help`, { type: "STREAMING", url: "https://www.twitch.tv/monstercat" })
     console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
     if (client.channels.fetch('763971750936838155')) {
       client.channels.fetch('763971750936838155').then(channelsss => {
