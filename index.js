@@ -46,7 +46,7 @@ client.snipes = new Discord.Collection();
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
 
-
+const Captcha = require("@haileybot/captcha-generator");
 
 
 
@@ -94,8 +94,47 @@ client.once('ready', () => {
     
     }
 })
-client.on('inviteCreate', async invite => guildInvites.set(invite.guild.id, await invite.guild.fetchInvites()));
+client.on("guildMemberAdd", async (member) => {
+  let captcha = new Captcha()
+  const channel = member.guild.channels.cache.find((x) => x.name === "verify")
+  
+  if(!channel) {
+   return 
+  }
 
+  
+  const vrole = member.guild.roles.cache.find((x) => x.name === "non-verified")
+  
+  if(!vrole) {
+ return 
+}
+member.roles.add(vrole)
+  
+  const verifycode = await channel.send("Please Type The Given Code For Verification",
+               new Discord.MessageAttachment(captcha.PNGStream, "captcha.png"))
+               let collector = channel.createMessageCollector(m => m.author.id === member.id)
+  
+  collector.on("collect", m => {
+    if(m.content.toUpperCase() === captcha.value) {
+     m.delete()
+      verifycode.delete()
+      member.roles.remove(vrole)
+      return member.send("NOW YOU ARE VERIFIED MEMBER :)")
+    } else if(m.content.toUpperCase() !== captcha.value) {
+      member.send("You gave wrong code, so you can apply again by joining server again")
+      verifycode.delete()
+      m.delete()
+      
+      setTimeout(function() {
+              member.kick()
+      }, 3000)
+        
+    } else {
+      verifycode.delete()
+    }
+  })
+
+  })
 client.on("messageUpdate", async (oldMessage, newMessage) => {
   if(oldMessage.author.bot) return
   const something = `<#${oldMessage.channel.id}>`
@@ -485,7 +524,7 @@ const slapped = new Discord.MessageEmbed()
   
     let kickedf= new Discord.MessageEmbed()
     
-        .setDescription(`***Successfully banned ${successfullybanned} (\`${successfullybanned.id}\`) ***`)
+        .setDescription(`***Successfully banned ${successfullybanned.user.tag} (\`${successfullybanned.id}\`)***`)
         .setColor(0x15daea)
         .setFooter(`banned by ${message.author.tag}`)
         message.channel.send(kickedf);
@@ -571,7 +610,7 @@ const slapped = new Discord.MessageEmbed()
   memberssssss.kick(reason)
 
   let kickedf = new Discord.MessageEmbed()
-      .setDescription(`***Successfully kicked ${memberssssss} (\`${memberssssss.id}\`) ***`)
+      .setDescription(`***Successfully kicked ${memberssssss.user.tag} (\`${memberssssss.id}\`) ***`)
       .setColor(0x15daea)
       .setFooter(`kicked by ${message.author.tag}`)
       message.channel.send(kickedf);
@@ -1888,8 +1927,36 @@ message.channel.send(format);
         let image = await canvacord.Canvas.trigger(avatar);
         let triggered = new Discord.MessageAttachment(image, "triggered.gif");
         return message.channel.send(triggered);
+  }else if(command === 'verification-enable'){
+   message.channel.send('OK! I have now begun the verification system, But wait! While I am doing the setup can you please create a text channel with the name of `verify` PLEASE PLEASE :pleading_face:')
+   const plsdoit = await message.guild.roles.create({
+      data: {
+        name: 'non-verified',
+        color: "#222222",
+        permissions: []
+      }
+    })
+    message.guild.channels.cache.forEach(async (channel, id) => {
+      await channel.updateOverwrite(plsdoit, {
+      CREATE_INSTANT_INVITE: false,
+      ADD_REACTIONS: false,
+      STREAM: false,
+      SEND_MESSAGES: false,
+      SEND_TTS_MESSAGES: false,
+      ATTACH_FILES: false,
+      READ_MESSAGE_HISTORY: false,
+      MENTION_EVERYONE: false,
+      USE_EXTERNAL_EMOJIS: false,
+      CONNECT: false,
+      SPEAK: false,
+      USE_VAD: false,
+      CHANGE_NICKNAME: false
+      })
+      })
+
   }
-  
+
+
       });
 
       client.on("messageReactionAdd", async (reaction, user) =>{
