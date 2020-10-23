@@ -28,7 +28,7 @@ const Levels = require('discord-xp')
 const canvas = require("discord-canvas"),
   shop = new canvas.FortniteShop();
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.4';
+var version = 'v5.5';
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
 const usedCommand = new Set();
