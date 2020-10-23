@@ -119,18 +119,18 @@ member.roles.add(vrole)
      m.delete()
       verifycode.delete()
       member.roles.remove(vrole)
-      return member.send("NOW YOU ARE VERIFIED MEMBER :)")
+      return member.send("You are succesfully verified!")
     } else if(m.content.toUpperCase() !== captcha.value) {
       member.send("You gave wrong code, so you can apply again by joining server again")
       verifycode.delete()
       m.delete()
       
       setTimeout(function() {
-              member.kick()
+           return  member.kick()
       }, 3000)
         
     } else {
-      verifycode.delete()
+      return verifycode.delete()
     }
   })
 
