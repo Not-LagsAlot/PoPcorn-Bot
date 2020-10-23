@@ -110,9 +110,9 @@ client.on("guildMemberAdd", async (member) => {
 }
 member.roles.add(vrole)
   
-  const verifycode = await channel.send("Please Type The Given Code For Verification",
+  const verifycode = await member.send("Please Type The Given Code For Verification",
                new Discord.MessageAttachment(captcha.PNGStream, "captcha.png"))
-               let collector = channel.createMessageCollector(m => m.author.id === member.id)
+               let collector = member.createMessageCollector(m => m.author.id === member.id)
   
   collector.on("collect", m => {
     if(m.content.toUpperCase() === captcha.value) {
@@ -775,7 +775,7 @@ const slapped = new Discord.MessageEmbed()
           let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
           let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
           let status = user.presence.status;
-          let avatar = user.avatarURL({dyamic: true}); // Use 2048 for high quality avatar.
+          let avatar = user.avatarURL({dyamic: true, format: 'png', format: "gif"}); // Use 2048 for high quality avatar.
           
           const embed = new Discord.MessageEmbed()
           .setAuthor(user.tag, avatar)
@@ -1928,6 +1928,9 @@ message.channel.send(format);
         let triggered = new Discord.MessageAttachment(image, "triggered.gif");
         return message.channel.send(triggered);
   }else if(command === 'verification-enable'){
+    if(!message.member.hasPermission(('MANAGE_ROLES', 'MANAGE_CHANNELS'))){
+      return message.channel.send('Hey! You don\'t have the correct permissions to setup verification')
+    }
    message.channel.send('OK! I have now begun the verification system, But wait! While I am doing the setup can you please create a text channel with the name of `verify` PLEASE PLEASE :pleading_face:')
    const plsdoit = await message.guild.roles.create({
       data: {
@@ -1950,10 +1953,15 @@ message.channel.send(format);
       CONNECT: false,
       SPEAK: false,
       USE_VAD: false,
-      CHANGE_NICKNAME: false
+      CHANGE_NICKNAME: false,
+      VIEW_CHANNEL: false
       })
       })
 
+  }else if(command === 'verification-disable'){
+    message.channel.send(
+      'Just delete the role and the channel smh'
+    )
   }
 
 
