@@ -1872,17 +1872,13 @@ message.channel.send(format);
   }else if(command === 'fortnite-shop'){
     
   
-let image = await shop
-  .setToken("3dc831fd-935c-4ff9-aaa8-3ef8fed7786c")
-  .toAttachment()
-  .setText("header", "FORTNITE ITEMS SHOP")
-  .setText("daily", "DAILY")
-  .setText("featured", "FEATURED")
-  .setText("date", "Fortnite shop of {date}")
-  .setBackground("https://i.redd.it/2mft3e5fkks11.jpg")
-  let attachment = new Discord.Attachment(image, "FortniteShop.png");
-
-message.channel.send(attachment);
+    let image = await shop
+    .setToken("3dc831fd-935c-4ff9-aaa8-3ef8fed7786c")
+    .toAttachment();
+  
+  let attachment = new Discord.MessageAttachment(image, "FortniteShop.png");
+  
+  message.channel.send(attachment);
   }
   
       });
