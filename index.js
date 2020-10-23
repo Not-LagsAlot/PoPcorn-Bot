@@ -1817,17 +1817,17 @@ message.channel.send(format);
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
-      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the Channel ID`);
+      return message.channel.send(`Invalid format: \`.reactole-add #Channel @RoleI :Emoji:\` You are missing the Channel`);
     if (!args[1])
-      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the role ID`);
+      return message.channel.send(`Invalid format: \`.reactole-add ChannelID @Role :Emoji:\` You are missing the role`);
     if (!args[2])
-      return message.channel.send(`Invalid format: \`.reactole-add ChannelID RoleID :Emoji:\` You are missing the emoji!`);
+      return message.channel.send(`Invalid format: \`.reactole-add ChannelID @Role :Emoji:\` You are missing the emoji!`);
  
      
-    if (!message.guild.roles.cache.has(args[1]))
+    if (!message.mentions.roles.first())
       return message.channel.send(`Invalid role given`);
  
-    let ch = message.guild.channels.cache.get(args[0]);
+    let ch = message.mentions.channels.first()
     if (!ch)
       return message.channel.send(`That is not an existing channel for this guild!`);
     const msg = await ch.send(
