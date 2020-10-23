@@ -12,7 +12,7 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added 1 new command (.joke)';
+var changes = 'Added 1 new command (.fortnite-shop)';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
@@ -20,7 +20,9 @@ var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
 const ccplease = '`cc-create`'
 const plslevels = '`rank`'
+const thatsfortnite = '`fortnite-shop`'
 const prefix = '.'
+const canvacord = require("canvacord");
 const Artificial = '`chat`'
 const Levels = require('discord-xp')
 const canvas = require("discord-canvas"),
@@ -196,6 +198,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Levelling', plslevels)
       .addField('Custom Commands', ccplease)
       .addField('Reaction Roles', plsreact)
+      .addField('Fortnite', thatsfortnite)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
       .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847) 🔴 [Support Server](https://discord.gg/MJHfQ54) 🔴 [Donate](https://www.patreon.com/pocornbot)`)
@@ -1879,6 +1882,11 @@ message.channel.send(format);
   let attachment = new Discord.MessageAttachment(image, "FortniteShop.png");
   
   message.channel.send(attachment);
+  }else if(command === 'trigger'){
+    let avatar = message.author.displayAvatarURL({ dynamic: false, format: 'png' });
+        let image = await canvacord.Canvas.trigger(avatar);
+        let triggered = new Discord.MessageAttachment(image, "triggered.gif");
+        return message.channel.send(triggered);
   }
   
       });
