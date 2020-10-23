@@ -46,7 +46,7 @@ client.snipes = new Discord.Collection();
 var report = '**Command:** ban\n**Expected:** Give me a prompt\n**Error:** Didn\'t give me the prompt';
 
 
-const Captcha = require("haileybot/captcha-generator");
+const Captcha = require("@haileybot/captcha-generator");
 
 
 
