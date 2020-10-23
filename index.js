@@ -241,6 +241,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Fortnite', thatsfortnite)
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
+      .addField('Verification', uwilldoit)
       .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847) 🔴 [Support Server](https://discord.gg/MJHfQ54) 🔴 [Donate](https://www.patreon.com/pocornbot)`)
      
       
