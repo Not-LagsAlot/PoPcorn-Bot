@@ -23,7 +23,8 @@ const plslevels = '`rank`'
 const prefix = '.'
 const Artificial = '`chat`'
 const Levels = require('discord-xp')
-
+const canvas = require("discord-canvas"),
+  shop = new canvas.FortniteShop();
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
 var version = 'v5.4';
 const { badwords } = require("./swear.json") 
@@ -1868,6 +1869,20 @@ message.channel.send(format);
     giveMeAJoke.getRandomDadJoke (function(joke) {
       message.channel.send(joke);
     })
+  }else if(command === 'fortnite-shop'){
+    
+  
+let image = await shop
+  .setToken("3dc831fd-935c-4ff9-aaa8-3ef8fed7786c")
+  .toAttachment()
+  .setText("header", "FORTNITE ITEMS SHOP")
+  .setText("daily", "DAILY")
+  .setText("featured", "FEATURED")
+  .setText("date", "Fortnite shop of {date}")
+  .setBackground("https://i.redd.it/2mft3e5fkks11.jpg")
+  let attachment = new Discord.Attachment(image, "FortniteShop.png");
+
+message.channel.send(attachment);
   }
   
       });

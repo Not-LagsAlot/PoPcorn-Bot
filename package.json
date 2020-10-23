@@ -19,6 +19,7 @@
     "mongoose": "5.10.7",
     "discord-xp": "1.0.6",
     "imageapi.js": "1.0.17",
-    "discord-jokes": "1.0.12"
+    "discord-jokes": "1.0.12",
+    "canvacord": "5.0.7"
   }
 }
