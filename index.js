@@ -110,9 +110,9 @@ client.on("guildMemberAdd", async (member) => {
 }
 member.roles.add(vrole)
   
-  const verifycode = await member.send("Please Type The Given Code For Verification",
+  const verifycode = await channel.send("Please Type The Given Code For Verification",
                new Discord.MessageAttachment(captcha.PNGStream, "captcha.png"))
-               let collector = member.createMessageCollector(m => m.author.id === member.id)
+               let collector = channel.createMessageCollector(m => m.author.id === member.id)
   
   collector.on("collect", m => {
     if(m.content.toUpperCase() === captcha.value) {
@@ -1953,8 +1953,7 @@ message.channel.send(format);
       CONNECT: false,
       SPEAK: false,
       USE_VAD: false,
-      CHANGE_NICKNAME: false,
-      VIEW_CHANNEL: false
+      CHANGE_NICKNAME: false
       })
       })
 
