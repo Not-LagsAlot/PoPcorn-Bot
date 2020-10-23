@@ -484,6 +484,7 @@ const slapped = new Discord.MessageEmbed()
     successfullybanned.ban(reason)
   
     let kickedf= new Discord.MessageEmbed()
+    
         .setDescription(`***Successfully banned ${successfullybanned} (\`${successfullybanned.id}\`) ***`)
         .setColor(0x15daea)
         .setFooter(`banned by ${message.author.tag}`)
@@ -1817,25 +1818,25 @@ message.channel.send(format);
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
-      return message.channel.send(`Invalid format: \`.reactole-add #Channel @RoleI :Emoji:\` You are missing the Channel`);
+      return message.channel.send(`Invalid format: \`.reactole-add #Channel RoleID :Emoji:\` You are missing the Channel`);
     if (!args[1])
-      return message.channel.send(`Invalid format: \`.reactole-add ChannelID @Role :Emoji:\` You are missing the role`);
+      return message.channel.send(`Invalid format: \`.reactole-add #Channel roleID :Emoji:\` You are missing the role`);
     if (!args[2])
-      return message.channel.send(`Invalid format: \`.reactole-add ChannelID @Role :Emoji:\` You are missing the emoji!`);
+      return message.channel.send(`Invalid format: \`.reactole-add #Channel RoleID :Emoji:\` You are missing the emoji!`);
  
      
-    if (!message.mentions.roles.first())
-      return message.channel.send(`Invalid role given`);
+    if (!message.guild.roles.cache.has(args[1]))
+      return message.channel.send(`Invalid roleID provided`);
  
     let ch = message.mentions.channels.first()
     if (!ch)
-      return message.channel.send(`That is not an existing channel for this guild!`);
+      return message.channel.send(`Invalid channel has been provided!`);
     const msg = await ch.send(
       new Discord.MessageEmbed({
         title: `New Reaction Role!`,
         timestamp: Date.now(),
         description: `
-            React with ${args[2]} to get the ${message.guild.roles.cache.get(args[1]).name} role
+            React with ${args[2]} to get the ${message.guild.roles.cache.get(args[1])} role
             `.trim(),
         color: `RANDOM`,
       })
