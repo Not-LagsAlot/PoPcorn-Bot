@@ -12,13 +12,13 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added user verification system';
+var changes = 'Added 1 new command `.cc-update`';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
-const ccplease = '`cc-create`'
+const ccplease = '`cc-create`, `cc-update`'
 const plslevels = '`rank`'
 const thatsfortnite = '`fortnite-shop`'
 const prefix = '.'
@@ -28,7 +28,7 @@ const Levels = require('discord-xp')
 const canvas = require("discord-canvas"),
   shop = new canvas.FortniteShop();
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.6';
+var version = 'v5.7';
 const uwilldoit = '`verification-enable`, `verification-disable`'
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -522,7 +522,7 @@ const slapped = new Discord.MessageEmbed()
     let reason = args.slice(1).join(' ');
     if (!reason) reason = `No reason provided`;
   
-    successfullybanned.ban(reason)
+    successfullybanned.ban({reason: reason})
   
     let kickedf= new Discord.MessageEmbed()
     
@@ -1078,7 +1078,30 @@ if (number == 7) {
     
     
       if(!muterole) {
-      return message.channel.send("This server do not have role with name `muted`, make sure to deny send message permission for the role")
+        muterole = await message.guild.roles.create({
+          data:{ 
+          name: "muted",
+          color: "#222222",
+          permissions: []
+          }
+          })
+          message.guild.channels.cache.forEach(async (channel, id) => {
+          await channel.updateOverwrite(muterole, {
+          CREATE_INSTANT_INVITE: true,
+          ADD_REACTIONS: false,
+          STREAM: false,
+          SEND_MESSAGES: false,
+          SEND_TTS_MESSAGES: false,
+          ATTACH_FILES: false,
+          READ_MESSAGE_HISTORY: true,
+          MENTION_EVERYONE: false,
+          USE_EXTERNAL_EMOJIS: true,
+          CONNECT: false,
+          SPEAK: false,
+          USE_VAD: false,
+          CHANGE_NICKNAME: true
+          })
+        })
     }
     if(user.roles.cache.has(muterole)) {
       return message.channel.send("Given User is already muted")
@@ -1785,6 +1808,7 @@ message.channel.send(format);
           .setDescription(`The current Uptime is: ${dDay} ${dHour} ${dMinute} ${dSecond}`)
           .setColor('RED')
           message.channel.send(plsuptime)
+        
           }usedCommand.add(message.author.id);
           setTimeout(() => {
               usedCommand.delete(message.author.id);
@@ -1812,14 +1836,7 @@ message.channel.send(format);
       { Guild: message.guild.id, Command: args[0] },
       async (err, data) => {
         if (err) throw err;
-        if (data) {
-          data.Content = args.slice(1).join(" ");
-          data.save();
-
-          message.channel.send(
-            `Successfully updated the command \`${args[0]}\``
-          );
-        } else if (!data) {
+         else if (!data) {
           let newData = new custom({
             Guild: message.guild.id,
             Command: args[0],
@@ -1866,7 +1883,7 @@ message.channel.send(format);
       return message.channel.send(`Invalid format: \`.reactole-add #Channel RoleID :Emoji:\` You are missing the emoji!`);
  
      
-    if (!message.guild.roles.cache.has(args[1]))
+    if (!message.mentions.roles.find())
       return message.channel.send(`Invalid roleID provided`);
  
     let ch = message.mentions.channels.first()
@@ -1955,14 +1972,34 @@ message.channel.send(format);
       CONNECT: false,
       SPEAK: false,
       USE_VAD: false,
-      CHANGE_NICKNAME: false
+      CHANGE_NICKNAME: false,
+      VIEW_CHANNEL: false
       })
+     
       })
 
   }else if(command === 'verification-disable'){
+    const letsdelete = message.guild.roles.cache.find((x) => x.name === "non-verified")
+
+    message.guild.roles.cache.delete(letsdelete)
+
     message.channel.send(
-      'Just delete the role and the channel smh'
+      'Succesfully deleted the role'
     )
+  }else if(command === 'cc-update'){
+    async (err, data) => {
+      if (err) throw err;
+    if (data) {
+      data.Content = args.slice(1).join(" ");
+      data.save();
+
+      message.channel.send(
+        `Successfully updated the command \`${args[0]}\``
+      );
+    }else{
+      return message.channel.send('Uh oh it looks like I am unable to find that custom command for this guild, you can create a custom command using `.cc-create <cmd name> <cmd content>`')
+    }
+    }
   }
 
 
@@ -2009,6 +2046,8 @@ message.channel.send(format);
     }
   );
       })
+
+     
       
 
 
