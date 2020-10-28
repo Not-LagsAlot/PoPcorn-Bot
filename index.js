@@ -18,7 +18,7 @@ var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
-const ccplease = '`cc-create`, `cc-update`'
+const ccplease = '`cc-create` `cc-update`'
 const plslevels = '`rank`'
 const thatsfortnite = '`fortnite-shop`'
 const prefix = '.'
@@ -1988,23 +1988,26 @@ message.channel.send(format);
     )
   }else if(command === 'cc-update'){
     if (!args[0])
-    return message.channel.send(`Please provide the name of the custom command!`);
+    return message.channel.send(`Please provide a name of the custom command to update!`);
   if (!args.slice(1).join(" "))
-    return message.channel.send(`Please provide the content to update!`);
-    async (err, data) => {
-      if (err) throw err;
-    if (data) {
-      data.Content = args.slice(1).join(" ");
-      data.save();
+    return message.channel.send(`Please provide some new message content!`);
+    custom.findOne(
+      { Guild: message.guild.id, Command: args[0] },
+      async (err, data) => {
+        if (err) throw err;
+        if (data) {
+          data.Content = args.slice(1).join(" ");
+          data.save();
 
-      message.channel.send(
-        `Successfully updated the command \`${args[0]}\``
-      );
-    }
-    if(!data){
-      return message.channel.send('Are you sure this is an existing custom command? I cant seem to find it in my database')
-    }
-    }
+          message.channel.send(
+            `Successfully updated the command \`${args[0]}\``
+          );
+          }
+          if(!data){
+            return message.channel.send(`Unable to find the custom command for this guild. Please use \`.cc-create <cmd name> <cmd content>\` to create it and then try again. If you think this error should not be here please join our [support server](https://invite.gg/popcorn) `)
+          }
+        })
+      
   }
 
 
