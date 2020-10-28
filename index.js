@@ -1987,6 +1987,10 @@ message.channel.send(format);
       'Succesfully deleted the role'
     )
   }else if(command === 'cc-update'){
+    if (!args[0])
+    return message.channel.send(`Please provide the name of the custom command!`);
+  if (!args.slice(1).join(" "))
+    return message.channel.send(`Please provide the content to update!`);
     async (err, data) => {
       if (err) throw err;
     if (data) {
@@ -1996,8 +2000,9 @@ message.channel.send(format);
       message.channel.send(
         `Successfully updated the command \`${args[0]}\``
       );
-    }else{
-      return message.channel.send('Uh oh it looks like I am unable to find that custom command for this guild, you can create a custom command using `.cc-create <cmd name> <cmd content>`')
+    }
+    if(!data){
+      return message.channel.send('Are you sure this is an existing custom command? I cant seem to find it in my database')
     }
     }
   }
