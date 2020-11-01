@@ -1987,6 +1987,9 @@ message.channel.send(format);
       'Succesfully deleted the role'
     )
   }else if(command === 'cc-update'){
+    if (!message.member.permissions.has("ADMINISTRATOR")){
+      return message.channel.send(`You require the \`Administrator\`permission to update custom commands!`);
+            }
     if (!args[0])
     return message.channel.send(`Please provide a name of the custom command to update!`);
   if (!args.slice(1).join(" "))
@@ -2004,7 +2007,11 @@ message.channel.send(format);
           );
           }
           if(!data){
-            return message.channel.send(`Unable to find the custom command for this guild. Please use \`.cc-create <cmd name> <cmd content>\` to create it and then try again. If you think this error should not be here please join our [support server](https://invite.gg/popcorn) `)
+            const nodata = new Discord.MessageEmbed()
+            .setTitle('<:Error:772388638545281037> Invalid Custom Command')
+            .setColor('RED')
+            .setDescription(`Unable to find the custom command for this guild. Please use \`.cc-create <cmd name> <cmd content>\` to create it and then try again. If you think this error should not be here please join our [support server](https://invite.gg/popcorn) `)
+            return message.channel.send(nodata)
           }
         })
       
@@ -2060,4 +2067,4 @@ message.channel.send(format);
 
 
 
-      client.login(process.env.token); 
+    client.login(process.env.token); 
