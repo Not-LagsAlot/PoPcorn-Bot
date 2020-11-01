@@ -137,6 +137,7 @@ member.roles.add(vrole)
 
   })
 client.on("messageUpdate", async (oldMessage, newMessage) => {
+  if(oldMessage.guild.id === '756810126035255307') return
   if(oldMessage.author.bot) return
   const something = `<#${oldMessage.channel.id}>`
   try {
@@ -155,6 +156,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
   } catch (e) {}  (oldMessage, newMessage);
 });
 client.on("messageDelete", async (message) => {
+  if(message.guild.id === '756810126035255307') return 
   if(message.author.bot) return
   if (message.partial) await message.fetch();
   const content = message.content
