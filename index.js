@@ -95,6 +95,8 @@ client.once('ready', () => {
     
     }
 })
+
+
 client.on("guildMemberAdd", async (member) => {
   let captcha = new Captcha()
   const channel = member.guild.channels.cache.find((x) => x.name === "verify")
@@ -151,6 +153,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     let channel = oldMessage.guild.channels.cache.find(
       (ch) => ch.name === "message-logs"
     );
+  
     if (!channel) return;
     channel.send(updated);
   } catch (e) {}  (oldMessage, newMessage);
@@ -552,7 +555,7 @@ const slapped = new Discord.MessageEmbed()
     message.reply('You cannot use the command beacuse of the cooldown.')
 } else {
 
-  if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** you don\t have `KICK MEMBERS` permission');
+  if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** you don\'t have `KICK MEMBERS` permission');
   if (!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('**Error:** I don\'t have `KICK MEMBERS` permission');
 
   const memberssssss = message.mentions.members.first() 
@@ -779,7 +782,7 @@ const slapped = new Discord.MessageEmbed()
           let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
           let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
           let status = user.presence.status;
-          let avatar = user.avatarURL({dyamic: true, format: 'png', format: "gif"}); // Use 2048 for high quality avatar.
+          let avatar = user.avatarURL({dyamic: true}); // Use 2048 for high quality avatar.
           
           const embed = new Discord.MessageEmbed()
           .setAuthor(user.tag, avatar)
