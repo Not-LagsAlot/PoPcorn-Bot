@@ -279,12 +279,12 @@ if(message.content.includes(`${client.user.id}`)) {
       message.reply('You cannot use the command beacuse of the cooldown.')
   } else {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-      return message.channel.send('<a:aBF_CheckNo:747070419668041788> You do **NOT** have the correct permissions to run this command')
+      return message.channel.send(':x: You do **NOT** have the correct permissions to run this command')
           }
          const userwarn = message.mentions.members.first()
       
          if(!userwarn){
-           return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please state a user <a:aBF_CheckNo:747070419668041788>')
+           return message.channel.send(':x: Please state a user :x:')
            }
       
            if(message.mentions.users.first().bot) {
@@ -294,7 +294,7 @@ if(message.content.includes(`${client.user.id}`)) {
            const reasonss =  args.slice(1).join(" ")
       
            if(!reasonss){
-             return message.channel.send('<a:aBF_CheckNo:747070419668041788> Please give a reason <a:aBF_CheckNo:747070419668041788>')
+             return message.channel.send(':x: Please give a reason :x:')
            }
       
            message.channel.send(`**${userwarn}** has been warned`)
@@ -311,7 +311,7 @@ if(message.content.includes(`${client.user.id}`)) {
 
     } else if (command === 'support') {
 
-    message.channel.send('Join **PoPcorn Support** server here: https://discord.gg/MJHfQ54 ');
+    message.channel.send('Join Blaze Fire\'s support server here: https://discord.gg/8VwUPP9txw ');
   } else if (command === 'purge') {
     if(usedCommand.has(message.author.id)){
       message.reply('You cannot use the command beacuse of the cooldown.')
@@ -1253,11 +1253,11 @@ if (number == 7) {
         if (!args[1]) {
           return message.channel.send('Suggestion needs to have atleast 2 words')
       }
-      if (client.channels.fetch('735422598493503539')) {
-          client.channels.fetch('735422598493503539').then(channel => {
+      if (client.channels.fetch('773459145541419025')) {
+          client.channels.fetch('773459145541419025').then(channel => {
 
             const suggestion = new Discord.MessageEmbed()
-            .setAuthor("SUGGESTION: " + message.author.tag, message.author.avatarURL())
+            .setAuthor("SUGGESTION: " + message.author.tag, message.author.avatarURL({dynamic: true}))
              .setThumbnail(message.author.avatarURL())
                 .setColor("RANDOM")
                .setDescription(args.join(" "))
@@ -1294,7 +1294,7 @@ if (number == 7) {
 message.channel.send(format);
       }else if(command === 'check'){
 
-        var check = ["<a:aBF_CheckYes:747070401729003581> bot works", "<a:aBF_CheckNo:747070419668041788> Bot does not work properly"]
+        var check = [" bot works", ":x: Bot does not work properly"]
         var response = Math.floor(Math.random() * check.length)
 
         message.channel.send(`${check[response]}`);
