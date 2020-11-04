@@ -14,7 +14,7 @@ const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
 var changes = 'Added 1 new command `.cc-update`';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
-var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `prefix`'
+var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
 var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
@@ -81,7 +81,7 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity(`.help`, { type: "STREAMING", url: "https://www.twitch.tv/monstercat" })
+  client.user.setActivity(`${prefix}help`, { type: "STREAMING", url: "https://www.twitch.tv/monstercat" })
     console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
     if (client.channels.fetch('763971750936838155')) {
       client.channels.fetch('763971750936838155').then(channelsss => {
@@ -95,6 +95,7 @@ client.once('ready', () => {
     
     }
 })
+
 
 
 client.on("guildMemberAdd", async (member) => {
@@ -160,6 +161,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
 });
 client.on("messageDelete", async (message) => {
   if(message.guild.id === '756810126035255307') return 
+ 
   if(message.author.bot) return
   if (message.partial) await message.fetch();
   const content = message.content
@@ -247,7 +249,7 @@ if(message.content.includes(`${client.user.id}`)) {
       .addField('Artificial Intelligence', Artificial)
       .addField('GiveAway', giveaways)
       .addField('Verification', uwilldoit)
-      .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847) 🔴 [Support Server](https://discord.gg/MJHfQ54) 🔴 [Donate](https://www.patreon.com/pocornbot)`)
+      .setDescription(`[Invite](https://discord.com/oauth2/authorize?client_id=773452901666127873&permissions=8&scope=bot) - [Support Server](https://discord.gg/8VwUPP9txw)`)
      
       
    
@@ -310,12 +312,6 @@ if(message.content.includes(`${client.user.id}`)) {
     } else if (command === 'support') {
 
     message.channel.send('Join **PoPcorn Support** server here: https://discord.gg/MJHfQ54 ');
-  } else if (command === 'info') {
-    const info = new Discord.MessageEmbed()
-      .setTitle('Info')
-      .setFooter('PoPcorn bot is a discord bot made by LagsAlot#0001, this bot has many features (fun and moderation)')
-
-    message.channel.send(info);
   } else if (command === 'purge') {
     if(usedCommand.has(message.author.id)){
       message.reply('You cannot use the command beacuse of the cooldown.')
@@ -394,7 +390,7 @@ const slapped = new Discord.MessageEmbed()
       .addField("Owner:", `LagsAlot#0001`)
       .addField("Channel's:", `${client.channels.cache.size}`)
       .addField("Server's using the bot:", `${client.guilds.cache.size}`)
-      .addField("users's know PoPcorn:", `${client.users.cache.size}`)
+      .addField("users's know Blaze Fire:", `${client.users.cache.size}`)
       .addField("Created:", client.user.createdAt)
       .setFooter(
         message.member.user.username.toUpperCase(),
@@ -478,49 +474,49 @@ const slapped = new Discord.MessageEmbed()
     if (!successfullybanned) return message.reply('Please mention a user');
     if(successfullybanned.hasPermission('BAN_MEMBERS')){
       const banneds = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(banneds);
     }
     if(successfullybanned.hasPermission('KICK_MEMBERS')){
       const bannedss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedss);
     }
     if(successfullybanned.hasPermission('ADMINISTRATOR')){
       const bannedsss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedsss);
     }
     if(successfullybanned.hasPermission('MANAGE_CHANNELS')){
       const bannedssss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedssss);
     }
     if(successfullybanned.hasPermission('MANAGE_ROLES')){
       const bannedsssss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedsssss);
     }
     if(successfullybanned.hasPermission('MANAGE_MESSAGES')){
       const bannedssssss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedssssss);
     }
     if(successfullybanned.hasPermission('MANAGE_GUILD')){
       const bannedsssssss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedsssssss);
     }
     if(!successfullybanned.bannable){
       const bannedssssssss = new Discord.MessageEmbed()
-      .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot ban a moderator/administrator')
+      .setDescription(':x: You cannot ban a moderator/administrator')
       .setColor('RANDOM')
       return message.reply(bannedssssssss);
     }
@@ -561,52 +557,53 @@ const slapped = new Discord.MessageEmbed()
   const memberssssss = message.mentions.members.first() 
 
   if (!memberssssss) return message.reply('Please mention a user');
+  
   if(memberssssss.hasPermission('BAN_MEMBERS')){
     const bannedss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedss);
   }
   if(memberssssss.hasPermission('KICK_MEMBERS')){
     const bannedsss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsss);
   }
   if(memberssssss.hasPermission('ADMINISTRATOR')){
     const bannedssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssss);
   }
   if(memberssssss.hasPermission('MANAGE_CHANNELS')){
     const bannedsssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsssss);
   }
   if(memberssssss.hasPermission('MANAGE_ROLES')){
     const bannedssssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssssss);
   }
   if(memberssssss.hasPermission('MANAGE_MESSAGES')){
     const bannedsssssss = new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedsssssss);
   }
   if(memberssssss.hasPermission('MANAGE_GUILD')){
     const bannedssssssss= new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> You cannot kick a moderator/administrator')
+    .setDescription(':x: You cannot kick a moderator/administrator')
     .setColor('RANDOM')
     return message.reply(bannedssssssss);
   }
   
   if(!memberssssss.kickable){
     const bannedsssssssss= new Discord.MessageEmbed()
-    .setDescription('<a:aBF_CheckNo:747070419668041788> Due to `Role Hierarchy` I am unable to ban that user')
+    .setDescription(':x: Due to `Role Hierarchy` I am unable to ban that user')
     .setColor('RANDOM')
     return message.reply(bannedsssssssss);
   }
@@ -1304,7 +1301,7 @@ message.channel.send(format);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
       .setTitle('PoPcorn Invite')
-      .setDescription(`Ello ello! I'm quite excited you chose interest in me, down below are some very important links that help me out! Click **Bot Invite** to invite me to your server, Click **Support Server** for info how to use me, Click **top.gg, pbl or dbl** option To vote for me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=723506760299839499&scope=bot&permissions=2146958847)\n[Support server](https://discord.gg/MJHfQ54)\n[top.gg](https://top.gg/bot/723506760299839499)\n[pbl](https://paradisebots.net/bots/723506760299839499)\n[DBL](https://discordbotlist.com/bots/popcorn/upvote)`)
+      .setDescription(`Hello! I'm quite excited you chose interest in me, down below are some very important links that help me out! Click **Bot Invite** to invite me to your server, Click **Support Server** for info how to use me, Click **PBL** option To vote for me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=773452901666127873&permissions=8&scope=bot)\n[Support server](https://discord.gg/8VwUPP9txw)\n[pbl](https://paradisebots.net/bots/723506760299839499)`)
       .setColor('RANDOM')
         
         message.channel.send(invite);
