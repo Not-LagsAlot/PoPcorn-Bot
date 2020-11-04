@@ -808,7 +808,7 @@ const slapped = new Discord.MessageEmbed()
   .setTitle('Whats new!')
   .addField('Current version', version)
   .addField('Changes To The Bot', changes)
-  .setFooter(`PoPcorn Bot | Made by LagsAlot#0001`)
+  .setFooter(`Blaze Fire | Made by LagsAlot#0001`)
   .setColor('RANDOM')
   .setTimestamp(Date.now())
 
@@ -1300,7 +1300,7 @@ message.channel.send(format);
         message.channel.send(`${check[response]}`);
       }else if(command === 'invite'){
         const invite = new Discord.MessageEmbed()
-      .setTitle('PoPcorn Invite')
+      .setTitle('Blaze Fire\'s Invite')
       .setDescription(`Hello! I'm quite excited you chose interest in me, down below are some very important links that help me out! Click **Bot Invite** to invite me to your server, Click **Support Server** for info how to use me, Click **PBL** option To vote for me <a:aBF_partyblobCool:747607506892750869>\n[Bot invite](https://discord.com/oauth2/authorize?client_id=773452901666127873&permissions=8&scope=bot)\n[Support server](https://discord.gg/8VwUPP9txw)\n[pbl](https://paradisebots.net/bots/723506760299839499)`)
       .setColor('RANDOM')
         
@@ -1379,7 +1379,7 @@ message.channel.send(format);
     message.channel.send(randomvid)
   }else if(command === 'dashboard'){
     const dashbords = new Discord.MessageEmbed()
-    .setTitle('PoPcorn Bot\'s dashbord')
+    .setTitle(' Bot\'s dashbord')
     .setDescription(`[Dashboard](https://www.youtube.com/watch?v=iik25wqIuFo)`)
     .setColor('RANDOM')
     message.channel.send(dashbords);
@@ -1566,7 +1566,7 @@ message.channel.send(format);
     }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
     }else if(command === 'partners'){
       const partners = new Discord.MessageEmbed()
-      .setTitle('PoPcorn Partners')
+      .setTitle('Blaze Fire\'s Partners')
       .addField('PBL | Paradise Bot\'s list', pbl)
       .setColor('RANDOM')
       message.channel.send(partners);
@@ -1866,7 +1866,7 @@ message.channel.send(format);
           }else if(command === 'donate'){
             
             const plsdonate = new Discord.MessageEmbed()
-            .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for popcorn by clicking [here](https://www.patreon.com/pocornbot). In addition donating also gives you a special Donator role in our [support server](https://www.invite.gg/popcorn)`)
+            .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for Blaze Fire by clicking [here](https://www.patreon.com/blazediscord). In addition donating also gives you a special Donator role in our [support server](https://discord.gg/8VwUPP9txw)`)
             .setThumbnail(message.author.displayAvatarURL())
             .setTimestamp(Date.now())
             .setFooter(`Requested by: ${message.author.tag}`)
