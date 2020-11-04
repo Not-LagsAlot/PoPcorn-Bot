@@ -2012,7 +2012,7 @@ message.channel.send(format);
             const nodata = new Discord.MessageEmbed()
             .setTitle('<:Error:772388638545281037> Invalid Custom Command')
             .setColor('RED')
-            .setDescription(`Unable to find the custom command for this guild. Please use \`.cc-create <cmd name> <cmd content>\` to create it and then try again. If you think this error should not be here please join our [support server](https://invite.gg/popcorn) `)
+            .setDescription(`Unable to find the custom command for this guild. Please use \`.cc-create <cmd name> <cmd content>\` to create it and then try again. If you think this error should not be here please join our [support server](https://discord.gg/8VwUPP9txw) `)
             return message.channel.send(nodata)
           }
         })
