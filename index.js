@@ -401,6 +401,18 @@ const slapped = new Discord.MessageEmbed()
     message.channel.send(user);
 
   }else if(command === 'serverinfo'){
+    if(message.guild.verificationLevel === "NONE") {
+      verifLevel = 'None'
+  } else if (message.guild.verificationLevel === "LOW") {
+      verifLevel = 'Low'
+  } else if(message.guild.verificationLevel === "MEDIUM") {
+      verifLevel = 'Medium'
+  } else if(message.guild.verificationLevel === "HIGH") {
+      verifLevel = 'High'
+  } else if(message.guild.verificationLevel === "VERY_HIGH") {
+      verifLevel = 'Very High'
+  }
+
     const server = new Discord.MessageEmbed()
     .setColor('RANDOM')
     .setImage(message.guild.iconURL)
@@ -411,9 +423,12 @@ const slapped = new Discord.MessageEmbed()
     .addField('Verification Level:', `${message.guild.verificationLevel}`, true)
     .addField(`Is verified?:`, `${message.guild.verified}`, true)
     .addField('Region:', `${message.guild.region}`, true)
-    .addField(`Number of emotes:`, `${message.guild.emojis.cache.size}`, true)
-    .addField(`Amount of channels`, `${message.guild.channels.cache.size}`, true)
-    .addField('Amount of roles', `${message.guild.roles.cache.size}`, true)
+    .addField(`Channel count`, `${message.guild.channels.cache.size}`, true)
+    .addField('Role count', `${message.guild.roles.cache.size}`, true)
+    .addField(`Emoji count`, `${message.guild.emojis.cache.size}`, true)
+    if(!message.guild.vanityURLCode === null) {
+      server.addField("Vanity Invite URL:", `${message.guild.vanityURLCode}`)
+  }
 
     message.channel.send(server)
 
