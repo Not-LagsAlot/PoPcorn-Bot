@@ -712,7 +712,7 @@ const slapped = new Discord.MessageEmbed()
             message.reply('You cannot use the command beacuse of the cooldown.')
         } else {
           let user = message.mentions.users.first() || message.author
-          let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
+          
           function game() {
             let game;
             if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
@@ -722,7 +722,6 @@ const slapped = new Discord.MessageEmbed()
           
         const plsuserinfo = new Discord.MessageEmbed()
         .setAuthor(`${user.username}${user.discriminator}`)
-        .addField("Nickname", nickname, true)
         .addField("Username", `${user.username}`, true)
         .addField("Discriminator/Tag", `\`#${user.discriminator}\``, true)
         .addField("ID:", `\`${user.id}\``, true)
