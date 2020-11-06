@@ -413,6 +413,7 @@ const slapped = new Discord.MessageEmbed()
     .addField('Region:', `\`${message.guild.region}\``, true)
     .addField(`Number of emotes:`, `\`${message.guild.emojis.cache.size}\``, true)
     .addField(`number of roles:`, `\`${message.guild.roles.cache.size}\``, true)
+    message.channel.send(server)
 
   }else if(command === 'ban'){
     
@@ -732,7 +733,8 @@ const slapped = new Discord.MessageEmbed()
         .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
         .setColor('RANDOM')
         message.channel.send(plsuserinfo)
-    }
+        
+    
             usedCommand.add(message.author.id);
             setTimeout(() => {
                 usedCommand.delete(message.author.id);
