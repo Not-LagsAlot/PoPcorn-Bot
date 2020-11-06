@@ -1956,6 +1956,19 @@ message.channel.send(format);
           }
         })
       
+  }else if(command === 'shutdown'){
+    if(message.author.id === '642308656217456641'){
+      message.channel.send('Shutting down the bot...')
+      message.react("✅").then(
+        process.exit()
+    );
+    }else{
+      const assholenorestart = new Discord.MessageEmbed()
+      .setTitle('<:PokemonGoError:774138046404100106> You **CANNOT** shutdown the bot')
+      .setDescription('You need to be a dev in order to shutdown!')
+      .setColor('RED')
+      message.channel.send(assholenorestart)
+    }
   }
 
 
