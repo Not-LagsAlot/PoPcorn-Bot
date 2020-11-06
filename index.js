@@ -401,63 +401,18 @@ const slapped = new Discord.MessageEmbed()
     message.channel.send(user);
 
   }else if(command === 'serverinfo'){
-    let icon = message.guild.iconURL({dyamic: true}); // Server Avatar
-    
-    let region = {
-      "brazil": "Brazil",
-      "eu-central": "Central Europe",
-      "singapore": "Singapore",
-      "london": "London",
-      "russia": "Russia",
-      "japan": "Japan",
-      "hongkong": "Hongkong",
-      "sydney": "Sydney",
-      "us-central": "U.S. Central",
-      "us-east": "U.S. East",
-      "us-south": "U.S. South",
-      "us-west": "U.S. West",
-      "eu-west": "Western Europe",
-      "india": "India",
-      "europe": "Europe"
-    }
-    
-    // Members
-    let memberss = message.guild.members;
-    let offline = memberss.cache.filter(m => m.user.presence.status === "offline").size,
-        online = memberss.cache.filter(m => m.user.presence.status === "online").size,
-        idle = memberss.cache.filter(m => m.user.presence.status === "idle").size,
-        dnd = memberss.cache.filter(m => m.user.presence.status === "dnd").size,
-        robot = memberss.cache.filter(m => m.user.bot).size,
-        total = message.guild.memberCount;
-    
-    // Channels
-    let channels = message.guild.channels;
-    let text = channels.cache.filter(r => r.type === "text").size,
-        vc = channels.cache.filter(r => r.type === "voice").size,
-        category = channels.cache.filter(r => r.type === "category").size,
-        totalchan = channels.cache.size;
-       
-    
-    // Region
-    let location = region[message.guild.region];
-    
-    // Date
-    let x = Date.now() - message.guild.createdAt;
-    let h = Math.floor(x / 86400000) // 86400000, 5 digits-zero.
-    let created = message.guild.createdAt // Install "dateformat" first.
-    
-    const embed = new Discord.MessageEmbed()
-    .setColor(0x7289DA)
-    .setTimestamp(new Date())
-    .setThumbnail(icon)
-    .setAuthor(message.guild.name, icon)
-    .setDescription(`**ID:** ${message.guild.id}`)
-    .addField("Region", location)
-    .addField("Date Created", `${created}`)
-    .addField("Owner", `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``)
-    .addField(`Members [${total}]`, `<:Online:751334258592710757>: ${online} \n<:idle:752069859130736750>: ${idle} \n<:DND:751334386842206208>: ${dnd} \n<:Offline:751334314343530538>: ${offline} \n🤖: ${robot}`)
-    .addField(`Channels [${totalchan}]`, `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`)
-    message.channel.send(embed); // Let's see if it's working!;
+    const server = new Discord.MessageEmbed()
+    .setColor('RANDOM')
+    .setImage(message.guild.iconURL)
+    .setTitle(' ServerInfo')
+    .addField('Guild Owner:', `${message.guild.owner}`, true)
+    .addField('Members:', `\`${message.guild.memberCount}\``, true)
+    .setFooter(`Guild Name: ${message.guild.name} | ${message.guild.nameAcronym} | id: ${message.guild.id}`)
+    .addField('Verification Level:', `\`${message.guild.verificationLevel}\``, true)
+    .addField(`Is verified?:`, `\`${message.guild.verified}\``, true)
+    .addField('Region:', `\`${message.guild.region}\``, true)
+    .addField(`Number of emotes:`, `\`${message.guild.emojis.cache.size}\``, true)
+    .addField(`number of roles:`, `\`${message.guild.roles.cache.size}\``, true)
 
   }else if(command === 'ban'){
     
@@ -755,13 +710,8 @@ const slapped = new Discord.MessageEmbed()
           if(usedCommand.has(message.author.id)){
             message.reply('You cannot use the command beacuse of the cooldown.')
         } else {
-          let user = message.mentions.users.first() || message.author;
-    
-          if (user.presence.status === "dnd") user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
-          if (user.presence.status === "idle") user.presence.status = "<:idle:752069859130736750> | Idle";
-          if (user.presence.status === "offline") user.presence.status = "<:Offline:751334314343530538> | Offline";
-          if (user.presence.status === "online") user.presence.status = "<:Online:751334258592710757> | Online";
-          
+          let user = message.mentions.users.first() || message.author
+          let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
           function game() {
             let game;
             if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
@@ -769,33 +719,20 @@ const slapped = new Discord.MessageEmbed()
             return game; // Return the result.
           }
           
-          let x = Date.now() - user.createdAt; // Since the user created their account.
-          let y = Date.now() - message.guild.members.cache.get(user.id).joinedAt; // Since the user joined the server.
-          let created = Math.floor(x / 86400000); // 5 digits-zero.
-          let joined = Math.floor(y / 86400000);
-          
-          const members = message.guild.member(user);
-          let nickname = members.nickname !== undefined && members.nickname !== null ? members.nickname : "None";
-          let createdate = moment.utc(user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Created Date
-          let joindate = moment.utc(members.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss"); // User Joined the Server Date
-          let status = user.presence.status;
-          let avatar = user.avatarURL({dyamic: true}); // Use 2048 for high quality avatar.
-          
-          const embed = new Discord.MessageEmbed()
-          .setAuthor(user.tag, avatar)
-          .setThumbnail(avatar)
-          .setTimestamp()
-          .setColor(0x7289DA)
-          .addField("ID", user.id, true)
-          .addField("Nickname", nickname, true)
-          .addField("Created Account Date", `${createdate} \nsince ${created} day(s) ago`, true)
-          .addField("Joined Guild Date", `${joindate} \nsince ${joined} day(s) ago`, true)
-          .addField("Status", status, true)
-          .addField("Game", game(), true)
-          
-          message.channel.send(embed); // Let's see if it's working.
-            
-            
+        const plsuserinfo = new Discord.MessageEmbed()
+        .setAuthor(`${user.username}${user.discriminator}`)
+        .addField("Nickname", nickname, true)
+        .addField("Username", `${user.username}`, true)
+        .addField("Discriminator/Tag", `\`#${user.discriminator}\``, true)
+        .addField("ID:", `\`${user.id}\``, true)
+        .addField("Avatar URL:", `[Click here](https://cdn.discordapp.com/avatars/${user.id}/${user.avatar})`, true)
+        .addField("Creation Date", `${user.createdAt}`, true)
+        .addField("Guild Joining Date", `${user.joinedAt}`, true)
+        .addField("Status", game(), true)
+        .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
+        .setColor('RANDOM')
+        message.channel.send(plsuserinfo)
+    }
             usedCommand.add(message.author.id);
             setTimeout(() => {
                 usedCommand.delete(message.author.id);
