@@ -98,7 +98,7 @@ client.once('ready', () => {
 
 
 
-client.on("guildMemberAdd", async (member) => {
+client.on("guildMemberAdd", async user => {
   let captcha = new Captcha()
   const channel = member.guild.channels.cache.find((x) => x.name === "verify")
   
@@ -107,34 +107,34 @@ client.on("guildMemberAdd", async (member) => {
   }
 
   
-  const vrole = member.guild.roles.cache.find((x) => x.name === "non-verified")
+  const vrole = user.guild.roles.cache.find((x) => x.name === "non-verified")
   
   if(!vrole) {
  return 
 }
-member.roles.add(vrole)
+user.roles.add(vrole)
   
   const verifycode = await channel.send("Please Type The Given Code For Verification",
                new Discord.MessageAttachment(captcha.PNGStream, "captcha.png"))
-               let collector = channel.createMessageCollector(m => m.author.id === member.id)
+               let collector = channel.createMessageCollector(m => m.author.id === user.id)
   
   collector.on("collect", m => {
     if(m.content.toUpperCase() === captcha.value) {
      m.delete()
       verifycode.delete()
-      member.roles.remove(vrole)
-      return member.send("You are succesfully verified!")
+      user.roles.remove(vrole)
+      user.send("You are succesfully verified!")
     } else if(m.content.toUpperCase() !== captcha.value) {
-      member.send("You gave wrong code, so you can apply again by joining server again")
+      user.send("You have given the wrong code! And so you have been kicked from the guild, Please join and try again")
       verifycode.delete()
       m.delete()
       
       setTimeout(function() {
-           return  member.kick()
+           return  user.kick()
       }, 3000)
         
     } else {
-      return verifycode.delete()
+      verifycode.delete()
     }
   })
 
@@ -1907,7 +1907,7 @@ message.channel.send(format);
     if(!message.member.hasPermission(('MANAGE_ROLES', 'MANAGE_CHANNELS'))){
       return message.channel.send('Hey! You don\'t have the correct permissions to setup verification')
     }
-   message.channel.send('OK! I have now begun the verification system, But wait! While I am doing the setup can you please create a text channel with the name of `verify` PLEASE PLEASE :pleading_face:')
+   message.channel.send('Ok then I have succesfully finished the verification system')
    const plsdoit = await message.guild.roles.create({
       data: {
         name: 'non-verified',
@@ -1934,6 +1934,11 @@ message.channel.send(format);
       })
      
       })
+      message.guild.channels
+        .create(`verify-here`, {
+         
+          type: "text"
+        })
 
   }else if(command === 'verification-disable'){
     const letsdelete = message.guild.roles.cache.find((x) => x.name === "non-verified")
