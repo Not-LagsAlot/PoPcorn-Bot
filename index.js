@@ -1984,6 +1984,10 @@ message.channel.send(format);
     if(!dm){
       return message.channel.send('Please mention someone to DM')
     }
+
+    if(!agrs[1]){
+      return message.channel.send('Please give some message content to send to the user!')
+    }
     const newdm = new Discord.MessageEmbed()
     .setTitle(`New DM from ${message.author.tag}!`)
     .setDescription(args.slice(0).join(" "))
@@ -1997,6 +2001,9 @@ message.channel.send(format);
     }
     if(!announcements.guild.me.hasPermission("SEND_MESSAGES")){
       return message.channel.send('Uh oh it appears that I can\'t send messages in that channel! :x:') //this will check if the bot has the permission to send message perm in the given channel
+    }
+    if(!agrs[1]){
+      return message.channel.send('Invalid format used: `.announce #channel <Message content>` you are missing the message content!s')
     }
 
     announcements.send(args.slice(0).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
