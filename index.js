@@ -12,10 +12,10 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added 1 new command `.cc-update`';
+var changes = 'Added 2 new commands `.dm`, `.announce`';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
-var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`'
-var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`';
+var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `announce`'
+var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`, `dm`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
 const ccplease = '`cc-create` `cc-update`'
@@ -28,7 +28,7 @@ const Levels = require('discord-xp')
 const canvas = require("discord-canvas"),
   shop = new canvas.FortniteShop();
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
-var version = 'v5.7';
+var version = 'v5.8';
 const uwilldoit = '`verification-enable`, `verification-disable`'
 const { badwords } = require("./swear.json") 
 const ms = require("ms");
@@ -387,7 +387,7 @@ const slapped = new Discord.MessageEmbed()
       .addField("Username:", client.user.username)
       .addField("Tag:", `**${client.user.discriminator}**`)
       .addField("ID:", client.user.id)
-      .addField("Owner:", `LagsAlot#0001`)
+      .addField("Owner:", `The Idiot Dev#9966`)
       .addField("Channel's:", `${client.channels.cache.size}`)
       .addField("Server's using the bot:", `${client.guilds.cache.size}`)
       .addField("users's know Blaze Fire:", `${client.users.cache.size}`)
@@ -763,7 +763,7 @@ const slapped = new Discord.MessageEmbed()
   .setTitle('Whats new!')
   .addField('Current version', version)
   .addField('Changes To The Bot', changes)
-  .setFooter(`Blaze Fire | Made by LagsAlot#0001`)
+  .setFooter(`Blaze Fire | Made by The Idiot Dev#9966`)
   .setColor('RANDOM')
   .setTimestamp(Date.now())
 
@@ -1393,7 +1393,7 @@ message.channel.send(format);
       let simpss = new Discord.MessageEmbed()
           .setTimestamp(Date.now())
           .setTitle("Hmmmm what is your simp rate at?")
-          .setDescription(`**LagsAlot** simp rate is...100%`)
+          .setDescription(`**The Idiot Dev**'s simp rate is...100%`)
           .setColor(`RANDOM`)
           message.channel.send(simpss)
     }else {
