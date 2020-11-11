@@ -1978,6 +1978,28 @@ message.channel.send(format);
         })
       
   
+  }else if(command === 'dm'){
+    const dm = message.mentions.members.first()
+
+    if(!dm){
+      return message.channel.send('Please mention someone to DM')
+    }
+    const newdm = new Discord.MessageEmbed()
+    .setTitle(`New DM from ${message.author.tag}!`)
+    .setDescription(args.slice(0).join(" "))
+    dm.send(newdm)
+  }else if(command === 'announce'){
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) return //this will check if the user has the permissions
+    const announcements = message.mentions.channels.first()
+
+    if(!announcements){
+      return message.channel.send('Invalid format used: `.announce #channel <Message Content>` you are missing the channnel!') //this will check if the channel is mentioned
+    }
+    if(!announcements.guild.me.hasPermission("SEND_MESSAGES")){
+      return message.channel.send('Uh oh it appears that I can\'t send messages in that channel! :x:') //this will check if the bot has the permission to send message perm in the given channel
+    }
+
+    announcements.send(args.slice(0).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
   }
 
 
@@ -2025,6 +2047,8 @@ message.channel.send(format);
   );
       })
 
+
+      
      
       
 
