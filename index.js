@@ -1990,8 +1990,9 @@ message.channel.send(format);
     }
     const newdm = new Discord.MessageEmbed()
     .setTitle(`New DM from ${message.author.tag}!`)
-    .setDescription(args.slice(0).join(" "))
+    .setDescription(args.slice(1).join(" "))
     dm.send(newdm)
+    message.channel.send('Sent the DM!')
   }else if(command === 'announce'){
     if(!message.member.hasPermission("MANAGE_CHANNELS")) return //this will check if the user has the permissions
     const announcements = message.mentions.channels.first()
