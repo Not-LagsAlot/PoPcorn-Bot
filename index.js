@@ -2042,7 +2042,7 @@ message.channel.send(format);
       return message.channel.send('Invalid format used: `.announce #channel <Message content>` you are missing the message content!s')
     }
 
-    announcements.send(args.slice(0).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
+    announcements.send(args.slice(1).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
   } catch (e){
     message.channel.send(`Error running that command: \`\`\`js\n${e}\`\`\``)
   }
