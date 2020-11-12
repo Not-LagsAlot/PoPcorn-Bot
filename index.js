@@ -2038,7 +2038,7 @@ message.channel.send(format);
     if(!announcements.guild.me.hasPermission("SEND_MESSAGES")){
       return message.channel.send('Uh oh it appears that I can\'t send messages in that channel! :x:') //this will check if the bot has the permission to send message perm in the given channel
     }
-    if(!agrs[1]){
+    if(!args[1]){
       return message.channel.send('Invalid format used: `.announce #channel <Message content>` you are missing the message content!s')
     }
 
