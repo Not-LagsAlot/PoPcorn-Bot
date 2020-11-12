@@ -2047,11 +2047,15 @@ message.channel.send(format);
     message.channel.send(`Error running that command: \`\`\`js\n${e}\`\`\``)
   }
   }else if(command === 'changemymind'){
+    try{
     let text = args.join(' ')
     if(!text) return message.channel.send('No text is provided.')
     let img = await Canvacord.Canvas.changemymind(text);
     let attachment = new Discord.MessageAttachment(img, 'changemymind.png');
     message.channel.send(attachment)
+    }catch (e){
+      message.channel.send(`Error running that command: \`\`\`js\n${e}\`\`\``)
+    }
   }
 
 
