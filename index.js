@@ -2044,7 +2044,7 @@ message.channel.send(format);
 
     announcements.send(args.slice(0).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
   } catch (e){
-    message.channel.send("Uh Oh an error has occured")
+    message.channel.send(`Error running that command: \`\`\`js\n${e}\`\`\``)
   }
   }else if(command === 'changemymind'){
     let text = args.join(' ')
