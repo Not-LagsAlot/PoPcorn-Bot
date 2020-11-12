@@ -2014,13 +2014,14 @@ message.channel.send(format);
       
   
   }else if(command === 'dm'){
+    try{
     const dm = message.mentions.members.first()
 
     if(!dm){
       return message.channel.send('Please mention someone to DM')
     }
 
-    if(!agrs[1]){
+    if(!args[1]){
       return message.channel.send('Please give some message content to send to the user!')
     }
     const newdm = new Discord.MessageEmbed()
@@ -2028,6 +2029,9 @@ message.channel.send(format);
     .setDescription(args.slice(1).join(" "))
     dm.send(newdm)
     message.channel.send('Sent the DM!')
+  } catch (e){
+    message.channel.send("Given user has there DM's off or have blocked me!")
+  }
   }else if(command === 'announce'){
     try{
     if(!message.member.hasPermission("MANAGE_CHANNELS")) return //this will check if the user has the permissions
