@@ -12,10 +12,10 @@ const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
-var changes = 'Added 2 new commands `.dm`, `.announce`';
+var changes = 'Added 1 new command `changemymind`';
 var info = '`avatar`, `ping`, `whois [user]`, `botinfo`, `serverinfo`, `support`, `partners`, `timer`, `covid`, `invite`, `uptime`, `donate`';
 var mod = '`ban`, `kick`, `warn`, `purge`, `slowmode`, `mute`, `unmute`, `announce`'
-var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`, `dm`';
+var fun = '`meme`, `reverse`, `hug`, `penis`, `emojify`, `clyde`, `8ball`, `kill`, `rps`  `trivia`, `slap`, `youtube`, `simp`, `spoiler`, `spotify`, `love`, `hack`, `code`, `panda-fact`, `joke`, `dm`, `changemymind`';
 var giveaways = '`giveaway (time here) (channel here) (prize here)`'
 var plsreact = '`reactrole-add`'
 const ccplease = '`cc-create` `cc-update`'
@@ -216,6 +216,7 @@ if(message.content.includes(`${client.user.id}`)) {
   if(!message.guild){
     return
   }
+  
 
   
 
@@ -1816,10 +1817,19 @@ message.channel.send(format);
 
             });
             if(command === "rank") {
+              if(usedCommand.has(message.author.id)){
+                message.reply('You cannot use the command beacuse of the cooldown.')
+            }else {
               const user = await Levels.fetch(message.author.id, message.guild.id);
               message.channel.send(`You are currently level **${user.level}**!`)
+            }usedCommand.add(message.author.id);
+            setTimeout(() => {
+                usedCommand.delete(message.author.id);
+            }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'donate'){
-            
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
             const plsdonate = new Discord.MessageEmbed()
             .setDescription(`Hey! as of right now as the bot grows some commands will become premium which is not what you or either the devs like, And to help stopping it you can donate for Blaze Fire by clicking [here](https://www.patreon.com/blazediscord). In addition donating also gives you a special Donator role in our [support server](https://discord.gg/8VwUPP9txw)`)
             .setThumbnail(message.author.displayAvatarURL())
@@ -1828,8 +1838,14 @@ message.channel.send(format);
             .setColor('BLUE')
             message.react("💕")
             message.channel.send(plsdonate)
+          }usedCommand.add(message.author.id);
+          setTimeout(() => {
+              usedCommand.delete(message.author.id);
+          }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds.
           }else if(command === 'reactrole-add'){
- 
+            if(usedCommand.has(message.author.id)){
+              message.reply('You cannot use the command beacuse of the cooldown.')
+          }else {
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(`You require \`Manage Guild\` permission!`);
     if (!args[0])
@@ -1864,6 +1880,10 @@ message.channel.send(format);
       Role: args[1],
     });
     newData.save();
+  }usedCommand.add(message.author.id);
+  setTimeout(() => {
+      usedCommand.delete(message.author.id);
+  }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds
 
           
 
@@ -1884,12 +1904,14 @@ message.channel.send(format);
   }else {
     return message.reply('You can\t destroy channels -_-')
   }
-  }else if(command === 'joke'){
+  }else if(command === 'dad-joke'){
     giveMeAJoke.getRandomDadJoke (function(joke) {
       message.channel.send(joke);
     })
   }else if(command === 'fortnite-shop'){
-    
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  }else {
   
     let image = await shop
     .setToken("3dc831fd-935c-4ff9-aaa8-3ef8fed7786c")
@@ -1898,11 +1920,23 @@ message.channel.send(format);
   let attachment = new Discord.MessageAttachment(image, "FortniteShop.png");
   
   message.channel.send(attachment);
+  }usedCommand.add(message.author.id);
+  setTimeout(() => {
+      usedCommand.delete(message.author.id);
+  }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds
   }else if(command === 'trigger'){
+    if(usedCommand.has(message.author.id)){
+      message.reply('You cannot use the command beacuse of the cooldown.')
+  }else {
+  
     let avatar = message.author.displayAvatarURL({ dynamic: false, format: 'png' });
         let image = await canvacord.Canvas.trigger(avatar);
         let triggered = new Discord.MessageAttachment(image, "triggered.gif");
         return message.channel.send(triggered);
+  }usedCommand.add(message.author.id);
+  setTimeout(() => {
+      usedCommand.delete(message.author.id);
+  }, 5000); //You can set the ammount of the cooldown here! Its Formated to Miliseconds
   }else if(command === 'verification-enable'){
     if(!message.member.hasPermission(('MANAGE_ROLES', 'MANAGE_CHANNELS'))){
       return message.channel.send('Hey! You don\'t have the correct permissions to setup verification')
@@ -1994,6 +2028,7 @@ message.channel.send(format);
     dm.send(newdm)
     message.channel.send('Sent the DM!')
   }else if(command === 'announce'){
+    try{
     if(!message.member.hasPermission("MANAGE_CHANNELS")) return //this will check if the user has the permissions
     const announcements = message.mentions.channels.first()
 
@@ -2008,6 +2043,15 @@ message.channel.send(format);
     }
 
     announcements.send(args.slice(0).join(" ")) //if all of it is correct and everything is given by the user, and the bot has the perms it will send the message in that channel
+  } catch (e){
+    message.channel.send("Uh Oh an error has occured")
+  }
+  }else if(command === 'changemymind'){
+    let text = args.join(' ')
+    if(!text) return message.channel.send('No text is provided.')
+    let img = await Canvacord.Canvas.changemymind(text);
+    let attachment = new MessageAttachment(img, 'changemymind.png');
+    message.channel.send(attachment)
   }
 
 
