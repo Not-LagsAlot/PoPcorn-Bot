@@ -10,6 +10,7 @@ mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/tes
 const giveMeAJoke = require('discord-jokes');
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
+const Canvacord = require('canvacord')
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
 var changes = 'Added 1 new command `changemymind`';
