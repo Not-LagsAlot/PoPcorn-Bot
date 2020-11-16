@@ -468,13 +468,8 @@ const slapped = new Discord.MessageEmbed()
         `Channels [${totalchan}]`,
         `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`
       )
-      .addField(
-         `Verification Level: ${message.guild.verificationLevel}`, true
-      )
-      .addField(
-      `Verified ${message.guild.verified}`, true
-      )
-      .addField(`Partnered`, `${message.guild.partnered}`, true);
+     .addField("Verification Level", `${message.guild.verificationLevel}`, true)
+      .addField("Partnered", `${message.guild.partnered}`, true);
 
     message.channel.send(serverinfos); // Let's see if it's working!
   
@@ -483,7 +478,7 @@ const slapped = new Discord.MessageEmbed()
       serverinfos.addField("Vanity URL:", `${message.guild.vanityURLCode}`)
   }
 
-    message.channel.send(server)
+    message.channel.send(serverinfos)
 }catch (e) {
   message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
   console.error(e)
@@ -803,7 +798,6 @@ const slapped = new Discord.MessageEmbed()
         .addField("Username", `${user.username}`, true)
         .addField("Tag", `#${user.discriminator}`, true)
         .addField("ID:", `${user.id}`, true)
-        .addField("Avatar URL:", `[Click me!](https://cdn.discordapp.com/avatars/${user.id}/${user.avatar})`, true)
         .addField("Creation Date", `${user.createdAt}`, true)
         .addField("Status", status, true)
         .addField("Highest Role", `<@&${message.member.roles.highest.id}>`, true)
