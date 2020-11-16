@@ -414,23 +414,71 @@ const slapped = new Discord.MessageEmbed()
   } else if(message.guild.verificationLevel === "VERY_HIGH") {
       verifLevel = 'Very High'
   }
+    let icon = message.guild.iconURL({ size: 2048 }); // Server Avatar
 
-    const server = new Discord.MessageEmbed()
-    .setColor('RANDOM')
-    .setImage(message.guild.iconURL)
-    .setTitle(' ServerInfo')
-    .addField('Guild Owner:', `${message.guild.owner}`, true)
-    .addField(`Name`, `${message.guild.name}`, true)
-    .addField('Members:', `${message.guild.memberCount}`, true)
-    .addField('Verification Level:', `${message.guild.verificationLevel}`, true)
-    .addField(`Verified:`, `${message.guild.verified}`, true)
-    .addField(`Partnered`, `${message.guild.partnered}`, true)
-    .addField('Region:', `${message.guild.region}`, true)
-    .addField(`Channel count`, `${message.guild.channels.cache.size}`, true)
-    .addField('Role count', `${message.guild.roles.cache.size}`, true)
-    .addField(`Emoji count`, `${message.guild.emojis.cache.size}`, true)
+ 
+
+    // Members
+    let memberss = message.guild.members;
+    let offline = memberss.cache.filter(
+        m => m.user.presence.status === "offline"
+      ).size,
+      online = memberss.cache.filter(m => m.user.presence.status === "online")
+        .size,
+      idle = memberss.cache.filter(m => m.user.presence.status === "idle")
+        .size,
+      dnd = memberss.cache.filter(m => m.user.presence.status === "dnd").size,
+      robot = memberss.cache.filter(m => m.user.bot).size,
+      total = message.guild.memberCount;
+
+    // Channels
+    let channels = message.guild.channels;
+    let text = channels.cache.filter(r => r.type === "text").size,
+      vc = channels.cache.filter(r => r.type === "voice").size,
+      category = channels.cache.filter(r => r.type === "category").size,
+      totalchan = channels.cache.size;
+
+    // Region
+    let location = message.guild.region;
+
+    // Date
+    let x = Date.now() - message.guild.createdAt;
+    let h = Math.floor(x / 86400000); // 86400000, 5 digits-zero.
+    let created = dateformat(message.guild.createdAt); // Install "dateformat" first.
+
+    const serverinfos = new Discord.MessageEmbed()
+      .setColor(0x7289da)
+      .setTimestamp(new Date())
+      .setThumbnail(icon)
+      .setAuthor(message.guild.name, icon)
+      .setDescription(`**ID:** ${message.guild.id}`)
+      .addField("Region", location)
+      .addField("Date Created", `${created} \nsince **${h}** day(s)`)
+      .addField(
+        "Owner",
+        `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``
+      )
+      .addField(
+        `Members [${total}]`,
+        `Online: ${online} \nIdle: ${idle} \nDND: ${dnd} \nOffline: ${offline} \nBots: ${robot}`
+      )
+      .addField(
+        `Channels [${totalchan}]`,
+        `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`
+      )
+      .addField(
+         `Verification Level: ${message.guild.verificationLevel}`
+      )
+      .addField(
+      `Verified ${message.guild.verified}`
+      )
+      .addField(`Partnered`, `${message.guild.partnered}`, true);
+
+    message.channel.send(serverinfos); // Let's see if it's working!
+  
+
     if(!message.guild.vanityURLCode === null) {
-      server.addField("Vanity Invite URL:", `${message.guild.vanityURLCode}`)
+      serverinfos.addField("Vanity URL:", `${message.guild.vanityURLCode}`)
   }
 
     message.channel.send(server)
@@ -756,7 +804,7 @@ const slapped = new Discord.MessageEmbed()
         .addField("Avatar URL:", `[Click me!](https://cdn.discordapp.com/avatars/${user.id}/${user.avatar})`, true)
         .addField("Creation Date", `${user.createdAt}`, true)
         .addField("Status", status, true)
-        .addField("Highest Role", `${message.member.roles.highest}`, true)
+        .addField("Highest Role", `<@&${message.member.roles.highest.id}>`, true)
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setColor('RANDOM')
         message.channel.send(plsuserinfo)
