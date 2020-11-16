@@ -785,6 +785,8 @@ const slapped = new Discord.MessageEmbed()
           if(usedCommand.has(message.author.id)){
             message.reply('You cannot use the command beacuse of the cooldown.')
         } else {
+
+          try{
           let user = message.mentions.users.first() || message.author
           if (user.presence.status === "dnd")
           user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
@@ -815,7 +817,10 @@ const slapped = new Discord.MessageEmbed()
         .setColor('RANDOM')
         message.channel.send(plsuserinfo)
         
-    
+        }catch (e) {
+          message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
+          console.error(e)
+        }
             usedCommand.add(message.author.id);
             setTimeout(() => {
                 usedCommand.delete(message.author.id);
