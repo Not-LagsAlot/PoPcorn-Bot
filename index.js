@@ -403,6 +403,7 @@ const slapped = new Discord.MessageEmbed()
     message.channel.send(user);
 
   }else if(command === 'serverinfo'){
+    try{
     if(message.guild.verificationLevel === "NONE") {
       verifLevel = 'None'
   } else if (message.guild.verificationLevel === "LOW") {
@@ -482,6 +483,10 @@ const slapped = new Discord.MessageEmbed()
   }
 
     message.channel.send(server)
+}catch (e) {
+  message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
+  console.error(e)
+}
 
   }else if(command === 'ban'){
     
