@@ -797,13 +797,7 @@ const slapped = new Discord.MessageEmbed()
         if (user.presence.status === "online")
           user.presence.status = "<:Online:751334258592710757> | Online";
           
-          function game() {
-            let game;
-            if (user.presence.activities.length >= 1) game = `${user.presence.activities[0].type} ${user.presence.activities[0].name}`;
-            else if (user.presence.activities.length < 1) game = "None"; // This will check if the user doesn't playing anything.
-            return game; // Return the result.
-          }
-          
+          let status = user.presence.status;
         const plsuserinfo = new Discord.MessageEmbed()
         .setAuthor(`${user.username}${user.discriminator}`)
         .addField("Username", `${user.username}`, true)
