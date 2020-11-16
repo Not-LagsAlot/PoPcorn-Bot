@@ -2061,7 +2061,55 @@ message.channel.send(format);
     }catch (e){
       message.channel.send(`Error running that command: \`\`\`js\n${e}\`\`\``)
     }
-  }
+  }else if(command === 'eval'){
+    const clean = text => {
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  else
+      return text;
+}
+      //add it role update thingie like you said to do it ;)
+    //also I am removing your eval access CUZ EVAL EVALUATES A JAVASCRIPT CODE -___________________________-
+    //ok if you want
+    //also DO NOT GIVE ANYONE EVAL ACCESS as they can run any JavaScript code they want like .eval client.shutdown() which will shutdown the bot
+    //hm ok
+    //also you know how you said glitch fucked ice how?
+    
+    let owners = [
+      '642308656217456641'
+            ]
+                    if(!owners.includes(message.author.id)) {
+                      const noeval = new Discord.MessageEmbed()
+                      .setTitle('<:Error:774138046253236224> Access Denied!')
+                      .setDescription("Only **The Idiot Dev#9966** can use this command!")
+                      .setColor("RED")
+            return message.channel.send(noeval)
+        }
+
+        let code = args.join(" ");
+        if (!code) return message.channel.send("What code would you like to evaluate?")
+    
+    if(code.includes("process.env.token")){
+      return message.channel.send("No token for you!")
+    }
+        
+            try {
+                let evaluated = eval(code)
+
+                let hrStart = process.hrtime();
+                let hrDiff = process.hrtime(hrStart);
+
+                typeof evaluated !== 'string' ? evaluated = require('util').inspect(evaluated) : '';
+
+                message.channel.send(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ""}${hrDiff[1] / 1000000} ms.* \`\`\`js\n${evaluated}\`\`\``)
+            } catch (e) {
+                message.channel.send(`Error evaluating: \`\`\`js\n${e}\`\`\``)
+                console.error(e)
+            }
+  
+        
+  
+      }
 
 
       });
