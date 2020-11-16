@@ -732,6 +732,14 @@ const slapped = new Discord.MessageEmbed()
             message.reply('You cannot use the command beacuse of the cooldown.')
         } else {
           let user = message.mentions.users.first() || message.author
+          if (user.presence.status === "dnd")
+          user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
+        if (user.presence.status === "idle")
+          user.presence.status = "<:idle:752069859130736750> | Idle";
+        if (user.presence.status === "offline")
+          user.presence.status = "<:Offline:751334314343530538> | Offline";
+        if (user.presence.status === "online")
+          user.presence.status = "<:Online:751334258592710757> | Online";
           
           function game() {
             let game;
@@ -747,7 +755,8 @@ const slapped = new Discord.MessageEmbed()
         .addField("ID:", `${user.id}`, true)
         .addField("Avatar URL:", `[Click me!](https://cdn.discordapp.com/avatars/${user.id}/${user.avatar})`, true)
         .addField("Creation Date", `${user.createdAt}`, true)
-        .addField("Status", game(), true)
+        .addField("Status", status, true)
+        .addField("Highest Role", `${message.member.roles.highest}`, true)
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setColor('RANDOM')
         message.channel.send(plsuserinfo)
@@ -2074,7 +2083,7 @@ message.channel.send(format);
     //also DO NOT GIVE ANYONE EVAL ACCESS as they can run any JavaScript code they want like .eval client.shutdown() which will shutdown the bot
     //hm ok
     //also you know how you said glitch fucked ice how?
-    
+
     let owners = [
       '642308656217456641'
             ]
