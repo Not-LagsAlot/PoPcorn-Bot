@@ -469,10 +469,10 @@ const slapped = new Discord.MessageEmbed()
         `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`
       )
       .addField(
-         `Verification Level: ${message.guild.verificationLevel}`
+         `Verification Level: ${message.guild.verificationLevel}`, true
       )
       .addField(
-      `Verified ${message.guild.verified}`
+      `Verified ${message.guild.verified}`, true
       )
       .addField(`Partnered`, `${message.guild.partnered}`, true);
 
