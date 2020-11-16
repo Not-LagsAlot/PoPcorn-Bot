@@ -471,7 +471,7 @@ const slapped = new Discord.MessageEmbed()
      .addField("Verification Level", `${message.guild.verificationLevel}`, true)
       .addField("Partnered", `${message.guild.partnered}`, true);
 
-    message.channel.send(serverinfos); // Let's see if it's working!
+  
   
 
     if(!message.guild.vanityURLCode === null) {
