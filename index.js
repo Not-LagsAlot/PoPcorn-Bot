@@ -469,7 +469,8 @@ const slapped = new Discord.MessageEmbed()
         `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`
       )
      .addField("Verification Level", `${message.guild.verificationLevel}`, true)
-      .addField("Partnered", `${message.guild.partnered}`, true);
+      .addField("Partnered", `${message.guild.partnered}`, true)
+      .addField("Highest Role", `${message.guild.roles.highest}`, true)
 
   //Hi
   
