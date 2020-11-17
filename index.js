@@ -782,7 +782,7 @@ const slapped = new Discord.MessageEmbed()
         } else {
 
           try{
-          let user = message.mentions.users.first() || message.author
+          let user = message.mentions.members.first() || message.author
           if (user.presence.status === "dnd")
           user.presence.status = "<:DND:751334386842206208> | Do Not Disturb";
         if (user.presence.status === "idle")
@@ -791,7 +791,6 @@ const slapped = new Discord.MessageEmbed()
           user.presence.status = "<:Offline:751334314343530538> | Offline";
         if (user.presence.status === "online")
           user.presence.status = "<:Online:751334258592710757> | Online";
-          
           let status = user.presence.status;
         const plsuserinfo = new Discord.MessageEmbed()
         .setAuthor(`${user.username}${user.discriminator}`)
@@ -800,7 +799,7 @@ const slapped = new Discord.MessageEmbed()
         .addField("ID:", `${user.id}`, true)
         .addField("Creation Date", `${user.createdAt}`, true)
         .addField("Status", status, true)
-        .addField("Highest Role", `<@&${message.member.roles.highest.id}>`, true)
+        .addField("Highest Role", `<@&${user.roles.highest.id}>`, true)
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setColor('RANDOM')
         message.channel.send(plsuserinfo)
@@ -1076,7 +1075,7 @@ if (number == 7) {
 
     if (!user) {
       return message.channel.send(
-        "Please mention the member to who you want to unmute"
+        "Please mention the member to who you want to mute"
       );
     }
  
