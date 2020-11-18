@@ -1671,7 +1671,7 @@ message.channel.send(format);
         "294tu4025u5305fo2gj" //little pyramid tho
       ];
       var password = Math.floor(Math.random() * pass.length);
-      let ppusersss = message.mentions.users.first()
+      let ppusersss = message.mentions.members.first()
       if(!ppusersss){
         return message.channel.send('Please mention a user to hack!')
       }
