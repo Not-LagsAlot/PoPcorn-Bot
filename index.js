@@ -101,6 +101,9 @@ client.once('ready', () => {
 
 
 client.on("guildMemberAdd", async user => {
+
+  if(user.user.bot) return
+
   let captcha = new Captcha()
   const channel = member.guild.channels.cache.find((x) => x.name === "verify")
   
@@ -2025,7 +2028,7 @@ message.channel.send(format);
      
       })
       message.guild.channels
-        .create(`verify-here`, {
+        .create(`verify`, {
          
           type: "text"
         })
