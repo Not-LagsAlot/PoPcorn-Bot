@@ -1889,7 +1889,7 @@ try{
 
               const neededXp = Levels.xpFor(parseInt(user.level) +1)
               
-              const rank = new Canvacord.Rank()
+              const card = new Canvacord.Rank()
               .setAvatar(usersss.displayAvatarURL({dynamic: false, format: "png"}))
               .setCurrentXP(user.xp)
               .setRequiredXP(neededXp)
@@ -1901,7 +1901,7 @@ try{
               const img = await card.build();
   
       
-              return message.channel.send(new MessageAttachment(img, "rank.png"));
+              return message.channel.send(new Discord.MessageAttachment(img, "rank.png"));
 
             } catch (e) {
               message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
