@@ -9,20 +9,20 @@
   "author": "LagsAlot",
   "license": "ISC",
   "dependencies": {
+    "@haileybot/captcha-generator": "1.2.3",
+    "canvacord": "^5.0.7",
+    "dateformat": "3.0.3",
+    "discord-canvas": "1.3.2",
+    "discord-jokes": "1.0.12",
+    "discord-xp": "1.0.6",
     "discord.js": "^12.2.0",
     "erela.js": "^1.1.8",
+    "imageapi.js": "1.0.17",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
+    "mongoose": "5.10.7",
     "movement": "0.0.13",
     "ms": "^2.1.2",
-    "node.js": "0.0.1-security",
-    "mongoose": "5.10.7",
-    "discord-xp": "1.0.6",
-    "imageapi.js": "1.0.17",
-    "discord-jokes": "1.0.12",
-    "canvacord": "5.0.7",
-    "discord-canvas": "1.3.2",
-    "@haileybot/captcha-generator": "1.2.3",
-    "dateformat": "3.0.3"
+    "node.js": "0.0.1-security"
   }
 }
