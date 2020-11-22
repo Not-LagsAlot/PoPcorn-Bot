@@ -26,7 +26,7 @@ const thatsfortnite = '`fortnite-shop`'
 const prefix = '.'
 const canvacord = require("canvacord");
 const Artificial = '`chat`'
-const Levels = require('discord-xp')
+const Levels = require("discord-xp")
 const canvas = require("discord-canvas"),
   shop = new canvas.FortniteShop();
 Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
@@ -105,7 +105,7 @@ client.on("guildMemberAdd", async user => {
   if(user.user.bot) return
 
   let captcha = new Captcha()
-  const channel = member.guild.channels.cache.find((x) => x.name === "verify")
+  const channel = user.guild.channels.cache.find((x) => x.name === "verify")
   
   if(!channel) {
    return 
@@ -1879,8 +1879,34 @@ message.channel.send(format);
               if(usedCommand.has(message.author.id)){
                 message.reply('You cannot use the command beacuse of the cooldown.')
             }else {
-              const user = await Levels.fetch(message.author.id, message.guild.id);
-              message.channel.send(`You are currently level **${user.level}**!`)
+
+              let usersss = message.mentions.users.first() || message.author;
+              const user = await Levels.fetch(usersss.id, message.guild.id);
+
+              if(!user){
+                return message.channel.send(":x: You dont have any XP yet! Send some messages and try again")
+              }
+
+              const neededXp = Levels.xpFor(parseInt(user.level) +1)
+              
+              const rank = new Canvacord.Rank()
+              .setAvatar(usersss.displayAvatarURL({dynamic: false, format: "png"}))
+              .setCurrentXP(user.xp)
+              .setRequiredXP(neededXp)
+              .setStatus(usersss.presence.status)
+              .setUsername(usersss.username)
+              .setDiscriminator(usersss.discriminator)
+              .setBackground("https://cdn.discordapp.com/embed/avatars/0.png")
+              rank.build()
+              .then(data => {
+                  const attachment = new Discord.MessageAttachment(data, "RankCard.png");
+                  message.channel.send(attachment);
+              })
+
+
+
+
+            
             }usedCommand.add(message.author.id);
             setTimeout(() => {
                 usedCommand.delete(message.author.id);
