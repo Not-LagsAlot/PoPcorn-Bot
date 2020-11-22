@@ -1879,7 +1879,7 @@ message.channel.send(format);
               if(usedCommand.has(message.author.id)){
                 message.reply('You cannot use the command beacuse of the cooldown.')
             }else {
-
+try{
               let usersss = message.mentions.users.first() || message.author;
               const user = await Levels.fetch(usersss.id, message.guild.id);
 
@@ -1903,7 +1903,10 @@ message.channel.send(format);
                   message.channel.send(attachment);
               })
 
-
+            } catch (e) {
+              message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
+              console.error(e)
+            }
 
 
             
