@@ -1897,11 +1897,11 @@ try{
               .setUsername(usersss.username)
               .setDiscriminator(usersss.discriminator)
               .setBackground("https://cdn.discordapp.com/embed/avatars/0.png")
-              rank.build()
-              .then(data => {
-                  const attachment = new Discord.MessageAttachment(data, "RankCard.png");
-                  message.channel.send(attachment);
-              })
+            
+              const img = await card.build();
+  
+      
+              return message.channel.send(new MessageAttachment(img, "rank.png"));
 
             } catch (e) {
               message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
