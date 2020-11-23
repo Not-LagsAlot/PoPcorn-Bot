@@ -11,7 +11,7 @@ const giveMeAJoke = require('discord-jokes');
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const dateformat = require("dateformat")
-const Cavacord = require("canvacord")
+
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
 var changes = 'Added 1 new command `changemymind`';
@@ -24,7 +24,6 @@ const ccplease = '`cc-create` `cc-update`'
 const plslevels = '`rank`'
 const thatsfortnite = '`fortnite-shop`'
 const prefix = '.'
-const canvacord = require("canvacord");
 const Artificial = '`chat`'
 const Levels = require("discord-xp")
 const canvas = require("discord-canvas"),
