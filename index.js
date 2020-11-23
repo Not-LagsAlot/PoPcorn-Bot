@@ -42,7 +42,7 @@ const configs = require('./logs.json')
 const custom = require("./custom")
 const fetch = require('node-fetch')
 const moment = require("moment");
-
+//Work mf
 
 
 client.snipes = new Discord.Collection();
