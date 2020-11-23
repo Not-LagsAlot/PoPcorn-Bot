@@ -11,7 +11,7 @@ const giveMeAJoke = require('discord-jokes');
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
 const dateformat = require("dateformat")
-const Canvacord = require('canvacord')
+const Cavacord = require("canvacord")
 const ReactionModel = require("./ReactRole");
 const api = require("imageapi.js");
 var changes = 'Added 1 new command `changemymind`';
@@ -1889,19 +1889,13 @@ try{
 
               const neededXp = Levels.xpFor(parseInt(user.level) +1)
               
-              const card = new Canvacord.Rank()
-              .setAvatar(usersss.displayAvatarURL({dynamic: false, format: "png"}))
-              .setCurrentXP(user.xp)
-              .setRequiredXP(neededXp)
-              .setStatus(usersss.presence.status)
-              .setUsername(usersss.username)
-              .setDiscriminator(usersss.discriminator)
-              .setBackground("https://cdn.discordapp.com/embed/avatars/0.png")
-            
-              const img = await card.build();
-  
-      
-              return message.channel.send(new Discord.MessageAttachment(img, "rank.png"));
+             const card = new Discord.MessageEmbed()
+             .setAuthor(`Rank Card for **${usersss.tag}**`)
+             .setImage(usersss.displayAvatarURL())
+             .addField(`Rank`, `**${user.level}/${neededXp}**`, true)
+             .addField(`XP`, `${user.xp}`, true)
+             .setFooter('Talk more to gain more XP!')
+             message.channel.send(card)
 
             } catch (e) {
               message.channel.send(`Error!: \`\`\`js\n${e}\`\`\``)
