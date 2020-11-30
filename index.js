@@ -82,20 +82,17 @@ const mapping = {
 
 
 client.once('ready', () => {
-  client.user.setActivity(`${prefix}help`, { type: "STREAMING", url: "https://www.twitch.tv/monstercat" })
-    console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
-    if (client.channels.fetch('763971750936838155')) {
-      client.channels.fetch('763971750936838155').then(channelsss => {
-    const nowonline = new Discord.MessageEmbed()
-    .setDescription(`Now logged in as \`${client.user.tag}\``)
-    .setColor(0x879ffa)
-    channelsss.send(nowonline)
+  console.log(`Bot is online, and is currently in ${client.guilds.cache.size} servers`);
+  if (client.channels.fetch('763971750936838155')) {
+    client.channels.fetch('763971750936838155').then(channelsss => {
+  const nowonline = new Discord.MessageEmbed()
+  .setDescription(`Now logged in as \`${client.user.tag}\``)
+  .setColor(0x879ffa)
+  channelsss.send(nowonline)
+})
+   
     
 
-      })
-    
-    }
-})
 
 
 
@@ -497,7 +494,7 @@ const slapped = new Discord.MessageEmbed()
     if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** as you do not have `BAN MEMBERS` permission you can\'t use this');
     if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('**Error:** I cannot ban as I do not have`BAN MEMBERS` permission ');
   
-    const successfullybanned = message.mentions.members.first() 
+    const successfullybanned = message.mentions.users.first() 
   
     if (!successfullybanned) return message.reply('Please mention a user');
     if(successfullybanned.hasPermission('BAN_MEMBERS')){
@@ -1119,6 +1116,8 @@ if (number == 7) {
           })
         })
     }
+    //const { MessageEmbed} = require ('discord.js')
+
     if(user.roles.cache.has(muterole)) {
       return message.channel.send("Given User is already muted")
     }
@@ -2189,6 +2188,16 @@ try{
   
         
   
+      }else if(command === 'lock'){
+        if(!message.memmber.hasPermission('MANAGE_CHANNELS')){
+          return message.react('❌')        }
+        const locker = message.mentions.channels.first()
+    
+        if(!locker){
+          return message.reply('Please give a channel for me to lock!')
+        }
+
+        locker.lockPermissions()
       }
 
 
@@ -2243,4 +2252,4 @@ try{
 
 
 
-    client.login(process.env.token); 
+    client.login(NzgyODE2MjEzMzAxOTg1Mjkx.X8RsaQ.sQMHdj0GBlmxHMcBaZLd9o83VqA); 
