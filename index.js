@@ -6,7 +6,7 @@ const client = new Discord.Client({
 });
 
 const mongoose = require("mongoose")
-mongoose.connect("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
+mongoose.connect("Your Mongo URL")
 const giveMeAJoke = require('discord-jokes');
 const Poll_Emoji_2 = "👎";
 const Poll_Emoji_1 = "👍";
@@ -28,7 +28,7 @@ const Artificial = '`chat`'
 const Levels = require("discord-xp")
 const canvas = require("discord-canvas"),
   shop = new canvas.FortniteShop();
-Levels.setURL("mongodb+srv://LagsAlot:q8r3hm2g@cluster0.z27sf.mongodb.net/test")
+Levels.setURL("Your Mongo URL")
 var version = 'v5.8';
 const uwilldoit = '`verification-enable`, `verification-disable`'
 const { badwords } = require("./swear.json") 
