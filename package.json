@@ -9,7 +9,7 @@
   "author": "LagsAlot",
   "license": "ISC",
   "dependencies": {
-    "@haileybot/captcha-generator": "1.2.3",
+    "@haileybot/captcha-generator": "1.7.0",
     "dateformat": "3.0.3",
     "discord-canvas": "1.3.2",
     "discord-jokes": "1.0.12",
