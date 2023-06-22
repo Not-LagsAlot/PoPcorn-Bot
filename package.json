@@ -19,7 +19,7 @@
     "imageapi.js": "1.0.17",
     "moment": "^2.29.2",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "5.10.7",
+    "mongoose": "5.13.17",
     "movement": "0.0.13",
     "ms": "^2.1.2",
     "node-pre-gyp": "0.12.0",
